@@ -1,0 +1,3093 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&family=Dynalight&display=swap');
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #42B9D2;
+      --blue-dark:  #2A8FA8;
+      --blue-deeper:#1e6d84;
+      --white:      #ffffff;
+      --off-white:  #f7f9fb;
+      --gray-light: #e8eef2;
+      --gray-mid:   #8a9baa;
+      --gray-dark:  #2c3e4a;
+      --text:       #1a2a34;
+      --shadow:     0 4px 24px rgba(66,185,210,0.12);
+      --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* TCC iframe compat: no viewport units on layout, explicit dimensions so
+       TCC's iframe auto-sizer knows the page has real height */
+    html {
+      scroll-behavior: auto;
+      width: 100%;
+      min-height: 200px;
+      background: #ffffff;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      background: #ffffff;
+      overflow-x: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      min-height: 200px;
+    }
+
+    #site-wrap {
+      width: 100%;
+      overflow-x: hidden;
+      background: #ffffff;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== NAVBAR WRAPPER — plain flow, no sticky/fixed to avoid TCC scroll loop ===== */
+    #navWrapper { display: none !important; }
+    #mobileMenu { display: none !important; }
+    /* hidden — TCC renders its own nav above the iframe */
+    #navWrapper_DISABLED {
+      position: relative;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: relative;
+      width: 100%;
+      background: var(--blue);
+      padding: 0;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    #navbar.scrolled {
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      width: 100%;
+      padding: 0 32px;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      transition: color var(--transition);
+    }
+
+    .nav-logo .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .nav-logo .logo-icon svg { width: 22px; height: 22px; }
+
+    #navbar.scrolled .nav-logo { color: #111; }
+    #navbar.scrolled .nav-logo .logo-icon { background: #111; }
+    #navbar.scrolled .nav-logo .logo-icon svg path { fill: var(--white); stroke: var(--white); }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--white);
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    #navbar.scrolled .nav-item > a { color: var(--text); }
+    .nav-item > a:hover, #navbar.scrolled .nav-item > a:hover {
+      background: rgba(66,185,210,0.12);
+      color: var(--blue);
+    }
+
+    .nav-item > a .chevron {
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform var(--transition);
+    }
+
+    .nav-item:hover > a .chevron { transform: rotate(-135deg) translateY(2px); }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      min-width: 220px;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
+      padding: 8px 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+      z-index: 100;
+    }
+
+    .nav-item:hover .dropdown, .nav-item:focus-within .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown li a {
+      display: block;
+      padding: 10px 20px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: background var(--transition), color var(--transition), padding var(--transition);
+      border-left: 3px solid transparent;
+    }
+
+    .dropdown li a:hover {
+      background: rgba(66,185,210,0.08);
+      color: var(--blue);
+      padding-left: 26px;
+      border-left-color: var(--blue);
+    }
+
+    .nav-cta {
+      background: var(--white) !important;
+      color: var(--blue) !important;
+      border-radius: 50px !important;
+      padding: 9px 22px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.3px !important;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition) !important;
+    }
+
+    #navbar.scrolled .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+    }
+
+    .nav-cta:hover {
+      box-shadow: 0 4px 16px rgba(66,185,210,0.35) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2.5px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    #navbar.scrolled .hamburger span { background: var(--text); }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 72px; left: 0; right: 0;
+      background: var(--white);
+      z-index: 999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 16px 0 24px;
+      max-height: calc(100% - 72px);
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu-item > a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-menu-item > a:hover { color: var(--blue); }
+
+    .mobile-submenu {
+      display: none;
+      background: var(--off-white);
+    }
+
+    .mobile-submenu.open { display: block; }
+
+    .mobile-submenu li a {
+      display: block;
+      padding: 10px 40px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .mobile-submenu li a:hover { color: var(--blue); }
+
+    /* ===== HERO SLIDER ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 620px;
+      min-height: 500px;
+      overflow: hidden;
+    }
+
+    /* ---- Base slide ---- */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Slide 0 visible immediately via CSS — no JS dependency */
+    #heroSlide0 { opacity: 1; }
+    .hero-slide.active { opacity: 1; }
+
+    /* Dark gradient overlay on every slide */
+    .hero-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26,42,52,0.45) 0%,
+        rgba(26,42,52,0.72) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Fallback gradient colour for slide 3 (static image slide) */
+    .hero-slide-static { background: linear-gradient(135deg, #1a2a34 0%, #2A8FA8 50%, #42B9D2 100%); }
+
+    /* ---- Slide 1: background VIDEO ---- */
+    #heroSlide0 {
+      background: linear-gradient(135deg, #1a2a34 0%, #2A8FA8 60%, #42B9D2 100%);
+    }
+
+    .hero-bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      /* Fallback colour while video loads */
+      background: #1a2a34;
+    }
+
+    /* ---- Slide 2: Year in Review video card ---- */
+    .hero-slide-review {
+      background: #0d1a22;
+    }
+
+    /* YouTube-style thumbnail fill */
+    .review-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0d1a22 0%, #1e3a4a 60%, #42B9D2 100%);
+      z-index: 0;
+    }
+
+    /* Remove the default gradient overlay on this slide — we handle our own */
+    .hero-slide-review::after { display: none; }
+
+    /* Custom rich overlay for review slide */
+    .review-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(13,26,34,0.92) 0%,
+        rgba(13,26,34,0.65) 55%,
+        rgba(66,185,210,0.18) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Play button (big cinematic circle) */
+    .review-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 3px solid rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), border-color var(--transition);
+      backdrop-filter: blur(6px);
+    }
+
+    .review-play-btn:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .review-play-btn svg { margin-left: 6px; }
+
+    /* Pulse ring */
+    .review-play-btn::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px solid rgba(66,185,210,0.4);
+      animation: ring-pulse 2.2s infinite;
+    }
+
+    @keyframes ring-pulse {
+      0%   { transform: scale(1);   opacity: 0.8; }
+      60%  { transform: scale(1.18); opacity: 0; }
+      100% { transform: scale(1.18); opacity: 0; }
+    }
+
+    /* Filmstrip accent line */
+    .review-film-strip {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--blue) 0px, var(--blue) 32px,
+        transparent 32px, transparent 44px
+      );
+      opacity: 0.6;
+      z-index: 2;
+    }
+
+    /* Year badge */
+    .review-year-badge {
+      position: absolute;
+      bottom: 80px;
+      right: 48px;
+      z-index: 3;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 12vw, 9rem);
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: -4px;
+      user-select: none;
+    }
+
+    /* Video lightbox modal */
+    .hero-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      width: min(900px, 94vw);
+    }
+
+    .lightbox-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    .lightbox-video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color var(--transition);
+    }
+
+    .lightbox-close:hover { color: var(--white); }
+
+    /* ---- Shared hero content layer ---- */
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      pointer-events: none; /* let clicks pass to play button etc */
+    }
+
+    /* Per-slide content panels — only one visible at a time */
+    .hero-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: all;
+      animation: panel-in 0.7s ease forwards;
+    }
+
+    /* Panel 0 visible immediately via CSS — no JS dependency, no animation */
+    #heroPanel0 { display: flex; opacity: 1; animation: none; }
+
+    .hero-panel.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Review slide — left-aligned content */
+    .hero-panel-review {
+      text-align: left;
+      align-items: flex-start;
+      position: absolute;
+      left: 6%;
+      bottom: 14%;
+      max-width: 540px;
+    }
+
+    .review-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .review-eyebrow span {
+      width: 32px;
+      height: 2px;
+      background: var(--blue);
+      display: inline-block;
+    }
+
+    .review-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.06;
+      color: var(--white);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+      margin-bottom: 16px;
+    }
+
+    .review-title em {
+      font-style: normal;
+      color: var(--blue);
+      filter: brightness(1.25);
+    }
+
+    .review-sub {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      max-width: 400px;
+    }
+
+    .review-watch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      padding: 13px 26px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(66,185,210,0.4);
+    }
+
+    .review-watch-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(66,185,210,0.5);
+    }
+
+    .review-watch-btn svg { flex-shrink: 0; }
+
+    .hero-eyebrow {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      line-height: 1.08;
+      color: var(--white);
+      max-width: 820px;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .hero-title span { color: var(--blue); filter: brightness(1.3); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.88);
+      max-width: 580px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(66,185,210,0.4);
+    }
+
+    .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 8px 28px rgba(66,185,210,0.5); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.7);
+    }
+
+    .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: var(--white); }
+
+    .btn-blue {
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(66,185,210,0.3);
+    }
+
+    .btn-blue:hover { background: var(--blue-dark); }
+
+    /* Hero Slider Controls */
+    .hero-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      border: none;
+    }
+
+    .hero-dot.active { background: var(--white); transform: scale(1.25); }
+
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background var(--transition);
+    }
+
+    .hero-arrow:hover { background: rgba(255,255,255,0.35); }
+    .hero-arrow-left { left: 24px; }
+    .hero-arrow-right { right: 24px; }
+
+    /* Service Times Bar */
+    .service-bar {
+      width: 100%;
+      background: var(--blue);
+      padding: 14px 32px;
+    }
+
+    .service-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .service-time-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .service-time-item .icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .service-bar-divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ===== SECTION UTILITIES ===== */
+    section { width: 100%; }
+
+    .section-pad { padding: 80px 32px; }
+    .section-pad-sm { padding: 56px 32px; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-title span { color: var(--blue); }
+
+    .section-sub {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--gray-mid);
+      max-width: 600px;
+    }
+
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin-left: auto; margin-right: auto; }
+
+    /* ===== WELCOME SECTION ===== */
+    .welcome-section {
+      background: var(--white);
+    }
+
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .welcome-image-wrap {
+      position: relative;
+    }
+
+    .welcome-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #42B9D2 0%, #1e6d84 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-img-placeholder {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 16px;
+    }
+
+    .welcome-img::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      background: var(--blue);
+      opacity: 0.12;
+      border-radius: 50%;
+    }
+
+    .accent-card {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      background: var(--blue);
+      color: var(--white);
+      padding: 18px 24px;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 24px rgba(66,185,210,0.4);
+      line-height: 1.2;
+    }
+
+    .accent-card small {
+      display: block;
+      font-weight: 400;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 3px;
+    }
+
+    .welcome-text { padding-left: 8px; }
+
+    .welcome-text p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--gray-dark);
+      margin-bottom: 20px;
+    }
+
+    .scripture-block {
+      border-left: 4px solid var(--blue);
+      padding: 16px 20px;
+      background: rgba(66,185,210,0.06);
+      border-radius: 0 8px 8px 0;
+      margin: 24px 0;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .scripture-block cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    /* ===== T.R.U. SECTION — MODERN FULL-BLEED ===== */
+    .tru-section {
+      width: 100%;
+      background: var(--text);
+      padding: 72px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle mesh backdrop */
+    .tru-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 10% 50%, rgba(66,185,210,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 90% 20%, rgba(66,185,210,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .tru-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tru-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .tru-eyebrow {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .tru-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      color: var(--white);
+      letter-spacing: -1px;
+    }
+
+    .tru-headline .tru-accent {
+      color: var(--blue);
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Underline squiggle on accent */
+    .tru-headline .tru-accent::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -6px; right: 0;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      opacity: 0.6;
+    }
+
+    .tru-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    }
+
+    .tru-card {
+      position: relative;
+      padding: 48px 36px 44px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: background var(--transition), transform var(--transition);
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .tru-card:hover {
+      background: rgba(66,185,210,0.1);
+      transform: translateY(-3px);
+      z-index: 2;
+    }
+
+    /* Giant ghost letter */
+    .tru-card-ghost {
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 9rem;
+      line-height: 1;
+      color: rgba(66,185,210,0.07);
+      letter-spacing: -4px;
+      pointer-events: none;
+      user-select: none;
+      transition: color var(--transition);
+    }
+
+    .tru-card:hover .tru-card-ghost {
+      color: rgba(66,185,210,0.14);
+    }
+
+    .tru-card-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(66,185,210,0.15);
+      border: 1px solid rgba(66,185,210,0.3);
+      border-radius: 50px;
+      padding: 6px 16px 6px 6px;
+      margin-bottom: 24px;
+    }
+
+    .tru-card-letter-badge {
+      width: 32px;
+      height: 32px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .tru-card-pill-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .tru-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .tru-card-desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .tru-card-line {
+      width: 40px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      margin-top: 24px;
+      transition: width var(--transition);
+    }
+
+    .tru-card:hover .tru-card-line { width: 72px; }
+
+    @media (max-width: 900px) {
+      .tru-cards { grid-template-columns: 1fr; gap: 2px; }
+      .tru-section { padding: 56px 20px; }
+      .tru-card { padding: 36px 28px 32px; }
+    }
+
+    /* ===== ANNOUNCEMENTS AUTO-SLIDER (single card) ===== */
+    .announcements-section {
+      background: var(--off-white);
+    }
+
+    .announce-stage {
+      position: relative;
+      margin-top: 48px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    /* Track holds all cards side by side */
+    .announce-track {
+      display: flex;
+      transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Every card = full width of stage */
+    .announce-card {
+      flex: 0 0 100%;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 360px;
+      background: var(--white);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .announce-thumb {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deeper) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .announce-thumb.t2 { background: linear-gradient(135deg, #2c3e4a 0%, var(--blue) 100%); }
+    .announce-thumb.t3 { background: linear-gradient(135deg, var(--blue-dark) 0%, #1a2a34 100%); }
+    .announce-thumb.t4 { background: linear-gradient(135deg, #1e6d84 0%, var(--blue) 100%); }
+    .announce-thumb.t5 { background: linear-gradient(135deg, var(--blue) 0%, #2c3e4a 100%); }
+    .announce-thumb.t6 { background: linear-gradient(135deg, #2A8FA8 0%, var(--blue-deeper) 100%); }
+
+    .announce-body {
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .announce-tag {
+      display: inline-block;
+      background: rgba(66,185,210,0.12);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .announce-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .announce-body p {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: var(--gray-mid);
+      flex: 1;
+    }
+
+    .announce-body .announce-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      align-self: flex-start;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      color: var(--blue);
+      text-transform: uppercase;
+      transition: gap var(--transition);
+    }
+
+    .announce-body .announce-cta:hover { gap: 10px; }
+
+    /* Progress bar */
+    .announce-progress {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gray-light);
+    }
+
+    .announce-progress-bar {
+      height: 100%;
+      background: var(--blue);
+      width: 0%;
+      transition: width linear;
+    }
+
+    /* Side nav arrows on the card */
+    .announce-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .announce-dots-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .announce-dot {
+      width: 28px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--gray-light);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), width var(--transition);
+    }
+
+    .announce-dot.active {
+      background: var(--blue);
+      width: 40px;
+    }
+
+    .announce-arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .announce-arr {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .announce-arr:hover { background: var(--blue); color: var(--white); }
+
+    @media (max-width: 768px) {
+      .announce-card { grid-template-columns: 1fr; min-height: auto; }
+      .announce-thumb { min-height: 180px; }
+      .announce-body { padding: 28px 24px 32px; }
+    }
+
+    /* ===== GALLERY SLIDER CONTROLS ===== */
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .slider-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .slider-btn:hover { background: var(--blue); color: var(--white); }
+
+    .slider-dots { display: flex; gap: 8px; }
+
+    .sdot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-light);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .sdot.active { background: var(--blue); }
+
+    /* ===== IMAGE GALLERY SLIDER ===== */
+    .gallery-section {
+      background: var(--white);
+    }
+
+    .gallery-slider-wrap {
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 16px;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .gallery-item {
+      flex: 0 0 calc(25% - 12px);
+      aspect-ratio: 4/3;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #42B9D2 0%, #1a2a34 100%);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item:nth-child(2) { background: linear-gradient(135deg, #1e6d84, #42B9D2); }
+    .gallery-item:nth-child(3) { background: linear-gradient(135deg, #2c3e4a, #42B9D2); }
+    .gallery-item:nth-child(4) { background: linear-gradient(135deg, #42B9D2, #2A8FA8); }
+    .gallery-item:nth-child(5) { background: linear-gradient(135deg, #1a2a34, #42B9D2); }
+    .gallery-item:nth-child(6) { background: linear-gradient(135deg, #2A8FA8, #1e6d84); }
+    .gallery-item:nth-child(7) { background: linear-gradient(135deg, #42B9D2, #2c3e4a); }
+    .gallery-item:nth-child(8) { background: linear-gradient(135deg, #1e6d84, #2A8FA8); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(66,185,210,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: rgba(255,255,255,0);
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      background: rgba(66,185,210,0.6);
+      color: var(--white);
+    }
+
+    .gallery-item-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      padding: 16px 14px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--white);
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== MINISTRIES ===== */
+    .ministries-section {
+      background: var(--gray-dark);
+      color: var(--white);
+    }
+
+    .ministries-section .section-title { color: var(--white); }
+    .ministries-section .section-sub { color: rgba(255,255,255,0.65); }
+
+    .ministries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .ministry-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: background var(--transition), transform var(--transition), border-color var(--transition);
+      cursor: pointer;
+    }
+
+    .ministry-card:hover {
+      background: rgba(66,185,210,0.12);
+      border-color: rgba(66,185,210,0.4);
+      transform: translateY(-4px);
+    }
+
+    .ministry-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(66,185,210,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .ministry-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .ministry-card p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .ministry-card .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--blue);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ===== COMMUNITY IMPACT ===== */
+    .impact-section {
+      background: var(--white);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .impact-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .impact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(66,185,210,0.2);
+    }
+
+    .impact-thumb {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, #42B9D2 0%, #1a2a34 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .impact-thumb.green { background: linear-gradient(135deg, #27ae60, #1e6d84); }
+
+    .impact-body {
+      padding: 24px 28px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .impact-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .impact-body p {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--gray-mid);
+      flex: 1;
+    }
+
+    .impact-body .btn-blue {
+      align-self: flex-start;
+      margin-top: 20px;
+      padding: 10px 22px;
+      font-size: 0.82rem;
+    }
+
+    /* ===== CONNECT SECTION ===== */
+    .connect-section {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deeper) 100%);
+      color: var(--white);
+    }
+
+    .connect-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .connect-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+      transition: background var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+
+    .connect-card:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-4px);
+    }
+
+    .connect-icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .connect-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .connect-card p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.72);
+    }
+
+    /* ===== GIVE SECTION ===== */
+    .give-section {
+      background: var(--off-white);
+    }
+
+    .give-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .give-text .section-sub { margin-top: 16px; }
+
+    .give-text .btn-blue { margin-top: 28px; }
+
+    .give-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .stat-number {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* ===== VISIT SECTION ===== */
+    .visit-section {
+      background: var(--white);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .visit-map {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #2c3e4a 0%, #42B9D2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .visit-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+    }
+
+    /* ===== SERMON SECTION ===== */
+    .sermon-section {
+      background: var(--off-white);
+    }
+
+    .sermon-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 52px;
+      align-items: center;
+      margin-top: 52px;
+    }
+
+    .sermon-player {
+      position: relative;
+    }
+
+    .sermon-iframe-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--gray-dark);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.18);
+    }
+
+    .sermon-iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* decorative glow behind the player */
+    .sermon-player::before {
+      content: '';
+      position: absolute;
+      inset: -16px;
+      border-radius: 24px;
+      background: radial-gradient(ellipse at center, rgba(66,185,210,0.18) 0%, transparent 70%);
+      z-index: -1;
+    }
+
+    .sermon-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .sermon-tag-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .sermon-tag {
+      display: inline-block;
+      background: rgba(66,185,210,0.12);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 50px;
+    }
+
+    .sermon-live-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gray-mid);
+    }
+
+    .sermon-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e74c3c;
+      display: inline-block;
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.25);
+      animation: pulse-dot 1.8s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(231,76,60,0.25); }
+      50%       { box-shadow: 0 0 0 7px rgba(231,76,60,0.08); }
+    }
+
+    .sermon-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .sermon-desc {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--gray-mid);
+      margin-bottom: 28px;
+    }
+
+    .sermon-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+      padding: 20px 22px;
+      background: var(--white);
+      border-radius: 12px;
+      border-left: 4px solid var(--blue);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .sermon-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .sermon-meta-icon { font-size: 1rem; flex-shrink: 0; }
+
+    .sermon-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .sermon-layout {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .ministries-grid { grid-template-columns: repeat(2, 1fr); }
+      .connect-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .gallery-item { flex: 0 0 calc(33.333% - 11px); }
+    }
+
+    @media (max-width: 900px) {
+      .welcome-grid, .give-inner, .visit-grid, .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .announce-card { flex: 0 0 calc(50% - 12px); }
+      .welcome-text { padding-left: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section-pad { padding: 56px 20px; }
+      .section-pad-sm { padding: 40px 20px; }
+      .nav-inner { padding: 0 20px; }
+      .service-bar { padding: 12px 20px; }
+      .service-bar-divider { display: none; }
+      .ministries-grid, .connect-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 88px 20px 60px; }
+      .gallery-item { flex: 0 0 calc(50% - 8px); }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .give-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .announce-card { flex: 0 0 calc(100%); }
+      .gallery-item { flex: 0 0 calc(100%); }
+      .hero-title { font-size: 2rem; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; max-width: 280px; }
+      .service-bar-inner { flex-direction: column; gap: 10px; }
+      .give-stats { grid-template-columns: 1fr; }
+    }
+
+    /* ===== TWO-ROW PHOTO SLIDER ===== */
+    .photo-slider-section {
+      background: var(--white);
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-slider-track-wrap {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Two rows stacked */
+    .photo-slider-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Each row is an infinite-scroll strip */
+    .photo-row {
+      display: flex;
+      gap: 6px;
+      width: max-content;
+      will-change: transform;
+    }
+
+    /* Row 1 scrolls left, Row 2 scrolls right */
+    .photo-row-1 {
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .photo-row-2 {
+      animation: scroll-right 30s linear infinite;
+    }
+
+    /* Pause on hover */
+    .photo-slider-section:hover .photo-row-1,
+    .photo-slider-section:hover .photo-row-2 {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .photo-item {
+      flex-shrink: 0;
+      width: 320px;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Gradient fade edges */
+    .photo-slider-section::before,
+    .photo-slider-section::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .photo-slider-section::before {
+      left: 0;
+      background: linear-gradient(to right, var(--white), transparent);
+    }
+
+    .photo-slider-section::after {
+      right: 0;
+      background: linear-gradient(to left, var(--white), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .photo-item { width: 220px; height: 160px; }
+      .photo-slider-section::before,
+      .photo-slider-section::after { width: 60px; }
+    }
+
+    /* ===== WORSHIP ONLINE DROPDOWN (service bar) ===== */
+    .worship-online-wrap {
+      position: relative;
+    }
+
+    .worship-online-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.6);
+      color: #fff;
+      padding: 9px 20px;
+      font-size: 0.82rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      white-space: nowrap;
+    }
+
+    .worship-online-btn:hover,
+    .worship-online-btn.active {
+      background: rgba(255,255,255,0.28);
+      border-color: #fff;
+    }
+
+    .worship-chevron {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg) translateY(-2px);
+      display: inline-block;
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .worship-online-btn.active .worship-chevron {
+      transform: rotate(-135deg) translateY(2px);
+    }
+
+    .worship-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 230px;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      padding: 8px 0;
+      z-index: 200;
+      list-style: none;
+    }
+
+    .worship-dropdown.open { display: block; }
+
+    .worship-dropdown li a {
+      display: block;
+      padding: 11px 22px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: background var(--transition), color var(--transition), padding var(--transition);
+      border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+
+    .worship-dropdown li a:hover {
+      background: rgba(66,185,210,0.08);
+      color: var(--blue);
+      padding-left: 28px;
+      border-left-color: var(--blue);
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* fade-in disabled in TCC iframe — IntersectionObserver has no scroll context
+       inside TCC's iframe so elements stay at opacity:0 forever */
+    .fade-in {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+
+<div id="site-wrap">
+
+  <!-- ===== NAVBAR STICKY WRAPPER ===== -->
+  <div id="navWrapper">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="javascript:void(0)" class="nav-logo" aria-label="Evolve Church Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L3 7l9 5 9-5-9-5zM3 17l9 5 9-5M3 12l9 5 9-5" stroke="#1a2a34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        Evolve Church
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li class="nav-item">
+          <a href="javascript:void(0)">About Us <span class="chevron"></span></a>
+          <ul class="dropdown">
+            <li><a href="javascript:void(0)">Our Beliefs</a></li>
+            <li><a href="javascript:void(0)">Meet the Staff</a></li>
+            <li><a href="javascript:void(0)">Get to Know Jesus Christ</a></li>
+            <li><a href="javascript:void(0)">Plan a Visit</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)">Connect <span class="chevron"></span></a>
+          <ul class="dropdown">
+            <li><a href="javascript:void(0)">Request Prayer</a></li>
+            <li><a href="javascript:void(0)">Support</a></li>
+            <li><a href="javascript:void(0)">Events</a></li>
+            <li><a href="javascript:void(0)">Volunteer</a></li>
+            <li><a href="javascript:void(0)">Evolve Shop</a></li>
+            <li><a href="javascript:void(0)">How Was Your Experience?</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)">Ministries <span class="chevron"></span></a>
+          <ul class="dropdown">
+            <li><a href="javascript:void(0)">Evolve Kids</a></li>
+            <li><a href="javascript:void(0)">Evolve Teens</a></li>
+            <li><a href="javascript:void(0)">Life Groups</a></li>
+            <li><a href="javascript:void(0)">Discipleships</a></li>
+            <li><a href="javascript:void(0)">Evolving Singles</a></li>
+            <li><a href="javascript:void(0)">Have You Lost Someone?</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:void(0)">What Are We Doing? <span class="chevron"></span></a>
+          <ul class="dropdown">
+            <li><a href="javascript:void(0)">Mental Health</a></li>
+            <li><a href="javascript:void(0)">Single Parent Housing Initiative</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#give" class="nav-cta">Give</a>
+        </li>
+      </ul>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul>
+      <li class="mobile-menu-item">
+        <a href="javascript:void(0)" data-toggle="about-sub">About Us <span>+</span></a>
+        <ul class="mobile-submenu" id="about-sub">
+          <li><a href="javascript:void(0)">Our Beliefs</a></li>
+          <li><a href="javascript:void(0)">Meet the Staff</a></li>
+          <li><a href="javascript:void(0)">Get to Know Jesus Christ</a></li>
+          <li><a href="javascript:void(0)">Plan a Visit</a></li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="javascript:void(0)" data-toggle="connect-sub">Connect <span>+</span></a>
+        <ul class="mobile-submenu" id="connect-sub">
+          <li><a href="javascript:void(0)">Request Prayer</a></li>
+          <li><a href="javascript:void(0)">Support</a></li>
+          <li><a href="javascript:void(0)">Events</a></li>
+          <li><a href="javascript:void(0)">Volunteer</a></li>
+          <li><a href="javascript:void(0)">Evolve Shop</a></li>
+          <li><a href="javascript:void(0)">How Was Your Experience?</a></li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="javascript:void(0)" data-toggle="min-sub">Ministries <span>+</span></a>
+        <ul class="mobile-submenu" id="min-sub">
+          <li><a href="javascript:void(0)">Evolve Kids</a></li>
+          <li><a href="javascript:void(0)">Evolve Teens</a></li>
+          <li><a href="javascript:void(0)">Life Groups</a></li>
+          <li><a href="javascript:void(0)">Discipleships</a></li>
+          <li><a href="javascript:void(0)">Evolving Singles</a></li>
+          <li><a href="javascript:void(0)">Have You Lost Someone?</a></li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="javascript:void(0)" data-toggle="doing-sub">What Are We Doing? <span>+</span></a>
+        <ul class="mobile-submenu" id="doing-sub">
+          <li><a href="javascript:void(0)">Mental Health</a></li>
+          <li><a href="javascript:void(0)">Single Parent Housing Initiative</a></li>
+        </ul>
+      </li>
+      <li class="mobile-menu-item">
+        <a href="#give" style="color:var(--blue)">Give</a>
+      </li>
+    </ul>
+  </nav><!-- /mobile-menu -->
+
+  </div><!-- /navWrapper -->
+
+  <!-- ===== HERO SLIDER ===== -->
+  <section class="hero" aria-label="Hero slideshow">
+
+    <!-- ── SLIDE 1 · Background Hero Video ─────────────────────────────── -->
+    <div class="hero-slide active" id="heroSlide0">
+      <!--
+        DROP YOUR VIDEO URL HERE.
+        Replace "YOUR_VIDEO_FILE.mp4" with the hosted .mp4 URL.
+        The <source> tag also accepts .webm for better compression.
+        The video plays silently and loops automatically — exactly like a
+        premium church-site hero background.
+      -->
+      <video
+        class="hero-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-hidden="true"
+        poster=""
+      >
+        <source src="https://t9017292562.p.clickup-attachments.com/t9017292562/2d712b5d-82f6-4168-a4d9-5ecda5753d0a/EOY%20VIDEO.mp4?view=open" type="video/mp4" />
+        <!-- Fallback: if browser can't play video, the gradient shows -->
+      </video>
+    </div>
+
+    <!-- ── SLIDE 2 · Year in Review ────────────────────────────────────── -->
+    <div class="hero-slide hero-slide-review" id="heroSlide1">
+      <div class="review-bg"></div>
+      <div class="review-overlay"></div>
+      <div class="review-film-strip"></div>
+      <div class="review-year-badge">2025</div>
+      <!-- Big centred play button that opens the lightbox -->
+      <button class="review-play-btn" id="reviewPlayBtn" aria-label="Watch Year in Review video">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ── SLIDE 3 · Static image / colour fallback ─────────────────────── -->
+    <div class="hero-slide hero-slide-static" id="heroSlide2"></div>
+
+    <!-- ── Shared content layer — swaps text per active slide ──────────── -->
+    <div class="hero-content">
+
+      <!-- Panel 0: main welcome (shown on slide 1) -->
+      <div class="hero-panel active" id="heroPanel0">
+        <p class="hero-eyebrow">📍 6550 N 76th St, Milwaukee, WI</p>
+        <h1 class="hero-title">
+          Welcome <span>Home</span> to<br/>Evolve Church
+        </h1>
+        <p class="hero-sub">
+          A community where faith grows, lives are transformed, and everyone belongs.
+          Join us this Sunday — you'll be amazed you found the church for YOU.
+        </p>
+        <div class="hero-btns" style="pointer-events:all;">
+          <a href="#visit" class="btn btn-primary">Plan a Visit</a>
+          <a href="javascript:void(0)" class="btn btn-outline">Watch Online</a>
+        </div>
+      </div>
+
+      <!-- Panel 1: year-in-review text (shown on slide 2) -->
+      <div class="hero-panel hero-panel-review" id="heroPanel1">
+        <p class="review-eyebrow"><span></span>Evolve Church</p>
+        <h2 class="review-title">Last Year<br/>in <em>Review</em></h2>
+        <p class="review-sub">A look back at the moments, milestones, and miracles God moved through our community in 2025.</p>
+        <button class="review-watch-btn" id="reviewWatchBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Watch the Video
+        </button>
+      </div>
+
+      <!-- Panel 2: third slide content -->
+      <div class="hero-panel" id="heroPanel2">
+        <p class="hero-eyebrow">New Every Sunday</p>
+        <h2 class="hero-title">Come As<br/>You <span>Are</span></h2>
+        <p class="hero-sub">
+          No dress code, no pressure. Just real people, real faith, and a God who meets you exactly where you are.
+        </p>
+        <div class="hero-btns" style="pointer-events:all;">
+          <a href="#about" class="btn btn-primary">Who We Are</a>
+          <a href="#sermons" class="btn btn-outline">Latest Sermon</a>
+        </div>
+      </div>
+
+    </div><!-- /hero-content -->
+
+    <button class="hero-arrow hero-arrow-left" id="heroPrev" aria-label="Previous slide">&#8592;</button>
+    <button class="hero-arrow hero-arrow-right" id="heroNext" aria-label="Next slide">&#8594;</button>
+
+    <div class="hero-dots" role="tablist" aria-label="Slideshow navigation">
+      <button class="hero-dot active" data-slide="0" role="tab" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-slide="1" role="tab" aria-label="Year in Review"></button>
+      <button class="hero-dot" data-slide="2" role="tab" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- ── YouTube lightbox (Year in Review) ──────────────────────────────── -->
+  <!--
+    Replace YEAR_IN_REVIEW_VIDEO_ID with your actual YouTube video ID.
+    Example: if the URL is youtube.com/watch?v=dQw4w9WgXcQ
+    then use:  src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+  -->
+  <div class="hero-lightbox" id="reviewLightbox" role="dialog" aria-modal="true" aria-label="Year in Review video">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close video">&times;</button>
+      <div class="lightbox-video-wrap">
+        <iframe
+          id="reviewIframe"
+          src=""
+          data-src="https://www.youtube.com/embed/YEAR_IN_REVIEW_VIDEO_ID?autoplay=1&rel=0"
+          title="Evolve Church — Last Year in Review"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SERVICE TIMES BAR ===== -->
+  <div class="service-bar" role="complementary" aria-label="Service times">
+    <div class="service-bar-inner">
+      <div class="service-time-item">
+        <div class="icon">🗓️</div>
+        <div>
+          <strong>SUNDAY WORSHIP</strong><br/>9:00am · 10:30am · 12:00pm
+        </div>
+      </div>
+      <div class="service-bar-divider"></div>
+      <div class="service-time-item">
+        <div class="icon">🌙</div>
+        <div>
+          <strong>WEDNESDAY ENCOUNTER</strong><br/>7:00pm
+        </div>
+      </div>
+      <div class="service-bar-divider"></div>
+      <div class="service-time-item">
+        <div class="icon">📺</div>
+        <div>
+          <strong>WATCH LIVE</strong><br/>Sundays 10:30am & 12pm CST
+        </div>
+      </div>
+      <div class="service-bar-divider"></div>
+      <div class="worship-online-wrap" id="worshipOnlineWrap">
+        <button class="worship-online-btn" id="worshipOnlineBtn" aria-haspopup="true" aria-expanded="false">
+          📺 Worship Online <span class="worship-chevron"></span>
+        </button>
+        <ul class="worship-dropdown" id="worshipDropdown" role="menu">
+          <li role="none"><a href="javascript:void(0)" role="menuitem">🔴 Livestream on Sunday</a></li>
+          <li role="none"><a href="https://www.youtube.com/@evolvenationmke" target="_blank" rel="noopener" role="menuitem">▶️ Browse Past Sermons</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== WELCOME SECTION ===== -->
+  <section class="welcome-section section-pad" id="about">
+    <div class="container">
+      <div class="welcome-grid">
+        <div class="welcome-image-wrap fade-in">
+          <div class="welcome-img">
+            <div class="welcome-img-placeholder">Evolve Church<br/>Milwaukee</div>
+          </div>
+          <div class="accent-card">
+            Est. Milwaukee, WI
+            <small>6550 N 76th Street</small>
+          </div>
+        </div>
+        <div class="welcome-text fade-in">
+          <p class="section-label">Welcome Home</p>
+          <h2 class="section-title">You Belong<br/><span style="font-family:'Dynalight',cursive;font-style:italic;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:1px;">Here</span></h2>
+          <p>At Evolve, community is everything. We are a church that believes in reaching people for Christ and building them up spiritually so they can reach others. Through gatherings, service, and support, we unite in compassion for growth and connection.</p>
+          <blockquote class="scripture-block">
+            "Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'"
+            <cite>— John 14:6</cite>
+          </blockquote>
+          <p>Whatever your story, wherever you've been — you are welcome exactly as you are. We operate with three unshakeable commitments that define everything we do.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+            <a href="javascript:void(0)" class="btn btn-blue">Our Beliefs</a>
+            <a href="javascript:void(0)" class="btn" style="background:var(--gray-light);color:var(--text);">Meet the Staff</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== T.R.U. SECTION ===== -->
+  <section class="tru-section" id="tru" aria-label="Our core values">
+    <div class="tru-inner">
+      <div class="tru-header fade-in">
+        <p class="tru-eyebrow">Who We Are</p>
+        <h2 class="tru-headline">We Are <span class="tru-accent">T.R.U.</span></h2>
+      </div>
+      <div class="tru-cards">
+        <div class="tru-card fade-in">
+          <div class="tru-card-ghost">T</div>
+          <div class="tru-card-pill">
+            <div class="tru-card-letter-badge">T</div>
+            <span class="tru-card-pill-label">First Commitment</span>
+          </div>
+          <h3 class="tru-card-title">Transparent</h3>
+          <p class="tru-card-desc">We operate with full openness — no hidden agendas, no pretense, no performance. What you see is exactly what we are. We believe honesty builds the kind of trust that changes lives.</p>
+          <div class="tru-card-line"></div>
+        </div>
+        <div class="tru-card fade-in">
+          <div class="tru-card-ghost">R</div>
+          <div class="tru-card-pill">
+            <div class="tru-card-letter-badge">R</div>
+            <span class="tru-card-pill-label">Second Commitment</span>
+          </div>
+          <h3 class="tru-card-title">Real</h3>
+          <p class="tru-card-desc">Authentic faith. Authentic community. Authentic encounters with a living God. We don't do religion for show — we do life together, honestly, in all its mess and beauty.</p>
+          <div class="tru-card-line"></div>
+        </div>
+        <div class="tru-card fade-in">
+          <div class="tru-card-ghost">U</div>
+          <div class="tru-card-pill">
+            <div class="tru-card-letter-badge">U</div>
+            <span class="tru-card-pill-label">Third Commitment</span>
+          </div>
+          <h3 class="tru-card-title">Unedited</h3>
+          <p class="tru-card-desc">We bring our whole selves — the victories and the struggles. Being unedited is how we walk in integrity. You don't have to clean yourself up before you come through our doors.</p>
+          <div class="tru-card-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TWO-ROW PHOTO SLIDER ===== -->
+  <section class="photo-slider-section" aria-label="Community photos">
+    <div class="photo-slider-track-wrap">
+      <div class="photo-slider-rows">
+
+        <!-- Row 1 — scrolls left (duplicated for seamless loop) -->
+        <div class="photo-row photo-row-1" id="photoRow1">
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/47a81811-b75c-44f9-ab26-8cb85bf01853/KTN_1436.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/b80c7a2a-c435-4d84-bfc1-c6d9041f5a46/KTN_1661.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/dc47e765-92b1-4354-961a-e7e5ed1d2672/DSC08602.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/14fe0e34-2ca0-48f1-874d-e950643cf091/KTN_1375.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <!-- Duplicates for seamless loop -->
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/47a81811-b75c-44f9-ab26-8cb85bf01853/KTN_1436.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/b80c7a2a-c435-4d84-bfc1-c6d9041f5a46/KTN_1661.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/dc47e765-92b1-4354-961a-e7e5ed1d2672/DSC08602.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/14fe0e34-2ca0-48f1-874d-e950643cf091/KTN_1375.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+        </div>
+
+        <!-- Row 2 — scrolls right (start offset, duplicated) -->
+        <div class="photo-row photo-row-2" id="photoRow2">
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/dc47e765-92b1-4354-961a-e7e5ed1d2672/DSC08602.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/14fe0e34-2ca0-48f1-874d-e950643cf091/KTN_1375.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/47a81811-b75c-44f9-ab26-8cb85bf01853/KTN_1436.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/b80c7a2a-c435-4d84-bfc1-c6d9041f5a46/KTN_1661.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <!-- Duplicates for seamless loop -->
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/dc47e765-92b1-4354-961a-e7e5ed1d2672/DSC08602.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/14fe0e34-2ca0-48f1-874d-e950643cf091/KTN_1375.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/47a81811-b75c-44f9-ab26-8cb85bf01853/KTN_1436.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+          <div class="photo-item"><img src="https://t9017292562.p.clickup-attachments.com/t9017292562/b80c7a2a-c435-4d84-bfc1-c6d9041f5a46/KTN_1661.jpg?view=open" alt="Evolve Church Community" loading="lazy"/></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ANNOUNCEMENTS AUTO-SLIDER ===== -->
+  <section class="announcements-section section-pad" id="announcements">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label">Stay Connected</p>
+        <h2 class="section-title">Announcements &amp; <span>Events</span></h2>
+        <p class="section-sub">Stay up to date with everything happening at Evolve Church. There's always something exciting going on in our community.</p>
+      </div>
+
+      <div class="announce-stage" id="announceStage">
+        <div class="announce-track" id="announceTrack">
+
+          <div class="announce-card">
+            <div class="announce-thumb">🙏</div>
+            <div class="announce-body">
+              <span class="announce-tag">Prayer</span>
+              <h3>Prayer Night — Every Wednesday</h3>
+              <p>Join us for an impactful Wednesday Night Encounter at 7:00pm. In tough times, prayer shifts focus to the One who listens. We're here to pray with you, no matter what you're facing.</p>
+              <a href="javascript:void(0)" class="announce-cta">Learn More →</a>
+            </div>
+          </div>
+
+          <div class="announce-card">
+            <div class="announce-thumb t2">👶</div>
+            <div class="announce-body">
+              <span class="announce-tag">Kids</span>
+              <h3>Evolve Kids Check-in Now Open</h3>
+              <p>Arrive early to find parking and check in children before service starts. Ages 2–12 welcome. Check-in opens 15 minutes before each service. Our team is equipped with engaging lessons every Sunday.</p>
+              <a href="javascript:void(0)" class="announce-cta">Learn More →</a>
+            </div>
+          </div>
+
+          <div class="announce-card">
+            <div class="announce-thumb t3">🎶</div>
+            <div class="announce-body">
+              <span class="announce-tag">Worship</span>
+              <h3>Sunday Worship — Three Services</h3>
+              <p>Three services every Sunday at 9:00am, 10:30am, and 12:00pm. Stream live on our website or social media channels Sundays at 10:30am &amp; 12:00pm CST.</p>
+              <a href="javascript:void(0)" class="announce-cta">Watch Online →</a>
+            </div>
+          </div>
+
+          <div class="announce-card">
+            <div class="announce-thumb t4">🛒</div>
+            <div class="announce-body">
+              <span class="announce-tag">Shop</span>
+              <h3>Evolve Shop — New Gear Available</h3>
+              <p>Rep your faith with our latest Evolve Church apparel and merchandise. Show the world where you belong. New collections available now in the Evolve Shop.</p>
+              <a href="javascript:void(0)" class="announce-cta">Visit Shop →</a>
+            </div>
+          </div>
+
+          <div class="announce-card">
+            <div class="announce-thumb t5">🤝</div>
+            <div class="announce-body">
+              <span class="announce-tag">Volunteer</span>
+              <h3>Volunteer Opportunities Open</h3>
+              <p>We use our hands to show our hearts. Join one of our many volunteer teams and make a real difference in the Milwaukee community. There's a place for you to serve.</p>
+              <a href="javascript:void(0)" class="announce-cta">Get Involved →</a>
+            </div>
+          </div>
+
+          <div class="announce-card">
+            <div class="announce-thumb t6">🏠</div>
+            <div class="announce-body">
+              <span class="announce-tag">Initiative</span>
+              <h3>Single Parent Housing Initiative</h3>
+              <p>Our housing initiative directly supports single parents in Milwaukee with practical resources, community connections, and personalized guidance to help families find stable, safe housing.</p>
+              <a href="javascript:void(0)" class="announce-cta">Learn More →</a>
+            </div>
+          </div>
+
+        </div>
+        <!-- progress bar -->
+        <div class="announce-progress">
+          <div class="announce-progress-bar" id="announceProgressBar"></div>
+        </div>
+      </div>
+
+      <!-- Controls below the card -->
+      <div class="announce-nav">
+        <div class="announce-dots-row" id="announceDotRow"></div>
+        <div class="announce-arrows">
+          <button class="announce-arr" id="announcePrev" aria-label="Previous announcement">&#8592;</button>
+          <button class="announce-arr" id="announceNext" aria-label="Next announcement">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IMAGE GALLERY SLIDER ===== -->
+  <section class="gallery-section section-pad" id="gallery">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label">Life at Evolve</p>
+        <h2 class="section-title">Our <span>Community</span> in Action</h2>
+        <p class="section-sub">Moments of worship, connection, and community impact from our Evolve Church family.</p>
+      </div>
+      <div class="gallery-slider-wrap">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Sunday Worship</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Evolve Kids</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Evolve Teens</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Life Groups</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Community Outreach</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Mental Health Workshop</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Wednesday Encounter</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-overlay">🔍</div>
+            <div class="gallery-item-label">Discipleship</div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="galleryPrev" aria-label="Previous images">&#8592;</button>
+        <div class="slider-dots" id="galleryDots"></div>
+        <button class="slider-btn" id="galleryNext" aria-label="Next images">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MINISTRIES ===== -->
+  <section class="ministries-section section-pad" id="ministries">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label" style="color:rgba(255,255,255,0.6)">Get Involved</p>
+        <h2 class="section-title">Our <span>Ministries</span></h2>
+        <p class="section-sub">We believe we belong together. There is a place for everyone at Evolve Church — from the youngest to the oldest, from every background and walk of life.</p>
+      </div>
+      <div class="ministries-grid">
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">👶</div>
+          <h3>Evolve Kids</h3>
+          <p>A place where children ages 2–12 learn about Christ in an enjoyable, interactive environment. Safe, loved, and engaged every Sunday.</p>
+          <a href="javascript:void(0)" class="card-link">Learn More →</a>
+        </div>
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">🎒</div>
+          <h3>Evolve Teens</h3>
+          <p>A high-energy environment where teenagers connect with peers their age, grow in faith, and discover their purpose in Christ.</p>
+          <a href="javascript:void(0)" class="card-link">Learn More →</a>
+        </div>
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">🤝</div>
+          <h3>Life Groups</h3>
+          <p>Small group community where you can experience authentic relationships, deeper Bible study, and real life-on-life discipleship.</p>
+          <a href="javascript:void(0)" class="card-link">Find a Group →</a>
+        </div>
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">📖</div>
+          <h3>Discipleships</h3>
+          <p>Evolve prioritizes disciple-making and community impact. Grow deeper in your faith and learn how to share Jesus with others.</p>
+          <a href="javascript:void(0)" class="card-link">Get Started →</a>
+        </div>
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">💍</div>
+          <h3>Evolving Singles</h3>
+          <p>A community for singles to build friendships, grow in faith, and discover God's unique purpose for this season of life.</p>
+          <a href="javascript:void(0)" class="card-link">Join Us →</a>
+        </div>
+        <div class="ministry-card fade-in">
+          <div class="ministry-icon">🕊️</div>
+          <h3>Have You Lost Someone?</h3>
+          <p>Grief support and compassionate community for those navigating loss. You don't have to walk through this season alone.</p>
+          <a href="javascript:void(0)" class="card-link">Find Support →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMUNITY IMPACT ===== -->
+  <section class="impact-section section-pad" id="impact">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label">What Are We Doing?</p>
+        <h2 class="section-title">Community <span>Impact</span></h2>
+        <p class="section-sub">Evolve Church is more than a Sunday gathering — we are active in the Milwaukee community, meeting real needs with real love.</p>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card fade-in">
+          <div class="impact-thumb">🧠</div>
+          <div class="impact-body">
+            <h3>Mental Health Ministry</h3>
+            <p>We believe in holistic wellbeing — spirit, mind, and body. Our mental health workshops and support programs provide practical resources and a caring community for those navigating mental health challenges. No one should face it alone.</p>
+            <a href="javascript:void(0)" class="btn btn-blue">Get Support</a>
+          </div>
+        </div>
+        <div class="impact-card fade-in">
+          <div class="impact-thumb green">🏠</div>
+          <div class="impact-body">
+            <h3>Single Parent Housing Initiative</h3>
+            <p>Our housing initiative directly supports single parents in Milwaukee with practical resources, community connections, and personalized guidance to help families find stable, safe housing and thrive in every area of life.</p>
+            <a href="javascript:void(0)" class="btn btn-blue">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONNECT ===== -->
+  <section class="connect-section section-pad" id="connect">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label" style="color:rgba(255,255,255,0.7)">Get Connected</p>
+        <h2 class="section-title" style="color:#fff">Next Steps for <span style="filter:brightness(1.4)">You</span></h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.75);margin:0 auto;">Whatever your next step is, we're here to walk with you. Connect with Evolve Church and take that next step today.</p>
+      </div>
+      <div class="connect-grid">
+        <div class="connect-card">
+          <div class="connect-icon">🙏</div>
+          <h3>Request Prayer</h3>
+          <p>In tough times, prayer shifts focus to the One who listens. We're here to pray with you, no matter what.</p>
+        </div>
+        <div class="connect-card">
+          <div class="connect-icon">📅</div>
+          <h3>Upcoming Events</h3>
+          <p>Connect, grow, and build community at one of our many upcoming events and special gatherings.</p>
+        </div>
+        <div class="connect-card">
+          <div class="connect-icon">🙌</div>
+          <h3>Volunteer</h3>
+          <p>We use our hands to show our hearts. Join a volunteer team and serve your community with us.</p>
+        </div>
+        <div class="connect-card">
+          <div class="connect-icon">💬</div>
+          <h3>Share Your Experience</h3>
+          <p>How was your visit? We want to hear from you. Your feedback helps us serve you better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GIVE ===== -->
+  <section class="give-section section-pad" id="give">
+    <div class="container">
+      <div class="give-inner">
+        <div class="give-text fade-in">
+          <p class="section-label">Generosity</p>
+          <h2 class="section-title">Give &amp; <span>Make a <em style="font-family:'Dynalight',cursive;font-style:italic;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:1px;">Difference</em></span></h2>
+          <p class="section-sub">We give just to give, not to get. Your generosity helps us reach more people in Milwaukee and beyond with the love of Jesus Christ. Giving online is safe, easy, and secure.</p>
+          <a href="javascript:void(0)" class="btn btn-blue" style="margin-top:28px;display:inline-flex;">Give Online →</a>
+        </div>
+        <div class="give-stats fade-in">
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Sunday Services</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">5k+</div>
+            <div class="stat-label">Lives Impacted</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Active Ministries</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">MKE</div>
+            <div class="stat-label">Milwaukee Community</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PLAN A VISIT ===== -->
+  <section class="visit-section section-pad" id="visit">
+    <div class="container">
+      <div class="visit-grid">
+        <div class="fade-in">
+          <p class="section-label">We'd Love to Meet You</p>
+          <h2 class="section-title">Plan Your <span>Visit</span></h2>
+          <p style="font-size:1.02rem;line-height:1.75;color:var(--gray-mid);margin-top:16px;">
+            Visiting somewhere new can feel intimidating, but at Evolve, we'll guide you through every unknown. When you arrive, look for our welcoming team — smiling faces ready to help make your first visit feel like home. There's no dress code, no pressure, just real community waiting to meet you.
+          </p>
+          <a href="javascript:void(0)" class="btn btn-blue" style="margin-top:32px;display:inline-flex;">I'm Planning a Visit →</a>
+        </div>
+        <div class="visit-map fade-in">
+          <iframe
+            src="https://maps.google.com/maps?q=6550+N+76th+St+Milwaukee+WI&output=embed"
+            title="Evolve Church location map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LATEST SERMON ===== -->
+  <section class="sermon-section section-pad" id="sermons">
+    <div class="container">
+      <div class="text-center fade-in">
+        <p class="section-label">Fresh Word</p>
+        <h2 class="section-title">Watch Our <span>Latest Sermon</span></h2>
+        <p class="section-sub">Catch up on our latest message — powerful, Bible-based teaching that inspires faith and equips you for everyday life.</p>
+      </div>
+      <div class="sermon-layout fade-in">
+        <div class="sermon-player">
+          <div class="sermon-iframe-wrap">
+            <iframe
+              src="https://www.youtube.com/embed?listType=user_uploads&list=evolvenationmke"
+              title="Latest Sermon — Evolve Church"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+        <div class="sermon-details">
+          <div class="sermon-tag-row">
+            <span class="sermon-tag">Latest Message</span>
+            <span class="sermon-live-badge"><span class="sermon-live-dot"></span>New Every Week</span>
+          </div>
+          <h3 class="sermon-title">Powerful, Bible-Based Teaching</h3>
+          <p class="sermon-desc">Each week Pastor Ken and the Evolve Church team bring a fresh, relevant word designed to meet you right where you are. Whether you're new to faith or have walked with Jesus for years, there's something in every message for you.</p>
+          <div class="sermon-meta-list">
+            <div class="sermon-meta-item">
+              <span class="sermon-meta-icon">📅</span>
+              <span>New messages every Sunday</span>
+            </div>
+            <div class="sermon-meta-item">
+              <span class="sermon-meta-icon">🔴</span>
+              <span>Live at 10:30am &amp; 12:00pm CST</span>
+            </div>
+            <div class="sermon-meta-item">
+              <span class="sermon-meta-icon">▶️</span>
+              <span>Full library on YouTube</span>
+            </div>
+          </div>
+          <div class="sermon-actions">
+            <a href="https://www.youtube.com/@evolvenationmke" target="_blank" rel="noopener" class="btn btn-blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+              Watch on YouTube
+            </a>
+            <a href="javascript:void(0)" class="btn" style="background:var(--gray-light);color:var(--text);">Church Online →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    /* ---- Navbar scroll sentinel ---- */
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      const sentinel = document.createElement('div');
+      sentinel.style.cssText = 'position:absolute;top:80px;left:0;width:1px;height:1px;pointer-events:none;';
+      (document.body || document.getElementById('site-wrap')).prepend(sentinel);
+      new IntersectionObserver(([entry]) => {
+        navbar.classList.toggle('scrolled', !entry.isIntersecting);
+      }, { threshold: 0 }).observe(sentinel);
+    }
+
+    /* ---- Hamburger / Mobile Menu ---- */
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+    });
+
+    document.querySelectorAll('.mobile-menu-item > a[data-toggle]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const subId = link.dataset.toggle;
+        const sub = document.getElementById(subId);
+        if (sub) {
+          sub.classList.toggle('open');
+          link.querySelector('span').textContent = sub.classList.contains('open') ? '−' : '+';
+        }
+      });
+    });
+
+    /* ---- Hero Slider ---- */
+    const heroSlides  = document.querySelectorAll('.hero-slide');
+    const heroPanels  = document.querySelectorAll('.hero-panel');
+    const heroDots    = document.querySelectorAll('.hero-dot');
+    const heroVideo   = document.querySelector('.hero-bg-video');
+    let heroIdx = 0;
+    let heroTimer;
+
+    function goHero(idx) {
+      // Deactivate current
+      heroSlides[heroIdx].classList.remove('active');
+      heroDots[heroIdx].classList.remove('active');
+      heroPanels[heroIdx].classList.remove('active');
+
+      heroIdx = (idx + heroSlides.length) % heroSlides.length;
+
+      // Activate new
+      heroSlides[heroIdx].classList.add('active');
+      heroDots[heroIdx].classList.add('active');
+      heroPanels[heroIdx].classList.add('active');
+
+      // Pause/resume background video based on active slide
+      if (heroVideo) {
+        heroIdx === 0 ? heroVideo.play().catch(()=>{}) : heroVideo.pause();
+      }
+    }
+
+    function startHeroAuto() {
+      heroTimer = setInterval(() => goHero(heroIdx + 1), 6500);
+    }
+
+    function resetHeroAuto() {
+      clearInterval(heroTimer);
+      startHeroAuto();
+    }
+
+    document.getElementById('heroPrev').addEventListener('click', () => { goHero(heroIdx - 1); resetHeroAuto(); });
+    document.getElementById('heroNext').addEventListener('click', () => { goHero(heroIdx + 1); resetHeroAuto(); });
+    heroDots.forEach(dot => {
+      dot.addEventListener('click', () => { goHero(parseInt(dot.dataset.slide)); resetHeroAuto(); });
+    });
+
+    // Touch swipe on hero
+    let heroSX = 0;
+    document.querySelector('.hero').addEventListener('touchstart', e => { heroSX = e.touches[0].clientX; }, { passive: true });
+    document.querySelector('.hero').addEventListener('touchend', e => {
+      const dx = heroSX - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 50) { dx > 0 ? goHero(heroIdx + 1) : goHero(heroIdx - 1); resetHeroAuto(); }
+    }, { passive: true });
+
+    startHeroAuto();
+
+    /* ---- Year-in-Review Lightbox ---- */
+    const lightbox      = document.getElementById('reviewLightbox');
+    const reviewIframe  = document.getElementById('reviewIframe');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const reviewPlayBtn = document.getElementById('reviewPlayBtn');
+    const reviewWatchBtn= document.getElementById('reviewWatchBtn');
+
+    function openLightbox() {
+      if (!reviewIframe.src || reviewIframe.src === window.location.href) {
+        reviewIframe.src = reviewIframe.dataset.src;
+      }
+      lightbox.classList.add('open');
+      // NOTE: do NOT set body overflow hidden — causes scroll reset in TCC iframe
+      clearInterval(heroTimer);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      reviewIframe.src = '';
+      startHeroAuto();
+    }
+
+    reviewPlayBtn?.addEventListener('click', openLightbox);
+    reviewWatchBtn?.addEventListener('click', openLightbox);
+    lightboxClose?.addEventListener('click', closeLightbox);
+
+    // Close on backdrop click
+    lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /* ---- Generic Slider Factory (gallery only) ---- */
+    function createSlider(trackId, prevId, nextId, dotsId, itemsPerPage) {
+      const track = document.getElementById(trackId);
+      const items = track ? track.children : [];
+      const total = items.length;
+      let idx = 0;
+
+      function getPerPage() {
+        const w = window.innerWidth;
+        if (typeof itemsPerPage === 'function') return itemsPerPage(w);
+        return itemsPerPage;
+      }
+
+      function getItemWidth() {
+        if (!items[0]) return 0;
+        return items[0].offsetWidth + 16;
+      }
+
+      function buildDots() {
+        const dotsEl = document.getElementById(dotsId);
+        if (!dotsEl) return;
+        const pages = Math.ceil(total / getPerPage());
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < pages; i++) {
+          const d = document.createElement('button');
+          d.className = 'sdot' + (i === 0 ? ' active' : '');
+          d.setAttribute('aria-label', `Page ${i+1}`);
+          d.addEventListener('click', () => goSlide(i));
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function updateDots() {
+        const dotsEl = document.getElementById(dotsId);
+        if (!dotsEl) return;
+        dotsEl.querySelectorAll('.sdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+
+      function goSlide(page) {
+        const pages = Math.ceil(total / getPerPage());
+        idx = Math.max(0, Math.min(page, pages - 1));
+        const offset = idx * getPerPage() * getItemWidth();
+        track.style.transform = `translateX(-${offset}px)`;
+        updateDots();
+      }
+
+      function next() { goSlide(idx + 1); }
+      function prev() { goSlide(idx - 1); }
+
+      const prevBtn = document.getElementById(prevId);
+      const nextBtn = document.getElementById(nextId);
+      if (prevBtn) prevBtn.addEventListener('click', prev);
+      if (nextBtn) nextBtn.addEventListener('click', next);
+
+      buildDots();
+      window.addEventListener('resize', () => { buildDots(); goSlide(0); }, { passive: true });
+    }
+
+    createSlider('galleryTrack', 'galleryPrev', 'galleryNext', 'galleryDots',
+      w => w <= 520 ? 1 : w <= 768 ? 2 : w <= 1100 ? 3 : 4);
+
+    /* ---- Announcements: single-card auto-slider with progress bar ---- */
+    (function() {
+      const track       = document.getElementById('announceTrack');
+      const dotRow      = document.getElementById('announceDotRow');
+      const bar         = document.getElementById('announceProgressBar');
+      const prevBtn     = document.getElementById('announcePrev');
+      const nextBtn     = document.getElementById('announceNext');
+      if (!track) return;
+
+      const cards  = Array.from(track.children);
+      const total  = cards.length;
+      const DELAY  = 5000;   // ms per slide
+      let   idx    = 0;
+      let   timer  = null;
+      let   barAnim = null;
+
+      /* Build pill dots */
+      cards.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'announce-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', `Announcement ${i + 1}`);
+        d.addEventListener('click', () => { goTo(i); resetAuto(); });
+        dotRow.appendChild(d);
+      });
+
+      function updateDots() {
+        dotRow.querySelectorAll('.announce-dot').forEach((d, i) =>
+          d.classList.toggle('active', i === idx));
+      }
+
+      function goTo(n) {
+        idx = (n + total) % total;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        updateDots();
+      }
+
+      /* Animated progress bar */
+      function startBar() {
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              bar.style.transition = `width ${DELAY}ms linear`;
+              bar.style.width = '100%';
+            });
+          });
+        }
+      }
+
+      function resetBar() {
+        if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
+      }
+
+      function startAuto() {
+        startBar();
+        timer = setInterval(() => { goTo(idx + 1); startBar(); }, DELAY);
+      }
+
+      function resetAuto() {
+        clearInterval(timer);
+        resetBar();
+        startAuto();
+      }
+
+      prevBtn?.addEventListener('click', () => { goTo(idx - 1); resetAuto(); });
+      nextBtn?.addEventListener('click', () => { goTo(idx + 1); resetAuto(); });
+
+      /* Touch swipe */
+      let sx = 0;
+      track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const dx = sx - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 50) { dx > 0 ? goTo(idx + 1) : goTo(idx - 1); resetAuto(); }
+      }, { passive: true });
+
+      /* Pause on hover */
+      const stage = document.getElementById('announceStage');
+      stage?.addEventListener('mouseenter', () => { clearInterval(timer); resetBar(); });
+      stage?.addEventListener('mouseleave', () => { startAuto(); });
+
+      startAuto();
+    })();
+
+    /* ---- Fade-in: immediately show all (IntersectionObserver unreliable in TCC iframe) ---- */
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+
+    /* ---- Touch / Swipe support (gallery) ---- */
+    function addSwipe(trackId, prevId, nextId) {
+      const el = document.getElementById(trackId);
+      if (!el) return;
+      let startX = 0;
+      el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      el.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) document.getElementById(nextId)?.click();
+          else document.getElementById(prevId)?.click();
+        }
+      }, { passive: true });
+    }
+
+    addSwipe('galleryTrack', 'galleryPrev', 'galleryNext');
+
+    /* ---- Worship Online dropdown (service bar) ---- */
+    const worshipBtn      = document.getElementById('worshipOnlineBtn');
+    const worshipDropdown = document.getElementById('worshipDropdown');
+
+    if (worshipBtn && worshipDropdown) {
+      worshipBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = worshipDropdown.classList.toggle('open');
+        worshipBtn.classList.toggle('active', open);
+        worshipBtn.setAttribute('aria-expanded', open);
+      });
+
+      // Close on outside click
+      document.addEventListener('click', () => {
+        worshipDropdown.classList.remove('open');
+        worshipBtn.classList.remove('active');
+        worshipBtn.setAttribute('aria-expanded', false);
+      });
+    }
+  </script>
+</div><!-- /site-wrap -->
