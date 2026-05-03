@@ -1,0 +1,929 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&family=Dynalight&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #42B9D2;
+    --teal-dark: #2a9ab8;
+    --teal-light: #7dd4e5;
+    --teal-glow: rgba(66,185,210,0.18);
+    --white: #ffffff;
+    --off-white: #f7fbfc;
+    --dark: #0d1a1f;
+    --mid: #1e3a42;
+    --text: #2c4a52;
+    --muted: #6a8f9a;
+    --border: rgba(66,185,210,0.2);
+  }
+
+  html, body {
+    background: #ffffff;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 92vh;
+    min-height: 600px;
+    max-height: 900px;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(66,185,210,0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(66,185,210,0.1) 0%, transparent 60%),
+      linear-gradient(160deg, #0d1a1f 0%, #122830 50%, #0a1a22 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(66,185,210,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(66,185,210,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center;
+    max-width: 780px;
+    padding: 0 24px;
+    animation: heroFadeUp 1s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow span {
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--teal);
+    opacity: 0.6;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0 auto 40px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+
+  .btn-primary:hover {
+    background: var(--teal-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(66,185,210,0.35);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll svg { opacity: 0.5; }
+
+  /* ── WHAT TO EXPECT ── */
+  .section {
+    padding: 100px 24px;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--teal);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  /* ── EXPECT CARDS ── */
+  .expect-section {
+    background: var(--off-white);
+  }
+
+  .expect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--border);
+  }
+
+  .expect-card {
+    background: var(--white);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .expect-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--teal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .expect-card:hover::before { transform: scaleX(1); }
+  .expect-card:hover { transform: translateY(-4px); }
+
+  .expect-icon {
+    width: 56px; height: 56px;
+    background: var(--teal-glow);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+  }
+
+  .expect-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .expect-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── TIMES & LOCATION ── */
+  .times-section {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .times-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 80% 50%, rgba(66,185,210,0.12) 0%, transparent 70%);
+  }
+
+  .times-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .times-section .section-title { color: var(--white); }
+  .times-section .section-desc { color: rgba(255,255,255,0.5); }
+
+  .time-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .time-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 28px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(66,185,210,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .time-card:hover {
+    background: rgba(66,185,210,0.08);
+    border-color: rgba(66,185,210,0.5);
+  }
+
+  .time-dot {
+    width: 12px; height: 12px;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px var(--teal);
+  }
+
+  .time-card-day {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .time-card-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .time-card-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
+  }
+
+  .location-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(66,185,210,0.2);
+    overflow: hidden;
+  }
+
+  .map-placeholder {
+    height: 260px;
+    background: linear-gradient(135deg, #1a3540 0%, #0d2530 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(66,185,210,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(66,185,210,0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .map-pin {
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+
+  .map-pin svg { filter: drop-shadow(0 0 16px var(--teal)); }
+  .map-pin p { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 8px; }
+
+  .location-info {
+    padding: 28px;
+  }
+
+  .location-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .location-info p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .location-info a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: var(--teal);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .location-info a:hover { color: var(--teal-light); }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--white); }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .faq-sticky { position: sticky; top: 80px; }
+
+  .faq-list { margin-top: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(66,185,210,0.15);
+  }
+
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    transition: color 0.2s;
+  }
+
+  .faq-q:hover { color: var(--teal); }
+
+  .faq-q.open { color: var(--teal); }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--teal-glow);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    color: var(--teal);
+    transition: transform 0.3s ease, background 0.3s;
+  }
+
+  .faq-q.open .faq-icon {
+    transform: rotate(45deg);
+    background: var(--teal);
+    color: white;
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+
+  .faq-a.open { max-height: 300px; padding-bottom: 20px; }
+
+  .faq-a p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* ── KIDS ── */
+  .kids-section {
+    background: linear-gradient(135deg, var(--teal) 0%, #2a9ab8 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kids-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 90% 20%, rgba(255,255,255,0.1) 0%, transparent 40%),
+      radial-gradient(circle at 10% 80%, rgba(255,255,255,0.06) 0%, transparent 40%);
+  }
+
+  .kids-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  .kids-section .section-label { color: rgba(255,255,255,0.6); }
+  .kids-section .section-label::after { background: rgba(255,255,255,0.4); }
+  .kids-section .section-title { color: var(--white); }
+  .kids-section .section-desc { color: rgba(255,255,255,0.7); }
+
+  .kids-features {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .kids-feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .kids-feature::before {
+    content: '✓';
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .kids-img-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .kids-img-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 2.2rem;
+    transition: background 0.3s;
+  }
+
+  .kids-img-card span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .kids-img-card:hover { background: rgba(255,255,255,0.18); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 24px;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(66,185,210,0.15) 0%, transparent 70%);
+  }
+
+  .cta-section .section-label {
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .cta-section .section-label::after { display: none; }
+  .cta-section .section-label::before {
+    content: '';
+    flex: none;
+    width: 32px; height: 1px;
+    background: var(--teal); opacity: 0.5;
+  }
+
+  .cta-section .section-title { color: var(--white); text-align: center; }
+  .cta-section .section-desc {
+    color: rgba(255,255,255,0.5);
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid rgba(66,185,210,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+
+  .btn-outline:hover {
+    background: rgba(66,185,210,0.1);
+    border-color: var(--teal);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .times-grid, .faq-layout, .kids-grid { grid-template-columns: 1fr; gap: 48px; }
+    .faq-sticky { position: static; }
+    .section { padding: 72px 20px; }
+    .hero h1 { font-size: 2.8rem; }
+  }
+
+  @media (max-width: 540px) {
+    .expect-grid { grid-template-columns: 1fr; }
+    .kids-img-block { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span> We're glad you're here <span></span></div>
+    <h1>Plan Your<br><em>Visit</em></h1>
+    <p class="hero-sub">Whether it's your first time or you're coming back — here's everything you need to know to feel right at home.</p>
+    <a href="#times" class="btn-primary">
+      See Service Times
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scroll
+  </div>
+</div>
+
+<!-- WHAT TO EXPECT -->
+<div class="section expect-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">First Time?</div>
+      <h2 class="section-title">What to <em>Expect</em></h2>
+      <p class="section-desc">We want your first experience at Evolve to be one you'll remember — in the best way possible.</p>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-card reveal reveal-delay-1">
+        <h3>Worship</h3>
+        <p>Expect live, energetic worship music that creates space to connect with God. Our worship team leads with passion and authenticity every week.</p>
+      </div>
+      <div class="expect-card reveal reveal-delay-2">
+        <h3>Message</h3>
+        <p>Relevant, scripture-based messages from Pastor Ken designed to meet you right where you are — honest, hopeful, and practical for everyday life.</p>
+      </div>
+      <div class="expect-card reveal reveal-delay-3">
+        <h3>Community</h3>
+        <p>From the parking lot to the lobby, you'll be welcomed by real people who are genuinely glad you showed up. We're a church family — come as you are.</p>
+      </div>
+      <div class="expect-card reveal reveal-delay-4">
+        <h3>About 75 Minutes</h3>
+        <p>Our services run about 75 minutes. We start on time and we respect yours — but we hope you'll want to stay and connect afterward.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMES & LOCATION -->
+<div class="section times-section" id="times">
+  <div class="container">
+    <div class="times-grid">
+      <div class="reveal">
+        <div class="section-label">Service Times</div>
+        <h2 class="section-title" style="color:#fff">Join Us <em>Sunday</em></h2>
+        <p class="section-desc">Three services every Sunday. Come early, stay for coffee, and meet the people who make Evolve home.</p>
+        <div class="time-cards">
+          <div class="time-card">
+            <div class="time-dot"></div>
+            <div>
+              <div class="time-card-day">Sunday Morning</div>
+              <div class="time-card-time">9:00 AM</div>
+              <div class="time-card-note">Evolve Kids available for all ages</div>
+            </div>
+          </div>
+          <div class="time-card">
+            <div class="time-dot"></div>
+            <div>
+              <div class="time-card-day">Sunday Morning</div>
+              <div class="time-card-time">10:30 AM</div>
+              <div class="time-card-note">Evolve Kids available for all ages</div>
+            </div>
+          </div>
+          <div class="time-card">
+            <div class="time-dot"></div>
+            <div>
+              <div class="time-card-day">Sunday at noon</div>
+              <div class="time-card-time">12:00 PM</div>
+              <div class="time-card-note">Evolve Kids available for all ages</div>
+            </div>
+          </div>
+          <div class="time-card">
+            <div class="time-dot"></div>
+            <div>
+              <div class="time-card-day">Online</div>
+              <div class="time-card-time">Live Stream</div>
+              <div class="time-card-note">Worship Online every Sunday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="location-card">
+          <div class="map-placeholder">
+            <div class="map-pin">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="var(--teal)" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <p>Milwaukee, WI</p>
+            </div>
+          </div>
+          <div class="location-info">
+            <h3>Evolve Church Milwaukee</h3>
+            <p>We meet in the heart of Milwaukee.<br>Parking is free and plentiful — look for our greeters to guide you in.</p>
+            <a href="https://maps.google.com" target="_blank">
+              Get Directions
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KIDS -->
+<div class="section kids-section">
+  <div class="container">
+    <div class="kids-grid">
+      <div class="reveal">
+        <div class="section-label">Evolve Kids</div>
+        <h2 class="section-title">Your Kids Will <em>Love It Here</em></h2>
+        <p class="section-desc">Evolve Kids is a safe, fun, and age-appropriate environment for children from birth through 5th grade — available at every service.</p>
+        <div class="kids-features">
+          <div class="kids-feature">Secure check-in for every child</div>
+          <div class="kids-feature">Age-specific classrooms (Nursery through 5th Grade)</div>
+          <div class="kids-feature">Background-checked, trained volunteers</div>
+          <div class="kids-feature">Bible-based curriculum that kids actually love</div>
+          <div class="kids-feature">Parents receive a pickup tag at check-in</div>
+        </div>
+      </div>
+      <div class="kids-img-block reveal reveal-delay-2">
+        <div class="kids-img-card"><span>Nursery</span></div>
+        <div class="kids-img-card"><span>Preschool</span></div>
+        <div class="kids-img-card"><span>Elementary</span></div>
+        <div class="kids-img-card"><span>Safe & Secure</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section faq-section">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-sticky reveal">
+        <div class="section-label">Questions</div>
+        <h2 class="section-title">Common <em>Questions</em></h2>
+        <p class="section-desc" style="margin-top:12px;">Can't find what you're looking for? We'd love to hear from you.</p>
+        <a href="mailto:hello@evolvenation.org" class="btn-primary" style="margin-top:32px; display:inline-flex; text-decoration:none;">
+          Contact Us
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="faq-list reveal reveal-delay-2">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What should I wear?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Come as you are — seriously. You'll see everything from jeans and hoodies to dressed up. There's no dress code at Evolve. We want you to feel comfortable, not judged.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Where do I park?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>We have free parking available on-site. Our parking team will be out to guide you. Arrive 10–15 minutes early on your first visit and we'll take care of you from the lot to the lobby.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Will I be put on the spot?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Never. We know visiting a new church can feel awkward. You won't be asked to stand up, introduce yourself to the crowd, or give anything. Just show up and take it all in.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What about my kids?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Evolve Kids is available at both Sunday services for children birth through 5th grade. Look for our Kids Check-In area in the lobby — our team will walk you through it step by step.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do I have to give money?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Absolutely not. Generosity is something we practice because we believe in it — but it's never an expectation of guests. Come and experience Evolve with no pressure.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Is there a way to watch online?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes! We stream live every Sunday through Worship Online. Head to evolvenation.org and look for the "Watch Live" option to join from wherever you are.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="section-label reveal" style="justify-content:center;">We'd love to meet you</div>
+    <h2 class="section-title reveal" style="color:white;text-align:center;margin:0 auto 16px;">Ready to <em>Take the Step?</em></h2>
+    <p class="section-desc reveal" style="text-align:center;margin:0 auto 48px;max-width:480px;">We're saving a spot for you this Sunday. No pressure, no expectations — just good people, great music, and a message that matters.</p>
+    <div class="cta-buttons reveal">
+      <a href="#times" class="btn-primary">Plan My Visit</a>
+      <a href="https://evolvenation.org" class="btn-outline">Watch Online</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>

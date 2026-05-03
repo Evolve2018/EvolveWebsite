@@ -1,0 +1,880 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue-deep: #0d2d35;
+  --blue-mid: #42B9D2;
+  --blue-bright: #42B9D2;
+  --blue-light: #d6f2f8;
+  --blue-pale: #edfafc;
+  --gold: #f0c94a;
+  --gold-light: #fdf6da;
+  --white: #ffffff;
+  --gray-soft: #f4f9fa;
+  --gray-muted: #6b8f96;
+  --text-dark: #0d2d35;
+  --text-body: #2a4a52;
+  --radius: 16px;
+  --radius-sm: 8px;
+}
+
+.kj-page {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-body);
+  background: var(--white);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── HERO ── */
+.kj-hero {
+  background: linear-gradient(160deg, var(--blue-deep) 0%, #0f3a45 55%, #2a9ab3 100%);
+  color: white;
+  padding: 96px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.kj-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(66,185,210,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+.kj-hero-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(200,151,26,0.15);
+  border: 1px solid rgba(200,151,26,0.35);
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+.kj-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 6vw, 68px);
+  font-weight: 700;
+  line-height: 1.1;
+  max-width: 760px;
+  margin: 0 auto 24px;
+  letter-spacing: -0.02em;
+}
+.kj-hero h1 em {
+  font-style: italic;
+  color: #90c4f5;
+}
+.kj-hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 540px;
+  margin: 0 auto 40px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+}
+.kj-hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+  animation: pulse-down 2s infinite;
+}
+.kj-hero-scroll svg { display: block; }
+@keyframes pulse-down {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(5px); opacity: 0.9; }
+}
+
+/* ── SECTION SHARED ── */
+.kj-section {
+  padding: 80px 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.kj-section-wide {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.kj-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue-bright);
+  margin-bottom: 14px;
+  display: block;
+}
+.kj-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.kj-body {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text-body);
+  max-width: 640px;
+}
+
+/* ── WHO IS JESUS ── */
+.kj-who {
+  background: var(--gray-soft);
+}
+.kj-who-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .kj-who-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+.kj-who-visual {
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #42B9D2 100%);
+  border-radius: var(--radius);
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.kj-who-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+.kj-who-visual-cross {
+  position: relative;
+  z-index: 1;
+}
+.kj-who-visual-cross svg {
+  width: 80px;
+  height: 80px;
+  opacity: 0.9;
+}
+.kj-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-style: italic;
+  color: var(--blue-deep);
+  border-left: 3px solid var(--blue-bright);
+  padding-left: 20px;
+  margin: 24px 0;
+  line-height: 1.5;
+}
+.kj-quote cite {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--blue-bright);
+  letter-spacing: 0.08em;
+  margin-top: 8px;
+}
+
+/* ── TRUTH CARDS ── */
+.kj-truths {
+  background: var(--white);
+}
+.kj-truths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.kj-truth-card {
+  background: var(--blue-pale);
+  border: 1px solid #b8e8f2;
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kj-truth-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(66,185,210,0.18);
+}
+.kj-truth-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--blue-bright);
+  background: rgba(66,185,210,0.12);
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+.kj-truth-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.kj-truth-text {
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+.kj-truth-verse {
+  margin-top: 16px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--blue-mid);
+  font-weight: 500;
+}
+
+/* ── STEPS ── */
+.kj-steps-bg {
+  background: linear-gradient(180deg, var(--blue-pale) 0%, var(--white) 100%);
+}
+.kj-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 48px;
+  position: relative;
+}
+.kj-steps-list::before {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 40px;
+  bottom: 40px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--blue-bright) 0%, rgba(21,101,192,0.1) 100%);
+}
+.kj-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+  padding: 0 0 40px;
+  align-items: start;
+}
+.kj-step:last-child { padding-bottom: 0; }
+.kj-step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--blue-bright);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(66,185,210,0.35);
+}
+.kj-step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  padding-top: 12px;
+}
+.kj-step-text {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-body);
+}
+
+/* ── PRAYER ── */
+.kj-prayer-bg {
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #0f3a45 60%, #42B9D2 100%);
+  padding: 80px 24px;
+  text-align: center;
+}
+.kj-prayer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.kj-prayer-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+.kj-prayer-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.15;
+}
+.kj-prayer-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.kj-prayer-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  text-align: left;
+  position: relative;
+}
+.kj-prayer-box::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  color: rgba(255,255,255,0.12);
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  line-height: 1;
+}
+.kj-prayer-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+.kj-prayer-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  font-style: normal;
+  text-align: right;
+}
+
+/* ── NEXT STEPS ── */
+.kj-next-bg {
+  background: var(--gray-soft);
+}
+.kj-next-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.kj-next-card {
+  background: var(--white);
+  border: 1px solid #cceef5;
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.kj-next-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(13,45,53,0.1);
+}
+.kj-next-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--blue-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.kj-next-icon svg { display: block; }
+.kj-next-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+.kj-next-text {
+  font-size: 14px;
+  color: var(--gray-muted);
+  line-height: 1.65;
+}
+.kj-next-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue-bright);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+/* ── CTA FOOTER ── */
+.kj-cta-bg {
+  background: var(--white);
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid #cceef5;
+}
+.kj-cta-inner { max-width: 600px; margin: 0 auto; }
+.kj-cta-btn {
+  display: inline-block;
+  background: #42B9D2;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.15s;
+  margin: 8px;
+}
+.kj-cta-btn:hover { background: var(--blue-deep); transform: translateY(-2px); }
+.kj-cta-btn-ghost {
+  background: transparent;
+  color: #42B9D2;
+  border: 2px solid #42B9D2;
+}
+.kj-cta-btn-ghost:hover { background: var(--blue-light); color: var(--blue-deep); }
+
+/* ── FOOTER ── */
+.kj-footer { background: var(--blue-deep); }
+.kj-footer-top {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 860px) {
+  .kj-footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 500px) {
+  .kj-footer-top { grid-template-columns: 1fr; }
+}
+.kj-ft-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 14px;
+}
+.kj-ft-logo-mark {
+  width: 38px;
+  height: 38px;
+  background: #42B9D2;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.kj-ft-brand-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.01em;
+}
+.kj-ft-tagline {
+  font-size: 14px;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 26px;
+  max-width: 250px;
+}
+.kj-ft-social { display: flex; gap: 9px; }
+.kj-ft-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.kj-ft-social a:hover { background: rgba(66,185,210,0.2); border-color: rgba(66,185,210,0.45); }
+.kj-ft-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #42B9D2;
+  margin-bottom: 18px;
+}
+.kj-ft-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.kj-ft-links li a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+.kj-ft-links li a:hover { color: white; }
+.kj-ft-contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.55);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.kj-ft-contact-row svg { flex-shrink: 0; margin-top: 2px; }
+.kj-ft-contact-row a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.15s; }
+.kj-ft-contact-row a:hover { color: white; }
+.kj-ft-service-note {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.8;
+}
+.kj-footer-bar {
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.kj-footer-bar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.kj-footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.kj-footer-bar-links { display: flex; gap: 20px; }
+.kj-footer-bar-links a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.kj-footer-bar-links a:hover { color: rgba(255,255,255,0.6); }
+.kj-divider {
+  max-width: 960px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #b8e8f2, transparent);
+}
+</style>
+
+<div class="kj-page">
+
+  <!-- HERO -->
+  <section class="kj-hero">
+    <span class="kj-hero-tag">Begin Your Journey</span>
+    <h1>Getting to Know<br><em>Jesus Christ</em></h1>
+    <p class="kj-hero-sub">The most important decision you'll ever make isn't about a career, a relationship, or a location — it's about who you say Jesus is.</p>
+    <div class="kj-hero-scroll">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Scroll to explore
+    </div>
+  </section>
+
+  <!-- WHO IS JESUS -->
+  <section class="kj-who">
+    <div class="kj-who-inner">
+      <div class="kj-who-visual">
+        <div class="kj-who-visual-cross">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="34" y="8" width="12" height="64" rx="4" fill="rgba(255,255,255,0.85)"/>
+            <rect x="12" y="28" width="56" height="12" rx="4" fill="rgba(255,255,255,0.85)"/>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <span class="kj-label">Who Is Jesus?</span>
+        <h2 class="kj-heading">More Than a Good Teacher</h2>
+        <p class="kj-body">Jesus of Nazareth lived over 2,000 years ago, yet His life divided history and His name is known in every corner of the world. He claimed to be not just a prophet or teacher — but the Son of God, the Savior of humanity.</p>
+        <blockquote class="kj-quote">
+          "I am the way, the truth, and the life. No one comes to the Father except through me."
+          <cite>— John 14:6</cite>
+        </blockquote>
+        <p class="kj-body">Unlike any other religious figure, Jesus backed His claims with miracles, an empty tomb, and the transformed lives of billions across every generation. Knowing Him changes everything.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="kj-divider"></div>
+
+  <!-- THREE TRUTHS -->
+  <section class="kj-truths">
+    <div class="kj-section">
+      <span class="kj-label">What the Bible Says</span>
+      <h2 class="kj-heading">Three Truths<br>That Change Everything</h2>
+      <div class="kj-truths-grid">
+        <div class="kj-truth-card">
+          <span class="kj-truth-num">01</span>
+          <div class="kj-truth-title">We All Fall Short</div>
+          <p class="kj-truth-text">Every person has sinned — fallen short of God's perfect standard. This sin creates a separation between us and God that we cannot bridge on our own.</p>
+          <div class="kj-truth-verse">Romans 3:23 · Romans 6:23</div>
+        </div>
+        <div class="kj-truth-card">
+          <span class="kj-truth-num">02</span>
+          <div class="kj-truth-title">God Came for Us</div>
+          <p class="kj-truth-text">God loved us too much to leave us separated. He sent His Son Jesus, who lived a perfect life and died on the cross to pay the penalty for our sin.</p>
+          <div class="kj-truth-verse">John 3:16 · Romans 5:8</div>
+        </div>
+        <div class="kj-truth-card">
+          <span class="kj-truth-num">03</span>
+          <div class="kj-truth-title">New Life Is Available</div>
+          <p class="kj-truth-text">Jesus rose from the dead, defeating sin and death. Anyone who places their faith in Him receives forgiveness, new life, and the promise of eternity with God.</p>
+          <div class="kj-truth-verse">Romans 10:9–10 · Ephesians 2:8–9</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kj-divider"></div>
+
+  <!-- HOW TO RESPOND -->
+  <section class="kj-steps-bg">
+    <div class="kj-section">
+      <span class="kj-label">How to Respond</span>
+      <h2 class="kj-heading">Beginning a Relationship<br>with Jesus</h2>
+      <p class="kj-body" style="margin-bottom: 0;">Becoming a Christian isn't about being good enough or having it all together. It's about responding to what Jesus has already done. Here's what that looks like:</p>
+
+      <div class="kj-steps-list">
+        <div class="kj-step">
+          <div class="kj-step-num">1</div>
+          <div>
+            <div class="kj-step-title">Acknowledge</div>
+            <p class="kj-step-text">Honestly recognize that you have sinned and that your sin has separated you from God. This isn't about shame — it's about seeing the truth clearly so healing can begin.</p>
+          </div>
+        </div>
+        <div class="kj-step">
+          <div class="kj-step-num">2</div>
+          <div>
+            <div class="kj-step-title">Believe</div>
+            <p class="kj-step-text">Put your trust in Jesus Christ — that He is the Son of God, that He died for your sins, and that God raised Him from the dead on the third day. This is the foundation of the Christian faith.</p>
+          </div>
+        </div>
+        <div class="kj-step">
+          <div class="kj-step-num">3</div>
+          <div>
+            <div class="kj-step-title">Confess & Commit</div>
+            <p class="kj-step-text">Confess Jesus as Lord of your life — not just Savior. Invite Him into your heart and make the decision to follow Him. This is a relationship, not just a religion, and it begins with a simple, sincere prayer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRAYER -->
+  <section class="kj-prayer-bg">
+    <div class="kj-prayer-inner">
+      <span class="kj-prayer-label">A Simple Prayer</span>
+      <h2 class="kj-prayer-heading">Ready to Begin?</h2>
+      <p class="kj-prayer-sub">If you've never given your life to Jesus — or if you want to recommit — you can pray something like this from your heart right now. God hears every sincere prayer.</p>
+      <div class="kj-prayer-box">
+        <p class="kj-prayer-text">
+          Lord Jesus, I know I am a sinner. I believe You died for my sins and rose again from the dead. Right now I turn from my sins and open the door of my heart and life. I receive You as my personal Lord and Savior. Thank You for saving me.
+        </p>
+        <p class="kj-prayer-note">Words matter far less than sincerity. Pray in your own words.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT STEPS -->
+  <section class="kj-next-bg">
+    <div class="kj-section">
+      <span class="kj-label">What Comes Next</span>
+      <h2 class="kj-heading">You're Not Alone<br>in This Journey</h2>
+      <p class="kj-body">Following Jesus is a lifelong adventure — and it's meant to be done in community. Here are four ways to take your next step at Evolve Church.</p>
+      <div class="kj-next-grid">
+        <div class="kj-next-card">
+          <div class="kj-next-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" stroke="#42B9D2" stroke-width="1.5"/>
+              <path d="M12 6v6l4 2" stroke="#42B9D2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="kj-next-title">Attend a Service</div>
+          <p class="kj-next-text">Join us in-person or online. Sundays are the perfect first step to experience the Evolve community.</p>
+          <a class="kj-next-link" href="#">Find Service Times →</a>
+        </div>
+        <div class="kj-next-card">
+          <div class="kj-next-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#42B9D2" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="9" cy="7" r="4" stroke="#42B9D2" stroke-width="1.5"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#42B9D2" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="kj-next-title">Join a Small Group</div>
+          <p class="kj-next-text">Life is better in community. Small groups meet throughout the week to study, pray, and grow together.</p>
+          <a class="kj-next-link" href="#">Explore Groups →</a>
+        </div>
+        <div class="kj-next-card">
+          <div class="kj-next-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="#42B9D2" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="#42B9D2" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="kj-next-title">Get Baptized</div>
+          <p class="kj-next-text">Baptism is your public declaration of faith — an outward sign of an inward change. Take this meaningful step.</p>
+          <a class="kj-next-link" href="#">Learn About Baptism →</a>
+        </div>
+        <div class="kj-next-card">
+          <div class="kj-next-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#42B9D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="kj-next-title">Talk to a Pastor</div>
+          <p class="kj-next-text">Have questions? We'd love to connect. Our team is here to walk with you wherever you are in your journey.</p>
+          <a class="kj-next-link" href="#">Contact Us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="kj-cta-bg">
+    <div class="kj-cta-inner">
+      <span class="kj-label" style="display:block; text-align:center;">We're Here for You</span>
+      <h2 class="kj-heading" style="text-align:center; font-size: clamp(26px, 3.5vw, 36px);">You Just Made<br>the Best Decision</h2>
+      <p class="kj-body" style="text-align:center; margin: 0 auto 36px; font-size:16px;">Whether you prayed that prayer today or you've been following Jesus for years — Evolve is a place where you belong. Come as you are. Grow together.</p>
+      <div>
+        <a class="kj-cta-btn" href="https://www.evolvenation.org/contact/">I Made a Decision</a>
+        <a class="kj-cta-btn kj-cta-btn-ghost" href="https://www.evolvenation.org/visit/">Plan My Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="kj-footer">
+    <div class="kj-footer-top">
+
+      <!-- Brand col -->
+      <div>
+        <div class="kj-ft-logo-row">
+          <div class="kj-ft-logo-mark">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 2L3 6l7 4 7-4-7-4zM3 14l7 4 7-4M3 10l7 4 7-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="kj-ft-brand-name">Evolve Church</span>
+        </div>
+        <p class="kj-ft-tagline">A community where faith grows, lives are transformed, and everyone belongs.</p>
+        <div class="kj-ft-social">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/evolvenationmke/" title="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/evolvenationmke/" title="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,255,255,0.6)"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@evolvenation" title="YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="rgba(255,255,255,0.6)" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <div class="kj-ft-col-title">Quick Links</div>
+        <ul class="kj-ft-links">
+          <li><a href="https://www.evolvenation.org/about/">About Us</a></li>
+          <li><a href="https://www.evolvenation.org/sermons/">Sermons</a></li>
+          <li><a href="https://www.evolvenation.org/events/">Events</a></li>
+          <li><a href="https://www.evolvenation.org/evolve-community/">Community</a></li>
+          <li><a href="https://www.evolvenation.org/leadership/">Leadership</a></li>
+          <li><a href="https://www.evolvenation.org/give/">Give</a></li>
+        </ul>
+      </div>
+
+      <!-- I'm New -->
+      <div>
+        <div class="kj-ft-col-title">I'm New</div>
+        <ul class="kj-ft-links">
+          <li><a href="https://www.evolvenation.org/visit/">Plan Your Visit</a></li>
+          <li><a href="https://www.evolvenation.org/about/knowing-jesus/">Knowing Jesus</a></li>
+          <li><a href="https://www.evolvenation.org/baptism/">Get Baptized</a></li>
+          <li><a href="https://www.evolvenation.org/groups/">Small Groups</a></li>
+          <li><a href="https://www.evolvenation.org/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact & Service Times -->
+      <div>
+        <div class="kj-ft-col-title">Find Us</div>
+        <div class="kj-ft-contact-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="#42B9D2" stroke-width="1.8"/>
+            <circle cx="12" cy="10" r="3" stroke="#42B9D2" stroke-width="1.8"/>
+          </svg>
+          <span>6550 N 76th St<br>Milwaukee, WI 53223</span>
+        </div>
+        <div class="kj-ft-contact-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.87-.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="#42B9D2" stroke-width="1.8"/>
+          </svg>
+          <a href="tel:4145104131">(414) 510-4131</a>
+        </div>
+        <div class="kj-ft-contact-row">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#42B9D2" stroke-width="1.8"/>
+            <polyline points="22,6 12,13 2,6" stroke="#42B9D2" stroke-width="1.8"/>
+          </svg>
+          <a href="mailto:connect@evolvenation.org">connect@evolvenation.org</a>
+        </div>
+        <div class="kj-ft-service-note">
+          <strong style="color:rgba(255,255,255,0.45); font-weight:600;">Sunday Worship</strong><br>
+          9:00am · 10:45am · 12:30pm<br>
+          <strong style="color:rgba(255,255,255,0.45); font-weight:600;">Wednesday Night</strong><br>
+          7:00pm
+        </div>
+      </div>
+
+    </div>
+
+    <div class="kj-footer-bar">
+      <div class="kj-footer-bar-inner">
+        <span class="kj-footer-copy">© 2026 Evolve Church · Milwaukee, WI · All rights reserved.</span>
+        <div class="kj-footer-bar-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="https://www.evolvenation.org/give/">Give Online</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
