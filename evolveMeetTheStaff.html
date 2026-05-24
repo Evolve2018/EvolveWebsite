@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
 
@@ -1022,4 +1023,1030 @@ function msToggle(btn) {
     });
   });
 })();
+=======
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue:        #42B9D2;
+  --blue-dark:   #2da3ba;
+  --blue-deeper: #1e8aa0;
+  --blue-bg:     #e8f7fa;
+  --navy:        #0d3a45;
+  --navy-dark:   #071f28;
+  --white:       #ffffff;
+  --off-white:   #f0fafc;
+  --gray-light:  #cdeaf0;
+  --gray-mid:    #5a8a96;
+  --text:        #0d2e38;
+  --transition:  0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+html, body { background: #ffffff; }
+
+.ms-wrap {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.ms-hero {
+  background: var(--navy-dark);
+  padding: 86px 32px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -5%, rgba(66,185,210,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 90% 110%, rgba(42,143,168,0.18) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.ms-hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.ms-hero-orb-1 {
+  width: 360px; height: 360px;
+  top: -120px; right: -80px;
+  background: radial-gradient(circle, rgba(66,185,210,0.1) 0%, transparent 70%);
+}
+.ms-hero-orb-2 {
+  width: 240px; height: 240px;
+  bottom: -60px; left: -40px;
+  background: radial-gradient(circle, rgba(42,143,168,0.1) 0%, transparent 70%);
+}
+
+.ms-hero-eyebrow {
+  position: relative;
+  z-index: 1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ms-hero-eyebrow::before,
+.ms-hero-eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--blue);
+  opacity: 0.5;
+}
+
+.ms-hero-title {
+  position: relative;
+  z-index: 1;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(40px, 8vw, 76px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.ms-hero-script {
+  font-family: 'Dynalight', cursive;
+  font-size: clamp(30px, 6vw, 54px);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 1px;
+  color: var(--blue);
+  display: block;
+  line-height: 1.2;
+}
+
+.ms-hero-sub {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px;
+  margin: 22px auto 0;
+  line-height: 1.75;
+}
+
+/* FILTER BAR */
+.ms-filter-bar {
+  background: var(--navy);
+  padding: 0 32px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  border-bottom: 1px solid rgba(66,185,210,0.12);
+  overflow-x: auto;
+}
+
+.ms-filter-bar::-webkit-scrollbar { display: none; }
+
+.ms-filter-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 17px 22px 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.ms-filter-btn:hover { color: rgba(255,255,255,0.75); }
+.ms-filter-btn.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+/* GRID SECTION */
+.ms-section {
+  padding: 72px 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.ms-dept-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.ms-dept-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  white-space: nowrap;
+}
+
+.ms-dept-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gray-light);
+}
+
+.ms-dept-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+/* CARD GRID */
+.ms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+  margin-bottom: 64px;
+}
+
+/* FEATURED CARD */
+.ms-card-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  background: var(--navy-dark);
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+@media (max-width: 680px) {
+  .ms-card-featured { grid-template-columns: 1fr; }
+}
+
+.ms-card-featured .ms-img-wrap {
+  aspect-ratio: auto;
+  min-height: 340px;
+}
+
+.ms-card-featured .ms-card-content {
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ms-card-featured .ms-card-name { color: var(--white); font-size: 30px; }
+.ms-card-featured .ms-card-title { color: var(--blue); }
+.ms-card-featured .ms-card-bio {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  line-height: 1.75;
+  margin-top: 16px;
+}
+.ms-card-featured .ms-card-email { color: var(--blue); margin-top: 20px; }
+.ms-card-featured .ms-card-divider { width: 36px; height: 2px; background: var(--blue); margin: 16px 0; }
+
+/* STANDARD CARD */
+.ms-card {
+  background: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.ms-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 36px rgba(66,185,210,0.14);
+  border-color: rgba(66,185,210,0.3);
+}
+
+.ms-img-wrap {
+  aspect-ratio: 3/4;
+  background: var(--navy);
+  overflow: hidden;
+  position: relative;
+}
+
+.ms-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  filter: saturate(0.85);
+}
+
+.ms-card:hover .ms-img-wrap img,
+.ms-card-featured .ms-img-wrap img {
+  filter: saturate(1);
+}
+
+.ms-card:hover .ms-img-wrap img { transform: scale(1.05); }
+
+.ms-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, var(--navy-dark) 0%, #1a3a4a 100%);
+}
+
+.ms-placeholder-initials {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 44px;
+  font-weight: 900;
+  color: rgba(66,185,210,0.35);
+  letter-spacing: 2px;
+}
+
+.ms-img-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue-deeper), var(--blue), var(--blue-dark));
+}
+
+.ms-card-content { padding: 18px 18px 14px; }
+
+.ms-card-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 5px;
+}
+
+.ms-card-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+}
+
+.ms-card-divider {
+  width: 28px;
+  height: 2px;
+  background: var(--blue);
+  margin: 12px 0;
+}
+
+.ms-expand-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  padding: 4px 0;
+  transition: color var(--transition);
+  margin-top: 4px;
+}
+
+.ms-expand-btn:hover { color: var(--blue-dark); }
+
+.ms-expand-icon {
+  width: 18px; height: 18px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  transition: transform var(--transition), color var(--transition);
+}
+
+.ms-card.open .ms-expand-icon { transform: rotate(45deg); color: var(--blue); border-color: var(--blue); }
+.ms-card.open .ms-expand-btn { color: var(--blue); }
+
+.ms-bio-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.ms-card.open .ms-bio-wrap { max-height: 300px; padding-top: 12px; }
+
+.ms-bio-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #526070;
+  border-top: 1px solid var(--gray-light);
+  padding-top: 12px;
+}
+
+.ms-card-email {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--blue-dark);
+  margin-top: 10px;
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.ms-card-email:hover { color: var(--blue); }
+
+/* VERSE BAND */
+.ms-verse {
+  background: var(--navy-dark);
+  padding: 68px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-verse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(66,185,210,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ms-verse-open-quote {
+  font-family: 'Dynalight', cursive;
+  font-size: 72px;
+  line-height: 0.8;
+  color: rgba(66,185,210,0.2);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.ms-verse blockquote {
+  font-family: 'Dynalight', cursive;
+  font-size: clamp(22px, 4vw, 34px);
+  color: rgba(255,255,255,0.82);
+  max-width: 680px;
+  margin: 0 auto 14px;
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+}
+
+.ms-verse cite {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-style: normal;
+  position: relative;
+  z-index: 1;
+}
+
+/* CTA */
+.ms-cta {
+  background: var(--blue-bg);
+  text-align: center;
+  padding: 76px 32px;
+}
+
+.ms-cta-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ms-cta-eyebrow::before, .ms-cta-eyebrow::after {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--blue);
+  opacity: 0.5;
+}
+
+.ms-cta h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--navy-dark);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.ms-cta-script {
+  font-family: 'Dynalight', cursive;
+  font-size: clamp(22px, 4vw, 38px);
+  color: var(--blue-dark);
+  display: block;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.ms-cta p {
+  font-size: 15px;
+  color: var(--gray-mid);
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.ms-btn-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ms-btn {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 32px;
+  border: 2px solid var(--blue-dark);
+  color: var(--blue-dark);
+  background: transparent;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.ms-btn:hover { background: var(--blue-dark); color: var(--white); }
+
+.ms-btn.primary { background: var(--blue-dark); color: var(--white); }
+.ms-btn.primary:hover { background: var(--blue); border-color: var(--blue); }
+
+.ms-hidden { display: none !important; }
+
+/* FOOTER */
+.ms-footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.65);
+  font-family: 'Open Sans', sans-serif;
+  padding: 64px 32px 0;
+  border-top: 3px solid var(--blue);
+}
+
+.ms-footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(66,185,210,0.12);
+}
+
+.ms-footer-brand-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.ms-footer-brand-script {
+  font-family: 'Dynalight', cursive;
+  font-size: 15px;
+  color: var(--blue);
+  display: block;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.ms-footer-brand p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.5);
+  max-width: 260px;
+  margin-bottom: 22px;
+}
+
+.ms-footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.ms-social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(66,185,210,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.ms-social-btn:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.ms-footer-col h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 18px;
+}
+
+.ms-footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ms-footer-col ul li a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.ms-footer-col ul li a:hover { color: var(--blue); }
+
+.ms-footer-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 14px;
+}
+
+.ms-footer-info-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.ms-footer-info-val {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+}
+
+.ms-footer-info-val:hover { color: var(--blue); }
+
+.ms-footer-bottom {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 20px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ms-footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+.ms-footer-copy span { color: var(--blue); }
+
+.ms-footer-legal {
+  display: flex;
+  gap: 20px;
+}
+
+.ms-footer-legal a {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: color var(--transition);
+  letter-spacing: 0.05em;
+}
+
+.ms-footer-legal a:hover { color: var(--blue); }
+
+@media (max-width: 820px) {
+  .ms-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .ms-footer-brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  .ms-hero { padding: 60px 20px 52px; }
+  .ms-section { padding: 48px 20px; }
+  .ms-filter-bar { justify-content: flex-start; }
+  .ms-grid { gap: 18px; }
+  .ms-footer { padding: 48px 20px 0; }
+  .ms-footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .ms-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+<div class="ms-wrap">
+
+  <div class="ms-hero">
+    <div class="ms-hero-orb ms-hero-orb-1"></div>
+    <div class="ms-hero-orb ms-hero-orb-2"></div>
+    <div class="ms-hero-eyebrow">The People Behind the Mission</div>
+    <h1 class="ms-hero-title">
+      Meet the
+      <span class="ms-hero-script">Team</span>
+    </h1>
+    <p class="ms-hero-sub">A diverse family of believers dedicated to helping Milwaukee know, grow, and show the love of Jesus.</p>
+  </div>
+
+  <div class="ms-filter-bar">
+    <button class="ms-filter-btn active" data-filter="all">All Staff</button>
+    <button class="ms-filter-btn" data-filter="pastoral">Pastoral</button>
+    <button class="ms-filter-btn" data-filter="ministry">Ministry</button>
+    <button class="ms-filter-btn" data-filter="operations">Operations</button>
+    <button class="ms-filter-btn" data-filter="creative">Creative</button>
+  </div>
+
+  <div class="ms-section">
+
+    <div class="ms-dept-row" data-dept="pastoral">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Pastoral Team</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="pastoral">
+
+      <div class="ms-card-featured" data-dept="pastoral">
+        <div class="ms-img-wrap">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">PK</span></div>
+          <div class="ms-img-accent"></div>
+        </div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Lead Pastor &amp; Founder</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Pastor Ken</div>
+          <p class="ms-card-bio">Pastor Ken founded Evolve Church with a vision to transform lives and communities in Milwaukee through the power of the Gospel. His passionate preaching, heart for the city, and unwavering faith have been the driving force behind everything we do at Evolve.</p>
+          <a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="pastoral">
+        <div class="ms-img-wrap">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div>
+          <div class="ms-img-accent"></div>
+        </div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Associate Pastor</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="pastoral">
+        <div class="ms-img-wrap">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div>
+          <div class="ms-img-accent"></div>
+        </div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Youth Pastor</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-dept-row" data-dept="ministry">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Ministry Team</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="ministry">
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Kids Ministry Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Teens Ministry Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Life Groups Coordinator</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Discipleship Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-dept-row" data-dept="operations">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Operations</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="operations">
+
+      <div class="ms-card" data-dept="operations">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Church Administrator</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="operations">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Finance Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-dept-row" data-dept="creative">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Creative &amp; Communications</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="creative">
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Worship Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Media &amp; Communications</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Graphic Designer</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="ms-verse">
+    <span class="ms-verse-open-quote">"</span>
+    <blockquote>And let us consider how we may spur one another on toward love and good deeds.</blockquote>
+    <cite>— Hebrews 10:24</cite>
+  </div>
+
+  <div class="ms-cta">
+    <div class="ms-cta-eyebrow">We'd love to hear from you</div>
+    <h2>
+      Want to
+      <span class="ms-cta-script">Connect with Us?</span>
+    </h2>
+    <p>Reach out — we're always happy to talk, answer questions, or pray with you.</p>
+    <div class="ms-btn-group">
+      <a class="ms-btn primary" href="https://www.evolvenation.org/connect-card">Connect Card</a>
+      <a class="ms-btn" href="mailto:info@evolvenation.org">Email Us</a>
+      <a class="ms-btn" href="https://www.evolvenation.org/contact">Contact Page</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ms-footer">
+    <div class="ms-footer-inner">
+
+      <!-- Brand -->
+      <div class="ms-footer-brand">
+        <div class="ms-footer-brand-name">Evolve Church</div>
+        <span class="ms-footer-brand-script">Milwaukee, Wisconsin</span>
+        <p>We exist to help people in Milwaukee and beyond know, grow, and show the love of Jesus. Everyone is welcome here.</p>
+        <div class="ms-footer-socials">
+          <a class="ms-social-btn" href="https://www.facebook.com/evolvenation" aria-label="Facebook">f</a>
+          <a class="ms-social-btn" href="https://www.instagram.com/evolvenation" aria-label="Instagram">&#9674;</a>
+          <a class="ms-social-btn" href="https://www.youtube.com/@evolvenation" aria-label="YouTube">&#9658;</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="ms-footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://www.evolvenation.org/home">Home</a></li>
+          <li><a href="https://www.evolvenation.org/who-we-are">Who We Are</a></li>
+          <li><a href="https://www.evolvenation.org/leadership">Leadership</a></li>
+          <li><a href="https://www.evolvenation.org/sermons">Sermons</a></li>
+          <li><a href="https://www.evolvenation.org/events">Events</a></li>
+        </ul>
+      </div>
+
+      <!-- Ministries -->
+      <div class="ms-footer-col">
+        <h4>Ministries</h4>
+        <ul>
+          <li><a href="https://www.evolvenation.org/evolve-kids">Evolve Kids</a></li>
+          <li><a href="https://www.evolvenation.org/evolve-teens">Evolve Teens</a></li>
+          <li><a href="https://www.evolvenation.org/life-groups">Life Groups</a></li>
+          <li><a href="https://www.evolvenation.org/discipleship">Discipleship</a></li>
+          <li><a href="https://www.evolvenation.org/cave">Evolving Men</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="ms-footer-col">
+        <h4>Contact</h4>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Address</span>
+          <a class="ms-footer-info-val" href="https://www.google.com/maps/place/Evolve+Church" target="_blank">6550 N 76th St<br>Milwaukee, WI 53223</a>
+        </div>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Phone</span>
+          <a class="ms-footer-info-val" href="tel:4145104131">(414) 510-4131</a>
+        </div>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Email</span>
+          <a class="ms-footer-info-val" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-footer-bottom">
+      <div class="ms-footer-copy">
+        &copy; 2026 <span>Evolve Church</span> &mdash; All Rights Reserved
+      </div>
+      <div class="ms-footer-legal">
+        <a href="https://www.evolvenation.org/connect-card">Connect Card</a>
+        <a href="https://www.evolvenation.org/give">Give Online</a>
+        <a href="https://www.evolvenation.org/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+function msToggle(btn) {
+  btn.closest('.ms-card').classList.toggle('open');
+}
+(function() {
+  var btns = document.querySelectorAll('.ms-filter-btn');
+  var deptRows = document.querySelectorAll('.ms-dept-row');
+  var grids = document.querySelectorAll('.ms-grid');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      deptRows.forEach(function(r) {
+        r.classList.toggle('ms-hidden', f !== 'all' && r.getAttribute('data-dept') !== f);
+      });
+      grids.forEach(function(g) {
+        g.classList.toggle('ms-hidden', f !== 'all' && g.getAttribute('data-dept') !== f);
+      });
+    });
+  });
+})();
+>>>>>>> ad770bdfb1aa5aacf3685d9247d3b751696e59c4
 </script>
