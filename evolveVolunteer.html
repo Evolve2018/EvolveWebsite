@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Volunteer – Evolve Nation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Montserrat:wght@400;600;700;800&display=swap');
+
+:root {
+  --teal:      #42B9D2;
+  --teal-dark: #2A8FA8;
+  --navy:      #07141a;
+  --navy2:     #0e2244;
+  --navy3:     #0d2d35;
+  --lime:      #d4ff50;
+  --white:     #ffffff;
+  --off-white: #e8f4f7;
+  --card-bg:   #0a1e28;
+  --text-muted:#7aafbf;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 82vh;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute; inset: 0;
+  background: url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg') center/cover no-repeat;
+  transform: scale(1.06);
+  animation: heroZoom 14s ease-out forwards;
+}
+@keyframes heroZoom { to { transform: scale(1.0); } }
+
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(7,20,26,.25) 0%,
+    rgba(7,20,26,.55) 50%,
+    rgba(7,20,26,.92) 100%);
+}
+
+.hero__content {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-family: 'Dynalight', cursive;
+  font-size: 1.35rem;
+  color: var(--teal);
+  letter-spacing: .04em;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp .7s .3s ease forwards;
+}
+
+.hero__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(3.2rem, 7vw, 6.2rem);
+  font-weight: 900;
+  line-height: .95;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  opacity: 0;
+  animation: fadeUp .7s .5s ease forwards;
+}
+.hero__title span { color: var(--teal); }
+
+.hero__sub {
+  margin-top: 20px;
+  max-width: 560px;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255,255,255,.82);
+  opacity: 0;
+  animation: fadeUp .7s .7s ease forwards;
+}
+
+.hero__cta {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  text-decoration: none;
+  transition: background .25s, transform .2s;
+  opacity: 0;
+  animation: fadeUp .7s .9s ease forwards;
+}
+.hero__cta:hover { background: var(--teal-dark); transform: translateY(-2px); }
+.hero__cta svg { transition: transform .2s; }
+.hero__cta:hover svg { transform: translateX(4px); }
+
+/* scroll-down indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: .55;
+  animation: fadeIn 1.2s 1.2s ease forwards;
+  opacity: 0;
+}
+.hero__scroll span {
+  font-size: .65rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 36px;
+  background: var(--teal);
+  animation: scrollPulse 1.8s 1.4s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { transform: scaleY(1); opacity:.55; }
+  50%      { transform: scaleY(.5); opacity:.2; }
+}
+
+/* ── INTRO BAND ───────────────────────────────── */
+.intro {
+  background: var(--navy3);
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.intro__label {
+  font-family: 'Dynalight', cursive;
+  font-size: 1.2rem;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.intro__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  max-width: 700px;
+  margin: 0 auto 22px;
+}
+
+.intro__body {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,.78);
+}
+
+.intro__stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 52px;
+  padding-top: 52px;
+  border-top: 1px solid rgba(66,185,210,.18);
+}
+
+.stat { text-align: center; }
+.stat__num {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: var(--teal);
+  line-height: 1;
+}
+.stat__label {
+  margin-top: 6px;
+  font-size: .75rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── DIVIDER ACCENT ───────────────────────────── */
+.section-label {
+  text-align: center;
+  padding: 64px 40px 0;
+}
+.section-label__eyebrow {
+  font-family: 'Dynalight', cursive;
+  font-size: 1.2rem;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.section-label__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.section-label__line {
+  width: 60px;
+  height: 3px;
+  background: var(--teal);
+  margin: 18px auto 0;
+}
+
+/* ── FILTER BAR ───────────────────────────────── */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 40px 40px 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid rgba(66,185,210,.35);
+  color: var(--text-muted);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--navy);
+}
+
+/* ── CARDS GRID ───────────────────────────────── */
+.cards-section {
+  padding: 48px 40px 80px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.vol-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(66,185,210,.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s;
+  opacity: 0;
+  transform: translateY(24px);
+}
+.vol-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .5s ease, transform .5s ease, box-shadow .3s, border-color .3s;
+}
+.vol-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5);
+  border-color: rgba(66,185,210,.4);
+}
+
+.vol-card__img {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+}
+.vol-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.vol-card:hover .vol-card__img img { transform: scale(1.07); }
+
+.vol-card__badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+.vol-card__body {
+  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.vol-card__icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.vol-card__name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 10px;
+}
+
+.vol-card__desc {
+  font-size: .88rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255,255,255,.65);
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.vol-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: transparent;
+  border: 1.5px solid var(--teal);
+  color: var(--teal);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 11px 22px;
+  text-decoration: none;
+  transition: background .22s, color .22s;
+  align-self: flex-start;
+}
+.vol-card__btn:hover {
+  background: var(--teal);
+  color: var(--navy);
+}
+.vol-card__btn svg { flex-shrink: 0; transition: transform .2s; }
+.vol-card__btn:hover svg { transform: translateX(3px); }
+
+/* ── CTA BANNER ───────────────────────────────── */
+.cta-banner {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy2);
+  padding: 90px 40px;
+  text-align: center;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg') center/cover no-repeat;
+  opacity: .1;
+}
+.cta-banner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(42,143,168,.3) 0%, transparent 60%);
+}
+.cta-banner__inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.cta-banner__eyebrow {
+  font-family: 'Dynalight', cursive;
+  font-size: 1.2rem;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+.cta-banner__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  line-height: .95;
+  margin-bottom: 20px;
+}
+.cta-banner__body {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,.75);
+  margin-bottom: 36px;
+}
+.cta-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 16px 38px;
+  text-decoration: none;
+  transition: background .22s, transform .2s;
+}
+.cta-banner__btn:hover { background: #55cce6; transform: translateY(-2px); }
+
+/* ── NEXT-STEPS STRIP ─────────────────────────── */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(66,185,210,.15);
+}
+.next-step {
+  position: relative;
+  padding: 56px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  background: var(--navy3);
+  transition: background .3s;
+}
+.next-step + .next-step {
+  border-left: 1px solid rgba(66,185,210,.12);
+}
+.next-step:hover { background: #0f2a34; }
+.next-step__tag {
+  font-size: .65rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+}
+.next-step__title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.next-step__link {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--teal);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: gap .2s;
+}
+.next-step__link:hover { gap: 12px; }
+
+/* ── FOOTER ───────────────────────────────────── */
+.footer {
+  background: #040d11;
+  padding: 64px 40px 32px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.footer__brand-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+.footer__brand-tagline {
+  font-size: .88rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 20px;
+}
+.footer__socials { display: flex; gap: 12px; flex-wrap: wrap; }
+.footer__social {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(66,185,210,.3);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--teal);
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.footer__social:hover { background: var(--teal); color: var(--navy); border-color: var(--teal); }
+.footer__social svg { width: 15px; height: 15px; }
+
+.footer__col-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 18px;
+}
+.footer__links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer__links a {
+  font-size: .88rem;
+  color: rgba(255,255,255,.5);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer__links a:hover { color: var(--white); }
+
+.footer__bottom {
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer__copy {
+  font-size: .78rem;
+  color: rgba(255,255,255,.25);
+}
+.footer__address {
+  font-size: .78rem;
+  color: rgba(255,255,255,.25);
+  text-align: right;
+}
+
+/* ── UTILITIES ────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: .55; }
+}
+
+/* ── RESPONSIVE ───────────────────────────────── */
+@media (max-width: 900px) {
+  .next-steps { grid-template-columns: 1fr; }
+  .next-step + .next-step { border-left: none; border-top: 1px solid rgba(66,185,210,.12); }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .intro__stats { gap: 36px; }
+}
+@media (max-width: 600px) {
+  .hero { height: 100svh; }
+  .hero__content, .intro, .cards-section, .cta-banner, .next-step, .filter-bar { padding-left: 20px; padding-right: 20px; }
+  .footer { padding: 48px 20px 24px; }
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .footer__address { text-align: left; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <span class="hero__eyebrow">Be the Church</span>
+    <h1 class="hero__title">Volunteer<br><span>With Us</span></h1>
+    <p class="hero__sub">Your gifts, your story, your time — they matter. Serving at Evolve is how we live out the Gospel and make God's love real for someone else.</p>
+    <a href="#teams" class="hero__cta">
+      Find your team
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ INTRO ══════════════════════════════════════════ -->
+<section class="intro" id="intro">
+  <p class="intro__label">Why serve?</p>
+  <h2 class="intro__title">Find Your Place. Make a Difference.</h2>
+  <p class="intro__body">Whether you're up front or behind the scenes, every act of service connects you more deeply with our mission and creates a stronger sense of belonging. God has uniquely gifted you — your story, your skills, your passions all have a purpose in His Church.</p>
+
+  <div class="intro__stats">
+    <div class="stat">
+      <span class="stat__num js-count" data-target="18">0</span>
+      <span class="stat__label">Ministry Teams</span>
+    </div>
+    <div class="stat">
+      <span class="stat__num js-count" data-target="200">0</span>
+      <span class="stat__label">Active Volunteers</span>
+    </div>
+    <div class="stat">
+      <span class="stat__num js-count" data-target="1">0</span>
+      <span class="stat__label">Church Family</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAMS GRID ═════════════════════════════════════ -->
+<div class="section-label" id="teams">
+  <p class="section-label__eyebrow">Where to serve</p>
+  <h2 class="section-label__title">Choose Your Team</h2>
+  <div class="section-label__line"></div>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Teams</button>
+  <button class="filter-btn" data-filter="worship">Worship &amp; Experience</button>
+  <button class="filter-btn" data-filter="community">Community</button>
+  <button class="filter-btn" data-filter="ministry">Ministry</button>
+  <button class="filter-btn" data-filter="ops">Operations</button>
+</div>
+
+<section class="cards-section">
+  <div class="cards-grid" id="cardsGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ═════════════════════════════════════ -->
+<section class="cta-banner">
+  <div class="cta-banner__inner">
+    <p class="cta-banner__eyebrow">We're better together</p>
+    <h2 class="cta-banner__title">Ready to<br>Step In?</h2>
+    <p class="cta-banner__body">Serving isn't just about filling a spot — it's about living out faith and helping make God's love real in someone else's life. Whatever your gift, there's a place for you here.</p>
+    <a href="#teams" class="cta-banner__btn">
+      Explore All Teams
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══ NEXT STEPS ══════════════════════════════════════ -->
+<div class="next-steps">
+  <div class="next-step">
+    <span class="next-step__tag">Go Public</span>
+    <h3 class="next-step__title">Baptism</h3>
+    <a href="/connect/baptism" class="next-step__link">
+      Learn More
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+  <div class="next-step">
+    <span class="next-step__tag">Follow Jesus Together</span>
+    <h3 class="next-step__title">Life Groups</h3>
+    <a href="/connect/life-groups" class="next-step__link">
+      Find a Group
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+  <div class="next-step">
+    <span class="next-step__tag">You're Not Alone</span>
+    <h3 class="next-step__title">Plan Your Visit</h3>
+    <a href="/connect/plan-your-visit" class="next-step__link">
+      Get Ready
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div>
+      <div class="footer__brand-name">Evolve Nation</div>
+      <p class="footer__brand-tagline">A non-denominational church in Milwaukee, WI committed to helping people Evolve in their faith and impact the world for Christ.</p>
+      <div class="footer__socials">
+        <!-- Instagram -->
+        <a href="https://instagram.com/evolvenationmke" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://facebook.com/evolvenation" class="footer__social" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://www.youtube.com/@evolvenationmke" class="footer__social" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42A2.78 2.78 0 0 0 20.59 4.4C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer__col-title">Explore</p>
+      <ul class="footer__links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/our-beliefs">Our Beliefs</a></li>
+        <li><a href="/meet-the-staff">Meet the Staff</a></li>
+        <li><a href="/knowing-jesus">Knowing Jesus</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer__col-title">Ministries</p>
+      <ul class="footer__links">
+        <li><a href="/evolve-kids">Evolve Kids</a></li>
+        <li><a href="/evolve-teens">Evolve Teens</a></li>
+        <li><a href="/evolving-minds">Evolving Minds</a></li>
+        <li><a href="/life-groups">Life Groups</a></li>
+        <li><a href="/outreach">Outreach</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer__col-title">Contact</p>
+      <ul class="footer__links">
+        <li><a href="mailto:info@evolvenation.org">info@evolvenation.org</a></li>
+        <li><a href="tel:+1-414-000-0000">(414) 000-0000</a></li>
+        <li><a href="/plan-your-visit">Plan Your Visit</a></li>
+        <li><a href="/giving">Give Online</a></li>
+        <li><a href="/connect">Connect</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2026 Evolve Nation. All rights reserved.</p>
+    <p class="footer__address">6550 N 76th St, Milwaukee, WI 53223</p>
+  </div>
+</footer>
+
+<!-- ══ JAVASCRIPT ══════════════════════════════════════ -->
+<script>
+const IMG = 'https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg';
+
+const TEAMS = [
+  {
+    name: 'Altar Helpers',
+    category: 'worship',
+    badge: 'Worship',
+    icon: '🙏',
+    desc: 'Support moments of prayer and response at the altar. Help facilitate life-changing encounters with God during services.',
+    formUrl: '#'
+  },
+  {
+    name: 'Ambassadors',
+    category: 'community',
+    badge: 'Community',
+    icon: '🤝',
+    desc: 'Be the first face people see. Represent the heart of Evolve by welcoming guests and helping them feel at home.',
+    formUrl: '#'
+  },
+  {
+    name: 'Counters',
+    category: 'ops',
+    badge: 'Operations',
+    icon: '📊',
+    desc: 'Handle post-service financial counting with integrity and accuracy. A quiet but critical behind-the-scenes role.',
+    formUrl: '#'
+  },
+  {
+    name: 'EVS',
+    category: 'ops',
+    badge: 'Operations',
+    icon: '✨',
+    desc: 'Keep our facility clean, welcoming, and ready for every service. Great things happen in spaces that are well cared for.',
+    formUrl: '#'
+  },
+  {
+    name: 'Evolve Apparel',
+    category: 'community',
+    badge: 'Community',
+    icon: '👕',
+    desc: 'Manage and distribute Evolve merchandise and branded gear, helping the church family represent with pride.',
+    formUrl: '#'
+  },
+  {
+    name: 'Evolve Community',
+    category: 'community',
+    badge: 'Community',
+    icon: '🏡',
+    desc: 'Help plan and execute community-building events that deepen relationships and strengthen our church family.',
+    formUrl: '#'
+  },
+  {
+    name: 'Evolving Minds',
+    category: 'ministry',
+    badge: 'Ministry',
+    icon: '🧠',
+    desc: 'Support our mental health and wellness ministry. Help create spaces where people can grow whole — mind, body, and spirit.',
+    formUrl: '#'
+  },
+  {
+    name: 'Evolve Teens',
+    category: 'ministry',
+    badge: 'Ministry',
+    icon: '🔥',
+    desc: 'Invest in the next generation. Walk alongside middle and high schoolers as they discover their identity in Christ.',
+    formUrl: '#'
+  },
+  {
+    name: 'Evolve Kids',
+    category: 'ministry',
+    badge: 'Ministry',
+    icon: '⭐',
+    desc: 'Step into the joy of helping kids know God\'s love. Volunteer with Evolve Kids and make an eternal impact, one child at a time.',
+    formUrl: '#'
+  },
+  {
+    name: 'Greeters',
+    category: 'community',
+    badge: 'Community',
+    icon: '👋',
+    desc: 'Be the smile at the door. Greeters help every person who walks in feel seen, valued, and genuinely welcomed.',
+    formUrl: '#'
+  },
+  {
+    name: 'Healthcare Ministry',
+    category: 'ministry',
+    badge: 'Ministry',
+    icon: '🩺',
+    desc: 'Use your medical expertise to serve the congregation and community. A powerful intersection of faith and calling.',
+    formUrl: '#'
+  },
+  {
+    name: 'Lobby Management',
+    category: 'ops',
+    badge: 'Operations',
+    icon: '🏛️',
+    desc: 'Ensure our lobby and common areas run smoothly before, during, and after services for an excellent guest experience.',
+    formUrl: '#'
+  },
+  {
+    name: 'Outreach',
+    category: 'ministry',
+    badge: 'Ministry',
+    icon: '🌍',
+    desc: 'Bring hope to Milwaukee and beyond. Serve with our Outreach team to meet real needs and share God\'s love in the community.',
+    formUrl: '#'
+  },
+  {
+    name: 'Production',
+    category: 'worship',
+    badge: 'Worship',
+    icon: '🎬',
+    desc: 'Use your technical talents for the Kingdom. Run cameras, lighting, graphics, and audio to create a powerful worship experience.',
+    formUrl: '#'
+  },
+  {
+    name: 'Parking Lot',
+    category: 'community',
+    badge: 'Community',
+    icon: '🚗',
+    desc: 'First impressions start in the parking lot. Help guests arrive safely and feel welcomed before they step inside.',
+    formUrl: '#'
+  },
+  {
+    name: 'Social Media',
+    category: 'ops',
+    badge: 'Operations',
+    icon: '📱',
+    desc: 'Help tell the Evolve story online. Create content, engage followers, and extend our reach to people far and near.',
+    formUrl: '#'
+  },
+  {
+    name: 'Snack Stands',
+    category: 'community',
+    badge: 'Community',
+    icon: '☕',
+    desc: 'Serve up smiles and snacks! Help manage our snack areas so that people can connect over good food and good vibes.',
+    formUrl: '#'
+  },
+  {
+    name: 'Stage Crew',
+    category: 'worship',
+    badge: 'Worship',
+    icon: '🎤',
+    desc: 'Support our worship team behind the scenes — set up, break down, and ensure every service runs without a hitch.',
+    formUrl: '#'
+  },
+];
+
+// ── Build cards ───────────────────────────────────────
+const grid = document.getElementById('cardsGrid');
+
+function buildCards(filter) {
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? TEAMS : TEAMS.filter(t => t.category === filter);
+  filtered.forEach((team, i) => {
+    const card = document.createElement('article');
+    card.className = 'vol-card';
+    card.dataset.category = team.category;
+    card.innerHTML = `
+      <div class="vol-card__img">
+        <img src="${IMG}" alt="${team.name}" loading="lazy" />
+        <span class="vol-card__badge">${team.badge}</span>
+      </div>
+      <div class="vol-card__body">
+        <div class="vol-card__icon">${team.icon}</div>
+        <h3 class="vol-card__name">${team.name}</h3>
+        <p class="vol-card__desc">${team.desc}</p>
+        <a href="${team.formUrl}" class="vol-card__btn">
+          I'm Interested
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>`;
+    grid.appendChild(card);
+
+    // staggered entrance
+    setTimeout(() => card.classList.add('visible'), 60 * (i % 9));
+  });
+  observeCards();
+}
+
+buildCards('all');
+
+// ── Filter buttons ────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildCards(btn.dataset.filter);
+  });
+});
+
+// ── Intersection observer for card reveal ─────────────
+function observeCards() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.vol-card:not(.visible)').forEach(c => io.observe(c));
+}
+
+// ── Count-up stats ────────────────────────────────────
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    const target = +el.dataset.target;
+    const suffix = target === 1 ? '' : '+';
+    let start = 0;
+    const step = target / 50;
+    const tick = () => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start) + (start >= target ? suffix : '');
+      if (start < target) requestAnimationFrame(tick);
+    };
+    tick();
+    statsObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.js-count').forEach(el => statsObserver.observe(el));
+</script>
+</body>
+</html>
