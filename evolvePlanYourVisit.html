@@ -26,7 +26,7 @@
   --radius:4px;
 }
 html{scroll-behavior:smooth;background:var(--dark)}
-body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);}
 
 /* ══ SCROLLBAR ══ */
 ::-webkit-scrollbar{width:4px}
@@ -1532,5 +1532,21 @@ function animateCount(el, target, suffix = '') {
   requestAnimationFrame(step);
 }
 </script>
+
+// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
+// Tells the parent TCC page how tall this content is so the iframe
+// resizes to fit and TCC's footer falls naturally below the content.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+
 </body>
 </html>

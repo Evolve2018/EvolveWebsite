@@ -25,7 +25,6 @@ html, body { background: #ffffff; }
   color: var(--text);
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 /* HERO */
@@ -1022,4 +1021,21 @@ function msToggle(btn) {
     });
   });
 })();
+
+// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
+// Tells the parent TCC page how tall this content is so the iframe
+// resizes to fit and TCC's footer falls naturally below the content.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
 </script>
+</body>
+</html>

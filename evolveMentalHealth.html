@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolving Minds | Evolve Church</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=Dynalight&display=swap');
+
+  /* ─── TOKENS ──────────────────────────────────────────── */
+  :root {
+    --blue:       #42B9D2;
+    --blue-dark:  #2A8FA8;
+    --blue-glow:  rgba(66,185,210,0.18);
+    --blue-mid:   rgba(66,185,210,0.08);
+    --navy:       #07141a;
+    --navy2:      #0e2244;
+    --navy3:      #0d2d35;
+    --card-bg:    #0a1e28;
+    --text:       #e8f0f3;
+    --muted:      #8ba8b4;
+    --white:      #ffffff;
+    --radius:     12px;
+    --transition: 0.35s cubic-bezier(.4,0,.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.65;
+  }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  .em-hero {
+    position: relative;
+    width: 100%;
+    height: 92vh;
+    min-height: 560px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .em-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      /* SWAP: replace with real hero image URL */
+      linear-gradient(160deg, #0d2d35 0%, #07141a 100%);
+    background-size: cover;
+    background-position: center 30%;
+    /* Placeholder atmospheric overlay — remove when real image is used */
+    background-image:
+      radial-gradient(ellipse 80% 60% at 60% 30%, rgba(66,185,210,0.12) 0%, transparent 70%),
+      linear-gradient(160deg, #0d2d35 0%, #07141a 100%);
+    transform: scale(1.04);
+    transition: transform 8s ease-out;
+  }
+
+  .em-hero__bg.loaded { transform: scale(1); }
+
+  .em-hero__vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(7,20,26,0.98) 0%, rgba(7,20,26,0.55) 45%, rgba(7,20,26,0.1) 100%),
+      linear-gradient(to right, rgba(7,20,26,0.4) 0%, transparent 60%);
+  }
+
+  /* placeholder scene — remove once real hero image is supplied */
+  .em-hero__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .em-hero__placeholder svg {
+    width: min(55vw, 520px);
+    opacity: 0.07;
+  }
+
+  .em-hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 0 6vw 8vh;
+    max-width: 860px;
+  }
+
+  .em-hero__eyebrow {
+    font-family: 'Dynalight', cursive;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--blue);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .em-hero__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3.4rem, 8.5vw, 7.2rem);
+    font-weight: 900;
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.85s 0.5s forwards;
+  }
+
+  .em-hero__title span { color: var(--blue); }
+
+  .em-hero__sub {
+    margin-top: 1.4rem;
+    font-size: clamp(1rem, 1.6vw, 1.18rem);
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 520px;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.85s 0.75s forwards;
+  }
+
+  .em-hero__cta {
+    margin-top: 2.2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.85s 0.95s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.82rem 2rem;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+  }
+
+  .btn--primary {
+    background: var(--blue);
+    color: var(--navy);
+  }
+  .btn--primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+  }
+  .btn--outline:hover { background: var(--blue-glow); transform: translateY(-2px); }
+
+  .em-hero__scroll {
+    position: absolute;
+    bottom: 2.2rem;
+    right: 6vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.4s forwards;
+  }
+  .em-hero__scroll span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .em-hero__scroll-line {
+    width: 1px;
+    height: 44px;
+    background: linear-gradient(to bottom, var(--blue), transparent);
+    animation: scrollPulse 2.2s 1.4s infinite;
+  }
+
+  /* ─── INTRO SECTION ───────────────────────────────────── */
+  .em-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 7rem 4vw;
+    align-items: center;
+  }
+
+  .em-intro__media {
+    position: relative;
+    padding-right: 4rem;
+  }
+
+  .em-intro__img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    display: block;
+    /* SWAP: replace src with real partner/ministry image */
+    background: linear-gradient(135deg, var(--navy3) 0%, var(--card-bg) 100%);
+  }
+
+  /* placeholder for intro image */
+  .em-intro__img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, #0d2d35 0%, #0a1e28 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px dashed rgba(66,185,210,0.25);
+    flex-direction: column;
+    gap: 0.8rem;
+    opacity: 0.7;
+  }
+
+  .em-intro__accent {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 2.5rem;
+    width: 120px;
+    height: 120px;
+    border: 2px solid var(--blue);
+    border-radius: 50%;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  .em-intro__accent2 {
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    width: 60px;
+    height: 60px;
+    background: var(--blue);
+    border-radius: 50%;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  .em-intro__copy { padding-left: 1rem; }
+
+  .em-intro__eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.9rem;
+  }
+
+  .em-intro__heading {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.4rem;
+  }
+
+  .em-intro__body {
+    font-size: 1.02rem;
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 1.8rem;
+    line-height: 1.75;
+  }
+
+  .em-intro__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .em-intro__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.97rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .em-intro__list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 0.55em;
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────────────── */
+  .em-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(66,185,210,0.25), transparent);
+    margin: 0 auto;
+    max-width: 960px;
+  }
+
+  /* ─── STATS BAND ──────────────────────────────────────── */
+  .em-stats {
+    background: var(--navy3);
+    border-top: 1px solid rgba(66,185,210,0.12);
+    border-bottom: 1px solid rgba(66,185,210,0.12);
+    padding: 3.6rem 4vw;
+  }
+
+  .em-stats__inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .em-stat__number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .em-stat__label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* ─── STORIES SECTION ─────────────────────────────────── */
+  .em-stories {
+    padding: 7rem 4vw;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .em-section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .em-section-header__eyebrow {
+    font-family: 'Dynalight', cursive;
+    font-size: 1.4rem;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .em-section-header__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .em-section-header__body {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* Video cards grid */
+  .em-stories__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+
+  .em-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(66,185,210,0.1);
+    transition: var(--transition);
+    position: relative;
+  }
+  .em-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(66,185,210,0.35);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.45);
+  }
+
+  .em-card__thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  /* SWAP: replace bg gradient with real thumbnail image per card */
+  .em-card__thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, #0d3040 0%, #081820 100%);
+    transition: transform 0.5s ease;
+  }
+
+  .em-card:hover .em-card__thumb-img { transform: scale(1.06); }
+
+  /* placeholder thumb */
+  .em-card__thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d3040 0%, #081820 100%);
+    color: var(--blue);
+    opacity: 0.5;
+    font-size: 0.72rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.5s ease;
+  }
+  .em-card:hover .em-card__thumb-placeholder { transform: scale(1.06); }
+
+  .em-card__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7,20,26,0.35);
+    transition: background var(--transition);
+  }
+  .em-card:hover .em-card__play { background: rgba(7,20,26,0.15); }
+
+  .em-card__play-icon {
+    width: 58px;
+    height: 58px;
+    background: rgba(66,185,210,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition), background var(--transition);
+  }
+  .em-card:hover .em-card__play-icon {
+    transform: scale(1.1);
+    background: var(--blue);
+  }
+  .em-card__play-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--navy);
+    margin-left: 3px;
+  }
+
+  .em-card__body {
+    padding: 1.4rem 1.5rem 1.8rem;
+  }
+
+  .em-card__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+
+  .em-card__subtitle {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+  }
+
+  .em-card__excerpt {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ─── RESOURCES SECTION ───────────────────────────────── */
+  .em-resources {
+    background: var(--navy3);
+    border-top: 1px solid rgba(66,185,210,0.1);
+    border-bottom: 1px solid rgba(66,185,210,0.1);
+    padding: 7rem 4vw;
+  }
+
+  .em-resources__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .em-resources__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+    margin-top: 4rem;
+  }
+
+  .em-resource-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(66,185,210,0.1);
+    border-radius: var(--radius);
+    padding: 2.2rem 1.8rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .em-resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--blue), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .em-resource-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(66,185,210,0.3);
+  }
+  .em-resource-card:hover::before { opacity: 1; }
+
+  .em-resource-card__icon {
+    width: 48px;
+    height: 48px;
+    background: var(--blue-glow);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    color: var(--blue);
+  }
+  .em-resource-card__icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--blue);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .em-resource-card__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+
+  .em-resource-card__body {
+    font-size: 0.92rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.65;
+    margin-bottom: 1.4rem;
+  }
+
+  .em-resource-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    text-decoration: none;
+    transition: gap var(--transition);
+  }
+  .em-resource-card__link:hover { gap: 0.7rem; }
+  .em-resource-card__link svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ─── QUOTE BAND ──────────────────────────────────────── */
+  .em-quote {
+    padding: 6rem 4vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .em-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.2em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22rem;
+    font-weight: 900;
+    color: var(--blue);
+    opacity: 0.04;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .em-quote__text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 760px;
+    margin: 0 auto 1.2rem;
+    line-height: 1.25;
+    position: relative;
+  }
+
+  .em-quote__text em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .em-quote__ref {
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  /* ─── RELATED MINISTRY STRIP ──────────────────────────── */
+  .em-related {
+    padding: 0 4vw 7rem;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .em-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+
+  .em-related-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .em-related-card:hover { transform: translateY(-4px); }
+
+  /* SWAP: replace placeholder backgrounds with real images per card */
+  .em-related-card--prayer { background: linear-gradient(135deg, #071424 0%, #0d2d35 100%); }
+  .em-related-card--groups { background: linear-gradient(135deg, #0e1f30 0%, #071424 100%); }
+  .em-related-card--grief  { background: linear-gradient(135deg, #0a1e28 0%, #07141a 100%); }
+
+  .em-related-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(7,20,26,0.92) 0%, rgba(7,20,26,0.2) 60%);
+    transition: background var(--transition);
+  }
+  .em-related-card:hover .em-related-card__overlay {
+    background: linear-gradient(to top, rgba(7,20,26,0.95) 0%, rgba(7,20,26,0.35) 55%);
+  }
+
+  .em-related-card__content {
+    position: relative;
+    z-index: 1;
+    padding: 1.6rem;
+    width: 100%;
+  }
+
+  .em-related-card__eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+  }
+
+  .em-related-card__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+
+  .em-related-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .em-related-card__link svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* ─── VIDEO MODAL ─────────────────────────────────────── */
+  .em-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(7,20,26,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .em-modal-bg.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .em-modal {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(66,185,210,0.2);
+    transform: scale(0.94);
+    transition: transform 0.3s ease;
+  }
+  .em-modal-bg.open .em-modal { transform: scale(1); }
+
+  .em-modal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.4rem 1.6rem 1rem;
+    gap: 1rem;
+  }
+
+  .em-modal__title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .em-modal__subtitle {
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .em-modal__close {
+    background: rgba(66,185,210,0.12);
+    border: 1px solid rgba(66,185,210,0.25);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--blue);
+    transition: background var(--transition);
+  }
+  .em-modal__close:hover { background: rgba(66,185,210,0.22); }
+  .em-modal__close svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .em-modal__video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+  }
+
+  .em-modal__video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    background: #000;
+    color: var(--muted);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .em-modal__video-placeholder svg {
+    width: 48px; height: 48px;
+    stroke: var(--blue); fill: none;
+    stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    opacity: 0.5;
+  }
+
+  .em-modal__video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────────────────── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.22s; }
+  .reveal-delay-3 { transition-delay: 0.34s; }
+
+  /* count-up stat */
+  .em-stat__number[data-final] { cursor: default; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .em-intro {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .em-intro__media { padding-right: 0; }
+    .em-intro__copy { padding-left: 0; }
+    .em-stories__grid,
+    .em-resources__grid,
+    .em-related__grid {
+      grid-template-columns: 1fr;
+    }
+    .em-stats__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .em-hero__content { padding: 0 5vw 6vh; }
+    .em-hero { height: 85vh; }
+    .em-stats__inner { grid-template-columns: 1fr; }
+    .em-related__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+     SWAP: Replace .em-hero__bg background-image with real full-width hero image
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-hero" id="hero">
+  <div class="em-hero__bg" id="heroBg"></div>
+
+  <!-- Placeholder scene: remove once real hero image is uploaded -->
+  <div class="em-hero__placeholder">
+    <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="120" r="90" stroke="#42B9D2" stroke-width="1" stroke-dasharray="6 4"/>
+      <circle cx="200" cy="120" r="60" stroke="#42B9D2" stroke-width="0.6" stroke-dasharray="4 6"/>
+      <path d="M200 60 L200 180 M140 120 L260 120" stroke="#42B9D2" stroke-width="0.8"/>
+      <circle cx="200" cy="120" r="14" fill="#42B9D2" opacity="0.15"/>
+      <text x="200" y="240" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#42B9D2" opacity="0.5" letter-spacing="4">HERO IMAGE PLACEHOLDER</text>
+    </svg>
+  </div>
+
+  <div class="em-hero__vignette"></div>
+
+  <div class="em-hero__content">
+    <p class="em-hero__eyebrow">Mental Health Ministry</p>
+    <h1 class="em-hero__title">Evolving<br><span>Minds</span></h1>
+    <p class="em-hero__sub">
+      You don't have to navigate the storms of life alone. We walk alongside you — mind, body, and spirit.
+    </p>
+    <div class="em-hero__cta">
+      <a href="#get-help" class="btn btn--primary">Get Support</a>
+      <a href="#stories" class="btn btn--outline">Hear Their Stories</a>
+    </div>
+  </div>
+
+  <div class="em-hero__scroll">
+    <span>Scroll</span>
+    <div class="em-hero__scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INTRO / PARTNERSHIP
+     SWAP: Replace .em-intro__img-placeholder with real <img> tag pointing to your partner/ministry image
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-intro" id="get-help">
+  <div class="em-intro__media reveal">
+    <!-- SWAP: <img src="YOUR_IMAGE_URL" alt="Evolving Minds Ministry" class="em-intro__img"> -->
+    <div class="em-intro__img-placeholder">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      Ministry Image
+    </div>
+    <div class="em-intro__accent"></div>
+    <div class="em-intro__accent2"></div>
+  </div>
+
+  <div class="em-intro__copy reveal reveal-delay-1">
+    <p class="em-intro__eyebrow">Offering Hope &amp; Direction</p>
+    <h2 class="em-intro__heading">You Were<br>Made for<br>Wholeness</h2>
+    <p class="em-intro__body">
+      At Evolve Church, we believe true healing is holistic — spirit, soul, and body. Our Evolving Minds ministry connects you with trusted mental health professionals and faith-based support, so you never have to face life's hardest seasons alone. Whether you're wrestling with anxiety, grief, relationship strain, or simply feeling stuck, there is hope, and there is help.
+    </p>
+    <ul class="em-intro__list">
+      <li>Individual counseling &amp; therapy referrals</li>
+      <li>Marriage &amp; relationship support</li>
+      <li>Grief and loss care</li>
+      <li>Anxiety, depression &amp; stress management</li>
+      <li>Parenting and family challenges</li>
+      <li>Teen &amp; young adult mental wellness</li>
+    </ul>
+    <!-- SWAP: Update href to your actual scheduling link or contact form -->
+    <a href="mailto:info@evolvenation.org?subject=Evolving Minds - Request Support" class="btn btn--primary">Request Support</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS BAND
+     ═══════════════════════════════════════════════════════ -->
+<div class="em-stats">
+  <div class="em-stats__inner">
+    <div class="reveal">
+      <div class="em-stat__number" data-final="1200">0</div>
+      <div class="em-stat__label">People Supported</div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="em-stat__number" data-final="8">0</div>
+      <div class="em-stat__label">Partner Counselors</div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="em-stat__number" data-final="5">0</div>
+      <div class="em-stat__label">Years of Ministry</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTURE QUOTE
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-quote reveal">
+  <p class="em-quote__text">
+    "The Lord is close to the <em>brokenhearted</em> and saves those who are <em>crushed in spirit.</em>"
+  </p>
+  <p class="em-quote__ref">Psalm 34:18</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STORIES / VIDEO TESTIMONIALS
+     SWAP: 
+       - Replace .em-card__thumb-placeholder with real <img> thumbnail
+       - Replace data-video-id with your real YouTube video IDs
+       - Update card title, subtitle, and excerpt per story
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-stories" id="stories">
+  <div class="em-section-header reveal">
+    <p class="em-section-header__eyebrow">Real People. Real Stories.</p>
+    <h2 class="em-section-header__title">Transformed<br>by Hope</h2>
+    <p class="em-section-header__body">
+      Hear directly from members of our community whose lives were changed when they took the courageous step toward healing.
+    </p>
+  </div>
+
+  <div class="em-stories__grid">
+
+    <!-- Card 1 -->
+    <!-- SWAP: data-video-id="YOUR_YOUTUBE_ID" and thumb image -->
+    <div class="em-card reveal reveal-delay-1"
+         data-video-id="PLACEHOLDER_VIDEO_1"
+         data-title="Finding Peace After the Storm"
+         data-subtitle="Personal Story — Marcus &amp; Deja"
+         onclick="openModal(this)">
+      <div class="em-card__thumb">
+        <!-- SWAP: <img src="YOUR_THUMB_URL" alt="Marcus &amp; Deja" class="em-card__thumb-img"> -->
+        <div class="em-card__thumb-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Video Thumbnail
+        </div>
+        <div class="em-card__play">
+          <div class="em-card__play-icon">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="em-card__body">
+        <p class="em-card__subtitle">Personal Story — Marcus &amp; Deja</p>
+        <h3 class="em-card__title">Finding Peace After the Storm</h3>
+        <p class="em-card__excerpt">We thought our marriage was over. After two years of silence and pain, we finally reached out to Evolving Minds. What happened next changed everything for our family.</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <!-- SWAP: data-video-id="YOUR_YOUTUBE_ID" and thumb image -->
+    <div class="em-card reveal reveal-delay-2"
+         data-video-id="PLACEHOLDER_VIDEO_2"
+         data-title="Choosing Life Over Anxiety"
+         data-subtitle="Personal Story — Simone R."
+         onclick="openModal(this)">
+      <div class="em-card__thumb">
+        <!-- SWAP: <img src="YOUR_THUMB_URL" alt="Simone R." class="em-card__thumb-img"> -->
+        <div class="em-card__thumb-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Video Thumbnail
+        </div>
+        <div class="em-card__play">
+          <div class="em-card__play-icon">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="em-card__body">
+        <p class="em-card__subtitle">Personal Story — Simone R.</p>
+        <h3 class="em-card__title">Choosing Life Over Anxiety</h3>
+        <p class="em-card__excerpt">I was so consumed by fear that I stopped leaving my house. The counselor I connected with through Evolve didn't just help me cope — she helped me understand why God still had a plan for my life.</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <!-- SWAP: data-video-id="YOUR_YOUTUBE_ID" and thumb image -->
+    <div class="em-card reveal reveal-delay-3"
+         data-video-id="PLACEHOLDER_VIDEO_3"
+         data-title="Grief Doesn't Get the Last Word"
+         data-subtitle="Personal Story — The Williams Family"
+         onclick="openModal(this)">
+      <div class="em-card__thumb">
+        <!-- SWAP: <img src="YOUR_THUMB_URL" alt="Williams Family" class="em-card__thumb-img"> -->
+        <div class="em-card__thumb-placeholder">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Video Thumbnail
+        </div>
+        <div class="em-card__play">
+          <div class="em-card__play-icon">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="em-card__body">
+        <p class="em-card__subtitle">Personal Story — The Williams Family</p>
+        <h3 class="em-card__title">Grief Doesn't Get the Last Word</h3>
+        <p class="em-card__excerpt">After losing our son, we were drowning. What Evolving Minds gave us wasn't just counseling — it was a community of people who held us up when we had nothing left to give.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     RESOURCES SECTION
+     SWAP: Update href values to real resource links
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-resources">
+  <div class="em-resources__inner">
+    <div class="em-section-header reveal">
+      <p class="em-section-header__eyebrow">We're Here for You</p>
+      <h2 class="em-section-header__title">How We<br>Can Help</h2>
+      <p class="em-section-header__body">
+        Whether you need a first conversation, an ongoing counselor, or a community that understands — we have a next step for you.
+      </p>
+    </div>
+
+    <div class="em-resources__grid">
+
+      <div class="em-resource-card reveal reveal-delay-1">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">One-on-One Counseling</h3>
+        <p class="em-resource-card__body">
+          Get connected with a licensed, faith-informed therapist for confidential, professional support tailored to your specific needs and season of life.
+        </p>
+        <!-- SWAP: Update href to scheduling link -->
+        <a href="mailto:info@evolvenation.org?subject=Counseling Request" class="em-resource-card__link">
+          Request a Session
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="em-resource-card reveal reveal-delay-2">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">Support Groups</h3>
+        <p class="em-resource-card__body">
+          Join others walking through similar challenges — grief, addiction recovery, anxiety, and more — in a confidential, judgment-free group setting rooted in faith.
+        </p>
+        <!-- SWAP: Update href to support group sign-up -->
+        <a href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new" class="em-resource-card__link">
+          Find a Group
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="em-resource-card reveal reveal-delay-3">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.2 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">Crisis &amp; Immediate Help</h3>
+        <p class="em-resource-card__body">
+          If you or someone you know is in crisis, please don't wait. We've compiled trusted 24/7 resources including hotlines, text lines, and emergency care options.
+        </p>
+        <!-- SWAP: Update href to a crisis resources page or contact -->
+        <a href="tel:988" class="em-resource-card__link">
+          Get Immediate Help
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="em-resource-card reveal reveal-delay-1">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">Faith &amp; Healing Library</h3>
+        <p class="em-resource-card__body">
+          Explore curated books, devotionals, and workbooks that address mental health through a Biblical lens — practical tools for your journey toward healing.
+        </p>
+        <!-- SWAP: Update href to library/resources page -->
+        <a href="#" class="em-resource-card__link">
+          Browse Resources
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="em-resource-card reveal reveal-delay-2">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">Wellness Workshops</h3>
+        <p class="em-resource-card__body">
+          Attend our quarterly Evolving Minds events — interactive workshops on topics like emotional health, resilience, managing trauma, and building healthy relationships.
+        </p>
+        <!-- SWAP: Update href to events page filtered for Evolving Minds events -->
+        <a href="https://www.evolvenation.org/events" class="em-resource-card__link">
+          See Upcoming Events
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+      <div class="em-resource-card reveal reveal-delay-3">
+        <div class="em-resource-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 class="em-resource-card__title">Prayer &amp; Spiritual Support</h3>
+        <p class="em-resource-card__body">
+          Sometimes you just need someone to pray with you. Our pastoral care team is available to walk with you in prayer and spiritual encouragement during difficult seasons.
+        </p>
+        <a href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new" class="em-resource-card__link">
+          Request Prayer
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     RELATED MINISTRY STRIP
+     SWAP: Replace card backgrounds with real background-image styles
+     e.g., style="background-image: url('YOUR_IMAGE_URL'); background-size: cover; background-position: center;"
+     ═══════════════════════════════════════════════════════ -->
+<section class="em-related" style="padding-top: 7rem;">
+  <div class="em-section-header reveal" style="margin-bottom: 3rem;">
+    <p class="em-section-header__eyebrow">Keep Exploring</p>
+    <h2 class="em-section-header__title">You're Not Alone</h2>
+  </div>
+
+  <div class="em-related__grid">
+
+    <a href="https://evolvenation.ccbchurch.com/goto/forms/348/responses/new" class="em-related-card em-related-card--grief reveal reveal-delay-1">
+      <div class="em-related-card__overlay"></div>
+      <div class="em-related-card__content">
+        <p class="em-related-card__eyebrow">Support in Loss</p>
+        <h3 class="em-related-card__title">Grieving Ministry</h3>
+        <span class="em-related-card__link">
+          Learn More
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="https://www.evolvenation.org/life-groups" class="em-related-card em-related-card--groups reveal reveal-delay-2">
+      <div class="em-related-card__overlay"></div>
+      <div class="em-related-card__content">
+        <p class="em-related-card__eyebrow">Follow Jesus Together</p>
+        <h3 class="em-related-card__title">Life Groups</h3>
+        <span class="em-related-card__link">
+          Find a Group
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new" class="em-related-card em-related-card--prayer reveal reveal-delay-3">
+      <div class="em-related-card__overlay"></div>
+      <div class="em-related-card__content">
+        <p class="em-related-card__eyebrow">You Don't Have to Carry This</p>
+        <h3 class="em-related-card__title">Request Prayer</h3>
+        <span class="em-related-card__link">
+          Submit a Request
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     VIDEO MODAL
+     ═══════════════════════════════════════════════════════ -->
+<div class="em-modal-bg" id="videoModal" onclick="handleModalBgClick(event)">
+  <div class="em-modal" id="modalInner">
+    <div class="em-modal__header">
+      <div>
+        <div class="em-modal__subtitle" id="modalSubtitle">Personal Story</div>
+        <div class="em-modal__title" id="modalTitle">Story Title</div>
+      </div>
+      <button class="em-modal__close" onclick="closeModal()" aria-label="Close video">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="em-modal__video-wrap" id="modalVideoWrap">
+      <!-- iframe injected by JS -->
+      <div class="em-modal__video-placeholder" id="modalPlaceholder">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Video will play here once a YouTube ID is set
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════ -->
+<script>
+  /* ── Scroll reveal ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── Count-up stats ── */
+  function animateCount(el) {
+    const final = parseInt(el.dataset.final, 10);
+    const duration = 1600;
+    const start = performance.now();
+    (function tick(now) {
+      const elapsed = Math.min(now - start, duration);
+      const progress = elapsed / duration;
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * final).toLocaleString();
+      if (elapsed < duration) requestAnimationFrame(tick);
+      else el.textContent = final.toLocaleString() + (final >= 100 ? '+' : '');
+    })(start);
+  }
+
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target);
+        statObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.em-stat__number[data-final]').forEach(el => statObserver.observe(el));
+
+  /* ── Hero parallax ── */
+  const heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight * 1.5) {
+      heroBg.style.transform = `translateY(${y * 0.28}px) scale(1.04)`;
+    }
+  }, { passive: true });
+
+  /* Trigger hero bg loaded class */
+  setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+  /* ── Video modal ── */
+  function openModal(card) {
+    const videoId    = card.dataset.videoId;
+    const title      = card.dataset.title;
+    const subtitle   = card.dataset.subtitle;
+    const modal      = document.getElementById('videoModal');
+    const wrap       = document.getElementById('modalVideoWrap');
+    const placeholder = document.getElementById('modalPlaceholder');
+
+    document.getElementById('modalTitle').textContent    = title;
+    document.getElementById('modalSubtitle').innerHTML   = subtitle;
+
+    // Remove any existing iframe
+    const existingIframe = wrap.querySelector('iframe');
+    if (existingIframe) existingIframe.remove();
+
+    // Only inject iframe if a real YouTube ID is set
+    if (videoId && !videoId.startsWith('PLACEHOLDER')) {
+      placeholder.style.display = 'none';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      wrap.appendChild(iframe);
+    } else {
+      placeholder.style.display = 'flex';
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const wrap  = document.getElementById('modalVideoWrap');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    const iframe = wrap.querySelector('iframe');
+    if (iframe) iframe.remove();
+    document.getElementById('modalPlaceholder').style.display = 'flex';
+  }
+
+  function handleModalBgClick(e) {
+    if (e.target === document.getElementById('videoModal')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+
+// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
+// Tells the parent TCC page how tall this content is so the iframe
+// resizes to fit and TCC's footer falls naturally below the content.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+
+</body>
+</html>

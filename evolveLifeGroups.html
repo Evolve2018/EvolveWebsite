@@ -34,7 +34,8 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 15px;
       line-height: 1.65;
-      overflow-x: hidden;
+      /* NOTE: overflow-x removed intentionally — it was preventing accurate
+         scrollHeight reporting to the parent iframe, causing footer overlap. */
       -webkit-font-smoothing: antialiased;
     }
 
@@ -55,7 +56,6 @@
         var(--dark);
     }
 
-    /* subtle grid */
     .hero::before {
       content: '';
       position: absolute;
@@ -66,7 +66,6 @@
       pointer-events: none;
     }
 
-    /* floating orbs */
     .hero::after {
       content: '';
       position: absolute;
@@ -121,10 +120,7 @@
       animation: fadeUp .7s .25s both;
     }
 
-    .hero-logo em {
-      color: var(--gold);
-      font-style: italic;
-    }
+    .hero-logo em { color: var(--gold); font-style: italic; }
 
     .hero-sub {
       font-family: 'Playfair Display', serif;
@@ -379,10 +375,7 @@
       letter-spacing: .05em;
     }
 
-    .results-label span {
-      color: var(--gold);
-      font-weight: 600;
-    }
+    .results-label span { color: var(--gold); font-weight: 600; }
 
     /* ─── SECTION LAYOUT ────────────────────────────────── */
     .section-wrap {
@@ -459,7 +452,7 @@
       overflow: hidden;
       position: relative;
       transition: transform var(--t), border-color var(--t), box-shadow var(--t);
-      cursor: default;
+      cursor: pointer;
     }
 
     .card::before {
@@ -480,6 +473,7 @@
     }
 
     .card:hover::before { opacity: 1; }
+    .card:active { transform: translateY(-2px); }
 
     .card-body {
       padding: 1.2rem 1.4rem 1rem;
@@ -668,18 +662,14 @@
       box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.05);
     }
 
-    .modal-backdrop.open .modal {
-      transform: translateY(0) scale(1);
-    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
 
     .modal-top-bar {
       height: 3px;
       background: linear-gradient(90deg, var(--gold), var(--gold-dk), transparent);
     }
 
-    .modal-inner {
-      padding: 2rem 2rem 1.5rem;
-    }
+    .modal-inner { padding: 2rem 2rem 1.5rem; }
 
     .modal-close {
       position: absolute;
@@ -688,8 +678,7 @@
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.08);
       color: #888;
-      width: 30px;
-      height: 30px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -702,12 +691,7 @@
 
     .modal-close:hover { background: rgba(255,255,255,.12); color: var(--text); }
 
-    .modal-pill-row {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      margin-bottom: 1.1rem;
-    }
+    .modal-pill-row { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem; }
 
     .modal-title {
       font-family: 'Playfair Display', serif;
@@ -718,12 +702,7 @@
       margin-bottom: 1rem;
     }
 
-    .modal-desc {
-      font-size: .92rem;
-      color: var(--text-2);
-      line-height: 1.8;
-      margin-bottom: 1.4rem;
-    }
+    .modal-desc { font-size: .92rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.4rem; }
 
     .modal-details {
       background: rgba(0,0,0,.2);
@@ -736,14 +715,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .modal-detail-row {
-      display: flex;
-      align-items: center;
-      gap: .65rem;
-      font-size: .84rem;
-      color: var(--text-2);
-    }
-
+    .modal-detail-row { display: flex; align-items: center; gap: .65rem; font-size: .84rem; color: var(--text-2); }
     .modal-detail-row svg { color: var(--gold); opacity: .7; flex-shrink: 0; }
     .modal-detail-row strong { color: var(--text); font-weight: 500; }
 
@@ -776,12 +748,7 @@
       gap: .4rem;
     }
 
-    .modal-cadence-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: .6;
-    }
+    .modal-cadence-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: .6; }
 
     .modal-join-btn {
       display: inline-flex;
@@ -807,10 +774,6 @@
       box-shadow: 0 6px 20px rgba(201,168,76,.35);
     }
 
-    /* card click affordance */
-    .card { cursor: pointer; }
-    .card:active { transform: translateY(-2px); }
-
     /* ─── RESPONSIVE ────────────────────────────────────── */
     @media (max-width: 600px) {
       .f-sep { display: none; }
@@ -832,9 +795,7 @@
   <h1 class="hero-logo">Evolve <em>Church</em></h1>
   <p class="hero-sub">Active Life Groups</p>
   <div class="hero-rule"></div>
-  <p class="hero-desc">
-    Find your community. Join a life group. Grow together.
-  </p>
+  <p class="hero-desc">Find your community. Join a life group. Grow together.</p>
   <div class="hero-cta">
     <a href="#groups" class="cta-btn">
       Explore Groups
@@ -991,22 +952,16 @@ const SECTIONS = [
   { id:'multicultural', label:'',               accent:'Multicultural',      subs:['in-person'] },
 ];
 
-// ─── SVG ICONS ─────────────────────────────────────────────────
 const ICO_PERSON = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>`;
 const ICO_CAL   = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>`;
 const ICO_EXT   = `<svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/></svg>`;
 
-// ─── BUILD CARD ─────────────────────────────────────────────────
 function buildCard(g) {
   const fmtClass = g.fmt === 'virtual' ? 'pill-vr' : 'pill-ip';
   const fmtLabel = g.fmt === 'virtual' ? 'Virtual'  : 'In Person';
   const searchKey = [g.name, g.leader, g.desc, g.cat, g.fmt, g.day].join(' ').toLowerCase();
-
   return `
-    <div class="card"
-         data-cat="${g.cat}"
-         data-fmt="${g.fmt}"
-         data-search="${searchKey}">
+    <div class="card" data-cat="${g.cat}" data-fmt="${g.fmt}" data-search="${searchKey}">
       <div class="card-body">
         <div class="card-header">
           <div class="card-title">${g.name}</div>
@@ -1025,39 +980,30 @@ function buildCard(g) {
     </div>`;
 }
 
-// ─── BUILD SECTIONS ─────────────────────────────────────────────
 function buildSections() {
   const main = document.getElementById('main');
   let html = '';
-
   SECTIONS.forEach(sec => {
     const total = GROUPS.filter(g => g.cat === sec.id).length;
     const titlePrefix = sec.label ? `${sec.label} ` : '';
-
     html += `<div class="section-wrap" data-section="${sec.id}">
       <div class="section-head">
         <h2 class="section-title">${titlePrefix}<em>${sec.accent}</em></h2>
         <div class="section-rule"></div>
         <span class="section-ct" id="ct-${sec.id}">${total} Group${total !== 1 ? 's' : ''}</span>
       </div>`;
-
     sec.subs.forEach(sub => {
       const items = GROUPS.filter(g => g.cat === sec.id && g.fmt === sub);
       if (!items.length) return;
       const subLabel = sub === 'virtual' ? 'Virtual' : 'In Person';
       html += `<div class="sub-label" data-sub="${sec.id}-${sub}">${subLabel}</div>
-               <div class="cards-grid" id="grid-${sec.id}-${sub}">
-                 ${items.map(buildCard).join('')}
-               </div>`;
+               <div class="cards-grid" id="grid-${sec.id}-${sub}">${items.map(buildCard).join('')}</div>`;
     });
-
     html += `</div>`;
   });
-
   main.innerHTML = html;
 }
 
-// ─── FILTER + SEARCH ────────────────────────────────────────────
 let activeCat = 'all';
 let activeFmt = null;
 let searchQ   = '';
@@ -1065,66 +1011,46 @@ let searchQ   = '';
 function applyFilters() {
   const allCards = document.querySelectorAll('.card');
   let visible = 0;
-
   allCards.forEach(card => {
-    const cat  = card.dataset.cat;
-    const fmt  = card.dataset.fmt;
-    const srch = card.dataset.search || '';
-
     const ok =
-      (activeCat === 'all' || cat === activeCat) &&
-      (!activeFmt || fmt === activeFmt) &&
-      (!searchQ   || srch.includes(searchQ));
-
+      (activeCat === 'all' || card.dataset.cat === activeCat) &&
+      (!activeFmt || card.dataset.fmt === activeFmt) &&
+      (!searchQ   || (card.dataset.search || '').includes(searchQ));
     card.style.display = ok ? '' : 'none';
     if (ok) visible++;
   });
-
-  // update total results count
   const countEl = document.getElementById('resultsCount');
   if (countEl) countEl.textContent = visible;
-
-  // never hide section wrappers — only hide grids/sub-labels that have zero visible cards
   SECTIONS.forEach(sec => {
     const secEl = document.querySelector('[data-section="' + sec.id + '"]');
     if (!secEl) return;
-
-    // count how many cards in this section are visible
     const visInSec = Array.from(secEl.querySelectorAll('.card')).filter(c => c.style.display !== 'none').length;
-
-    // show/hide the whole section wrapper based on whether any cards are showing
     secEl.style.display = visInSec > 0 ? '' : 'none';
-
     sec.subs.forEach(sub => {
       const grid   = document.getElementById('grid-' + sec.id + '-' + sub);
       const subLbl = document.querySelector('[data-sub="' + sec.id + '-' + sub + '"]');
       if (!grid) return;
       const anyVis = Array.from(grid.querySelectorAll('.card')).some(c => c.style.display !== 'none');
-      grid.style.display   = anyVis ? '' : 'none';
+      grid.style.display = anyVis ? '' : 'none';
       if (subLbl) subLbl.style.display = anyVis ? '' : 'none';
     });
-
-    // update per-section count
     const ctEl = document.getElementById('ct-' + sec.id);
     if (ctEl) ctEl.textContent = visInSec + ' Group' + (visInSec !== 1 ? 's' : '');
   });
+  sendHeight(); // notify parent after DOM changes
 }
 
-// ─── SCROLL TO CONTENT ──────────────────────────────────────────
 function scrollToContent() {
   const filterBar = document.getElementById('groups');
   if (!filterBar) return;
-  const top = filterBar.getBoundingClientRect().top + window.scrollY - 1;
-  window.scrollTo({ top: top, behavior: 'smooth' });
+  window.scrollTo({ top: filterBar.getBoundingClientRect().top + window.scrollY - 1, behavior: 'smooth' });
 }
 
-// ─── WIRE UP FILTERS ────────────────────────────────────────────
 function initFilters() {
   document.querySelectorAll('.filter-btn[data-cat]').forEach(btn => {
     btn.addEventListener('click', () => {
       const isActive = btn.classList.contains('active');
       document.querySelectorAll('.filter-btn[data-cat]').forEach(b => b.classList.remove('active'));
-
       if (isActive && btn.dataset.cat !== 'all') {
         document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
         activeCat = 'all';
@@ -1135,7 +1061,6 @@ function initFilters() {
       applyFilters();
     });
   });
-
   document.querySelectorAll('.filter-btn[data-fmt]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.classList.contains('active')) {
@@ -1150,7 +1075,6 @@ function initFilters() {
       scrollToContent();
     });
   });
-
   const si = document.getElementById('searchInput');
   if (si) {
     si.addEventListener('input', () => {
@@ -1166,51 +1090,42 @@ function initFilters() {
   }
 }
 
-// ─── INIT ────────────────────────────────────────────────────────
 buildSections();
 initFilters();
 
-
-// ─── POPULATE STATS FROM DATA ────────────────────────────────────
 (function() {
-  const total = GROUPS.length;
+  const total    = GROUPS.length;
   const inPerson = GROUPS.filter(g => g.fmt === 'in-person').length;
   const virtual  = GROUPS.filter(g => g.fmt === 'virtual').length;
-  const cats = new Set(GROUPS.map(g => g.cat)).size;
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statCats').textContent  = cats;
-  document.getElementById('statIP').textContent    = inPerson;
-  document.getElementById('statVR').textContent    = virtual;
+  const cats     = new Set(GROUPS.map(g => g.cat)).size;
+  document.getElementById('statTotal').textContent    = total;
+  document.getElementById('statCats').textContent     = cats;
+  document.getElementById('statIP').textContent       = inPerson;
+  document.getElementById('statVR').textContent       = virtual;
   document.getElementById('resultsCount').textContent = total;
 })();
 
-// ─── MODAL ───────────────────────────────────────────────────────
 (function() {
   const backdrop = document.getElementById('modalBackdrop');
   const closeBtn = document.getElementById('modalClose');
 
-  let scrollY = 0;
-
   function openModal(g) {
-    document.getElementById('modalTitle').textContent   = g.name;
-    document.getElementById('modalDesc').textContent    = g.desc;
-    document.getElementById('modalLeader').textContent  = g.leader;
-    document.getElementById('modalDay').textContent     = g.day;
-    document.getElementById('modalTime').textContent    = g.time;
-    document.getElementById('modalCadence').textContent = g.cadence;
-    document.getElementById('modalCadence2').textContent= g.cadence;
-    document.getElementById('modalFormat').textContent  = g.fmt === 'virtual' ? 'Virtual' : 'In Person';
-    document.getElementById('modalJoinBtn').href        = g.link;
-
+    document.getElementById('modalTitle').textContent    = g.name;
+    document.getElementById('modalDesc').textContent     = g.desc;
+    document.getElementById('modalLeader').textContent   = g.leader;
+    document.getElementById('modalDay').textContent      = g.day;
+    document.getElementById('modalTime').textContent     = g.time;
+    document.getElementById('modalCadence').textContent  = g.cadence;
+    document.getElementById('modalCadence2').textContent = g.cadence;
+    document.getElementById('modalFormat').textContent   = g.fmt === 'virtual' ? 'Virtual' : 'In Person';
+    document.getElementById('modalJoinBtn').href         = g.link;
     const pill = document.getElementById('modalPill');
-    pill.textContent  = g.fmt === 'virtual' ? 'Virtual' : 'In Person';
-    pill.className    = 'pill ' + (g.fmt === 'virtual' ? 'pill-vr' : 'pill-ip');
+    pill.textContent = g.fmt === 'virtual' ? 'Virtual' : 'In Person';
+    pill.className   = 'pill ' + (g.fmt === 'virtual' ? 'pill-vr' : 'pill-ip');
 
-    scrollY = window.scrollY || window.pageYOffset;
-    var vh = window.innerHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
     backdrop.style.top    = scrollY + 'px';
-    backdrop.style.height = vh + 'px';
-
+    backdrop.style.height = window.innerHeight + 'px';
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1220,38 +1135,41 @@ initFilters();
     backdrop.style.top    = '';
     backdrop.style.height = '';
     document.body.style.overflow = '';
+    sendHeight();
   }
 
   document.getElementById('main').addEventListener('click', function(e) {
-    const joinBtn = e.target.closest('.join-btn');
-    if (joinBtn) return;
-
+    if (e.target.closest('.join-btn')) return;
     const card = e.target.closest('.card');
     if (!card) return;
-
-    const cat  = card.dataset.cat;
-    const fmt  = card.dataset.fmt;
-    const srch = card.dataset.search;
-
     const g = GROUPS.find(function(item) {
-      return item.cat === cat &&
-             item.fmt === fmt &&
-             [item.name, item.leader, item.desc, item.cat, item.fmt, item.day].join(' ').toLowerCase() === srch;
+      return item.cat === card.dataset.cat &&
+             item.fmt === card.dataset.fmt &&
+             [item.name, item.leader, item.desc, item.cat, item.fmt, item.day].join(' ').toLowerCase() === card.dataset.search;
     });
-
     if (g) openModal(g);
   });
 
   closeBtn.addEventListener('click', closeModal);
-
-  backdrop.addEventListener('click', function(e) {
-    if (e.target === backdrop) closeModal();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
+  backdrop.addEventListener('click', function(e) { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
 })();
+
+// ─── IFRAME HEIGHT REPORTER ──────────────────────────────────────
+// Sends the page's full scrollHeight to the parent TCC page so the
+// iframe resizes to fit content and TCC's footer falls below it.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
 </script>
 </body>
 </html>

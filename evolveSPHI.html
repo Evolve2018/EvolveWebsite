@@ -34,7 +34,6 @@ body {
   background: var(--navy);
   color: var(--off-white);
   font-family: 'Outfit', sans-serif;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -46,7 +45,6 @@ body {
 
 html, body {
   width: 100%;
-  overflow-x: hidden;
 }
 
   .spi-iframe-wrap {
@@ -1910,110 +1908,22 @@ footer {
 </footer>
 
 <script>
-// ═══ SLIDER ═══
-const APPLY_URL = 'https://evolvenation.ccbchurch.com/goto/forms/360/responses/new';
-
-let slideIdx = 0;
-const track = document.getElementById('sliderTrack');
-const dots = document.querySelectorAll('.slider-dot');
-
-function getSlideWidth() {
-  const s = track.querySelector('.slider-slide');
-  if (!s) return 336; // 320px + 16px gap fallback
-  return s.offsetWidth + 16;
-}
-
-function getVisibleCount() {
-  const ow = document.getElementById('sliderOuter').offsetWidth;
-  const sw = getSlideWidth();
-  return Math.max(1, Math.floor(ow / sw));
-}
-
-function getMaxIndex() {
-  const slides = track.querySelectorAll('.slider-slide');
-  const vis = getVisibleCount();
-  return Math.max(0, slides.length - vis);
-}
-
-function goToSlide(idx) {
-  const max = getMaxIndex();
-  slideIdx = Math.max(0, Math.min(idx, max));
-  track.style.transform = `translateX(-${slideIdx * getSlideWidth()}px)`;
-  dots.forEach((d, i) => d.classList.toggle('active', i === Math.min(slideIdx, dots.length - 1)));
-}
-
-function slide(dir) {
-  const next = slideIdx + dir;
-  if (next < 0) goToSlide(getMaxIndex());
-  else if (next > getMaxIndex()) goToSlide(0);
-  else goToSlide(next);
-}
-
-// Auto-advance
-let autoTimer = setInterval(() => slide(1), 4500);
-const outer = document.getElementById('sliderOuter');
-outer.addEventListener('mouseenter', () => clearInterval(autoTimer));
-outer.addEventListener('mouseleave', () => { autoTimer = setInterval(() => slide(1), 4500); });
-
-// Touch swipe
-let touchStartX = 0;
-outer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-outer.addEventListener('touchend', e => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) slide(diff > 0 ? 1 : -1);
-});
-
-window.addEventListener('resize', () => { goToSlide(0); });
-
-// ═══ SCROLL ANIMATIONS ═══
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
-
-// ═══ NAV ═══
-let navOpen = false;
-function toggleNav(btn) {
-  navOpen = !navOpen;
-  const links = document.getElementById('navLinks');
-  if (navOpen) {
-    links.style.cssText = `
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 68px; left: 0; right: 0;
-      background: rgba(8,14,23,0.97);
-      backdrop-filter: blur(20px);
-      padding: 32px 24px;
-      gap: 24px;
-      border-bottom: 1px solid rgba(66,185,210,0.15);
-      z-index: 999;
-    `;
-    btn.children[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-    btn.children[1].style.opacity = '0';
-    btn.children[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-  } else {
-    links.style.display = 'none';
-    btn.children[0].style.transform = '';
-    btn.children[1].style.opacity = '';
-    btn.children[2].style.transform = '';
-  }
-}
-
-// Sticky nav shadow on scroll
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('mainNav');
-  nav.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
-});
-
-// ═══ IFRAME HEIGHT REPORTER ═══
-function reportHeight() {
-  window.parent.postMessage({ type: 'resize', height: document.body.scrollHeight }, '*');
-}
-const ro = new ResizeObserver(reportHeight);
-ro.observe(document.body);
-reportHeight();
 </script>
+
+// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
+// Tells the parent TCC page how tall this content is so the iframe
+// resizes to fit and TCC's footer falls naturally below the content.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+
 </body>
 </html>

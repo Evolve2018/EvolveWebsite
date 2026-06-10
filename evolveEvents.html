@@ -34,7 +34,6 @@ body {
   font-weight: 300;
   line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 /* ── AMBIENT BG ── */
@@ -1069,154 +1068,6 @@ body {
       </div>
     </div>
 
-    <!-- ── EVENT REQUEST FORM ── -->
-    <div class="request-section reveal" id="requestForm">
-
-      <!-- Left panel -->
-      <div class="request-left">
-        <img class="request-left-img"
-          src="https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg"
-          alt="" aria-hidden="true" loading="lazy">
-        <div class="request-left-tint"></div>
-        <div class="request-left-content">
-          <div class="request-left-eyebrow">
-            <span class="eyebrow-line" style="width:28px"></span>
-            <span>Request an Event</span>
-          </div>
-          <h2>Have an<br><span>idea?</span></h2>
-          <p>Got an event in mind for the Evolve community? Fill out the form and our team will review your request and be in touch.</p>
-        </div>
-        <div class="request-left-details">
-          <div class="request-detail-item">
-            <div class="request-detail-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-            </div>
-            <div>
-              <strong>Email Us</strong>
-              <span>info@evolvenation.org</span>
-            </div>
-          </div>
-          <div class="request-detail-item">
-            <div class="request-detail-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8A16 16 0 0 0 16 16.89l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div>
-              <strong>Call Us</strong>
-              <span>(414) 510-4131</span>
-            </div>
-          </div>
-          <div class="request-detail-item">
-            <div class="request-detail-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div>
-              <strong>Response Time</strong>
-              <span>Within 2–3 business days</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right panel: form -->
-      <div class="request-right">
-        <div id="eventRequestForm">
-          <div class="form-row two-col">
-            <div class="form-group">
-              <label class="form-label" for="req-name">Your Name <span class="req">*</span></label>
-              <input class="form-input" type="text" id="req-name" placeholder="First & last name" autocomplete="name">
-              <span class="field-error" id="err-name">Please enter your name.</span>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="req-email">Email Address <span class="req">*</span></label>
-              <input class="form-input" type="email" id="req-email" placeholder="you@example.com" autocomplete="email">
-              <span class="field-error" id="err-email">Please enter a valid email.</span>
-            </div>
-          </div>
-          <div class="form-row two-col">
-            <div class="form-group">
-              <label class="form-label" for="req-phone">Phone Number</label>
-              <input class="form-input" type="tel" id="req-phone" placeholder="(414) 555-0000" autocomplete="tel">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="req-ministry">Ministry / Group</label>
-              <select class="form-select" id="req-ministry">
-                <option value="" disabled selected>Select one...</option>
-                <option>Life Groups</option>
-                <option>Evolve Kids</option>
-                <option>Evolve Teens</option>
-                <option>Evolving Men (The Cave)</option>
-                <option>Evolving Singles</option>
-                <option>Discipleship</option>
-                <option>Community Outreach</option>
-                <option>General / Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="req-event-name">Event Name <span class="req">*</span></label>
-              <input class="form-input" type="text" id="req-event-name" placeholder="What would you like to call this event?">
-              <span class="field-error" id="err-event-name">Please enter an event name.</span>
-            </div>
-          </div>
-          <div class="form-row two-col">
-            <div class="form-group">
-              <label class="form-label" for="req-date">Preferred Date <span class="req">*</span></label>
-              <input class="form-input" type="date" id="req-date" style="color-scheme:dark">
-              <span class="field-error" id="err-date">Please select a date.</span>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="req-time">Preferred Time</label>
-              <input class="form-input" type="time" id="req-time" style="color-scheme:dark">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="req-location">Desired Location / Space</label>
-              <input class="form-input" type="text" id="req-location" placeholder="e.g. Main sanctuary, Fellowship hall, offsite...">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="req-desc">Event Description <span class="req">*</span></label>
-              <textarea class="form-textarea" id="req-desc" placeholder="Tell us what this event is about, who it's for, and what you'd need from the church team..."></textarea>
-              <span class="field-error" id="err-desc">Please describe the event.</span>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="req-attendance">Expected Attendance</label>
-              <select class="form-select" id="req-attendance">
-                <option value="" disabled selected>Approximate headcount...</option>
-                <option>Under 25</option>
-                <option>25 – 50</option>
-                <option>50 – 100</option>
-                <option>100 – 200</option>
-                <option>200+</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-submit-row">
-            <p class="form-submit-note">Our team reviews all requests and will follow up within 2–3 business days.</p>
-            <button class="btn-submit" id="reqSubmitBtn" onclick="submitEventRequest()">
-              <span class="btn-text">Submit Request</span>
-              <div class="btn-spinner"></div>
-            </button>
-          </div>
-        </div>
-
-        <!-- Success message -->
-        <div class="form-success" id="formSuccess">
-          <div class="form-success-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <h3>Request Sent!</h3>
-          <p>Thanks for reaching out. Our team will review your event request and get back to you within 2–3 business days.</p>
-        </div>
-      </div>
-
-    </div>
-
     <!-- ── STAY CONNECTED ── -->
     <div class="stay-connected reveal">
       <div class="stay-connected-bg">
@@ -1602,5 +1453,21 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 loadEvents();
 </script>
+
+// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
+// Tells the parent TCC page how tall this content is so the iframe
+// resizes to fit and TCC's footer falls naturally below the content.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+
 </body>
 </html>
