@@ -49,12 +49,8 @@ html, body {
 
   .spi-iframe-wrap {
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 100%;
   }
   .spi-iframe-wrap iframe {
     display: block;
@@ -1355,95 +1351,13 @@ nav {
   color: var(--faint);
 }
 
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
-footer {
-  background: var(--navy-mid);
-  border-top: 1px solid var(--navy-border);
-  padding: 64px 80px 36px;
-}
 
-.footer-inner { max-width: 1280px; margin: 0 auto; }
 
-.footer-top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid var(--navy-border);
-  margin-bottom: 32px;
-}
 
-.footer-logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-.footer-logo-dot {
-  width: 8px; height: 8px;
-  background: var(--teal);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--teal);
-}
-.footer-logo {
-  font-family: 'Syne', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--white);
-}
 
-.footer-address {
-  font-size: 13px;
-  color: var(--faint);
-  line-height: 1.75;
-  font-weight: 300;
-}
 
-.footer-col-title {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 20px;
-}
 
-.footer-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.footer-links a {
-  font-size: 13px;
-  color: rgba(232,244,247,0.45);
-  text-decoration: none;
-  font-weight: 300;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--teal); }
 
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-copy {
-  font-size: 12px;
-  color: var(--faint);
-  letter-spacing: 0.04em;
-}
-.footer-tagline {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 13px;
-  color: var(--teal);
-  opacity: 0.7;
-}
 
 /* ═══════════════════════════════════════
    ANIMATIONS
@@ -1522,12 +1436,10 @@ footer {
   .apply-section { padding: 0 24px 60px; }
   .apply-inner { padding: 40px 28px; grid-template-columns: 1fr; gap: 40px; }
 
-  footer { padding: 48px 24px 28px; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+
 }
 
 @media (max-width: 480px) {
-  .footer-top { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; }
   .btn-primary, .btn-outline { text-align: center; justify-content: center; }
   .hero-stats { flex-direction: column; gap: 16px; }
@@ -1859,51 +1771,6 @@ footer {
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-logo-wrap">
-          <div class="footer-logo-dot"></div>
-          <span class="footer-logo">Evolve Church — Single Parent Initiative</span>
-        </div>
-        <div class="footer-address">6550 N 76th St, Milwaukee, WI 53223<br>(414) 510-4131 · sphi@evolvenation.org</div>
-      </div>
-      <div>
-        <div class="footer-col-title">Program</div>
-        <ul class="footer-links">
-          <li><a href="#initiative">The Initiative</a></li>
-          <li><a href="#program">Path to Ownership</a></li>
-          <li><a href="#eligibility">Eligibility</a></li>
-          <li><a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank">Apply Now</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Evolve Church</div>
-        <ul class="footer-links">
-          <li><a href="https://evolvenation.org" target="_blank">Visit Our Site</a></li>
-          <li><a href="https://evolvenation.org/sermons" target="_blank">Sermons</a></li>
-          <li><a href="https://evolvenation.org/about" target="_blank">Who We Are</a></li>
-          <li><a href="https://evolvenation.org/give" target="_blank">Give</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:4145104131">(414) 510-4131</a></li>
-          <li><a href="mailto:sphi@evolvenation.org">sphi@evolvenation.org</a></li>
-          <li><a href="mailto:sphi@evolvenation.org">Donate a Property</a></li>
-          <li><a href="https://evolvenation.org/give" target="_blank">Give to SPI</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Evolve Church. All rights reserved.</p>
-      <p class="footer-tagline">Changing the city. Changing the generation.</p>
-    </div>
-  </div>
-</footer>
 
 <script>
 // ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
