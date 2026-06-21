@@ -1375,6 +1375,120 @@
       display: flex;
       gap: 10px;
     }
+.evolve-by-numbers-section {
+  background: linear-gradient(
+    135deg,
+    #07141a 0%,
+    #0d2e38 30%,
+    #0f3d4a 50%,
+    #0d2e38 70%,
+    #07141a 100%
+  );
+  border-top: 1px solid rgba(66, 185, 210, 0.15);
+  border-bottom: 1px solid rgba(66, 185, 210, 0.15);
+  padding: 56px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* Soft radial teal bloom in the center */
+.evolve-by-numbers-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 120% at 50% 50%,
+    rgba(66, 185, 210, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.evolve-numbers-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.evolve-numbers-eyebrow {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #42B9D2;
+  margin: 0 0 40px;
+}
+
+.evolve-numbers-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.evolve-numbers-col {
+  flex: 1 1 180px;
+  text-align: center;
+  padding: 8px 32px;
+}
+
+.evolve-numbers-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+
+  /* Teal glow */
+  text-shadow:
+    0 0 18px rgba(66, 185, 210, 0.55),
+    0 0 40px rgba(66, 185, 210, 0.25);
+
+  /* Teal underline accent */
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(66, 185, 210, 0.5);
+}
+
+.evolve-numbers-value.static {
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  white-space: nowrap;
+  white-space: nowrap;
+}
+
+.evolve-numbers-label {
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.evolve-numbers-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(66, 185, 210, 0.35) 40%,
+    rgba(66, 185, 210, 0.35) 60%,
+    transparent
+  );
+  flex-shrink: 0;
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .evolve-numbers-grid { flex-direction: column; gap: 32px; }
+  .evolve-numbers-divider { display: none; }
+  .evolve-numbers-col { padding: 0 16px; }
+}
 
     .social-btn {
       width: 38px;
@@ -2114,6 +2228,43 @@
       </div>
     </div>
   </section>
+  <!-- ================== Evolve Church by the numbers ================== -->
+<section class="evolve-by-numbers-section" aria-label="Evolve Church by the numbers">
+  <div class="evolve-numbers-inner">
+    <p class="evolve-numbers-eyebrow">Evolve Church at a Glance</p>
+    <div class="evolve-numbers-grid">
+
+      <div class="evolve-numbers-col">
+        <div class="evolve-numbers-value static">5,100–5,700</div>
+        <div class="evolve-numbers-label">Weekly Attendees</div>
+      </div>
+
+      <div class="evolve-numbers-divider"></div>
+
+      <div class="evolve-numbers-col">
+        <div class="evolve-numbers-value" data-prefix="" data-suffix=",000+">20</div>
+        <div class="evolve-numbers-label">Members</div>
+      </div>
+
+      <div class="evolve-numbers-divider"></div>
+
+      <div class="evolve-numbers-col">
+        <div class="evolve-numbers-value static">Est. 2018</div>
+        <div class="evolve-numbers-label">Founded in Milwaukee, WI</div>
+      </div>
+
+      <div class="evolve-numbers-divider"></div>
+
+      <div class="evolve-numbers-col">
+        <div class="evolve-numbers-value static">#1</div>
+        <div class="evolve-numbers-label">One of Wisconsin's Largest Churches</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+    <!-- ================== Evolve Church by the numbers ================== -->
+
 
   <!-- ===== T.R.U. SECTION ===== -->
   <section class="tru-section" id="tru" aria-label="Our core values">
@@ -2515,7 +2666,7 @@
             <div class="stat-label">Sunday Services</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">5k+</div>
+            <div class="stat-number">8k+</div>
             <div class="stat-label">Lives Impacted</div>
           </div>
           <div class="stat-card">
@@ -3296,6 +3447,44 @@ statEls.forEach(el => {
         .catch(e5 => { console.warn('S5 (hardcoded):', e5.message);  });
 
     })();
+    (function () {
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  function animateValue(el) {
+    const prefix = el.dataset.prefix ?? '';
+    const suffix = el.dataset.suffix ?? '';
+    const target = parseFloat(el.textContent.trim());
+    if (isNaN(target)) return;
+
+    const duration = 1800;
+    const start = performance.now();
+
+    // Zero out before animating
+    el.textContent = prefix + '0' + suffix;
+
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const val = Math.round(target * easeOut(p));
+      el.textContent = prefix + val + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = prefix + target + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateValue(e.target);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  // Only observe non-static values
+  document.querySelectorAll('.evolve-numbers-value:not(.static)')
+    .forEach(el => observer.observe(el));
+})();
 
   </script>
 
@@ -3313,6 +3502,8 @@ window.addEventListener('resize', sendHeight);
 if (typeof ResizeObserver !== 'undefined') {
   new ResizeObserver(sendHeight).observe(document.body);
 }
+
+
 
 </body>
 </html>
