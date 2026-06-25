@@ -1,0 +1,690 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&family=Dynalight&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal:        #4ECDE8;
+  --teal-dark:   #2BACC8;
+  --teal-glow:   rgba(78,205,232,0.18);
+  --teal-subtle: rgba(78,205,232,0.08);
+  --navy:        #061a22;
+  --navy-mid:    #0b3040;
+  --navy-card:   rgba(11,48,64,0.75);
+  --navy-card2:  rgba(6,26,34,0.9);
+  --white:       #ffffff;
+  --white-90:    rgba(255,255,255,0.92);
+  --white-60:    rgba(255,255,255,0.60);
+  --white-30:    rgba(255,255,255,0.30);
+  --white-10:    rgba(255,255,255,0.10);
+  --white-06:    rgba(255,255,255,0.06);
+  --accent-warn: #F5C842;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ─── HERO ─────────────────────────────────────────── */
+.dir-hero {
+  background: linear-gradient(150deg, #0a2535 0%, #0d3a4d 45%, #071f2b 100%);
+  padding: 64px 24px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.dir-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(78,205,232,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 100%, rgba(78,205,232,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* animated teal orb */
+.dir-hero::after {
+  content: '';
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(78,205,232,0.08) 0%, transparent 70%);
+  top: -120px; left: 50%; transform: translateX(-50%);
+  animation: pulse-orb 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pulse-orb {
+  0%,100% { transform: translateX(-50%) scale(1); opacity: 0.6; }
+  50%      { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+.dir-hero-eyebrow {
+  font-family: 'Dynalight', cursive;
+  color: var(--teal);
+  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+  margin-bottom: 10px;
+  position: relative;
+}
+.dir-hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.6rem, 8vw, 4.4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  line-height: 1;
+  margin-bottom: 16px;
+  position: relative;
+}
+.dir-hero h1 em {
+  font-style: normal;
+  color: var(--teal);
+  /* shimmer */
+  background: linear-gradient(90deg, #4ECDE8 20%, #a0eaf7 50%, #4ECDE8 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.dir-hero-sub {
+  font-size: clamp(0.92rem, 2.2vw, 1.05rem);
+  font-weight: 300;
+  color: var(--white-60);
+  max-width: 500px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+  position: relative;
+}
+
+/* CTA buttons row */
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 11px 26px;
+  border-radius: 8px;
+  border: none;
+  background: var(--teal);
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(78,205,232,0.3);
+}
+.btn-primary:hover {
+  background: #6fd9ee;
+  box-shadow: 0 0 32px rgba(78,205,232,0.5);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 11px 26px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(78,205,232,0.4);
+  background: transparent;
+  color: var(--teal);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  background: var(--teal-subtle);
+  border-color: var(--teal);
+}
+
+/* ─── DISCLAIMER ────────────────────────────────────── */
+.disclaimer-band {
+  background: linear-gradient(90deg, rgba(245,200,66,0.07) 0%, rgba(245,200,66,0.04) 100%);
+  border-top: 1px solid rgba(245,200,66,0.2);
+  border-bottom: 1px solid rgba(245,200,66,0.2);
+  padding: 18px 24px;
+}
+.disclaimer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.disclaimer-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(245,200,66,0.15);
+  border: 1.5px solid rgba(245,200,66,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent-warn);
+  margin-top: 1px;
+}
+.disclaimer-head {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent-warn);
+  margin-bottom: 4px;
+}
+.disclaimer-text {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--white-60);
+}
+.disclaimer-text strong { color: var(--white-90); font-weight: 600; }
+
+/* ─── SECTION SHELL (Filter + Grid) ────────────────── */
+.dir-body {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── FILTER BAR ────────────────────────────────────── */
+.filter-section {
+  padding: 36px 0 0;
+}
+.filter-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--white-60);
+}
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-btn {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--white-10);
+  background: var(--white-06);
+  color: var(--white-60);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.filter-btn:hover {
+  border-color: rgba(78,205,232,0.4);
+  color: var(--teal);
+  background: var(--teal-subtle);
+}
+.filter-btn.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--navy);
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(78,205,232,0.35);
+}
+
+/* results row */
+.results-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0 18px;
+}
+.results-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--white-30);
+  white-space: nowrap;
+}
+.results-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--white-10) 0%, transparent 100%);
+}
+
+/* ─── GRID ──────────────────────────────────────────── */
+.directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  padding-bottom: 64px;
+}
+
+/* ─── CARD ──────────────────────────────────────────── */
+.biz-card {
+  background: var(--navy-card);
+  border: 1px solid rgba(78,205,232,0.14);
+  border-radius: 14px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  position: relative;
+}
+.biz-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(78,205,232,0.45);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(78,205,232,0.1) inset;
+}
+
+/* colored top accent strip */
+.biz-card-top {
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal) 0%, #2BACC8 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.biz-card:hover .biz-card-top { opacity: 1; }
+
+.biz-card-body {
+  padding: 22px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0;
+}
+
+.biz-industry-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--teal);
+  background: rgba(78,205,232,0.1);
+  border: 1px solid rgba(78,205,232,0.22);
+  border-radius: 4px;
+  padding: 3px 9px;
+  display: inline-block;
+  margin-bottom: 11px;
+  width: fit-content;
+}
+
+.biz-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.1rem, 2.8vw, 1.3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+.biz-owner {
+  font-size: 0.8rem;
+  color: var(--white-60);
+  margin-bottom: 14px;
+}
+.biz-owner span { color: var(--white-90); font-weight: 500; }
+
+.biz-tagline {
+  font-size: 0.85rem;
+  line-height: 1.62;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+  padding: 10px 14px;
+  border-left: 2px solid rgba(78,205,232,0.4);
+  background: rgba(78,205,232,0.05);
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 16px;
+}
+
+/* contact grid */
+.biz-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  margin-bottom: 16px;
+}
+.biz-ci { display: flex; flex-direction: column; gap: 2px; }
+.biz-ci.span2 { grid-column: 1 / -1; }
+.biz-ci-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--teal);
+  opacity: 0.75;
+}
+.biz-ci-val {
+  font-size: 0.8rem;
+  color: var(--white-90);
+  word-break: break-word;
+}
+.biz-ci-val a {
+  color: var(--white-90);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+.biz-ci-val a:hover { color: var(--teal); }
+
+/* divider */
+.biz-sep {
+  height: 1px;
+  background: var(--white-10);
+  margin: 4px 0 14px;
+}
+
+/* social row */
+.biz-social-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--white-30);
+  margin-bottom: 8px;
+}
+.biz-socials { display: flex; flex-wrap: wrap; gap: 7px; }
+.biz-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+  padding: 6px 13px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid var(--white-10);
+  background: var(--white-06);
+  color: var(--white-60);
+  transition: all 0.18s ease;
+}
+.biz-social-btn svg { width: 12px; height: 12px; fill: currentColor; flex-shrink: 0; }
+.biz-social-btn.facebook:hover  { background: #1877F2; border-color: #1877F2; color: #fff; }
+.biz-social-btn.instagram:hover { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-color: transparent; color: #fff; }
+.biz-social-btn.tiktok:hover    { background: #111; border-color: #69C9D0; color: #fff; }
+.biz-social-btn.linkedin:hover  { background: #0A66C2; border-color: #0A66C2; color: #fff; }
+
+/* empty */
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--white-30);
+  font-size: 0.95rem;
+}
+
+/* ─── FORM SECTION ──────────────────────────────────── */
+.form-section {
+  background: linear-gradient(160deg, #0a2535 0%, #0d3a4d 100%);
+  border-top: 1px solid rgba(78,205,232,0.12);
+  padding: 64px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.form-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(78,205,232,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.form-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+}
+.form-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.form-eyebrow {
+  font-family: 'Dynalight', cursive;
+  color: var(--teal);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+.form-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.form-title em {
+  font-style: normal;
+  color: var(--teal);
+}
+.form-desc {
+  font-size: 0.9rem;
+  color: var(--white-60);
+  line-height: 1.65;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* iframe wrapper with glow border */
+.form-frame-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(78,205,232,0.2);
+  box-shadow: 0 0 40px rgba(78,205,232,0.08), 0 24px 60px rgba(0,0,0,0.4);
+  background: #fff;
+}
+.form-frame-wrap iframe {
+  width: 100%;
+  height: 900px;
+  border: none;
+  display: block;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dir-body { padding: 0 16px; }
+  .directory-grid { grid-template-columns: 1fr; }
+  .biz-contact-grid { grid-template-columns: 1fr; }
+  .biz-ci.span2 { grid-column: 1; }
+  .form-frame-wrap iframe { height: 1100px; }
+  .form-section { padding: 48px 16px; }
+}
+</style>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<div class="dir-hero">
+  <div class="dir-hero-eyebrow">Evolve Church</div>
+  <h1>Business <em>Directory</em></h1>
+  <p class="dir-hero-sub">Connect with fellow Evolve members who own and operate businesses in our community.</p>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="document.getElementById('biz-form-section').scrollIntoView({behavior:'smooth'})">List Your Business</button>
+    <button class="btn-ghost" onclick="document.getElementById('dir-grid-section').scrollIntoView({behavior:'smooth'})">Browse Directory</button>
+  </div>
+</div>
+
+<!-- ══ DISCLAIMER ═════════════════════════════════════════ -->
+<div class="disclaimer-band">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-icon">!</div>
+    <div>
+      <div class="disclaimer-head">Important Notice</div>
+      <p class="disclaimer-text">
+        The information below is provided by Evolve Church members who operate and own their own businesses. This listing is an informational resource to find products and professional services from fellow church members. These businesses operate <strong>entirely independently</strong> of Evolve Church and Evolve Community. <strong>Evolve Church and Evolve Community DOES NOT endorse or sponsor any of the included businesses.</strong> We encourage you to do your own vetting before patronizing, as we cannot be held liable for products or services received. This directory is published on an "as-is" basis and we cannot guarantee the completeness or accuracy of the information included.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FILTER + GRID ══════════════════════════════════════ -->
+<div id="dir-grid-section">
+  <div class="dir-body">
+    <div class="filter-section">
+      <div class="filter-top">
+        <div class="filter-label">Filter by Industry</div>
+      </div>
+      <div class="filter-bar" id="filterBar"></div>
+    </div>
+    <div class="results-row">
+      <span class="results-count" id="resultsCount"></span>
+      <div class="results-line"></div>
+    </div>
+    <div class="directory-grid" id="directoryGrid"></div>
+  </div>
+</div>
+
+<!-- ══ FORM SECTION ═══════════════════════════════════════ -->
+<div class="form-section" id="biz-form-section">
+  <div class="form-inner">
+    <div class="form-header">
+      <div class="form-eyebrow">Join the Directory</div>
+      <div class="form-title">List Your <em>Business</em></div>
+      <p class="form-desc">Are you an Evolve member who owns or operates a business? Submit your information below to be featured in our Business Directory. Submissions are reviewed before publishing.</p>
+    </div>
+    <div class="form-frame-wrap">
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLScdP3O69Lp8gkwU9tSU6uuZhJzhIS5m0VKJFaGAL6B2dEcKOw/viewform?embedded=true"
+        title="Evolve Church Business Owner Directory Submission Form"
+        referrerpolicy="strict-origin-when-cross-origin">
+        Loading form…
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+const BUSINESSES = [
+  {
+    name: "Heavenly Minds Counseling & Therapy",
+    owner: "Laprece Armour",
+    industry: "Counseling & Therapy",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-519-8499",
+    email: "LapreceArmour@heavenlyminds.org",
+    website: "https://laprece-armour.clientsecure.me/",
+    tagline: "Faith-based mental health services.",
+    facebook: "https://www.facebook.com/share/1D7znap25z/?mibextid=wwXIfr",
+    instagram: null, tiktok: null, linkedin: null
+  },
+  {
+    name: "Richmond's Food For Your Soul Catering LLC",
+    owner: "Clyde & Dionna Richmond",
+    industry: "Catering",
+    city: "Milwaukee, WI",
+    phone: "414-630-7040",
+    email: "Richmondscateringmke@gmail.com",
+    website: "https://www.richmondscateringllc.com",
+    tagline: "Richmond's customizes catering for all occasions, with great food, & exceptional service. Who's catering for you? If not Richmond's, it Should be!",
+    facebook: "https://www.facebook.com/RichmondsFoodForYourSoulCatering/",
+    instagram: "https://www.instagram.com/richmondsfyscateringllc/",
+    tiktok: "https://www.tiktok.com/@richmondscatering",
+    linkedin: null
+  }
+];
+
+BUSINESSES.sort((a, b) => a.industry.localeCompare(b.industry));
+
+const ICONS = {
+  facebook:  `<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  tiktok:    `<svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.75a4.85 4.85 0 01-1.02-.06z"/></svg>`,
+  linkedin:  `<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`
+};
+
+function buildCard(biz) {
+  const socials = [
+    biz.facebook  && { key:'facebook',  label:'Facebook',  url:biz.facebook },
+    biz.instagram && { key:'instagram', label:'Instagram', url:biz.instagram },
+    biz.tiktok    && { key:'tiktok',    label:'TikTok',    url:biz.tiktok },
+    biz.linkedin  && { key:'linkedin',  label:'LinkedIn',  url:biz.linkedin }
+  ].filter(Boolean);
+
+  const domain = biz.website ? biz.website.replace(/^https?:\/\//,'').replace(/\/$/,'') : null;
+
+  return `<div class="biz-card" data-industry="${biz.industry}">
+    <div class="biz-card-top"></div>
+    <div class="biz-card-body">
+      <div class="biz-industry-tag">${biz.industry}</div>
+      <div class="biz-name">${biz.name}</div>
+      <div class="biz-owner">Proprietor: <span>${biz.owner}</span></div>
+      ${biz.tagline ? `<div class="biz-tagline">${biz.tagline}</div>` : ''}
+      <div class="biz-contact-grid">
+        <div class="biz-ci"><div class="biz-ci-label">Location</div><div class="biz-ci-val">${biz.city}</div></div>
+        <div class="biz-ci"><div class="biz-ci-label">Phone</div><div class="biz-ci-val"><a href="tel:${biz.phone.replace(/\D/g,'')}">${biz.phone}</a></div></div>
+        <div class="biz-ci span2"><div class="biz-ci-label">Email</div><div class="biz-ci-val"><a href="mailto:${biz.email}">${biz.email}</a></div></div>
+        ${domain ? `<div class="biz-ci span2"><div class="biz-ci-label">Website</div><div class="biz-ci-val"><a href="${biz.website}" target="_blank" rel="noopener">${domain}</a></div></div>` : ''}
+      </div>
+      ${socials.length ? `
+        <div class="biz-sep"></div>
+        <div class="biz-social-label">Follow on</div>
+        <div class="biz-socials">
+          ${socials.map(s=>`<a class="biz-social-btn ${s.key}" href="${s.url}" target="_blank" rel="noopener">${ICONS[s.key]} ${s.label}</a>`).join('')}
+        </div>` : ''}
+    </div>
+  </div>`;
+}
+
+function getIndustries() {
+  return ['All', ...[...new Set(BUSINESSES.map(b=>b.industry))].sort()];
+}
+
+let activeFilter = 'All';
+
+function render() {
+  const filtered = activeFilter === 'All' ? BUSINESSES : BUSINESSES.filter(b=>b.industry===activeFilter);
+  document.getElementById('directoryGrid').innerHTML = filtered.length
+    ? filtered.map(buildCard).join('')
+    : `<div class="empty-state">No businesses found in this category.</div>`;
+  const n = filtered.length;
+  document.getElementById('resultsCount').textContent =
+    `${n} ${n===1?'Business':'Businesses'}${activeFilter!=='All' ? ' · '+activeFilter : ''}`;
+}
+
+function renderFilters() {
+  const bar = document.getElementById('filterBar');
+  bar.innerHTML = getIndustries().map(ind =>
+    `<button class="filter-btn${ind===activeFilter?' active':''}" data-ind="${ind}">${ind}</button>`
+  ).join('');
+  bar.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.ind;
+    bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }));
+}
+
+renderFilters();
+render();
+
+// iframe height reporter
+function sendHeight() {
+  const h = document.documentElement.scrollHeight || document.body.scrollHeight;
+  window.parent.postMessage({ type: 'iframeHeight', height: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new ResizeObserver(sendHeight).observe(document.body);
+</script>
