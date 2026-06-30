@@ -201,55 +201,156 @@ body {
   padding: 0 24px;
 }
 
-/* ─── FILTER BAR ────────────────────────────────────── */
-.filter-section {
+/* ─── SEARCH + FILTER CONTROLS ─────────────────────── */
+.controls-section {
   padding: 36px 0 0;
-}
-.filter-top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 8px;
+  align-items: stretch;
 }
-.filter-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--white-60);
+
+/* search bar */
+.search-wrap {
+  position: relative;
+  flex: 1 1 320px;
+  min-width: 240px;
 }
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--white-30);
+  pointer-events: none;
 }
-.filter-btn {
+.search-input {
+  width: 100%;
   font-family: 'Barlow', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 7px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--white-10);
+  font-size: 0.88rem;
+  color: var(--white-90);
   background: var(--white-06);
+  border: 1px solid var(--white-10);
+  border-radius: 8px;
+  padding: 12px 14px 12px 40px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.search-input::placeholder { color: var(--white-30); }
+.search-input:focus {
+  border-color: rgba(78,205,232,0.5);
+  background: rgba(78,205,232,0.05);
+  box-shadow: 0 0 0 3px rgba(78,205,232,0.1);
+}
+.search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: var(--white-10);
   color: var(--white-60);
+  font-size: 0.7rem;
   cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
   transition: all 0.18s ease;
 }
-.filter-btn:hover {
-  border-color: rgba(78,205,232,0.4);
-  color: var(--teal);
-  background: var(--teal-subtle);
+.search-clear:hover { background: var(--white-15); color: var(--white); }
+.search-clear.visible { display: flex; }
+
+/* industry dropdown */
+.industry-select-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 220px;
 }
-.filter-btn.active {
-  background: var(--teal);
-  border-color: var(--teal);
-  color: var(--navy);
+.industry-select {
+  width: 100%;
+  height: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--white-90);
+  background: var(--white-06);
+  border: 1px solid var(--white-10);
+  border-radius: 8px;
+  padding: 12px 38px 12px 16px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.2s ease;
+}
+.industry-select:hover {
+  border-color: rgba(78,205,232,0.35);
+}
+.industry-select:focus {
+  border-color: rgba(78,205,232,0.5);
+  box-shadow: 0 0 0 3px rgba(78,205,232,0.1);
+}
+.industry-select option {
+  background: var(--navy-mid);
+  color: var(--white-90);
+}
+.industry-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid var(--white-30);
+  border-bottom: 1.5px solid var(--white-30);
+  transform: translateY(-65%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* active filter chip (shown below controls when industry != All) */
+.active-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  min-height: 0;
+}
+.active-chip {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
-  box-shadow: 0 0 14px rgba(78,205,232,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--navy);
+  background: var(--teal);
+  border-radius: 20px;
+  padding: 5px 8px 5px 12px;
+  box-shadow: 0 0 14px rgba(78,205,232,0.3);
 }
+.active-chip.visible { display: inline-flex; }
+.active-chip button {
+  background: rgba(6,26,34,0.25);
+  border: none;
+  color: var(--navy);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.active-chip button:hover { background: rgba(6,26,34,0.4); }
 
 /* results row */
 .results-row {
@@ -512,6 +613,8 @@ body {
   .biz-ci.span2 { grid-column: 1; }
   .form-frame-wrap iframe { height: 1100px; }
   .form-section { padding: 48px 16px; }
+  .controls-section { flex-direction: column; }
+  .search-wrap, .industry-select-wrap { flex: 1 1 auto; min-width: 0; }
 }
 </style>
 
@@ -542,11 +645,18 @@ body {
 <!-- ══ FILTER + GRID ══════════════════════════════════════ -->
 <div id="dir-grid-section">
   <div class="dir-body">
-    <div class="filter-section">
-      <div class="filter-top">
-        <div class="filter-label">Filter by Industry</div>
+    <div class="controls-section">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search businesses, owners, or services…" autocomplete="off">
+        <button class="search-clear" id="searchClear" aria-label="Clear search">&#10005;</button>
       </div>
-      <div class="filter-bar" id="filterBar"></div>
+      <div class="industry-select-wrap">
+        <select id="industrySelect" class="industry-select"></select>
+      </div>
+    </div>
+    <div class="active-chip-row">
+      <span class="active-chip" id="activeChip"><span id="activeChipLabel"></span><button id="activeChipClear" aria-label="Clear filter">&#10005;</button></span>
     </div>
     <div class="results-row">
       <span class="results-count" id="resultsCount"></span>
@@ -587,7 +697,9 @@ const BUSINESSES = [
     website: "https://laprece-armour.clientsecure.me/",
     tagline: "Faith-based mental health services.",
     facebook: "https://www.facebook.com/share/1D7znap25z/?mibextid=wwXIfr",
-    instagram: null, tiktok: null, linkedin: null
+    instagram: null,
+    tiktok: null,
+    linkedin: null
   },
   {
     name: "Richmond's Food For Your Soul Catering LLC",
@@ -602,7 +714,1001 @@ const BUSINESSES = [
     instagram: "https://www.instagram.com/richmondsfyscateringllc/",
     tiktok: "https://www.tiktok.com/@richmondscatering",
     linkedin: null
-  }
+  },
+  {
+    name: "H&J Estates LLC",
+    owner: "Harold Simelton",
+    industry: "Real Estate",
+    city: "Milwaukee, WI",
+    phone: "414-324-0406",
+    email: "Harold@hnjestates.com",
+    website: "https://hnjestates.com",
+    tagline: "Real estate investing. Fix and flips, BRRR methods and investments.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "The Preddie Collection LLC",
+    owner: "Taje Evans",
+    industry: "Retail",
+    city: "Milwaukee, WI",
+    phone: "414-865-4728",
+    email: "tajeevans31@gmail.com",
+    website: null,
+    tagline: "The Preddie Collection provides beauty cosmetics products for women in Milwaukee, WI and worldwide, making them feel beautiful inside and out.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "In Due Time Prenatal Care & Doula Services",
+    owner: "Shaquita Morgan",
+    industry: "Health",
+    city: "Milwaukee, WI",
+    phone: "414-522-7887",
+    email: "Smorgan@induetimemke.com",
+    website: "https://www.induetimemke.com",
+    tagline: "Prenatal Care, Child Care Coordination, Doula Services.",
+    facebook: null,
+    instagram: "https://www.instagram.com/induetimemke",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "The Folding Chair Collective",
+    owner: "Dr. Raven C Major",
+    industry: "Organizational Consulting",
+    city: "Milwaukee, Wisconsin",
+    phone: "262-794-2590",
+    email: "drravencmajor@thefoldingchairco.com",
+    website: "https://www.thefoldingchairco.com",
+    tagline: "Rooted in equity, we equip leaders to transform leadership development, decision-making, and culture.",
+    facebook: null,
+    instagram: "https://www.instagram.com/_thefoldingchaircollective",
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/in/drravencmajor"
+  },
+  {
+    name: "Honest & Integral Services LLC",
+    owner: "John Sherock",
+    industry: "Cleaning Services",
+    city: "Milwaukee, WI",
+    phone: "414-439-5711",
+    email: "integralandhonest@gmail.com",
+    website: "https://www.callhisnow.com",
+    tagline: "We do window cleaning, janitorial cleaning, pressure washing for both commercial and residential. We clean windows on tall buildings as well.",
+    facebook: "https://www.facebook.com/share/1B7JfbGy9E/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/his_llc_",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "SHII Designs Home Decor Consultation Service",
+    owner: "Tanisha Gant",
+    industry: "Interior Design",
+    city: "Milwaukee, WI",
+    phone: "414-235-7759",
+    email: "shii.designs2@gmail.com",
+    website: null,
+    tagline: "Residential, commercial new construction, forever home owners and short term house renters looking for fresh ideas and guidance recreating their space.",
+    facebook: "https://www.facebook.com/share/17tJBy38EB/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/shiidesignsllc",
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/in/tanisha-g-79a0a217b"
+  },
+  {
+    name: "Pretty Soul Blooms",
+    owner: "Samantha Mitchell",
+    industry: "Florist",
+    city: "Milwaukee, WI",
+    phone: "414-366-4864",
+    email: "contactprettysoul@gmail.com",
+    website: "https://prettysoulblooms.as.me/",
+    tagline: "Pretty Soul Blooms creates fresh, custom floral arrangements for every occasion, spreading love, beauty, and joy through every bouquet.",
+    facebook: "https://www.facebook.com/share/1DEBVj1bPJ/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/prettysoulblooms",
+    tiktok: "https://www.tiktok.com/@prettysoulblooms",
+    linkedin: null
+  },
+  {
+    name: "Above And Beyond Home Health",
+    owner: "Melissa Willock",
+    industry: "Health",
+    city: "3500 N Sherman Blvd Suite 204, Milwaukee, WI",
+    phone: null,
+    email: "aboveandbeyondh@gmail.com",
+    website: null,
+    tagline: "Home Health Care for all ages. CPR certification, CBRF certification.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Nailed By Des LLC",
+    owner: "Destiny Brooks",
+    industry: "Cosmetology",
+    city: "Milwaukee, WI",
+    phone: "414-364-8831",
+    email: "nailedbydesllc@gmail.com",
+    website: "https://nailsbydes123.booksy.com/",
+    tagline: "Nail salon.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Vasquez Printing Company",
+    owner: "Luis Vasquez",
+    industry: "Graphic Design",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-315-3356",
+    email: "Vasquez.printingco@gmail.com",
+    website: null,
+    tagline: "One stop shop for all your apparel printing needs. 2024 RISE Program 2nd place winner. ASE certified auto body technician/painter.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Tripway Enterprises LLC",
+    owner: "Charles Madison",
+    industry: "Trucking",
+    city: "Milwaukee, WI",
+    phone: "414-522-6992",
+    email: "tripwayenterprises@gmail.com",
+    website: null,
+    tagline: "Semi trucking company that hauls grocery freight for Kroger/Roundy's out of Oconomowoc, WI.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Graceworks Coaching",
+    owner: "Martinus Roper",
+    industry: "Faith Based Coaching",
+    city: "Milwaukee, WI",
+    phone: "414-522-0124",
+    email: "martinusroper@gmail.com",
+    website: "https://graceworkscoaching.org/",
+    tagline: "Christian coaching focused on personal growth, purpose, relationships, leadership, and life alignment through biblical wisdom.",
+    facebook: "https://www.facebook.com/profile.php?id=61588851035603",
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Bites of Bliss Charcuterie",
+    owner: "Ashleigh Sanders",
+    industry: "Catering",
+    city: "Milwaukee, WI",
+    phone: "414-301-2796",
+    email: "hello@bitesofblisscharcuterie.com",
+    website: "https://www.bitesofblisscharcuterie.com",
+    tagline: "Charcuterie board and mobile carts for events of all kinds.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Simply Tailored Brand Solutions",
+    owner: "Jayzaria Thomas",
+    industry: "Marketing",
+    city: "Milwaukee, WI",
+    phone: "414-367-9780",
+    email: "Connect@simplytailoredbrands.com",
+    website: "https://www.simplytailoredbrands.com",
+    tagline: "Strategic marketing and branding agency helping entrepreneurs build stronger brands, attract customers, and grow confidently.",
+    facebook: null,
+    instagram: "https://www.instagram.com/simplytailoredbrands",
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/company/simply-tailored-brand-solutions/"
+  },
+  {
+    name: "Silver Agility",
+    owner: "Matthew Arthur-Gray",
+    industry: "Organizational Consulting",
+    city: "Milwaukee, WI",
+    phone: "212-470-5616",
+    email: "hello@silveragility.com",
+    website: "https://www.silveragility.com/matthew",
+    tagline: "We help leaders and teams get clearer, communicate better, and move with confidence when the ground keeps shifting.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Clean Rite Cleaning Service LLC",
+    owner: "Tyine Kirkendoll",
+    industry: "Cleaning Services",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-349-6096",
+    email: "cleanritecleaningservice35@gmail.com",
+    website: null,
+    tagline: "I clean residential and commercial. I also do floor cleaning, detail and soft cleaning, and clean outs.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Truss Me Films",
+    owner: "Demetrius Truss",
+    industry: "Creative Media",
+    city: "Milwaukee, WI",
+    phone: "414-315-6905",
+    email: "Trussmefilms@gmail.com",
+    website: "https://www.trussmefilms.com",
+    tagline: "Truss Me Films creates impactful films, plays, podcasts, commercials, and documentaries that inspire, heal, and transform communities.",
+    facebook: null,
+    instagram: "https://www.instagram.com/truss_me_films",
+    tiktok: "https://www.tiktok.com/@trussmefilms",
+    linkedin: null
+  },
+  {
+    name: "Young Scholars of the Future Childcare",
+    owner: "Roni Gilbert",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "414-739-3372",
+    email: "youngscholarsofthefiture@yahoo.com",
+    website: null,
+    tagline: "Provide care for a group of children.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Lashall's Creations LLC",
+    owner: "Helena Watts",
+    industry: "Retail",
+    city: "Milwaukee, WI",
+    phone: "414-378-9974",
+    email: "lashallscreations@gmail.com",
+    website: "https://lashallscreationsllc.square.site/s/shop",
+    tagline: "We specialize in personalized apparel, home decor, and unique gifts including custom shirts, pillows, cups, tables, and more.",
+    facebook: null,
+    instagram: "https://www.instagram.com/lashalls_creation",
+    tiktok: "https://www.tiktok.com/@lashallscreationsllc",
+    linkedin: null
+  },
+  {
+    name: "Passion Meets Purpose Child Development Center",
+    owner: "Passion McNealey",
+    industry: "Childcare",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-292-8295",
+    email: "passionmcnealy@icloud.com",
+    website: null,
+    tagline: "Provides quality childcare for children ages 6 weeks to 13 years. We offer a safe, nurturing environment with meals, educational and activities.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Bright Stars Big Dreams Family Childcare",
+    owner: "Chelsea Lee",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "262-336-7305",
+    email: "Brightstarsbigjreams@gmail.com",
+    website: null,
+    tagline: "Childcare services.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Foster Friend Foundation",
+    owner: "Alexia Knox",
+    industry: "Family Services",
+    city: "Glendale, WI",
+    phone: "414-940-4775",
+    email: "info@fosterfriend.org",
+    website: "https://www.fosterfriend.org",
+    tagline: "We provide support services to adults, seniors, and children with disabilities guided by biblical values. We also provide abuse awareness training.",
+    facebook: "https://www.facebook.com/profile.php?id=61590726710440",
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "B2B Brighter Dayz",
+    owner: "Shanika Wilder",
+    industry: "Assisted Living",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-306-3793",
+    email: "Brighterdayztreatmentcenter@gmail.com",
+    website: "https://b2bbrighterdayz.com",
+    tagline: "We are a housing resource for individuals who need a second chance, suffer from homelessness, or share living and must have income. Houses fully furnished.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Annie Z's Sweet Treats & Catering",
+    owner: "Anastasia Zbichorski",
+    industry: "Catering",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-364-1002",
+    email: "Zbichorsk1@gmail.com",
+    website: null,
+    tagline: "A wide spread of full catering and custom cakes and treats.",
+    facebook: null,
+    instagram: "https://www.instagram.com/anniezbichorski",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Impact Medical Coverage",
+    owner: "Dr. Tonya Hill",
+    industry: "Health",
+    city: "New Berlin, WI",
+    phone: "440-570-6366",
+    email: "simplydrt@gmail.com",
+    website: "https://simplydrt.acnibo.com",
+    tagline: "I provide commercial grade major medical coverage at wholesale prices. If you are paying for your own medical coverage let's talk.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Handyman At Your Service LLC",
+    owner: "Adam Kraai",
+    industry: "Construction Trade",
+    city: "Kenosha, WI",
+    phone: "262-945-8536",
+    email: "adamkraai@gmail.com",
+    website: "https://www.adamkraai.com",
+    tagline: "Home improvement and maintenance.",
+    facebook: "https://www.facebook.com/share/18pvLeyDns/",
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Strother Laundry Service",
+    owner: "Ashley Strother",
+    industry: "Laundry",
+    city: "Milwaukee, WI",
+    phone: "414-233-8117",
+    email: "Strotherlaundry@gmail.com",
+    website: "https://strotherlaundry.com",
+    tagline: "Strother Laundry provides pickup and delivery laundry services for both personal and commercial clients in Milwaukee and surrounding counties.",
+    facebook: "https://www.facebook.com/share/1c4PJZ3om1/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/strotherlaundry",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "La Empanada LLC",
+    owner: "Lacey Pesce",
+    industry: "Food & Beverage",
+    city: "Grafton, Wisconsin",
+    phone: "414-595-0739",
+    email: "Laempanadaargentinefood@gmail.com",
+    website: "https://laempanadallc.com",
+    tagline: "We are a food cart that fries large empanadas and sweet churro chips and apple pie minis. We serve a tangy and spicy sauce with the fried empanadas.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "TradeMark Trees",
+    owner: "Aaron Tatum-Massey",
+    industry: "Landscaping",
+    city: "Milwaukee, WI",
+    phone: "414-554-2238",
+    email: "Tatummassey@yahoo.com",
+    website: null,
+    tagline: "Tree removal, pruning, branch removal, bush and shrub trimming.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "ProReNata",
+    owner: "Kayla Smith",
+    industry: "Retail",
+    city: "Milwaukee, WI",
+    phone: "262-838-0336",
+    email: "Info@prorenatamke.com",
+    website: "https://prorenatamke.com/",
+    tagline: "Custom cups, apparel, and bold accessories for confident women who love standout, personalized style.",
+    facebook: null,
+    instagram: "https://www.instagram.com/prorenata_mke",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Young Stars Academy",
+    owner: "Shaquila Thomas",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "262-720-2676",
+    email: "shaquilathomas1@icloud.com",
+    website: "https://shaquilathomas1.wixsite.com/youngstarsacademy",
+    tagline: "Young Stars Academy provides childcare services.",
+    facebook: "https://www.facebook.com/young_stars_academy_",
+    instagram: "https://www.instagram.com/young_stars_academy_",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "PackNShip",
+    owner: "Rodney & Joyce Hill",
+    industry: "Retail",
+    city: "Bayside, WI",
+    phone: "414-228-8131",
+    email: "Packnmailplus@yahoo.com",
+    website: "https://packnshipwi.com",
+    tagline: "Ship with all carriers. We offer physical and virtual mailbox service, fingerprint services, and sell all shipping materials such as boxes in all sizes.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Street Level Productions",
+    owner: "Russell Loving",
+    industry: "Creative Media",
+    city: "Milwaukee, WI",
+    phone: "414-465-9479",
+    email: "StreetLevel414@Gmail.com",
+    website: null,
+    tagline: "Music services - production, recording, mixing and mastering. Song writing, jingles and promotional music for advertising, film & video games.",
+    facebook: "https://www.facebook.com/streetlevel414",
+    instagram: "https://www.instagram.com/street.level414",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "The New Way Of Living",
+    owner: "Makisha Brown",
+    industry: "Family Services",
+    city: "Milwaukee, WI",
+    phone: "414-616-1977",
+    email: "Mbrown@thenewwayoflivingwi.com",
+    website: "https://www.thenewwayofliving.com/",
+    tagline: "Youth boys stabilization group home, ages 10 to 18.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Access Recovery Mental Health Services",
+    owner: "Erin Hayden",
+    industry: "Counseling & Therapy",
+    city: "Milwaukee, WI",
+    phone: "414-269-8356",
+    email: "ehayden@armhswi.com",
+    website: "https://armhswi.com",
+    tagline: "Mental health and AODA outpatient counseling treatment.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Changing Hearts Community Care",
+    owner: "Krissy Gilbert",
+    industry: "Assisted Living",
+    city: "Waukesha and Milwaukee Counties, WI",
+    phone: "414-308-7395",
+    email: "Info@changingheartscc.com",
+    website: "https://changingheartscc.com",
+    tagline: "Non-medical home care agency providing companionship, personal care, meal prep, transportation, respite, and daily living support.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Sanders Safe Haven",
+    owner: "Allison Renee Sanders",
+    industry: "Real Estate",
+    city: "Milwaukee, WI",
+    phone: "414-491-1660",
+    email: "sandersvision@outlook.com",
+    website: null,
+    tagline: "Supportive independent living / temporary shelter & safe haven for women and children experiencing domestic abuse, SA, or trafficking.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Ne-Ne's Nail Spa LLC",
+    owner: "Dominique Waupoose",
+    industry: "Nails",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-326-5470",
+    email: "neecole87@hotmail.com",
+    website: "https://calendly.com/neecole2007",
+    tagline: "Provide acrylic nail designs, full service pedicures.",
+    facebook: null,
+    instagram: "https://www.instagram.com/nenez_nailz",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "TLC Child Care Services, LLC",
+    owner: "Teresa Gift",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "414-353-2632",
+    email: "teresaanngift@gmail.com",
+    website: null,
+    tagline: "Five star rated childcare services.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Just Gina's Gracious Kitchen",
+    owner: "Jo'Nique Reynolds",
+    industry: "Catering",
+    city: "Milwaukee, WI",
+    phone: "414-238-1332",
+    email: "Jooreynolds1@yahoo.com",
+    website: null,
+    tagline: "Just Gina's Gracious Kitchen provides homemade comfort food, catering, meal prep, eggrolls, desserts, and event vending. Where flavor meets grace.",
+    facebook: null,
+    instagram: "https://www.instagram.com/jonique_87",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "HomeWell Care Services (New Century Home Care LLC)",
+    owner: "Nikki Russell",
+    industry: "Health",
+    city: "Mequon, WI",
+    phone: "262-478-0732",
+    email: "Nrussell@homewellcares.com",
+    website: "https://www.homewellcares.com/wi241",
+    tagline: "HomeWell Care Services provides high quality in-home care and peace of mind for families in our communities.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Bayview Laundromat",
+    owner: "Damion Forrest",
+    industry: "Laundry",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-350-5696",
+    email: "damion@bayviewlaundromatmke.com",
+    website: "https://www.bayviewlaundromatmke.com",
+    tagline: "Our laundromat is a climate controlled facility equipped with all sizes of washers and dryers, two coin changers, and a soap/bleach vending machine.",
+    facebook: "https://www.facebook.com/bayviewlaundromatmke",
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Allstate Insurance - Carlissa Dykes Schmit",
+    owner: "Carlissa Schmit",
+    industry: "Financial Consulting/Advising",
+    city: "Menomonee Falls, WI",
+    phone: "262-317-5829",
+    email: "cschmit@allstate.com",
+    website: "https://agents.allstate.com/carlissa-schmit-menomonee-falls-wi.html",
+    tagline: "I am a licensed insurance agent for auto, home, life, and securities products like annuities and VUL.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Perry & Family Cleaning",
+    owner: "Aaron Perry",
+    industry: "Janitorial",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-305-9114",
+    email: "Perryfamcleaning@gmail.com",
+    website: null,
+    tagline: "Commercial, crime scene, strip & waxing, windows.",
+    facebook: "https://www.facebook.com/share/1BLx3D29uD/?mibextid=wwXIfr",
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "McBeath Consulting LLC",
+    owner: "Patrice McBeath-Lock",
+    industry: "Counseling & Therapy",
+    city: "Milwaukee, WI",
+    phone: "414-573-1084",
+    email: "admin@mcbeathconsulting.com",
+    website: "https://www.mcbeathconsulting.com",
+    tagline: "McBeath Consulting provides trauma-informed counseling, behavioral health, CLTS, wellness, and family support services.",
+    facebook: "https://www.facebook.com/MCBEATH.CONSULTING/",
+    instagram: "https://www.instagram.com/mcbeath.consulting/",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Auntie Bunny's Sweets LLC",
+    owner: "Bonita Goodman-Johnson",
+    industry: "Food & Beverage",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-536-8885",
+    email: "alwaysalady_01@yahoo.com",
+    website: null,
+    tagline: "Auntie Bunny's Sweets offers handcrafted cupcakes, cakes, cookies, pies, and desserts for every occasion.",
+    facebook: "https://www.facebook.com/share/197kNZuhrE/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/auntiebunnyssweets",
+    tiktok: "https://www.tiktok.com/@alwaysalady02",
+    linkedin: null
+  },
+  {
+    name: "Garden Joys Community Inc.",
+    owner: "Jamira Jagers",
+    industry: "Urban Agriculture & Community Food Security",
+    city: "Milwaukee, WI",
+    phone: "262-787-8165",
+    email: "gardenjoys.mke@gmail.com",
+    website: "https://sites.google.com/view/gardenjoys/home",
+    tagline: "Urban agriculture nonprofit providing fresh food, gardening education, community outreach, and food security programs.",
+    facebook: null,
+    instagram: "https://www.instagram.com/gardenjoysfarm/",
+    tiktok: "https://www.tiktok.com/@garden_joys_4thejoy",
+    linkedin: null
+  },
+  {
+    name: "Dee Business Solutions, LLC",
+    owner: "Daquona Alexander",
+    industry: "Financial Consulting/Advising",
+    city: "Milwaukee, WI",
+    phone: "414-326-0098",
+    email: "info@deetaxlady.com",
+    website: "https://www.deebizsolutions.com",
+    tagline: "Dee Business Solutions provides tax preparation, business consulting, startup guidance, and financial education for individuals and entrepreneurs.",
+    facebook: "https://www.facebook.com/profile.php?id=61577005378503",
+    instagram: "https://www.instagram.com/realdeetaxlady",
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/in/daquona-alexander-3526aa378"
+  },
+  {
+    name: "A Step Above Child Care",
+    owner: "Britney Reid",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "414-210-3274",
+    email: "asachildcare2021@gmail.com",
+    website: null,
+    tagline: "Nurtures and educates children.",
+    facebook: "https://www.facebook.com/share/1R7bvwSJh3/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/asachildcarellc",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Sam's Treehouse Childcare Center",
+    owner: "Jermesha Mchenry",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "262-865-1400",
+    email: "samstreehouse2025@gmail.com",
+    website: null,
+    tagline: "We provide childcare to children 6 weeks to 13 years old.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Broomie Art Studio LLC",
+    owner: "Sophia Broomfield",
+    industry: "Art Studio",
+    city: "Milwaukee, WI",
+    phone: "414-758-1930",
+    email: "Hardwrk@icloud.com",
+    website: null,
+    tagline: "Broomie Art Studio offers creative art workshops, paint parties, community events, and custom artwork for all ages.",
+    facebook: "https://www.facebook.com/share/14dTP7tCPHy/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/broomieartstudio",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "The Daily Crown",
+    owner: "Elzie Flenard",
+    industry: "Business Development",
+    city: "Remote",
+    phone: "262-291-2260",
+    email: "hello@elzieflenard.com",
+    website: "https://www.elzieflenard.com",
+    tagline: "A faith-based business growth platform helping Christian entrepreneurs grow God's way with daily alignment and execution rhythms.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/in/elzieflenard/"
+  },
+  {
+    name: "Essential Life Home Care Services LLC",
+    owner: "Felicia Alstork",
+    industry: "Health",
+    city: "Milwaukee, WI",
+    phone: "414-885-3709",
+    email: "info@essentiallifehcs.com",
+    website: "https://www.essentiallifehcs.com",
+    tagline: "Providing personal care, respite, and supportive services for children (6+) through seniors with disabilities.",
+    facebook: "https://www.facebook.com/Essentiallifehomecareservicesllc/",
+    instagram: "https://www.instagram.com/essentiallifehcs/",
+    tiktok: "https://www.tiktok.com/@essentiallifehcs/",
+    linkedin: "https://www.linkedin.com/company/essential-life-home-care-services"
+  },
+  {
+    name: "Aged Out Leveled Up Inc.",
+    owner: "Jeanie Carr",
+    industry: "Family Services",
+    city: "Milwaukee, WI",
+    phone: "262-208-4665",
+    email: "jeanie@agedoutleveledupinc.org",
+    website: "https://agedoutleveledupinc.org",
+    tagline: "Aged Out Leveled Up Inc. supports foster and at-risk youth with mentoring, life skills, housing resources, and career training.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Shy's Place",
+    owner: "Tashyra Wright",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "414-519-1632",
+    email: "shysplace2@gmail.com",
+    website: "https://shysplace.lovable.app/",
+    tagline: "Milwaukee's first minority-based bilingual daycare, celebrating diversity and nurturing individual skills since day one.",
+    facebook: "https://www.facebook.com/share/1Bi2An9pKg/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/shysplace_",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "SS Catering Inc.",
+    owner: "Lakisha LaGrant",
+    industry: "Catering",
+    city: "Milwaukee, WI",
+    phone: "414-238-8289",
+    email: "llagrant@yahoo.com",
+    website: null,
+    tagline: "Catering service.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Victoria's Food For Thought, LLC",
+    owner: "Victoria Nzubechukwu",
+    industry: "Counseling & Therapy",
+    city: "Milwaukee, WI",
+    phone: "414-708-7425",
+    email: "jacksonfamilytherapy@gmail.com",
+    website: null,
+    tagline: "I provide mental health counseling to individuals, couples and families as an independent contractor through various clinics.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "PlayWorks, LLC",
+    owner: "Chanel Horton",
+    industry: "Event Planning",
+    city: "Menomonee Falls, WI",
+    phone: "262-239-0536",
+    email: "itsplayworks@gmail.com",
+    website: null,
+    tagline: "PlayWorks creates memorable events through custom decor, balloon designs, event styling, and creative planning services.",
+    facebook: "https://www.facebook.com/share/1GimxvxFp5/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/playworks_llc",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Kira Hair Care",
+    owner: "Kira Hubbard",
+    industry: "Cosmetology",
+    city: "Milwaukee, WI",
+    phone: "414-334-4954",
+    email: "Kirahaircare0@gmail.com",
+    website: "https://kglazedit.as.me/",
+    tagline: "I provide natural hair services and specialize in extensions such as wigs, sew-ins, and all things extension related.",
+    facebook: null,
+    instagram: "https://www.instagram.com/kirahaircare",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "The Focused Notary LLC",
+    owner: "Simone Johnson",
+    industry: "Legal Consulting/Advising",
+    city: "Milwaukee, WI",
+    phone: "262-421-6077",
+    email: "thefocusednotary@gmail.com",
+    website: "https://thefocusednotary.com",
+    tagline: "I serve the public as an impartial witness, performing notarial acts.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Direct Care Supportive Service",
+    owner: "Detra Ferguson",
+    industry: "Health",
+    city: "Glendale, WI",
+    phone: "414-393-3006",
+    email: "directcss@yahoo.com",
+    website: "https://www.directcss.com",
+    tagline: "DCSS provides in-home care services for members with healthcare needs.",
+    facebook: "https://www.facebook.com/profile.php?id=100027972261302",
+    instagram: "https://www.instagram.com/directcaress/",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Mr Seasonz LLC",
+    owner: "Tracy Hadley",
+    industry: "Food & Beverage",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-861-8441",
+    email: "hadleytracy144@gmail.com",
+    website: null,
+    tagline: "My business Mr Seasonz LLC was created for people who love to cook meals that create memories at meal time by using flavorful seasonings.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "S.L.DAIR Group",
+    owner: "Viviette Walker",
+    industry: "Financial Consulting/Advising",
+    city: "Wauwatosa, WI",
+    phone: "262-682-8128",
+    email: "support@sldairgroup.com",
+    website: "https://www.sldairgroup.com",
+    tagline: "Bookkeeping, financial systems & IRS representation for service-based businesses. EA & QuickBooks ProAdvisor with a Bachelor's in Business Admin.",
+    facebook: "https://www.facebook.com/S.L.DAIRGroup",
+    instagram: "https://instagram.com/sldair_group",
+    tiktok: "https://www.tiktok.com/@s.l.dairgroup",
+    linkedin: "https://www.linkedin.com/company/sldairgroup-llc"
+  },
+  {
+    name: "Cleansentials",
+    owner: "Makeisha Gross",
+    industry: "Cleaning Services",
+    city: "Milwaukee, WI",
+    phone: "414-436-4691",
+    email: "Hello@cleansentials.com",
+    website: "https://www.cleansentials.com",
+    tagline: "Residential, commercial, property management cleaning service.",
+    facebook: "https://www.facebook.com/cleansentials",
+    instagram: "https://www.instagram.com/cleansentials",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Bizsentials Consulting",
+    owner: "Makeisha Gross",
+    industry: "Organizational Consulting",
+    city: "Milwaukee, WI",
+    phone: "414-409-3219",
+    email: "Hello@bizsentialsconsulting.com",
+    website: "https://www.bizsentialsconsulting.com",
+    tagline: "Business consulting.",
+    facebook: "https://www.facebook.com/bizsentialsconsulting",
+    instagram: "https://www.instagram.com/bizsentials_consulting_grp",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Kays Klubhouse Early Childhood Learning",
+    owner: "Kayla Sanders",
+    industry: "Childcare",
+    city: "Milwaukee, WI",
+    phone: "414-690-3977",
+    email: "kaysklubhouseecla22@outlook.com",
+    website: "https://kaysklubhousemke.com",
+    tagline: "24 hour licensed family childcare facility serving with CLTS and Peer and Parent Peer Support Services.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Self Drive",
+    owner: "Benedict Eruchalu",
+    industry: "Information & Technology",
+    city: "Wisconsin",
+    phone: "414-687-2973",
+    email: "beruchalu@selfdrivetoday.com",
+    website: "https://www.selfdrivetoday.com",
+    tagline: "We are an upcoming tech company dedicated to streamlining the car buying experience by making it simple to test drive and buy on your terms.",
+    facebook: "https://www.facebook.com/selfdrivetoday/",
+    instagram: "https://www.instagram.com/selfdrivetoday/",
+    tiktok: "https://www.tiktok.com/@selfdrivetoday",
+    linkedin: "https://www.linkedin.com/company/selfdrivetoday/"
+  },
+  {
+    name: "Delicate Rose Designs LLC DBA: S&A Harris Photography",
+    owner: "Shawntrale Harris",
+    industry: "Creative Media",
+    city: "Bayview, WI",
+    phone: "414-850-1417",
+    email: "shawne@saharrisphotography.com",
+    website: "https://www.saharrisphotography.com",
+    tagline: "Creative portrait photography specializing in bold branding, headshots, and artistic studio-inspired experiences.",
+    facebook: "https://www.facebook.com/share/1bV86h9BP4/?mibextid=wwXIfr",
+    instagram: "https://www.instagram.com/s.a_harrisphotography",
+    tiktok: null,
+    linkedin: null
+  },
+  {
+    name: "Walters Realty Group",
+    owner: "Angela Walters",
+    industry: "Real Estate",
+    city: "Bayside, WI",
+    phone: "414-235-1152",
+    email: "waltersrealtygroup@compass.com",
+    website: "https://waltersrealtywi.com/",
+    tagline: "Walters Realty Group is an elite team of real estate professionals specializing in helping clients buy and sell beautiful homes and sound investments.",
+    facebook: "https://www.facebook.com/wrghomes/",
+    instagram: "https://www.instagram.com/waltersrealtywi/",
+    tiktok: null,
+    linkedin: "https://www.linkedin.com/in/angela-walters-realtor/"
+  },
+  {
+    name: "God's Warriors of Dance",
+    owner: "Sondaya Weddle",
+    industry: "Nonprofit",
+    city: "Milwaukee, WI",
+    phone: "262-422-0194",
+    email: "godswarriorsofdance@gmail.com",
+    website: "https://www.gwod.org",
+    tagline: "Christian nonprofit glorifying God through liturgical dance, worship, prayer, and community outreach to families in need.",
+    facebook: "https://www.facebook.com/profile.php?id=61577230899001",
+    instagram: "https://www.instagram.com/godswarriorsofdance",
+    tiktok: "https://www.tiktok.com/@godswarriorsofdance",
+    linkedin: null
+  },
+  {
+    name: "Happy Journey Homes LLC",
+    owner: "Sincere Jackson",
+    industry: "Real Estate",
+    city: "Milwaukee, Wisconsin",
+    phone: "414-595-9198",
+    email: "Happyjhomes@gmail.com",
+    website: "https://wiscohardmoney.com",
+    tagline: "I am a hard money lender. I provide funding for people that want to start flipping houses and Real Estate, or buying and holding in Real Estate.",
+    facebook: null,
+    instagram: null,
+    tiktok: null,
+    linkedin: null
+  },
 ];
 
 BUSINESSES.sort((a, b) => a.industry.localeCompare(b.industry));
@@ -632,9 +1738,9 @@ function buildCard(biz) {
       <div class="biz-owner">Proprietor: <span>${biz.owner}</span></div>
       ${biz.tagline ? `<div class="biz-tagline">${biz.tagline}</div>` : ''}
       <div class="biz-contact-grid">
-        <div class="biz-ci"><div class="biz-ci-label">Location</div><div class="biz-ci-val">${biz.city}</div></div>
-        <div class="biz-ci"><div class="biz-ci-label">Phone</div><div class="biz-ci-val"><a href="tel:${biz.phone.replace(/\D/g,'')}">${biz.phone}</a></div></div>
-        <div class="biz-ci span2"><div class="biz-ci-label">Email</div><div class="biz-ci-val"><a href="mailto:${biz.email}">${biz.email}</a></div></div>
+        <div class="biz-ci"><div class="biz-ci-label">Location</div><div class="biz-ci-val">${biz.city || 'N/A'}</div></div>
+        ${biz.phone ? `<div class="biz-ci"><div class="biz-ci-label">Phone</div><div class="biz-ci-val"><a href="tel:${biz.phone.replace(/\D/g,'')}">${biz.phone}</a></div></div>` : ''}
+        ${biz.email ? `<div class="biz-ci span2"><div class="biz-ci-label">Email</div><div class="biz-ci-val"><a href="mailto:${biz.email}">${biz.email}</a></div></div>` : ''}
         ${domain ? `<div class="biz-ci span2"><div class="biz-ci-label">Website</div><div class="biz-ci-val"><a href="${biz.website}" target="_blank" rel="noopener">${domain}</a></div></div>` : ''}
       </div>
       ${socials.length ? `
@@ -651,32 +1757,81 @@ function getIndustries() {
   return ['All', ...[...new Set(BUSINESSES.map(b=>b.industry))].sort()];
 }
 
-let activeFilter = 'All';
+let activeIndustry = 'All';
+let searchTerm = '';
+
+function matchesSearch(biz, term) {
+  if (!term) return true;
+  const haystack = [biz.name, biz.owner, biz.industry, biz.tagline, biz.city]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+  return haystack.includes(term);
+}
 
 function render() {
-  const filtered = activeFilter === 'All' ? BUSINESSES : BUSINESSES.filter(b=>b.industry===activeFilter);
+  const term = searchTerm.trim().toLowerCase();
+  const filtered = BUSINESSES.filter(b =>
+    (activeIndustry === 'All' || b.industry === activeIndustry) && matchesSearch(b, term)
+  );
+
   document.getElementById('directoryGrid').innerHTML = filtered.length
     ? filtered.map(buildCard).join('')
-    : `<div class="empty-state">No businesses found in this category.</div>`;
+    : `<div class="empty-state">No businesses match your search. Try a different term or industry.</div>`;
+
   const n = filtered.length;
-  document.getElementById('resultsCount').textContent =
-    `${n} ${n===1?'Business':'Businesses'}${activeFilter!=='All' ? ' · '+activeFilter : ''}`;
+  let label = `${n} ${n===1?'Business':'Businesses'}`;
+  if (activeIndustry !== 'All') label += ` · ${activeIndustry}`;
+  if (term) label += ` · "${searchTerm.trim()}"`;
+  document.getElementById('resultsCount').textContent = label;
+
+  // active chip
+  const chip = document.getElementById('activeChip');
+  if (activeIndustry !== 'All') {
+    document.getElementById('activeChipLabel').textContent = activeIndustry;
+    chip.classList.add('visible');
+  } else {
+    chip.classList.remove('visible');
+  }
+
+  // search clear button visibility
+  document.getElementById('searchClear').classList.toggle('visible', !!searchTerm);
 }
 
-function renderFilters() {
-  const bar = document.getElementById('filterBar');
-  bar.innerHTML = getIndustries().map(ind =>
-    `<button class="filter-btn${ind===activeFilter?' active':''}" data-ind="${ind}">${ind}</button>`
+function renderIndustrySelect() {
+  const select = document.getElementById('industrySelect');
+  select.innerHTML = getIndustries().map(ind =>
+    `<option value="${ind}"${ind===activeIndustry?' selected':''}>${ind === 'All' ? 'All Industries' : ind}</option>`
   ).join('');
-  bar.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
-    activeFilter = btn.dataset.ind;
-    bar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+  select.addEventListener('change', () => {
+    activeIndustry = select.value;
     render();
-  }));
+  });
 }
 
-renderFilters();
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('searchClear');
+  input.addEventListener('input', () => {
+    searchTerm = input.value;
+    render();
+  });
+  clearBtn.addEventListener('click', () => {
+    searchTerm = '';
+    input.value = '';
+    input.focus();
+    render();
+  });
+}
+
+document.getElementById('activeChipClear').addEventListener('click', () => {
+  activeIndustry = 'All';
+  document.getElementById('industrySelect').value = 'All';
+  render();
+});
+
+renderIndustrySelect();
+setupSearch();
 render();
 
 // iframe height reporter
