@@ -257,6 +257,60 @@
       padding-right: .3rem;
     }
 
+    /* ─── CATEGORY DROPDOWN ─────────────────────────────── */
+    .cat-select-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .cat-select-wrap::after {
+      content: '';
+      position: absolute;
+      right: .9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid #6a7f96;
+      pointer-events: none;
+    }
+
+    .cat-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      border-radius: 100px;
+      padding: .38rem 2.2rem .38rem 1.1rem;
+      font-size: .8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--t);
+      outline: none;
+      min-width: 160px;
+    }
+
+    .cat-select:focus,
+    .cat-select:hover {
+      border-color: rgba(255,255,255,.25);
+      background: rgba(255,255,255,.1);
+    }
+
+    .cat-select option {
+      background: #141d2e;
+      color: var(--text);
+    }
+
+    .cat-select.has-value {
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.12);
+      color: var(--text);
+    }
+
     .f-sep {
       width: 1px;
       height: 18px;
@@ -264,6 +318,7 @@
       margin: 0 .2rem;
     }
 
+    /* ─── FORMAT TOGGLE BUTTONS ──────────────────────────── */
     .filter-btn {
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.12);
@@ -287,6 +342,7 @@
       background: rgba(255,255,255,.12);
     }
 
+    /* ─── SEARCH ─────────────────────────────────────────── */
     .search-wrap {
       margin-left: auto;
       position: relative;
@@ -777,6 +833,7 @@
     /* ─── RESPONSIVE ────────────────────────────────────── */
     @media (max-width: 600px) {
       .f-sep { display: none; }
+      .cat-select { min-width: 140px; }
       .search-wrap { margin-left: 0; width: 100%; }
       .search-input { width: 100%; }
       .search-input:focus { width: 100%; }
@@ -791,7 +848,6 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="top">
   <div class="hero-orb"></div>
-  <p class="hero-eyebrow">April 2026</p>
   <h1 class="hero-logo">Evolve <em>Church</em></h1>
   <p class="hero-sub">Active Life Groups</p>
   <div class="hero-rule"></div>
@@ -816,12 +872,16 @@
 <div class="filter-bar" id="groups">
   <div class="filter-inner">
     <span class="filter-label">Filter</span>
-    <button class="filter-btn active" data-cat="all">All Groups</button>
-    <button class="filter-btn" data-cat="women">Women</button>
-    <button class="filter-btn" data-cat="men">Men</button>
-    <button class="filter-btn" data-cat="couples">Couples</button>
-    <button class="filter-btn" data-cat="coed">Co-Ed</button>
-    <button class="filter-btn" data-cat="multicultural">Multicultural</button>
+    <div class="cat-select-wrap">
+      <select class="cat-select" id="catSelect">
+        <option value="all">All Groups</option>
+        <option value="women">Women</option>
+        <option value="men">Men</option>
+        <option value="couples">Couples</option>
+        <option value="coed">Co-Ed</option>
+        <option value="multicultural">Multicultural</option>
+      </select>
+    </div>
     <div class="f-sep"></div>
     <button class="filter-btn" data-fmt="in-person">In-Person</button>
     <button class="filter-btn" data-fmt="virtual">Virtual</button>
@@ -904,7 +964,7 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer">
-  <p>© 2026 <em>Evolve Church</em> &nbsp;·&nbsp; Active Life Groups &nbsp;·&nbsp; April 2026</p>
+  <p>© 2026 <em>Evolve Church</em> &nbsp;·&nbsp; Active Life Groups</p>
 </footer>
 
 <script>
@@ -1047,20 +1107,19 @@ function scrollToContent() {
 }
 
 function initFilters() {
-  document.querySelectorAll('.filter-btn[data-cat]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const isActive = btn.classList.contains('active');
-      document.querySelectorAll('.filter-btn[data-cat]').forEach(b => b.classList.remove('active'));
-      if (isActive && btn.dataset.cat !== 'all') {
-        document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
-        activeCat = 'all';
-      } else {
-        btn.classList.add('active');
-        activeCat = btn.dataset.cat;
-      }
-      applyFilters();
-    });
+  // ── Category dropdown ──────────────────────────────────
+  const catSel = document.getElementById('catSelect');
+  catSel.addEventListener('change', () => {
+    activeCat = catSel.value;
+    catSel.classList.toggle('has-value', activeCat !== 'all');
+    // clear search when category changes
+    searchQ = '';
+    const si = document.getElementById('searchInput');
+    if (si) si.value = '';
+    applyFilters();
   });
+
+  // ── Format toggle buttons ──────────────────────────────
   document.querySelectorAll('.filter-btn[data-fmt]').forEach(btn => {
     btn.addEventListener('click', () => {
       if (btn.classList.contains('active')) {
@@ -1075,15 +1134,17 @@ function initFilters() {
       scrollToContent();
     });
   });
+
+  // ── Search ─────────────────────────────────────────────
   const si = document.getElementById('searchInput');
   if (si) {
     si.addEventListener('input', () => {
       searchQ = si.value.trim().toLowerCase();
+      // reset category + format when typing
       activeCat = 'all';
       activeFmt = null;
-      document.querySelectorAll('.filter-btn[data-cat]').forEach(b => b.classList.remove('active'));
-      const allBtn = document.querySelector('.filter-btn[data-cat="all"]');
-      if (allBtn) allBtn.classList.add('active');
+      catSel.value = 'all';
+      catSel.classList.remove('has-value');
       document.querySelectorAll('.filter-btn[data-fmt]').forEach(b => b.classList.remove('active'));
       applyFilters();
     });

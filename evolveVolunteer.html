@@ -336,12 +336,6 @@ body {
   flex: 1;
 }
 
-.vol-card__icon {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  line-height: 1;
-}
-
 .vol-card__name {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1.3rem;
@@ -495,80 +489,6 @@ body {
 }
 .next-step__link:hover { gap: 12px; }
 
-/* ── FOOTER ───────────────────────────────────── */
-.footer {
-  background: #040d11;
-  padding: 64px 40px 32px;
-}
-.footer__top {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-.footer__brand-name {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--teal);
-  margin-bottom: 12px;
-}
-.footer__brand-tagline {
-  font-size: .88rem;
-  line-height: 1.65;
-  color: rgba(255,255,255,.45);
-  margin-bottom: 20px;
-}
-.footer__socials { display: flex; gap: 12px; flex-wrap: wrap; }
-.footer__social {
-  width: 36px; height: 36px;
-  border: 1px solid rgba(66,185,210,.3);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--teal);
-  text-decoration: none;
-  transition: background .2s, border-color .2s;
-}
-.footer__social:hover { background: var(--teal); color: var(--navy); border-color: var(--teal); }
-.footer__social svg { width: 15px; height: 15px; }
-
-.footer__col-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: .7rem;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 18px;
-}
-.footer__links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-.footer__links a {
-  font-size: .88rem;
-  color: rgba(255,255,255,.5);
-  text-decoration: none;
-  transition: color .2s;
-}
-.footer__links a:hover { color: var(--white); }
-
-.footer__bottom {
-  padding-top: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer__copy {
-  font-size: .78rem;
-  color: rgba(255,255,255,.25);
-}
-.footer__address {
-  font-size: .78rem;
-  color: rgba(255,255,255,.25);
-  text-align: right;
-}
 
 /* ── UTILITIES ────────────────────────────────── */
 @keyframes fadeUp {
@@ -583,16 +503,11 @@ body {
 @media (max-width: 900px) {
   .next-steps { grid-template-columns: 1fr; }
   .next-step + .next-step { border-left: none; border-top: 1px solid rgba(66,185,210,.12); }
-  .footer__top { grid-template-columns: 1fr 1fr; }
   .intro__stats { gap: 36px; }
 }
 @media (max-width: 600px) {
   .hero { height: 100svh; }
   .hero__content, .intro, .cards-section, .cta-banner, .next-step, .filter-bar { padding-left: 20px; padding-right: 20px; }
-  .footer { padding: 48px 20px 24px; }
-  .footer__top { grid-template-columns: 1fr; }
-  .footer__bottom { flex-direction: column; align-items: flex-start; }
-  .footer__address { text-align: left; }
   .cards-grid { grid-template-columns: 1fr; }
 }
 </style>
@@ -705,67 +620,6 @@ body {
   </div>
 </div>
 
-<!-- ══ FOOTER ══════════════════════════════════════════ -->
-<footer class="footer">
-  <div class="footer__top">
-    <div>
-      <div class="footer__brand-name">Evolve Nation</div>
-      <p class="footer__brand-tagline">A non-denominational church in Milwaukee, WI committed to helping people Evolve in their faith and impact the world for Christ.</p>
-      <div class="footer__socials">
-        <!-- Instagram -->
-        <a href="https://instagram.com/evolvenationmke" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <!-- Facebook -->
-        <a href="https://facebook.com/evolvenation" class="footer__social" aria-label="Facebook" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <!-- YouTube -->
-        <a href="https://www.youtube.com/@evolvenationmke" class="footer__social" aria-label="YouTube" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42A2.78 2.78 0 0 0 20.59 4.4C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 2A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-2A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div>
-      <p class="footer__col-title">Explore</p>
-      <ul class="footer__links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/our-beliefs">Our Beliefs</a></li>
-        <li><a href="/meet-the-staff">Meet the Staff</a></li>
-        <li><a href="/knowing-jesus">Knowing Jesus</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="footer__col-title">Ministries</p>
-      <ul class="footer__links">
-        <li><a href="/evolve-kids">Evolve Kids</a></li>
-        <li><a href="/evolve-teens">Evolve Teens</a></li>
-        <li><a href="/evolving-minds">Evolving Minds</a></li>
-        <li><a href="/life-groups">Life Groups</a></li>
-        <li><a href="/outreach">Outreach</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <p class="footer__col-title">Contact</p>
-      <ul class="footer__links">
-        <li><a href="mailto:info@evolvenation.org">info@evolvenation.org</a></li>
-        <li><a href="tel:+1-414-000-0000">(414) 000-0000</a></li>
-        <li><a href="/plan-your-visit">Plan Your Visit</a></li>
-        <li><a href="/giving">Give Online</a></li>
-        <li><a href="/connect">Connect</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer__bottom">
-    <p class="footer__copy">© 2026 Evolve Nation. All rights reserved.</p>
-    <p class="footer__address">6550 N 76th St, Milwaukee, WI 53223</p>
-  </div>
-</footer>
 
 <!-- ══ JAVASCRIPT ══════════════════════════════════════ -->
 <script>
@@ -776,7 +630,6 @@ const TEAMS = [
     name: 'Altar Helpers',
     category: 'worship',
     badge: 'Worship',
-    icon: '🙏',
     desc: 'Support moments of prayer and response at the altar. Help facilitate life-changing encounters with God during services.',
     formUrl: '#'
   },
@@ -784,7 +637,6 @@ const TEAMS = [
     name: 'Ambassadors',
     category: 'community',
     badge: 'Community',
-    icon: '🤝',
     desc: 'Be the first face people see. Represent the heart of Evolve by welcoming guests and helping them feel at home.',
     formUrl: '#'
   },
@@ -792,7 +644,6 @@ const TEAMS = [
     name: 'Counters',
     category: 'ops',
     badge: 'Operations',
-    icon: '📊',
     desc: 'Handle post-service financial counting with integrity and accuracy. A quiet but critical behind-the-scenes role.',
     formUrl: '#'
   },
@@ -800,7 +651,6 @@ const TEAMS = [
     name: 'EVS',
     category: 'ops',
     badge: 'Operations',
-    icon: '✨',
     desc: 'Keep our facility clean, welcoming, and ready for every service. Great things happen in spaces that are well cared for.',
     formUrl: '#'
   },
@@ -808,7 +658,6 @@ const TEAMS = [
     name: 'Evolve Apparel',
     category: 'community',
     badge: 'Community',
-    icon: '👕',
     desc: 'Manage and distribute Evolve merchandise and branded gear, helping the church family represent with pride.',
     formUrl: '#'
   },
@@ -816,7 +665,6 @@ const TEAMS = [
     name: 'Evolve Community',
     category: 'community',
     badge: 'Community',
-    icon: '🏡',
     desc: 'Help plan and execute community-building events that deepen relationships and strengthen our church family.',
     formUrl: '#'
   },
@@ -824,7 +672,6 @@ const TEAMS = [
     name: 'Evolving Minds',
     category: 'ministry',
     badge: 'Ministry',
-    icon: '🧠',
     desc: 'Support our mental health and wellness ministry. Help create spaces where people can grow whole — mind, body, and spirit.',
     formUrl: '#'
   },
@@ -832,7 +679,6 @@ const TEAMS = [
     name: 'Evolve Teens',
     category: 'ministry',
     badge: 'Ministry',
-    icon: '🔥',
     desc: 'Invest in the next generation. Walk alongside middle and high schoolers as they discover their identity in Christ.',
     formUrl: '#'
   },
@@ -840,7 +686,6 @@ const TEAMS = [
     name: 'Evolve Kids',
     category: 'ministry',
     badge: 'Ministry',
-    icon: '⭐',
     desc: 'Step into the joy of helping kids know God\'s love. Volunteer with Evolve Kids and make an eternal impact, one child at a time.',
     formUrl: '#'
   },
@@ -848,7 +693,6 @@ const TEAMS = [
     name: 'Greeters',
     category: 'community',
     badge: 'Community',
-    icon: '👋',
     desc: 'Be the smile at the door. Greeters help every person who walks in feel seen, valued, and genuinely welcomed.',
     formUrl: '#'
   },
@@ -856,7 +700,6 @@ const TEAMS = [
     name: 'Healthcare Ministry',
     category: 'ministry',
     badge: 'Ministry',
-    icon: '🩺',
     desc: 'Use your medical expertise to serve the congregation and community. A powerful intersection of faith and calling.',
     formUrl: '#'
   },
@@ -864,7 +707,6 @@ const TEAMS = [
     name: 'Lobby Management',
     category: 'ops',
     badge: 'Operations',
-    icon: '🏛️',
     desc: 'Ensure our lobby and common areas run smoothly before, during, and after services for an excellent guest experience.',
     formUrl: '#'
   },
@@ -872,7 +714,6 @@ const TEAMS = [
     name: 'Outreach',
     category: 'ministry',
     badge: 'Ministry',
-    icon: '🌍',
     desc: 'Bring hope to Milwaukee and beyond. Serve with our Outreach team to meet real needs and share God\'s love in the community.',
     formUrl: '#'
   },
@@ -880,7 +721,6 @@ const TEAMS = [
     name: 'Production',
     category: 'worship',
     badge: 'Worship',
-    icon: '🎬',
     desc: 'Use your technical talents for the Kingdom. Run cameras, lighting, graphics, and audio to create a powerful worship experience.',
     formUrl: '#'
   },
@@ -888,7 +728,6 @@ const TEAMS = [
     name: 'Parking Lot',
     category: 'community',
     badge: 'Community',
-    icon: '🚗',
     desc: 'First impressions start in the parking lot. Help guests arrive safely and feel welcomed before they step inside.',
     formUrl: '#'
   },
@@ -896,7 +735,6 @@ const TEAMS = [
     name: 'Social Media',
     category: 'ops',
     badge: 'Operations',
-    icon: '📱',
     desc: 'Help tell the Evolve story online. Create content, engage followers, and extend our reach to people far and near.',
     formUrl: '#'
   },
@@ -904,7 +742,6 @@ const TEAMS = [
     name: 'Snack Stands',
     category: 'community',
     badge: 'Community',
-    icon: '☕',
     desc: 'Serve up smiles and snacks! Help manage our snack areas so that people can connect over good food and good vibes.',
     formUrl: '#'
   },
@@ -912,7 +749,6 @@ const TEAMS = [
     name: 'Stage Crew',
     category: 'worship',
     badge: 'Worship',
-    icon: '🎤',
     desc: 'Support our worship team behind the scenes — set up, break down, and ensure every service runs without a hitch.',
     formUrl: '#'
   },
@@ -934,7 +770,6 @@ function buildCards(filter) {
         <span class="vol-card__badge">${team.badge}</span>
       </div>
       <div class="vol-card__body">
-        <div class="vol-card__icon">${team.icon}</div>
         <h3 class="vol-card__name">${team.name}</h3>
         <p class="vol-card__desc">${team.desc}</p>
         <a href="${team.formUrl}" class="vol-card__btn">
