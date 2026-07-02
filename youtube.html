@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- ============================================================================
+       WHY THIS FILE EXISTS
+       The homepage runs inside The Church Co's cross-origin iframe, which strips
+       the referrer before it reaches YouTube — the cause of "Error 153: Video
+       player configuration error". This page is a clean document served from our
+       OWN GitHub Pages domain, so YouTube receives a valid referrer and the error
+       goes away. The homepage popups load this page (with ?v=VIDEO_ID) instead of
+       embedding youtube.com directly.
+
+       BONUS: if YouTube still refuses for any reason, this page shows a branded
+       "Watch on YouTube" card — visitors NEVER see the grey 153 screen.
+
+       DEPLOY: upload this file to the repo root next to index.html, i.e.
+         https://evolve2018.github.io/EvolveWebsite/youtube.html
+       (If you change the path, update EVOLVE_YT_PROXY in index.html to match.)
+       ============================================================================ -->
+  <!-- Clean referrer policy — this is the whole point of the proxy. Must be
+       strict-origin-when-cross-origin (NOT no-referrer / same-origin). -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Evolve Church — Sermon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden; background: #07141a;
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    /* YouTube player fills the frame */
+    #player, #player iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    /* Loading spinner (shown until the player is ready) */
+    #loading {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      background: #07141a;
+    }
+    #loading.hide { display: none; }
+    .spinner {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 4px solid rgba(66,185,210,0.25); border-top-color: #42B9D2;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Branded fallback — shown ONLY if the player can't configure.
+       This is what replaces the ugly grey "Error 153" screen. */
+    #fallback {
+      position: absolute; inset: 0; z-index: 3; display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 28px; gap: 14px;
+      background: radial-gradient(ellipse at 50% 38%, #0d3a45 0%, #07141a 72%);
+    }
+    #fallback.show { display: flex; }
+    #fallback .mark {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(66,185,210,0.15); border: 1px solid rgba(66,185,210,0.35);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 2px;
+    }
+    #fallback h2 { color: #fff; font-size: 1.2rem; font-weight: 800; letter-spacing: .2px; }
+    #fallback p  { color: rgba(255,255,255,0.6); font-size: .9rem; max-width: 340px; line-height: 1.55; }
+    #fallback a {
+      display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+      background: #FF0000; color: #fff; font-weight: 700; font-size: .95rem;
+      padding: 13px 26px; border-radius: 40px; margin-top: 4px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    #fallback a:hover { transform: translateY(-2px); background: #e60000; }
+    #fallback a svg { flex-shrink: 0; }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <div id="loading"><div class="spinner"></div></div>
+
+  <div id="fallback">
+    <div class="mark">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#42B9D2">
+        <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+      </svg>
+    </div>
+    <h2>Watch this sermon</h2>
+    <p>Tap below to watch on YouTube — opens in a new tab.</p>
+    <a id="fallbackLink" href="#" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      Watch on YouTube
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var params  = new URLSearchParams(location.search);
+      var videoId = (params.get('v') || '').trim();
+
+      var loadingEl  = document.getElementById('loading');
+      var fallbackEl = document.getElementById('fallback');
+      var playerBox  = document.getElementById('player');
+      var linkEl     = document.getElementById('fallbackLink');
+
+      linkEl.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId);
+
+      var ready = false;
+
+      function showPlayer() {
+        ready = true;
+        clearTimeout(failTimer);
+        loadingEl.classList.add('hide');
+        fallbackEl.classList.remove('show');
+        if (playerBox) playerBox.style.display = '';
+      }
+      function showFallback() {
+        loadingEl.classList.add('hide');
+        fallbackEl.classList.add('show');
+        if (playerBox) playerBox.style.display = 'none';
+      }
+
+      // No video id → straight to the branded card.
+      if (!videoId) { showFallback(); return; }
+
+      // If the player isn't ready in a few seconds, assume a config failure
+      // (Error 153, blocked embed, etc.) and show the branded card instead.
+      var failTimer = setTimeout(function () { if (!ready) showFallback(); }, 4500);
+
+      // Load YouTube's IFrame Player API (lets us detect ready/error).
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.onerror = function () { showFallback(); };
+      document.head.appendChild(tag);
+
+      // Called automatically by the API once it loads.
+      window.onYouTubeIframeAPIReady = function () {
+        try {
+          new YT.Player('player', {
+            videoId: videoId,
+            playerVars: {
+              autoplay: 1,
+              rel: 0,
+              playsinline: 1,
+              modestbranding: 1,
+              origin: location.origin
+            },
+            events: {
+              onReady: showPlayer,
+              onError: showFallback
+            }
+          });
+        } catch (e) {
+          showFallback();
+        }
+      };
+    })();
+  </script>
+</body>
+</html>
