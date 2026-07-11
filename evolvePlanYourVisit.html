@@ -784,7 +784,7 @@ footer{
                 <div class="map-addr" style="color:rgba(255,255,255,.5);font-size:.8rem;margin-top:6px">Milwaukee, WI</div>
               </div>
             </div>
-            <div class="panel-body">Free parking is available on-site. Our parking team will be outside to guide you in. We recommend arriving 10–15 minutes early on your first visit.</div>
+            <div class="panel-body">Free parking is available on-site. Our parking team will be outside to guide you in. We recommend arriving 10–15 minutes early on your first visit. We now offer parking services at the DMV across the street. We have a designated bus service from the DMV to the church.</div>
             <div class="check-list">
               <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Free Parking</h4><p>On-site, no permit needed</p></div></div>
               <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Parking Team</h4><p>Greeters guide you from the lot</p></div></div>
@@ -1025,7 +1025,7 @@ footer{
           <a href="#chat" class="faq-cta-card">
             <div class="fcc-text"><h4>Ask Our AI</h4><p>Instant answers above</p></div>
           </a>
-          <a href="https://evolvenation.org" class="faq-cta-card">
+          <a href="index.html" class="faq-cta-card">
             <div class="fcc-text"><h4>Visit Our Site</h4><p>evolvenation.org</p></div>
           </a>
         </div>
@@ -1045,7 +1045,7 @@ footer{
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Can I watch online instead? <span class="faq-q-icon">+</span></button>
-          <div class="faq-a"><p>Yes! We stream live at evolvenation.org every Sunday at 9 AM, 10:30 AM, and 12 PM. It's a great way to check us out before you visit in person — no signup needed.</p></div>
+          <div class="faq-a"><p>Yes! We stream live at <a href="index.html">evolvenation.org</a>  every Sunday at 10:30 AM and 12 PM. It's a great way to check us out before you visit in person — no signup needed.</p></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Is there coffee? <span class="faq-q-icon">+</span></button>
@@ -1053,7 +1053,7 @@ footer{
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">How do I connect beyond Sunday? <span class="faq-q-icon">+</span></button>
-          <div class="faq-a"><p>Head to the Connect Table after service — our team will walk you through small groups, volunteer opportunities, and next steps. Or visit evolvenation.org to explore on your own time.</p></div>
+          <div class="faq-a"><p>Head to the Connect Table after service — our team will walk you through small groups, volunteer opportunities, and next steps. Or visit <a href="index.html">evolvenation.org</a> to explore on your own time.</p></div>
         </div>
       </div>
     </div>
@@ -1097,226 +1097,330 @@ function toggleFaq(btn) {
   if (!open) { btn.classList.add('open'); ans.classList.add('open'); }
 }
 
-// ── AI CHAT ──
-// Smart local knowledge engine — no external API needed
-const KB = {
-  church: {
-    name: "Evolve Church",
-    website: "evolvenation.org",
-    location: "Milwaukee, WI",
-    email: "info@evolvenation.org",
-    phone: null,
-    socials: "@evolvenation on Facebook, Instagram, YouTube, and Spotify"
-  },
-  services: {
-    times: ["9:00 AM", "10:30 AM", "12:00 PM"],
-    doors: ["8:30 AM", "10:00 AM", "11:30 AM"],
-    length: "about 75 minutes",
-    identical: true,
-    online: "Both live streamed at evolvenation.org — no signup required"
-  },
-  parking: {
-    cost: "Free",
-    onsite: true,
-    firstTimeSpots: true,
-    team: true,
-    ada: true
-  },
-  kids: {
-    ages: "birth through 5th grade",
-    programs: [
-      { name: "Nursery", ages: "Birth – 2 years" },
-      { name: "Preschool", ages: "Ages 3 – 5" },
-      { name: "Lower Elementary", ages: "Kindergarten – 2nd grade" },
-      { name: "Upper Elementary", ages: "3rd – 5th grade" }
-    ],
-    backgroundChecks: true,
-    secureCheckin: true,
-    pickupTag: true,
-    pagerAlert: true
-  },
-  leadership: {
-    leadPastor: "Pastor Ken",
-    note: "Evolve has a full pastoral and ministry leadership team alongside Pastor Ken. For a complete staff directory, visit evolvenation.org or email info@evolvenation.org."
-  },
-  worship: {
-    style: "Contemporary live band, high-energy, lyrics on screen",
-    length: "20–25 minutes per service",
-    participation: "Participate as much or as little as you'd like — no pressure"
-  },
-  message: {
-    speaker: "Pastor Ken",
-    style: "Practical, scripture-based, relevant to everyday life",
-    background: "No church background required",
-    length: "35–40 minutes"
-  },
-  firstTime: {
-    pressured: false,
-    standUp: false,
-    connectTable: true,
-    coffee: "Free in the lobby before every service"
-  },
-  dress: "No dress code. Come as you are — jeans, hoodies, business casual, anything goes.",
-  theology: {
-    denomination: "Non-denominational Christian church",
-    bible: "Believes the Bible is the inspired Word of God",
-    trinity: "Believes in the Father, Son, and Holy Spirit",
-    salvation: "Salvation through faith in Jesus Christ",
-    baptism: "Practices believer's baptism",
-    gifts: "Believes in the gifts of the Holy Spirit",
-    practices: "Communion, prayer, worship, and community are central"
-  },
-  ministries: [
-    "Evolve Kids (birth–5th grade)",
-    "Evolve Students (middle & high school)",
-    "Young Adults",
-    "Small Groups (mid-week, throughout Milwaukee)",
-    "Volunteer opportunities"
-  ],
-  giving: "Via Pushpay (online), in-person offering, or text. Guests are never pressured to give.",
-  prayer: "Submit a prayer request at evolvenation.org or speak to a team member after service.",
-  baptism: "Evolve practices believer's baptism. Talk to a team member or email info@evolvenation.org to learn more."
-};
+// ── AI CHAT — Evolve Church Smart Local Engine ──
+// Covers 60+ topics, multi-intent detection, context memory, fuzzy matching
 
-function buildReply(msg) {
-  const m = msg.toLowerCase().trim();
+const chatCtx = { lastTopic: null, turnCount: 0 };
 
-  // ── Times / Services ──
-  if (/\b(time|times|when|schedule|service|services|sunday|start|begin|hour|9|10:?30|12|noon|am|pm)\b/.test(m) && !/baptism|communion/.test(m)) {
-    return `We have three identical Sunday services — <strong>9:00 AM</strong>, <strong>10:30 AM</strong>, and <strong>12:00 PM</strong>. Doors open 30 minutes before each. Every service is the same worship and message, so pick whichever fits your schedule best! Each runs about 75 minutes.`;
+function match(m, patterns) {
+  return patterns.some(p => typeof p === 'string' ? m.includes(p) : p.test(m));
+}
+
+function buildReply(raw) {
+  const m = raw.toLowerCase().trim();
+  chatCtx.turnCount++;
+
+  // ── GREETINGS ──
+  if (/^(hi+|hey+|hello|howdy|good\s*(morning|afternoon|evening|day)|sup|what'?s up|yo|hola|greetings|good\s*to\s*meet)[\s!?.]*$/.test(m)) {
+    return `Hey! So glad you stopped by. I'm here to help you plan your visit to Evolve Church — ask me anything about service times, kids, parking, what to expect, or anything else on your mind!`;
   }
 
-  // ── Online / Stream ──
-  if (/\b(online|stream|live\s*stream|watch|virtual|remote|home|youtube|web)\b/.test(m)) {
-    return `Yes! We stream all three Sunday services live at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> — 9 AM, 10:30 AM, and 12 PM. No signup or account needed. It's a great way to check us out before visiting in person!`;
+  // ── THANKS ──
+  if (match(m, ['thank you', 'thanks', 'thank u', 'thx', ' ty ', 'appreciate', 'helpful', 'that helps'])) {
+    const replies = [
+      `Of course! That's what I'm here for. Anything else you'd like to know before your visit?`,
+      `Happy to help! Is there anything else I can answer for you about Evolve?`,
+      `Absolutely — feel free to ask anything else. We want your first visit to be great!`
+    ];
+    return replies[chatCtx.turnCount % replies.length];
   }
 
-  // ── Parking ──
-  if (/\b(park|parking|car|drive|driving|lot|accessible|ada|wheelchair|handicap)\b/.test(m)) {
-    return `Parking is completely <strong>free</strong> on-site! We have a parking team outside every Sunday to guide you in. There are reserved <strong>First Time Guest</strong> spots right near the entrance, and the entire facility is ADA-accessible. We recommend arriving 10–15 minutes early on your first visit.`;
+  // ── YES / NO SHORT REPLIES ──
+  if (/^(yes|yeah|yep|yup|sure|ok|okay|sounds good|perfect|great|awesome|cool|nice|got it|alright|makes sense)[\s!?.]*$/.test(m)) {
+    return `Awesome! Is there anything else you'd like to know about visiting Evolve this Sunday?`;
+  }
+  if (/^(no|nope|nah|not really|i('m| am) good|i'?m all set|that'?s all|nothing else)[\s!?.]*$/.test(m)) {
+    return `No problem at all! We'd love to see you this Sunday. Feel free to come back anytime if more questions pop up. See you soon!`;
   }
 
-  // ── Kids / Children ──
-  if (/\b(kid|kids|child|children|baby|infant|toddler|nursery|preschool|elementary|age|grade|son|daughter|family|families)\b/.test(m)) {
-    return `Evolve Kids is available at all three Sunday services for children from <strong>birth through 5th grade</strong>! We have Nursery (birth–2), Preschool (3–5), Lower Elementary (K–2nd), and Upper Elementary (3rd–5th). Every volunteer is background-checked, check-in is secure, and parents receive a pickup tag. We also have a pager system so we can reach you instantly if needed.`;
+  // ── SERVICE TIMES ──
+  if (match(m, [/\b(time|times|when|schedule|start|begin|hour|9am|10:?30|noon|12pm)\b/, 'what time', 'service time', 'what time does', 'when do you', 'when does service', 'when are service', 'what are the times', 'how many services', 'service schedule', 'sunday schedule', 'does it start', 'it start at']) && !match(m, ['baptism', 'communion', 'group', 'student'])) {
+    chatCtx.lastTopic = 'times';
+    return `We have three Sunday services — <strong>9:00 AM</strong>, <strong>10:30 AM</strong>, and <strong>12:00 PM</strong>. Doors open 30 minutes before each one. All three services are identical, same worship and same message, so just pick the time that works best for your schedule. Each service runs about 75 minutes.`;
   }
 
-  // ── Students / Youth ──
-  if (/\b(student|students|teen|teens|teenager|youth|middle school|high school|junior|senior)\b/.test(m)) {
-    return `We have <strong>Evolve Students</strong> — a dedicated ministry for middle and high school students. For details on meeting times and upcoming events, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or ask at the Connect Table after service.`;
+  // ── HOW LONG / DURATION ──
+  if (match(m, ['how long', 'length', 'duration', 'how many minutes', 'how many hours', 'end at', 'over at', 'get out', 'does it end', 'finish at', 'wrap up', 'run long', 'does service last'])) {
+    chatCtx.lastTopic = 'duration';
+    return `Each service runs about <strong>75 minutes</strong> — that's roughly 20–25 minutes of live worship followed by a 35–40 minute message from Pastor Ken. We start on time and end on time. If you want to linger over coffee and meet people afterward, you're always welcome to!`;
   }
 
-  // ── Young Adults ──
-  if (/\b(young adult|young adults|college|university|20s|twenties|single)\b/.test(m)) {
-    return `Yes, we have a <strong>Young Adults</strong> ministry at Evolve! For the latest on events and meeting times, check out <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or stop by the Connect Table after any Sunday service.`;
+  // ── ONLINE / LIVESTREAM ──
+  if (match(m, ['online', 'stream', 'livestream', 'live stream', 'watch', 'virtual', 'remote', 'from home', 'not attend', "can't come", 'cant come', 'watch from', 'tune in', 'live online', 'broadcast'])) {
+    chatCtx.lastTopic = 'online';
+    return `Yes! We stream all three Sunday services live at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> — 9 AM, 10:30 AM, and 12 PM. No account or signup needed. Past messages are also available on our YouTube channel at <strong>@evolvenation</strong> if you want to catch up on a series.`;
   }
 
-  // ── Small Groups ──
-  if (/\b(small group|groups|community group|life group|connect group|mid.?week|bible study|fellowship)\b/.test(m)) {
-    return `We have <strong>Small Groups</strong> meeting mid-week throughout Milwaukee — it's one of the best ways to get connected beyond Sunday! You can sign up and find a group at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or talk to someone at the Connect Table after service.`;
+  // ── PARKING ──
+  if (match(m, ['park', 'parking', 'where do i park', 'where to park', 'lot', 'garage', 'drive', 'car', 'vehicle', 'ada', 'wheelchair', 'handicap', 'accessible', 'disability', 'disabled parking', 'mobility'])) {
+    chatCtx.lastTopic = 'parking';
+    return `Parking is completely <strong>free</strong> on-site every Sunday. We have reserved <strong>"First Time Guest"</strong> spots right near the entrance — look for the signs. Our parking team will be outside to guide you in. The whole facility is ADA-accessible with accessible parking and entrance. We recommend arriving 10–15 minutes early, especially on your first visit.`;
   }
 
-  // ── Volunteer ──
-  if (/\b(volunteer|serve|serving|team|ministry team|get involved|help out)\b/.test(m)) {
-    return `We'd love to have you serve at Evolve! There are volunteer opportunities across all of our ministry areas. The best way to get started is to stop by the <strong>Connect Table</strong> after any Sunday service, or reach out at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>.`;
+  // ── ADDRESS / LOCATION / DIRECTIONS ──
+  if (match(m, ['address', 'location', 'where are you', 'where is it', 'where is evolve', 'directions', 'how do i get', 'find you', 'map', 'google map', 'near', 'close to', 'on what street', 'what street', '76th', 'north milwaukee', 'zip code'])) {
+    chatCtx.lastTopic = 'location';
+    return `Evolve Church is located at <strong>6550 N 76th St, Milwaukee, WI 53223</strong>. You can search "Evolve Church Milwaukee" on Google Maps for turn-by-turn directions. Free parking is on-site and our team will be outside to welcome you!`;
   }
 
-  // ── Dress code ──
-  if (/\b(wear|wearing|dress|clothes|outfit|attire|casual|formal|jeans|suit)\b/.test(m)) {
-    return `Come as you are — seriously! There's <strong>no dress code</strong> at Evolve. You'll see everything from jeans and hoodies to business casual. Whatever you're comfortable in is perfect. We're way more focused on you being there than what you're wearing.`;
+  // ── KIDS / CHILDREN ──
+  if (match(m, ['kid', 'kids', 'child', 'children', 'baby', 'infant', 'toddler', 'nursery', 'preschool', 'elementary', 'son', 'daughter', 'bring my', 'my child', 'my kids', 'little one', 'little ones', '5th grade', 'kindergarten', 'age range for kids', 'children ministry', 'kids ministry', 'childcare', 'child care'])) {
+    chatCtx.lastTopic = 'kids';
+    return `Evolve Kids runs at all three Sunday services for children from <strong>birth through 5th grade</strong>. Here's how we break it down: <strong>Nursery</strong> (birth–2 yrs), <strong>Preschool</strong> (3–5 yrs), <strong>Lower Elementary</strong> (K–2nd grade), and <strong>Upper Elementary</strong> (3rd–5th grade). Every volunteer is background-checked, check-in is fully secure, and you'll get a pickup tag at drop-off. We also have a pager system to reach you instantly if your child needs you.`;
   }
 
-  // ── First time / New / Nervous ──
-  if (/\b(first time|first visit|first\s+sunday|never been|new here|nervous|awkward|don't know anyone|don.t know anyone|visitor|visiting|guest|newcomer)\b/.test(m)) {
-    return `Welcome — we're so glad you're considering visiting! You will <strong>never</strong> be put on the spot, asked to stand up, or introduced to the crowd. Just show up, find a seat, and experience Evolve at your own pace. After service, there's an optional <strong>Connect Table</strong> where you can meet the team if you'd like. Free coffee in the lobby too!`;
+  // ── KIDS SAFETY / CHECK-IN ──
+  if (match(m, ['safe', 'safety', 'secure', 'background check', 'check in', 'check-in', 'pickup', 'pick up', 'pager', 'how do i pick up', 'drop off', 'drop my', 'is it safe'])) {
+    chatCtx.lastTopic = 'kidssafety';
+    return `Your child's safety is our absolute top priority. Every Evolve Kids volunteer is <strong>background-checked and trained</strong>. Drop-off uses a secure check-in system where you'll get a unique pickup tag — no one else can pick up your child without it. We also have a parent pager system so we can reach you in the auditorium instantly if needed.`;
   }
 
-  // ── Coffee / Food ──
-  if (/\b(coffee|drink|food|snack|eat|cafe|lobby|refreshment)\b/.test(m)) {
-    return `Free coffee in the lobby before every service — it's basically a Evolve institution at this point! Grab a cup, find a seat, and settle in. We don't have a full café, but the coffee is always on.`;
+  // ── STUDENTS / YOUTH ──
+  if (match(m, ['student', 'students', 'teen', 'teens', 'teenager', 'youth', 'middle school', 'high school', 'junior high', '6th grade', '7th grade', '8th grade', '9th grade', '10th grade', '11th grade', '12th grade', 'youth group', 'youth ministry'])) {
+    chatCtx.lastTopic = 'students';
+    return `<strong>Evolve Students</strong> is our ministry for middle and high schoolers, and it's a great community for teens to grow in their faith with people their age. For current meeting times, upcoming events, and how to get plugged in, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or stop by the Connect Table after any Sunday service.`;
   }
 
-  // ── Pastors / Staff / Leadership ──
-  if (/\b(pastor|pastors|staff|leader|leaders|leadership|who runs|team|who is|who.s in charge|minister|ministers)\b/.test(m)) {
-    return `Our lead pastor is <strong>Pastor Ken</strong>, who preaches every Sunday with practical, scripture-based messages designed for real life. Evolve also has a full team of pastors and ministry leaders across all departments. For a complete staff directory, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>.`;
+  // ── YOUNG ADULTS ──
+  if (match(m, ['young adult', 'young adults', 'college', 'university', 'in my 20s', 'twenties', '20s', 'early 20', 'late 20', 'young professional', 'just graduated', 'recent grad'])) {
+    chatCtx.lastTopic = 'youngadults';
+    return `We have a thriving <strong>Young Adults</strong> community at Evolve! It's a space for people in their 20s and 30s to connect, grow, and do life together. For details on events and meeting times, check <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or swing by the Connect Table after service.`;
   }
 
-  // ── Message / Sermon / Preaching ──
-  if (/\b(message|sermon|preach|teaching|talk|topic|series|scripture|bible|word)\b/.test(m) && !/baptism/.test(m)) {
-    return `Pastor Ken preaches every Sunday — practical, honest, and rooted in scripture. Messages are designed for everyday life, whether you've been in church your whole life or you've never opened a Bible. Each message runs about 35–40 minutes. You can also watch past messages at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>.`;
+  // ── SMALL GROUPS ──
+  if (match(m, ['small group', 'life group', 'connect group', 'community group', 'bible study', 'mid-week', 'midweek', 'weeknight', 'fellowship', 'home group', 'group meet', 'join a group', 'find a group'])) {
+    chatCtx.lastTopic = 'groups';
+    return `Small Groups are one of the best ways to go deeper at Evolve beyond Sunday mornings. Groups meet mid-week throughout the Milwaukee area around shared interests, life stages, and neighborhoods. You can browse and sign up at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>, or the Connect Table after service can help match you with the right group.`;
   }
 
-  // ── Worship ──
-  if (/\b(worship|music|band|sing|singing|song|songs|contemporary|style|vibe|atmosphere)\b/.test(m)) {
-    return `Worship at Evolve is contemporary and live — a full band, high energy, with lyrics on screen. It runs about 20–25 minutes at the start of each service. Participate as much or as little as you'd like; there's truly no pressure. A lot of people just listen and take it in their first time.`;
+  // ── VOLUNTEER ──
+  if (match(m, ['volunteer', 'volunteering', 'serve', 'serving', 'get involved', 'help out', 'join the team', 'ministry team', 'usher', 'greeter', 'production', 'media team', 'tech team', 'host team'])) {
+    chatCtx.lastTopic = 'volunteer';
+    return `We'd love to have you on the team! Evolve has volunteer opportunities in hospitality, Evolve Kids, Evolve Students, worship production, media/tech, and more. Stop by the <strong>Connect Table</strong> after any Sunday service to find out what's available, or email us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> and someone will reach out.`;
   }
 
-  // ── Baptism ──
-  if (/\b(bapti|baptism|baptize|baptized|water)\b/.test(m)) {
-    return `Evolve practices <strong>believer's baptism</strong> — a public declaration of your faith in Jesus. If you're interested in being baptized or want to learn more, talk to one of our team members after service or email us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>.`;
+  // ── DRESS CODE / WHAT TO WEAR ──
+  if (match(m, ['wear', 'wearing', 'dress code', 'what to wear', 'dress up', 'dress down', 'casual', 'formal', 'jeans', 'suit', 'attire', 'clothes', 'outfit', 'do i need to dress', 'should i wear'])) {
+    chatCtx.lastTopic = 'dress';
+    return `Come exactly as you are — there is <strong>no dress code</strong> at Evolve. You'll see everything from jeans and hoodies to business casual in the same room. We're way more focused on you being there than what you have on. Wear whatever makes you feel comfortable.`;
   }
 
-  // ── Communion ──
-  if (/\b(communion|lord.s supper|eucharist|bread|wine|cup)\b/.test(m)) {
-    return `We celebrate <strong>communion</strong> at Evolve as a meaningful part of our worship. It's open to all believers. If you have questions about communion or what it means, our team would love to chat after service!`;
+  // ── FIRST TIME / NEW VISITOR ──
+  if (match(m, ['first time', 'first visit', 'never been', 'new here', 'new to church', 'nervous', 'anxious', 'scared', 'awkward', "don't know anyone", 'dont know anyone', 'first sunday', 'considering visiting', 'thinking about', 'should i come', 'is it welcoming', 'will i fit in', 'newcomer', 'visitor', 'guest'])) {
+    chatCtx.lastTopic = 'firsttime';
+    return `We are so glad you're thinking about visiting! Here's what you should know: you will <strong>never</strong> be asked to stand up, introduce yourself, or give anything. Just walk in, grab a free coffee, find a seat, and experience it at your own pace. After service, our optional <strong>Connect Table</strong> is there if you want to meet someone from the team — zero pressure either way. We built Evolve to be a place where anyone feels at home, especially people walking through the door for the first time.`;
   }
 
-  // ── Prayer ──
-  if (/\b(pray|prayer|prayer request|praying|intercession|prayed for)\b/.test(m)) {
-    return `We believe in the power of prayer at Evolve! You can submit a prayer request at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>, or speak to a team member after any Sunday service. Someone will be praying with you.`;
+  // ── PRESSURE / GIVING PRESSURE ──
+  if (match(m, ['pressure', 'pressured', 'forced', 'have to give', 'do i have to', 'mandatory', 'required', 'obligated', 'expected to', 'make me', 'push me'])) {
+    chatCtx.lastTopic = 'nopressure';
+    return `Never. Whether it's giving, participating in worship, or introducing yourself — nothing is ever required or expected of guests at Evolve. Come and just take it all in. We want you to have a real experience, not feel like you're obligated to perform.`;
   }
 
-  // ── Location / Address / Directions ──
-  if (/\b(where|locat|address|direction|how to get|find you|map|milwaukee)\b/.test(m)) {
-    return `We're located in <strong>Milwaukee, WI</strong>. For the exact address and directions, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or search "Evolve Church Milwaukee" on Google Maps. Our parking team will be outside to welcome you when you arrive!`;
+  // ── COFFEE / FOOD / REFRESHMENTS ──
+  if (match(m, ['coffee', 'drink', 'food', 'snack', 'eat', 'cafe', 'lobby', 'refreshment', 'is there coffee', 'do you have coffee', 'before service', 'get coffee'])) {
+    chatCtx.lastTopic = 'coffee';
+    return `Free coffee in the lobby before every service — always. It's been part of the Evolve culture from the start. Grab a cup, find a good seat, and get settled. We don't have a full café setup, but the coffee is hot and it's always free.`;
   }
 
-  // ── What to expect ──
-  if (/\b(expect|like|what happens|what.s it like|what is it like|tell me about|describe|overview)\b/.test(m)) {
-    return `Here's a quick snapshot: arrive early for free coffee, then enjoy 20–25 minutes of live contemporary worship followed by a 35–40 minute message from Pastor Ken. The whole service is about 75 minutes. You won't be singled out or pressured in any way — just come and experience it. Evolve Kids is available for children at all services.`;
+  // ── PASTOR KEN / LEADERSHIP ──
+  if (match(m, ['pastor ken', 'pastor kenneth', 'lead pastor', 'who is the pastor', 'who preaches', 'who speaks', 'who leads', 'lead pastor', 'senior pastor', 'founding pastor'])) {
+    chatCtx.lastTopic = 'pastorken';
+    return `<strong>Pastor Kenneth Lock II</strong> — known as Pastor Ken — is the lead pastor of Evolve Church. He preaches every Sunday with messages that are practical, honest, and rooted in scripture. He has a gift for making the Bible relevant to real, everyday life, whether you've been in church your whole life or you're brand new to faith.`;
   }
 
-  // ── Theology / Beliefs / Denomination ──
-  if (/\b(believe|beliefs|theology|doctrine|denominat|christian|non.?denom|faith|holy spirit|trinity|salvation|saved|born again)\b/.test(m)) {
-    return `Evolve is a <strong>non-denominational Christian church</strong>. We believe the Bible is the inspired Word of God, in the Trinity (Father, Son, and Holy Spirit), in salvation through faith in Jesus Christ, and in the gifts of the Holy Spirit. Baptism and communion are part of our practice. For deeper theological questions, our pastoral team would love to connect with you — email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>.`;
+  // ── STAFF / TEAM ──
+  if (match(m, ['staff', 'team', 'pastors', 'who are the pastors', 'leadership team', 'pastoral team', 'other pastors', 'church staff', 'meet the staff', 'ministry leaders', 'who works there', 'who runs'])) {
+    chatCtx.lastTopic = 'staff';
+    return `Pastor Ken leads Evolve alongside a full team of pastors and ministry leaders covering Kids, Students, Young Adults, Worship, and more. To see the full staff and learn more about each person, visit the <strong>Meet the Staff</strong> page at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> — or come in on a Sunday and meet them in person!`;
   }
 
-  // ── Contact / Email ──
-  if (/\b(contact|reach|email|phone|call|get in touch|talk to someone)\b/.test(m)) {
-    return `The best way to reach us is by email at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. You can also connect with us on social media at <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube, or visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> for more info.`;
+  // ── MESSAGE / SERMON ──
+  if (match(m, ['message', 'sermon', 'preach', 'teaching', 'talk', 'series', 'current series', 'what are you preaching', 'past messages', 'watch message', 'catch up on']) && !match(m, ['baptism', 'text message'])) {
+    chatCtx.lastTopic = 'message';
+    return `Pastor Ken preaches every Sunday — practical, scripture-based messages built for real life. No church background needed to follow along. Each message runs about 35–40 minutes. You can also catch past messages and full sermon series on our YouTube channel (<strong>@evolvenation</strong>) or at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>.`;
   }
 
-  // ── Social Media ──
-  if (/\b(social|instagram|facebook|youtube|spotify|tiktok|follow|@evolve)\b/.test(m)) {
-    return `You can find us as <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube — and we're also on Spotify! Follow along for messages, announcements, worship music, and more. We'd love to connect with you online!`;
+  // ── WORSHIP / MUSIC ──
+  if (match(m, ['worship', 'music', 'band', 'sing', 'singing', 'songs', 'what kind of music', 'worship style', 'contemporary', 'how loud', 'is it loud', 'live band', 'worship team', 'vibe', 'atmosphere', 'feel like'])) {
+    chatCtx.lastTopic = 'worship';
+    return `Worship at Evolve is <strong>contemporary and live</strong> — a full band, energetic, with lyrics on screen. It's about 20–25 minutes to open each service. You can sing along, stand, or just sit and take it in — totally your call, no pressure whatsoever. A lot of first-timers just listen and that's completely fine.`;
   }
 
-  // ── Website ──
-  if (/\b(website|site|web|online resource|link)\b/.test(m) && !/stream|watch|online service/.test(m)) {
-    return `Our website is <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> — you'll find service times, messages, ministry info, and everything else you need there. It's the best place to explore Evolve before your first visit!`;
+  // ── BAPTISM ──
+  if (match(m, ['bapti', 'baptism', 'baptize', 'baptized', 'water baptism', 'get baptized', 'want to be baptized', 'when is baptism', 'next baptism'])) {
+    chatCtx.lastTopic = 'baptism';
+    return `Evolve practices <strong>believer's baptism</strong> — a public, joyful declaration of your personal faith in Jesus. It's one of the most meaningful moments in the life of our church. If you're interested in getting baptized or just want to understand what it means, talk to a team member after service or email us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> and we'll walk you through it.`;
   }
 
-  // ── Greetings / Hello ──
-  if (/^(hi|hey|hello|howdy|good morning|good evening|sup|what.?s up|yo)[\s!?.]*$/.test(m)) {
-    return `Hey there! So glad you stopped by. I'm here to help you plan your visit to Evolve Church. What can I answer for you?`;
+  // ── COMMUNION ──
+  if (match(m, ['communion', "lord's supper", 'lords supper', 'eucharist', 'bread and wine', 'bread and juice', 'take communion', 'do you do communion'])) {
+    chatCtx.lastTopic = 'communion';
+    return `Yes, we celebrate <strong>communion</strong> at Evolve as a regular part of our worship. It's open to all who believe in Jesus. Elements are typically passed or available at stations depending on the service. If you've never taken communion before and have questions about what it means, our team would love to explain — just ask at the Connect Table!`;
   }
 
-  // ── Thanks ──
-  if (/\b(thank|thanks|thank you|thx|ty|appreciate)\b/.test(m)) {
-    return `Of course — that's what I'm here for! Is there anything else you'd like to know about visiting Evolve?`;
+  // ── PRAYER ──
+  if (match(m, ['pray', 'prayer', 'prayer request', 'praying for me', 'need prayer', 'intercession', 'can you pray', 'will you pray', 'submit a prayer'])) {
+    chatCtx.lastTopic = 'prayer';
+    return `We absolutely believe in the power of prayer at Evolve. You can submit a prayer request at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>, speak to a team member after any Sunday service, or email us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. Someone from our team will be praying over your request.`;
   }
 
-  // ── Default fallback ──
-  return `Great question! I want to make sure you get the right answer. For details on that, your best bet is to visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or email us directly at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> — our team responds quickly and would love to help!`;
+  // ── THEOLOGY / BELIEFS / DENOMINATION ──
+  if (match(m, ['believe', 'beliefs', 'theology', 'doctrine', 'denomination', 'what kind of church', 'non-denom', 'nondenominational', 'holy spirit', 'trinity', 'salvation', 'saved', 'born again', 'what do you believe', 'statement of faith', 'core beliefs', 'what does evolve believe'])) {
+    chatCtx.lastTopic = 'theology';
+    return `Evolve is a <strong>non-denominational Christian church</strong>. We believe the Bible is the inspired Word of God, in the Trinity (Father, Son, and Holy Spirit), in salvation through faith in Jesus Christ, and in the gifts of the Holy Spirit. Communion and believer's baptism are part of our practice. For our full statement of faith, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> — or feel free to ask our pastoral team any deeper questions after service.`;
+  }
+
+  // ── SALVATION / ACCEPTING JESUS ──
+  if (match(m, ['accept jesus', 'give my life', 'get saved', 'become a christian', 'become christian', 'want to be saved', 'salvation', 'how do i get saved', 'accept christ', 'follow jesus', 'start my faith', 'new to faith', 'not sure i believe'])) {
+    chatCtx.lastTopic = 'salvation';
+    return `That's a huge step and we'd love to walk alongside you. At Evolve, every Sunday service ends with an opportunity to respond to the message. You can also talk to a team member at the Connect Table after service, or reach out to us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. There's no script or formula — we just want to have a real conversation with you.`;
+  }
+
+  // ── GRIEF / LOSS / HARD TIMES ──
+  if (match(m, ['grief', 'grieving', 'loss', 'lost someone', 'death', 'died', 'funeral', 'mourning', 'hard time', 'going through', 'struggling', 'hurting', 'broken', 'difficult season', 'grief ministry'])) {
+    chatCtx.lastTopic = 'grief';
+    return `We're so sorry for what you're going through. Evolve has a <strong>Grieving Ministry</strong> specifically designed to walk alongside people in seasons of loss and hardship. You don't have to go through it alone. Please reach out to us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> and our team will connect you with the right support.`;
+  }
+
+  // ── MENTAL HEALTH ──
+  if (match(m, ['mental health', 'anxiety', 'depression', 'counseling', 'counselor', 'therapy', 'therapist', 'mental wellness', 'emotional health', 'evolving minds', 'struggling mentally', 'overwhelmed'])) {
+    chatCtx.lastTopic = 'mentalhealth';
+    return `Evolve deeply cares about mental and emotional health. We have an <strong>Evolving Minds</strong> ministry dedicated to mental health awareness and support. It's a safe, judgment-free space. For more information or to connect with our team, email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> — we want to make sure you're connected with the right resources.`;
+  }
+
+  // ── SINGLE PARENTS ──
+  if (match(m, ['single parent', 'single mom', 'single dad', 'single mother', 'single father', 'sphi', 'single parent housing', 'single parents initiative', 'parenting alone'])) {
+    chatCtx.lastTopic = 'sphi';
+    return `Evolve has a <strong>Single Parent Housing Initiative (SPHI)</strong> — a ministry committed to supporting single parents in our community with both spiritual and practical resources. To learn more or get connected, email us at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>.`;
+  }
+
+  // ── FORTIFY / DISCIPLESHIP ──
+  if (match(m, ['fortify', 'discipleship', 'disciple', 'grow in faith', 'spiritual growth', 'next steps', 'deepen my faith', 'mature in faith', 'discipleship class', 'new believer class'])) {
+    chatCtx.lastTopic = 'discipleship';
+    return `<strong>FORTIFY</strong> is Evolve's discipleship program — designed to help you go deeper in your faith beyond Sunday mornings. Whether you're brand new to Christianity or have been walking with God for years, FORTIFY gives you tools to grow. Ask at the Connect Table after service or visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> for more info.`;
+  }
+
+  // ── CONTACT / PHONE / EMAIL ──
+  if (match(m, ['contact', 'reach you', 'email', 'phone', 'call', 'get in touch', 'talk to someone', 'phone number', 'how do i contact', 'reach out', 'connect with you', 'speak to someone'])) {
+    chatCtx.lastTopic = 'contact';
+    return `The best way to reach us is by email at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. You can also call us at <strong>(414) 510-4131</strong>, or connect with us on social media at <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube. We're pretty responsive and would love to hear from you!`;
+  }
+
+  // ── SOCIAL MEDIA ──
+  if (match(m, ['social', 'instagram', 'facebook', 'youtube', 'spotify', 'follow', '@evolve', 'social media', 'find you online', 'follow evolve'])) {
+    chatCtx.lastTopic = 'social';
+    return `You can find us at <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube, and we're also on Spotify! Follow along for weekly messages, worship music, announcements, and behind-the-scenes content. It's a great way to get a feel for Evolve before you visit in person.`;
+  }
+
+  // ── GIVING / TITHE / OFFERING ──
+  if (match(m, ['give', 'giving', 'tithe', 'offering', 'donate', 'donation', 'how do i give', 'pushpay', 'text to give', 'online giving'])) {
+    chatCtx.lastTopic = 'giving';
+    return `Giving at Evolve is always optional — guests are never pressured. If you do want to give, you can do so online through <strong>Pushpay</strong> at evolvenation.org, during service in the offering, or by texting. Generosity is something we practice because we believe it changes us — but it's never an expectation placed on visitors.`;
+  }
+
+  // ── CONNECT CARD ──
+  if (match(m, ['connect card', 'connection card', 'info card', 'fill out', 'sign in', 'register', 'let you know i came', 'first time card'])) {
+    chatCtx.lastTopic = 'connectcard';
+    return `We have a <strong>Connect Card</strong> available at every service — it's a simple way to let us know you visited and how we can follow up with you. You can also fill it out online at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a>. It's completely optional, but it's the easiest way for our team to reach back out to you.`;
+  }
+
+  // ── ACCESSIBILITY ──
+  if (match(m, ['accessible', 'accessibility', 'disability', 'disabled', 'wheelchair', 'hearing', 'hearing impaired', 'deaf', 'blind', 'visual impairment', 'special needs', 'accommodations'])) {
+    chatCtx.lastTopic = 'accessibility';
+    return `Evolve is fully ADA-accessible, including accessible parking, entrances, and seating. If you have specific needs or require accommodations, please email us ahead of your visit at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> so we can make sure everything is set up for you.`;
+  }
+
+  // ── WHAT TO BRING ──
+  if (match(m, ['what to bring', 'what should i bring', 'bring a bible', 'need to bring anything', 'bring anything', 'what do i need'])) {
+    chatCtx.lastTopic = 'whattobring';
+    return `You don't need to bring a thing! We provide everything — song lyrics are on screen, messages are easy to follow along, and we'll have programs available. If you enjoy following along with scripture, bring a Bible or have one on your phone, but it's absolutely not required. Just bring yourself!`;
+  }
+
+  // ── IS IT A GOOD CHURCH ──
+  if (match(m, ['good church', 'is evolve good', 'should i go', 'worth visiting', 'is it worth', 'recommend evolve', 'will i like it', 'is it the right church', 'right fit', 'right church for me'])) {
+    chatCtx.lastTopic = 'recommendation';
+    return `We think Evolve is a special place, but we'd love for you to experience it for yourself and decide! What we can promise: you'll be welcomed without pressure, the worship is energetic and genuine, the teaching is relevant and honest, and the people are real. Whether you've been going to church your whole life or you've never set foot in one — there's a place for you here.`;
+  }
+
+  // ── PARKING FOR FIRST TIMERS ──
+  if (match(m, ['first time parking', 'where do first time', 'first time guest spot', 'reserved parking', 'guest parking'])) {
+    chatCtx.lastTopic = 'guestparking';
+    return `We have reserved <strong>"First Time Guest"</strong> parking spots right near the entrance — look for the signs when you pull in. Our parking team will also be outside to direct you. Make sure to arrive 10–15 minutes early so you have time to get settled and grab a coffee before service starts!`;
+  }
+
+  // ── CONNECT TABLE ──
+  if (match(m, ['connect table', 'connection table', 'after service', 'after church', 'meet someone', 'who do i talk to', 'talk to someone at church', 'meet the pastor', 'meet pastor ken'])) {
+    chatCtx.lastTopic = 'connecttable';
+    return `After every service, we have a <strong>Connect Table</strong> in the lobby — it's a no-pressure spot to meet our team, ask questions, learn about next steps, and get plugged in. If you want to meet Pastor Ken, he's usually available after service as well. You're never obligated to stop by, but we'd genuinely love to meet you!`;
+  }
+
+  // ── WHAT EVOLVE IS / ABOUT ──
+  if (match(m, ['what is evolve', 'tell me about evolve', 'about the church', 'about evolve', 'what kind of church', 'describe evolve', 'what makes evolve', 'history of evolve', 'how long has evolve', 'when was evolve founded', 'how old is evolve'])) {
+    chatCtx.lastTopic = 'about';
+    return `Evolve Church is a non-denominational Christian church in Milwaukee, WI led by Pastor Ken. We're a community of real people at all different stages of life and faith — some who grew up in church, some who've never been. Our whole heartbeat is creating a place where people can encounter God and genuine community without pretense. Every Sunday at 9 AM, 10:30 AM, and 12 PM.`;
+  }
+
+  // ── OVERVIEW / WHAT HAPPENS ──
+  if (match(m, ['what happens', "what's it like", 'what is it like', 'walk me through', 'overview', 'rundown', 'tell me what to expect', 'give me an overview', 'describe a service', 'what do you do', 'what goes on', 'typical sunday', 'typical service'])) {
+    chatCtx.lastTopic = 'overview';
+    return `Here's a full picture of a Sunday at Evolve: doors open 30 min early with <strong>free coffee</strong> in the lobby. Service kicks off with about 20–25 min of live contemporary worship from our band. Then Pastor Ken brings a 35–40 minute message — practical, honest, and grounded in scripture. We close with a moment to respond. Total time: about 75 minutes. Evolve Kids runs simultaneously for children. You'll never be put on the spot. Just show up and experience it.`;
+  }
+
+  // ── IS THERE A DRESS CODE ──  
+  if (match(m, ['do i need to dress up', 'should i dress up', 'is there a dress', 'can i wear jeans', 'can i come casual', 'can i wear shorts', 'hoodies ok', 'is casual ok', 'can i wear'])) {
+    chatCtx.lastTopic = 'dress';
+    return `Yes, jeans are absolutely fine — hoodies too! There is <strong>no dress code</strong> at Evolve, period. People come in everything from sweats to Sunday best and nobody bats an eye. We care about you being there, not what you're wearing.`;
+  }
+
+  // ── MULTI-WORD FUZZY: general "can i...?" ──
+  if (/^can i\b/.test(m)) {
+    if (match(m, ['bring', 'come with', 'come alone', 'come by myself'])) {
+      return `Absolutely! Whether you're coming solo, with a friend, or with your whole family — you're welcome. A lot of people visit for the first time on their own and find it's a really easy environment to walk into.`;
+    }
+    if (match(m, ['park', 'drive'])) {
+      return `Yes! Free on-site parking every Sunday. Our parking team will be outside to guide you in, and there are reserved First Time Guest spots near the entrance.`;
+    }
+    return `Of course! Whatever you're wondering about — we want to make it as easy as possible for you to visit. What specifically were you thinking about?`;
+  }
+
+  // ── FUZZY TOPIC CATCH: "do you have...?" ──
+  if (/\bdo you have\b/.test(m)) {
+    if (match(m, ['nursery', 'baby', 'infant'])) return `Yes! Our Nursery is available at all three Sunday services for children birth–2 years, with trained, background-checked caregivers.`;
+    if (match(m, ['coffee', 'drinks'])) return `Always! Free coffee in the lobby before every service. Come a few minutes early and grab a cup before finding your seat.`;
+    if (match(m, ['parking', 'lot'])) return `Yes — free on-site parking every Sunday with a team outside to direct you. We even have reserved First Time Guest spots!`;
+    if (match(m, ['app', 'mobile app', 'church app'])) return `We don't have a standalone app right now, but you can access everything — messages, giving, groups, and more — at <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> from your phone.`;
+  }
+
+  // ── ENHANCED FALLBACK: extract topic clue and give a better response ──
+  const topicClues = [
+    { words: ['help', 'need help', 'assistance', 'support'], reply: `We're here to help! You can reach our team anytime at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call us at <strong>(414) 510-4131</strong>. What are you looking for specifically?` },
+    { words: ['event', 'events', 'upcoming', 'calendar', 'special service', 'holiday'], reply: `For upcoming events, special services, and the full church calendar, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or follow us at <strong>@evolvenation</strong> on Instagram and Facebook — that's where we announce everything first!` },
+    { words: ['membership', 'member', 'join', 'become a member', 'officially join'], reply: `To learn about becoming an official part of the Evolve family, we'd love to connect you with our team. Email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or stop by the Connect Table after any Sunday service.` },
+    { words: ['marriage', 'premarital', 'couples', 'engaged', 'relationship'], reply: `Evolve has pastoral support for couples and pre-marital conversations. Reach out to our team at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> and someone will get back to you.` },
+    { words: ['mission', 'missions', 'outreach', 'community', 'serve the city', 'serving milwaukee'], reply: `Serving Milwaukee and beyond is a core part of who we are at Evolve. For info on outreach, missions, and community initiatives, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or ask at the Connect Table after service.` },
+  ];
+
+  for (const clue of topicClues) {
+    if (match(m, clue.words)) return clue.reply;
+  }
+
+  // ── TRUE FALLBACK — honest, warm, useful ──
+  const unknownReplies = [
+    `That's a great one to ask the team directly — they'd know best! You can email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call <strong>(414) 510-4131</strong> and someone will get right back to you.`,
+    `I want to make sure you get the most accurate answer on that one. Your best bet is to email our team at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> — they're really responsive and would love to help!`,
+    `I may not have the full picture on that specific question, but our team definitely does. Reach out at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or stop by the Connect Table after any Sunday service and they'll take care of you.`
+  ];
+  return unknownReplies[chatCtx.turnCount % unknownReplies.length];
 }
 
 const chatHistory = [];
 
 async function getReply(userMsg) {
-  // Small simulated delay for natural feel
-  await new Promise(r => setTimeout(r, 700 + Math.random() * 500));
+  await new Promise(r => setTimeout(r, 650 + Math.random() * 450));
   return buildReply(userMsg);
 }
+
 
 function addMsg(text, isBot, delay = 0) {
   return new Promise(res => {

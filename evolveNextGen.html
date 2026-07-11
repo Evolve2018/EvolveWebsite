@@ -1,0 +1,528 @@
+<!-- Evolve Next Gen Landing Page -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
+  #ng-root {
+    --teal: #42B9D2;
+    --teal-dark: #2A8FA8;
+    --navy-1: #07141a;
+    --navy-2: #071f28;
+    --navy-3: #0d3a45;
+    font-family: 'Open Sans', sans-serif;
+    color: #eaf6fa;
+    background: var(--navy-1);
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #ng-root * { box-sizing: border-box; }
+
+  #ng-root a { text-decoration: none; color: inherit; }
+
+  #ng-root .ng-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- HERO ---------- */
+  .ng-hero {
+    position: relative;
+    padding: 56px 24px 72px;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(66,185,210,0.16), transparent 55%),
+      radial-gradient(circle at 85% 80%, rgba(66,185,210,0.10), transparent 50%),
+      linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .ng-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(120px, 22vw, 320px);
+    letter-spacing: 6px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(66,185,210,0.14);
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .ng-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ng-orb-1 {
+    width: 220px;
+    height: 220px;
+    background: rgba(66,185,210,0.28);
+    top: -40px;
+    left: 8%;
+    animation: ngFloat1 13s ease-in-out infinite;
+  }
+
+  .ng-orb-2 {
+    width: 160px;
+    height: 160px;
+    background: rgba(42,143,168,0.30);
+    bottom: -30px;
+    right: 10%;
+    animation: ngFloat2 16s ease-in-out infinite;
+  }
+
+  .ng-orb-3 {
+    width: 110px;
+    height: 110px;
+    background: rgba(66,185,210,0.22);
+    top: 30%;
+    right: 22%;
+    animation: ngFloat1 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes ngFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(24px, 30px) scale(1.08); }
+  }
+
+  @keyframes ngFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-28px, -18px) scale(1.1); }
+  }
+
+  .ng-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ng-logo-mark {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 18px;
+    color: #fff;
+    opacity: 0.9;
+    margin-bottom: 28px;
+  }
+
+  .ng-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 14px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .ng-hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.02;
+    margin: 0 0 8px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ng-hero h1 em {
+    font-family: 'Dynalight', cursive;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--teal);
+    text-transform: none;
+    font-size: 1.15em;
+    padding: 0 6px;
+  }
+
+  .ng-hero p.ng-sub {
+    max-width: 640px;
+    margin: 18px auto 0;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #cfe7ee;
+  }
+
+  .ng-hero-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .ng-hero-strip span {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 7px 16px;
+    border: 1px solid rgba(66,185,210,0.45);
+    border-radius: 999px;
+    color: #9fd8e6;
+  }
+
+  /* ---------- INTRO STRIP (the "journey" framing) ---------- */
+  .ng-journey {
+    padding: 44px 24px 8px;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ng-journey h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 12px;
+  }
+
+  .ng-journey p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: #b7d4dc;
+    margin: 0;
+  }
+
+  /* ---------- SECTIONS GRID ---------- */
+  .ng-grid {
+    max-width: 1140px;
+    margin: 48px auto 80px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  @media (max-width: 780px) {
+    .ng-grid { grid-template-columns: 1fr; }
+  }
+
+  .ng-card {
+    display: block;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--navy-2);
+    border: 1px solid rgba(66,185,210,0.18);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .ng-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(66,185,210,0.55);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  }
+
+  .ng-card-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .ng-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .ng-card:hover .ng-card-img-wrap img {
+    transform: scale(1.06);
+  }
+
+  .ng-card-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7,20,26,0) 40%, rgba(7,20,26,0.92) 100%);
+  }
+
+  .ng-card-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    background: rgba(7,20,26,0.65);
+    border: 1px solid rgba(66,185,210,0.5);
+    color: var(--teal);
+    padding: 6px 12px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+
+  .ng-card-body {
+    padding: 22px 22px 26px;
+  }
+
+  .ng-card-body h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .ng-card-body p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #b7d4dc;
+    margin: 0 0 16px;
+  }
+
+  .ng-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .ng-pills span {
+    font-family: 'Barlow', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.3px;
+    color: #9fd8e6;
+    background: rgba(66,185,210,0.10);
+    border: 1px solid rgba(66,185,210,0.28);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .ng-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: var(--teal);
+  }
+
+  .ng-card-cta svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ng-card:hover .ng-card-cta svg {
+    transform: translateX(5px);
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .ng-divider {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .ng-divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(66,185,210,0.4), transparent);
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .ng-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .ng-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ng-reveal { opacity: 1; transform: none; transition: none; }
+    .ng-orb { animation: none; }
+  }
+
+  /* ---------- FOOTER NOTE ---------- */
+  .ng-footnote {
+    text-align: center;
+    padding: 0 24px 60px;
+    font-size: 13px;
+    color: #5f8a95;
+  }
+</style>
+
+<div id="ng-root">
+
+  <!-- HERO -->
+  <section class="ng-hero">
+    <div class="ng-grain"></div>
+    <div class="ng-watermark">NEXT GEN</div>
+    <div class="ng-orb ng-orb-1"></div>
+    <div class="ng-orb ng-orb-2"></div>
+    <div class="ng-orb ng-orb-3"></div>
+    <div class="ng-logo-mark">EVOLVE</div>
+    <div class="ng-eyebrow">Next Gen</div>
+    <h1>Raising up the <em>next</em> generation</h1>
+    <p class="ng-sub">
+      From our youngest kids to our teens, and from Frwd to one-on-one mentorship —
+      Next Gen is where every age and every stage gets to know who they are in Christ,
+      find real community, and grow in faith together.
+    </p>
+    <div class="ng-hero-strip">
+      <span>Kids</span>
+      <span>Teens</span>
+      <span>Frwd</span>
+      <span>Mentorship</span>
+    </div>
+  </section>
+
+  <div class="ng-divider"><div class="ng-divider-line"></div></div>
+
+  <!-- JOURNEY INTRO -->
+  <section class="ng-journey ng-reveal">
+    <h2>Four ministries, one family</h2>
+    <p>
+      Wherever your family is starting from, there's a place for them here. Explore each
+      ministry below to see what your child, teen, or young adult can be part of at Evolve.
+    </p>
+  </section>
+
+  <!-- CARDS -->
+  <div class="ng-grid">
+
+    <!-- KIDS -->
+    <a class="ng-card ng-reveal" href="evolveKids.html">
+      <div class="ng-card-img-wrap">
+        <span class="ng-card-tag">Kids</span>
+        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Kids">
+      </div>
+      <div class="ng-card-body">
+        <h3>Kids</h3>
+        <p>Where kids learn who God says they are — worthy, chosen, and loved — through fun, hands-on discovery every week.</p>
+        <div class="ng-pills">
+          <span>Learning</span><span>Fun</span><span>God's Children</span><span>Worthy</span><span>Chosen</span>
+        </div>
+        <span class="ng-card-cta">Explore Kids
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- TEENS -->
+    <a class="ng-card ng-reveal" href="evolveTeens.html">
+      <div class="ng-card-img-wrap">
+        <span class="ng-card-tag">Teens</span>
+        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Teens">
+      </div>
+      <div class="ng-card-body">
+        <h3>Teens</h3>
+        <p>A space where teens grow in faith, discover their God-given identity, and build real friendships — safe, fun, and engaging every step of the way.</p>
+        <div class="ng-pills">
+          <span>Community</span><span>Fun</span><span>Faith-filled</span><span>Safe</span><span>Engaging</span><span>Identity</span><span>Worthy</span>
+        </div>
+        <span class="ng-card-cta">Explore Teens
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- FRWD -->
+    <a class="ng-card ng-reveal" href="evolveForward.html">
+      <div class="ng-card-img-wrap">
+        <span class="ng-card-tag">Frwd</span>
+        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Frwd">
+      </div>
+      <div class="ng-card-body">
+        <h3>Frwd</h3>
+        <p>A next step for growing believers to press into identity, connection, and freedom in Christ through real discipleship and community.</p>
+        <div class="ng-pills">
+          <span>Identity</span><span>Connection</span><span>Growth</span><span>Freedom in Christ</span><span>Community</span><span>Discipleship</span>
+        </div>
+        <span class="ng-card-cta">Explore Frwd
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <!-- MENTORSHIP -->
+    <a class="ng-card ng-reveal" href="evolveMentorship.html">
+      <div class="ng-card-img-wrap">
+        <span class="ng-card-tag">Mentorship</span>
+        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Mentorship">
+      </div>
+      <div class="ng-card-body">
+        <h3>Mentorship</h3>
+        <p>One-on-one relationships built on guidance, love, and support — walking alongside the next generation, friend to friend.</p>
+        <div class="ng-pills">
+          <span>Guidance</span><span>Love</span><span>Connection</span><span>Support</span><span>Friendship</span>
+        </div>
+        <span class="ng-card-cta">Explore Mentorship
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="ng-footnote">Photos shown are placeholders — final photography coming soon.</p>
+
+</div>
+
+<script>
+  (function() {
+    function ngSendHeight() {
+      var height = document.getElementById('ng-root').scrollHeight;
+      window.parent.postMessage({ type: 'resize', height: height }, '*');
+    }
+    window.addEventListener('load', ngSendHeight);
+    window.addEventListener('resize', ngSendHeight);
+    if (window.ResizeObserver) {
+      var ngRO = new ResizeObserver(ngSendHeight);
+      ngRO.observe(document.getElementById('ng-root'));
+    }
+    setTimeout(ngSendHeight, 300);
+    setTimeout(ngSendHeight, 1000);
+
+    var ngReveals = document.querySelectorAll('#ng-root .ng-reveal');
+    var ngDelay = 0;
+    ngReveals.forEach(function(el) {
+      el.style.transitionDelay = ngDelay + 'ms';
+      ngDelay += 90;
+    });
+
+    if (window.IntersectionObserver) {
+      var ngIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            ngIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      ngReveals.forEach(function(el) { ngIO.observe(el); });
+    } else {
+      ngReveals.forEach(function(el) { el.classList.add('is-visible'); });
+    }
+  })();
+</script>

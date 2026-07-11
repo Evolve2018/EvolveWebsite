@@ -1,0 +1,534 @@
+<!-- Evolve Frwd Page -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dynalight&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
+  #fw-root {
+    --teal: #42B9D2;
+    --teal-dark: #2A8FA8;
+    --navy-1: #07141a;
+    --navy-2: #071f28;
+    --navy-3: #0d3a45;
+    font-family: 'Open Sans', sans-serif;
+    color: #eaf6fa;
+    background: var(--navy-1);
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #fw-root * { box-sizing: border-box; }
+  #fw-root a { text-decoration: none; color: inherit; }
+
+  #fw-root .fw-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- HERO ---------- */
+  .fw-hero {
+    position: relative;
+    padding: 50px 24px 60px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(66,185,210,0.18), transparent 55%),
+      radial-gradient(circle at 90% 85%, rgba(66,185,210,0.10), transparent 50%),
+      linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+  }
+
+  .fw-hero > * { position: relative; z-index: 1; }
+
+  .fw-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .fw-orb-1 { width: 200px; height: 200px; background: rgba(66,185,210,0.26); top: -30px; left: 6%; animation: fwFloat1 13s ease-in-out infinite; }
+  .fw-orb-2 { width: 150px; height: 150px; background: rgba(42,143,168,0.28); bottom: -20px; right: 8%; animation: fwFloat2 15s ease-in-out infinite; }
+
+  @keyframes fwFloat1 { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(20px,26px) scale(1.08);} }
+  @keyframes fwFloat2 { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-24px,-16px) scale(1.1);} }
+
+  .fw-hero-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .fw-hero-inner { grid-template-columns: 1fr; text-align: center; }
+  }
+
+  .fw-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .fw-hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 62px);
+    line-height: 1.04;
+    margin: 0 0 16px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .fw-hero h1 em {
+    font-family: 'Dynalight', cursive;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--teal);
+    text-transform: none;
+    font-size: 1.15em;
+    padding: 0 4px;
+  }
+
+  .fw-hero p.fw-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #cfe7ee;
+    max-width: 520px;
+    margin: 0 0 22px;
+  }
+
+  @media (max-width: 860px) {
+    .fw-hero p.fw-sub { margin: 0 auto 22px; }
+  }
+
+  .fw-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 26px;
+  }
+
+  @media (max-width: 860px) {
+    .fw-pills { justify-content: center; }
+  }
+
+  .fw-pills span {
+    font-family: 'Barlow', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.4px;
+    padding: 6px 14px;
+    border: 1px solid rgba(66,185,210,0.4);
+    border-radius: 999px;
+    color: #9fd8e6;
+  }
+
+  .fw-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #07141a;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 24px rgba(66,185,210,0.26);
+  }
+
+  .fw-hero-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(66,185,210,0.36);
+  }
+
+  .fw-hero-img {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border: 1px solid rgba(66,185,210,0.25);
+  }
+
+  .fw-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fw-hero-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7,20,26,0) 55%, rgba(7,20,26,0.75) 100%);
+  }
+
+  .fw-hero-note {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #cfe7ee;
+  }
+
+  /* ---------- PILLARS ---------- */
+  .fw-section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 70px 24px 10px;
+  }
+
+  .fw-section-head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .fw-section-head .fw-eyebrow { justify-content: center; display: flex; }
+
+  .fw-section-head h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 40px);
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 12px;
+  }
+
+  .fw-section-head p {
+    max-width: 580px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #b7d4dc;
+  }
+
+  .fw-pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .fw-pillar-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .fw-pillar-grid { grid-template-columns: 1fr; }
+  }
+
+  .fw-pillar {
+    background: var(--navy-2);
+    border: 1px solid rgba(66,185,210,0.18);
+    border-radius: 16px;
+    padding: 26px 22px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .fw-pillar:hover {
+    transform: translateY(-4px);
+    border-color: rgba(66,185,210,0.5);
+  }
+
+  .fw-pillar .fw-pillar-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .fw-pillar h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .fw-pillar p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: #b7d4dc;
+    margin: 0;
+  }
+
+  /* ---------- CONNECT CTA ---------- */
+  .fw-connect {
+    max-width: 1080px;
+    margin: 70px auto 0;
+    padding: 0 24px;
+  }
+
+  .fw-connect-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    padding: 46px 32px;
+    text-align: center;
+    background:
+      radial-gradient(circle at 25% 20%, rgba(66,185,210,0.28), transparent 55%),
+      radial-gradient(circle at 80% 90%, rgba(66,185,210,0.16), transparent 50%),
+      var(--navy-3);
+    border: 1px solid rgba(66,185,210,0.35);
+  }
+
+  .fw-connect-card h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 4vw, 38px);
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .fw-connect-card h2 em {
+    font-family: 'Dynalight', cursive;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--teal);
+    text-transform: none;
+    font-size: 1.2em;
+  }
+
+  .fw-connect-card p {
+    max-width: 540px;
+    margin: 0 auto 26px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #cfe7ee;
+  }
+
+  .fw-connect-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal);
+    color: #07141a;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 15px 30px;
+    border-radius: 999px;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 26px rgba(66,185,210,0.28);
+  }
+
+  .fw-connect-btn:hover {
+    background: #fff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 34px rgba(66,185,210,0.4);
+  }
+
+  /* ---------- CONTACT STRIP ---------- */
+  .fw-contact {
+    max-width: 1080px;
+    margin: 60px auto 0;
+    padding: 0 24px 70px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .fw-contact { grid-template-columns: 1fr; }
+  }
+
+  .fw-contact div { padding: 20px; }
+
+  .fw-contact .fw-c-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .fw-contact .fw-c-value {
+    font-size: 14.5px;
+    color: #cfe7ee;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .fw-reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fw-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fw-reveal { opacity: 1; transform: none; transition: none; }
+    .fw-orb { animation: none; }
+  }
+</style>
+
+<div id="fw-root">
+
+  <!-- HERO -->
+  <section class="fw-hero">
+    <div class="fw-grain"></div>
+    <div class="fw-orb fw-orb-1"></div>
+    <div class="fw-orb fw-orb-2"></div>
+    <div class="fw-hero-inner">
+      <div>
+        <div class="fw-eyebrow">Ages 19&ndash;28</div>
+        <h1>Move <em>Frwd</em> in who God made you to be</h1>
+        <p class="fw-sub">
+          Frwd is where 19&ndash;28 year olds find real community, dig into who they are in
+          Christ, and grow into the freedom and purpose God has for this season of life.
+        </p>
+        <div class="fw-pills">
+          <span>Identity</span><span>Connection</span><span>Growth</span><span>Freedom in Christ</span><span>Community</span><span>Discipleship</span>
+        </div>
+        <a class="fw-hero-btn" href="#">
+          Get Connected
+        </a>
+      </div>
+      <div class="fw-hero-img">
+        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Frwd">
+        <div class="fw-hero-note">Frwd &middot; Ages 19&ndash;28</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="fw-section">
+    <div class="fw-section-head fw-reveal">
+      <div class="fw-eyebrow">What Frwd Is About</div>
+      <h2>Built on six things</h2>
+      <p>
+        This season of life comes with big questions. Frwd is a space to work through them
+        together — here's what shapes everything we do.
+      </p>
+    </div>
+    <div class="fw-pillar-grid">
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">01</div>
+        <h3>Identity</h3>
+        <p>Discover who you are in Christ — not who the world says you have to be.</p>
+      </div>
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">02</div>
+        <h3>Connection</h3>
+        <p>Real relationships with people in the same season, walking the same road.</p>
+      </div>
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">03</div>
+        <h3>Growth</h3>
+        <p>Practical teaching that meets you where you're at and pushes you forward.</p>
+      </div>
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">04</div>
+        <h3>Freedom in Christ</h3>
+        <p>Break free from what's been holding you back and step into who God says you are.</p>
+      </div>
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">05</div>
+        <h3>Community</h3>
+        <p>A group of people who show up for each other, in the good seasons and the hard ones.</p>
+      </div>
+      <div class="fw-pillar fw-reveal">
+        <div class="fw-pillar-num">06</div>
+        <h3>Discipleship</h3>
+        <p>Grow deeper in your faith with people who will walk alongside you, not just watch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONNECT CTA -->
+  <section class="fw-connect">
+    <div class="fw-connect-card fw-reveal">
+      <h2>Ready to move <em>Frwd?</em></h2>
+      <p>
+        If you're 19&ndash;28 and looking for your people, this is it. Get connected and
+        we'll get you plugged in.
+      </p>
+      <a class="fw-connect-btn" href="#">Get Connected</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="fw-contact fw-reveal">
+    <div>
+      <div class="fw-c-label">Email</div>
+      <div class="fw-c-value">info@evolvenation.org</div>
+    </div>
+    <div>
+      <div class="fw-c-label">Phone</div>
+      <div class="fw-c-value">414-510-4131</div>
+    </div>
+    <div>
+      <div class="fw-c-label">Find Us</div>
+      <div class="fw-c-value">6550 N 76th St, Milwaukee, WI 53223</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function() {
+    function fwSendHeight() {
+      var height = document.getElementById('fw-root').scrollHeight;
+      window.parent.postMessage({ type: 'resize', height: height }, '*');
+    }
+    window.addEventListener('load', fwSendHeight);
+    window.addEventListener('resize', fwSendHeight);
+    if (window.ResizeObserver) {
+      var fwRO = new ResizeObserver(fwSendHeight);
+      fwRO.observe(document.getElementById('fw-root'));
+    }
+    setTimeout(fwSendHeight, 300);
+    setTimeout(fwSendHeight, 1000);
+
+    var fwReveals = document.querySelectorAll('#fw-root .fw-reveal');
+    var fwDelay = 0;
+    fwReveals.forEach(function(el) {
+      el.style.transitionDelay = fwDelay + 'ms';
+      fwDelay += 70;
+    });
+
+    if (window.IntersectionObserver) {
+      var fwIO = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            fwIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      fwReveals.forEach(function(el) { fwIO.observe(el); });
+    } else {
+      fwReveals.forEach(function(el) { el.classList.add('is-visible'); });
+    }
+  })();
+</script>
