@@ -833,6 +833,7 @@
     }
 
     .announce-thumb {
+      position: relative;
       width: 100%;
       height: 100%;
       min-height: 260px;
@@ -848,6 +849,34 @@
     .announce-thumb.t4 { background: linear-gradient(135deg, #1e6d84 0%, var(--blue) 100%); }
     .announce-thumb.t5 { background: linear-gradient(135deg, var(--blue) 0%, #2c3e4a 100%); }
     .announce-thumb.t6 { background: linear-gradient(135deg, #2A8FA8 0%, var(--blue-deeper) 100%); }
+
+    /* Date badge overlaid on live-event thumbnails */
+    .announce-date-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      line-height: 1.1;
+    }
+    .announce-date-badge .ad-day {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--blue-dark, var(--text));
+    }
+    .announce-date-badge .ad-month {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      color: var(--blue);
+    }
 
     .announce-body {
       padding: 48px 44px;
@@ -2638,12 +2667,14 @@
     <div class="connect-grid">
 
       <div class="connect-card" style="background-image:url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg');background-size:cover;background-position:center;" link="https://evolvenation.ccbchurch.com/goto/forms/149/responses/new">
+        <a href="mailto:connect@evolvenation.org">
         <div class="connect-card-overlay"></div>
         <div class="connect-card-content">
           <div class="connect-icon"></div>
           <h3>Request Prayer</h3>
           <p>In tough times, prayer shifts focus to the One who listens. We're here to pray with you, no matter what.</p>
         </div>
+        </a>
       </div>
 
       <div class="connect-card" style="background-image:url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg');background-size:cover;background-position:center;">
@@ -2920,23 +2951,57 @@
     createSlider('galleryTrack', 'galleryPrev', 'galleryNext', 'galleryDots',
       w => w <= 520 ? 1 : w <= 768 ? 2 : w <= 1100 ? 3 : 4);
 
-    /* ---- Announcements: single-card auto-slider with progress bar ---- */
-    (function() {
-      const track       = document.getElementById('announceTrack');
-      const dotRow      = document.getElementById('announceDotRow');
-      const bar         = document.getElementById('announceProgressBar');
-      const prevBtn     = document.getElementById('announcePrev');
-      const nextBtn     = document.getElementById('announceNext');
+    /* ---- Announcements: live TCC events (fetched), single-card auto-slider ---- */
+
+    // Same Cloudflare Worker that powers evolveEvents.html — returns a flat
+    // JSON array of { id, name, date, time, location, description, tags, link, featured, image }
+    const EVENTS_WORKER_URL   = 'https://evolveevents.chrisdawolo.workers.dev';
+    const EVENT_FALLBACK_IMG  = 'https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg';
+
+    function escAttr(s) { return (s || '').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+    function escHtml(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    function announceEventCardHTML(ev) {
+      const raw   = String(ev.date || '');
+      const d     = raw ? new Date(raw + (raw.length === 10 ? 'T00:00:00' : '')) : null;
+      const valid = d && !isNaN(d);
+      const month = valid ? d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase() : '';
+      const day   = valid ? d.getDate() : '';
+      const img   = ev.image || EVENT_FALLBACK_IMG;
+      const tag   = (ev.tags && ev.tags[0]) || 'Event';
+      const meta  = [ev.time, ev.location].filter(Boolean).join(' · ');
+
+      return `
+          <div class="announce-card">
+            <div class="announce-thumb" style="background-image:url('${escAttr(img)}');background-size:cover;background-position:center;">
+              ${valid ? `<div class="announce-date-badge"><span class="ad-day">${day}</span><span class="ad-month">${month}</span></div>` : ''}
+            </div>
+            <div class="announce-body">
+              <span class="announce-tag">${escHtml(tag)}</span>
+              <h3>${escHtml(ev.name || 'Upcoming Event')}</h3>
+              <p>${escHtml(ev.description || '')}${meta ? `<br><strong>${escHtml(meta)}</strong>` : ''}</p>
+              ${ev.link ? `<a href="${escAttr(ev.link)}" class="announce-cta" target="_blank" rel="noopener">Learn More →</a>` : ''}
+            </div>
+          </div>`;
+    }
+
+    function initAnnounceSlider() {
+      const track   = document.getElementById('announceTrack');
+      const dotRow  = document.getElementById('announceDotRow');
+      const bar     = document.getElementById('announceProgressBar');
+      const prevBtn = document.getElementById('announcePrev');
+      const nextBtn = document.getElementById('announceNext');
       if (!track) return;
 
       const cards  = Array.from(track.children);
       const total  = cards.length;
+      if (!total) return;
       const DELAY  = 5000;   // ms per slide
       let   idx    = 0;
       let   timer  = null;
-      let   barAnim = null;
 
-      /* Build pill dots */
+      /* Build pill dots (fresh each time, in case this runs after a re-render) */
+      dotRow.innerHTML = '';
       cards.forEach((_, i) => {
         const d = document.createElement('button');
         d.className = 'announce-dot' + (i === 0 ? ' active' : '');
@@ -2985,6 +3050,8 @@
         startAuto();
       }
 
+      goTo(0);
+
       prevBtn?.addEventListener('click', () => { goTo(idx - 1); resetAuto(); });
       nextBtn?.addEventListener('click', () => { goTo(idx + 1); resetAuto(); });
 
@@ -3002,7 +3069,28 @@
       stage?.addEventListener('mouseleave', () => { startAuto(); });
 
       startAuto();
-    })();
+    }
+
+    async function loadLiveAnnouncements() {
+      const track = document.getElementById('announceTrack');
+      if (!track || !EVENTS_WORKER_URL) { initAnnounceSlider(); return; }
+      try {
+        const res = await fetch(EVENTS_WORKER_URL);
+        if (!res.ok) throw new Error('Status ' + res.status);
+        const events = await res.json();
+        if (Array.isArray(events) && events.length) {
+          const sorted = events.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+          track.innerHTML = sorted.map(announceEventCardHTML).join('');
+        }
+        // If the worker returns an empty array, the original hardcoded
+        // ministry cards already in the DOM are left in place as fallback.
+      } catch (err) {
+        console.warn('Live events fetch failed, showing fallback announcements:', err);
+      }
+      initAnnounceSlider();
+    }
+
+    loadLiveAnnouncements();
 
     /* ---- Fade-in on scroll ---- */
     const fadeEls = document.querySelectorAll('.fade-in');
@@ -3438,9 +3526,19 @@ statEls.forEach(el => {
           });
         }
 
-        // Update the corner label to reflect inline playback
+        // Update the corner label to reflect inline playback — swap the
+        // "Watch on YouTube" text pill for a compact play-icon badge.
         const ytLabel = thumbEl && thumbEl.querySelector('div:last-child');
-        if (ytLabel) ytLabel.textContent = 'Play Sermon';
+        if (ytLabel) {
+          ytLabel.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="white" style="margin-left:1px;"><path d="M8 5v14l11-7z"/></svg>';
+          ytLabel.style.display = 'flex';
+          ytLabel.style.alignItems = 'center';
+          ytLabel.style.justifyContent = 'center';
+          ytLabel.style.padding = '0';
+          ytLabel.style.width = '32px';
+          ytLabel.style.height = '32px';
+          ytLabel.style.borderRadius = '50%';
+        }
 
         // Hover effect on play button
         const playBtn = document.getElementById('sermonPlayBtn');

@@ -1047,10 +1047,10 @@ footer{
           <button class="faq-q" onclick="toggleFaq(this)">Can I watch online instead? <span class="faq-q-icon">+</span></button>
           <div class="faq-a"><p>Yes! We stream live at <a href="index.html">evolvenation.org</a>  every Sunday at 10:30 AM and 12 PM. It's a great way to check us out before you visit in person — no signup needed.</p></div>
         </div>
-        <div class="faq-item">
+   <!--     <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Is there coffee? <span class="faq-q-icon">+</span></button>
           <div class="faq-a"><p>Free coffee, always. It's one of the first things people notice and one of the most important things we do. Come early and grab a cup before you find your seat.</p></div>
-        </div>
+        </div>-->
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">How do I connect beyond Sunday? <span class="faq-q-icon">+</span></button>
           <div class="faq-a"><p>Head to the Connect Table after service — our team will walk you through small groups, volunteer opportunities, and next steps. Or visit <a href="index.html">evolvenation.org</a> to explore on your own time.</p></div>
@@ -1304,7 +1304,7 @@ function buildReply(raw) {
   // ── CONTACT / PHONE / EMAIL ──
   if (match(m, ['contact', 'reach you', 'email', 'phone', 'call', 'get in touch', 'talk to someone', 'phone number', 'how do i contact', 'reach out', 'connect with you', 'speak to someone'])) {
     chatCtx.lastTopic = 'contact';
-    return `The best way to reach us is by email at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. You can also call us at <strong>(414) 510-4131</strong>, or connect with us on social media at <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube. We're pretty responsive and would love to hear from you!`;
+    return `The best way to reach us is by email at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a>. You can also call us at <strong>(414) 395-6067</strong>, or connect with us on social media at <strong>@evolvenation</strong> on Facebook, Instagram, and YouTube. We're pretty responsive and would love to hear from you!`;
   }
 
   // ── SOCIAL MEDIA ──
@@ -1394,7 +1394,7 @@ function buildReply(raw) {
 
   // ── ENHANCED FALLBACK: extract topic clue and give a better response ──
   const topicClues = [
-    { words: ['help', 'need help', 'assistance', 'support'], reply: `We're here to help! You can reach our team anytime at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call us at <strong>(414) 510-4131</strong>. What are you looking for specifically?` },
+    { words: ['help', 'need help', 'assistance', 'support'], reply: `We're here to help! You can reach our team anytime at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call us at <strong>(414) 395-6067</strong>. What are you looking for specifically?` },
     { words: ['event', 'events', 'upcoming', 'calendar', 'special service', 'holiday'], reply: `For upcoming events, special services, and the full church calendar, visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or follow us at <strong>@evolvenation</strong> on Instagram and Facebook — that's where we announce everything first!` },
     { words: ['membership', 'member', 'join', 'become a member', 'officially join'], reply: `To learn about becoming an official part of the Evolve family, we'd love to connect you with our team. Email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or stop by the Connect Table after any Sunday service.` },
     { words: ['marriage', 'premarital', 'couples', 'engaged', 'relationship'], reply: `Evolve has pastoral support for couples and pre-marital conversations. Reach out to our team at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> and someone will get back to you.` },
@@ -1407,7 +1407,7 @@ function buildReply(raw) {
 
   // ── TRUE FALLBACK — honest, warm, useful ──
   const unknownReplies = [
-    `That's a great one to ask the team directly — they'd know best! You can email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call <strong>(414) 510-4131</strong> and someone will get right back to you.`,
+    `That's a great one to ask the team directly — they'd know best! You can email <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or call <strong>(414) 395-6067</strong> and someone will get right back to you.`,
     `I want to make sure you get the most accurate answer on that one. Your best bet is to email our team at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> — they're really responsive and would love to help!`,
     `I may not have the full picture on that specific question, but our team definitely does. Reach out at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> or stop by the Connect Table after any Sunday service and they'll take care of you.`
   ];
