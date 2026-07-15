@@ -37,6 +37,10 @@
       /* NOTE: overflow-x removed intentionally — it was preventing accurate
          scrollHeight reporting to the parent iframe, causing footer overlap. */
       -webkit-font-smoothing: antialiased;
+      /* position:relative gives .modal-backdrop a real positioned ancestor to
+         size against, instead of falling back to the initial containing block
+         (viewport), which was inflating scrollHeight by a full screen height. */
+      position: relative;
     }
 
     /* ─── HERO ─────────────────────────────────────────── */
@@ -684,8 +688,10 @@
     /* ─── MODAL OVERLAY ─────────────────────────────────── */
     .modal-backdrop {
       position: absolute;
+      top: 0;
       left: 0;
       right: 0;
+      bottom: 0;
       background: rgba(0,0,0,.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -697,7 +703,6 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity .25s ease;
-      min-height: 100%;
     }
 
     .modal-backdrop.open {
