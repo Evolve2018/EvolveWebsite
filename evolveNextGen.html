@@ -31,7 +31,7 @@
   /* ---------- HERO ---------- */
   .ng-hero {
     position: relative;
-    padding: 56px 24px 72px;
+    padding: 22px 24px 24px;
     background:
       radial-gradient(circle at 20% 15%, rgba(66,185,210,0.16), transparent 55%),
       radial-gradient(circle at 85% 80%, rgba(66,185,210,0.10), transparent 50%),
@@ -102,7 +102,10 @@
     50% { transform: translate(-28px, -18px) scale(1.1); }
   }
 
-  .ng-hero > * {
+  .ng-hero .ng-logo-mark,
+  .ng-hero .ng-eyebrow,
+  .ng-hero h1,
+  .ng-hero p.ng-sub {
     position: relative;
     z-index: 1;
   }
@@ -111,28 +114,28 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     letter-spacing: 2px;
-    font-size: 18px;
+    font-size: 15px;
     color: #fff;
-    opacity: 0.9;
-    margin-bottom: 28px;
+    opacity: 0.85;
+    margin-bottom: 10px;
   }
 
   .ng-eyebrow {
     font-family: 'Barlow Condensed', sans-serif;
     text-transform: uppercase;
     letter-spacing: 4px;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--teal);
     font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
 
   .ng-hero h1 {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: clamp(40px, 7vw, 72px);
+    font-size: clamp(34px, 6vw, 60px);
     line-height: 1.02;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -149,34 +152,16 @@
   }
 
   .ng-hero p.ng-sub {
-    max-width: 640px;
-    margin: 18px auto 0;
-    font-size: 17px;
-    line-height: 1.65;
+    max-width: 620px;
+    margin: 10px auto 0;
+    font-size: 16px;
+    line-height: 1.55;
     color: #cfe7ee;
-  }
-
-  .ng-hero-strip {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 30px;
-  }
-
-  .ng-hero-strip span {
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    padding: 7px 16px;
-    border: 1px solid rgba(66,185,210,0.45);
-    border-radius: 999px;
-    color: #9fd8e6;
   }
 
   /* ---------- INTRO STRIP (the "journey" framing) ---------- */
   .ng-journey {
-    padding: 44px 24px 8px;
+    padding: 26px 24px 4px;
     max-width: 960px;
     margin: 0 auto;
     text-align: center;
@@ -202,7 +187,7 @@
   /* ---------- SECTIONS GRID ---------- */
   .ng-grid {
     max-width: 1140px;
-    margin: 48px auto 80px;
+    margin: 32px auto 80px;
     padding: 0 24px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -389,12 +374,6 @@
       Next Gen is where every age and every stage gets to know who they are in Christ,
       find real community, and grow in faith together.
     </p>
-    <div class="ng-hero-strip">
-      <span>Kids</span>
-      <span>Teens</span>
-      <span>Frwd</span>
-      <span>Mentorship</span>
-    </div>
   </section>
 
   <div class="ng-divider"><div class="ng-divider-line"></div></div>
@@ -412,10 +391,10 @@
   <div class="ng-grid">
 
     <!-- KIDS -->
-    <a class="ng-card ng-reveal" href="evolveKids.html">
+    <a class="ng-card ng-reveal" href="https://www.evolvenation.org/kids" target="_top">
       <div class="ng-card-img-wrap">
         <span class="ng-card-tag">Kids</span>
-        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Kids">
+        <img src="https://media.thechurchcoassets.com/accounts/5782/6a2c2dd7-f6f8-4455-8a48-b30684de7176-./DSC05516.jpg" alt="Evolve Kids">
       </div>
       <div class="ng-card-body">
         <h3>Kids</h3>
@@ -430,10 +409,10 @@
     </a>
 
     <!-- TEENS -->
-    <a class="ng-card ng-reveal" href="evolveTeens.html">
+    <a class="ng-card ng-reveal" href="https://www.evolvenation.org/teens" target="_top">
       <div class="ng-card-img-wrap">
         <span class="ng-card-tag">Teens</span>
-        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Teens">
+        <img src="https://media.thechurchcoassets.com/accounts/5782/fb457604-353b-49bc-9f60-680d697739a1-./DSC09670.jpg" alt="Evolve Teens">
       </div>
       <div class="ng-card-body">
         <h3>Teens</h3>
@@ -448,7 +427,7 @@
     </a>
 
     <!-- FRWD -->
-    <a class="ng-card ng-reveal" href="evolveForward.html">
+    <a class="ng-card ng-reveal" href="https://www.evolvenation.org/frwd" target="_top">
       <div class="ng-card-img-wrap">
         <span class="ng-card-tag">Frwd</span>
         <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Frwd">
@@ -466,10 +445,10 @@
     </a>
 
     <!-- MENTORSHIP -->
-    <a class="ng-card ng-reveal" href="evolveMentorship.html">
+    <a class="ng-card ng-reveal" href="https://www.evolvenation.org/mentorship" target="_top">
       <div class="ng-card-img-wrap">
         <span class="ng-card-tag">Mentorship</span>
-        <img src="https://media.thechurchcoassets.com/accounts/5782/e5fde54c-2b75-41b8-8c53-3b9806ac57ab-./_MG_8558.jpg" alt="Evolve Mentorship">
+        <img src="https://media.thechurchcoassets.com/accounts/5782/9bde7d4b-4d16-4d51-ab1e-35ab579adbde-./evolveDiscipleship.jpg" alt="Evolve Mentorship">
       </div>
       <div class="ng-card-body">
         <h3>Mentorship</h3>
@@ -485,7 +464,6 @@
 
   </div>
 
-  <p class="ng-footnote">Photos shown are placeholders — final photography coming soon.</p>
 
 </div>
 
