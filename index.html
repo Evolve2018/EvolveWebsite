@@ -52,6 +52,14 @@
       width: 100% !important;
     }
 
+    /* Locks the iframe's own scroll position while a video modal is open —
+       pairs with window.scrollTo({top:0}) in openLivestream()/openSermonModal()
+       to keep the position:fixed overlay aligned with what the visitor sees. */
+    html.evolve-modal-open, html.evolve-modal-open body {
+      overflow: hidden !important;
+      height: 100% !important;
+    }
+
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
@@ -3344,6 +3352,12 @@ statEls.forEach(el => {
 
       function openLivestream() {
         if (!overlay) return;
+        // Scroll the iframe's own document to top first — this is what keeps
+        // position:fixed modals aligned with what the visitor actually sees,
+        // since "fixed" anchors to the iframe's own box, not the outer TCC
+        // page's scroll position. Same fix used on evolveOurBeliefs.html.
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        document.documentElement.classList.add('evolve-modal-open');
         overlay.classList.add('open');
         showLoading();
         setHeader(false, '');
@@ -3358,6 +3372,7 @@ statEls.forEach(el => {
       function closeLivestream() {
         if (!overlay) return;
         overlay.classList.remove('open');
+        document.documentElement.classList.remove('evolve-modal-open');
         videoWrap.innerHTML = ''; // stop playback
       }
 
@@ -3452,6 +3467,8 @@ statEls.forEach(el => {
          it shows a branded fallback card if YouTube ever still refuses. */
       function openSermonModal() {
         if (!modalOverlay || !currentVideo) return;
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        document.documentElement.classList.add('evolve-modal-open');
         modalOverlay.classList.add('open');
         if (modalTitleEl) {
           modalTitleEl.innerHTML =
@@ -3469,6 +3486,7 @@ statEls.forEach(el => {
       function closeSermonModal() {
         if (!modalOverlay) return;
         modalOverlay.classList.remove('open');
+        document.documentElement.classList.remove('evolve-modal-open');
         if (modalVideo) modalVideo.innerHTML = ''; // stop playback
       }
       if (modalClose)   modalClose.addEventListener('click', closeSermonModal);
