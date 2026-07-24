@@ -624,9 +624,7 @@
   checkReveal();
 })();
 
-// ─── IFRAME HEIGHT REPORTER ─────────────────────────────────────
-// Tells the parent TCC page how tall this content is so the iframe
-// resizes to fit and TCC's footer falls naturally below the content.
+
 function sendHeight() {
   window.parent.postMessage(
     { type: 'iframeHeight', height: document.documentElement.scrollHeight },
