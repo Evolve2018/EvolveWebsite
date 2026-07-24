@@ -131,8 +131,8 @@
             '<h4>Ministries</h4>' +
             '<ul>' +
               '<li><a href="https://www.evolvenation.org/kids" target="' + TOP + '">Kids</a></li>' +
-              '<li><a href="https://www.evolvenation.org/teens" target="' + TOP + '">Teens</a></li>' +
-              '<li><a href="https://www.evolvenation.org/frwd" target="' + TOP + '">Frwd (19&ndash;28)</a></li>' +
+              '<li><a href="https://www.evolvenation.org/evolve-teens-2" target="' + TOP + '">Teens</a></li>' +
+              '<li><a href="https://www.evolvenation.org/frwd" target="' + TOP + '">Frwd </a></li>' +
               '<li><a href="https://www.evolvenation.org/lifegroups" target="' + TOP + '">Life Groups</a></li>' +
               '<li><a href="https://www.evolvenation.org/discipleship" target="' + TOP + '">Discipleship</a></li>' +
               '<li><a href="https://www.evolvenation.org/mentalhealth" target="' + TOP + '">Mental Health</a></li>' +
@@ -143,9 +143,9 @@
           '<div class="ef-col">' +
             '<h4>Get Involved</h4>' +
             '<ul>' +
-              '<li><a href="https://www.evolvenation.org/events" target="' + TOP + '">Events</a></li>' +
-              '<li><a href="https://www.evolvenation.org/volunteer" target="' + TOP + '">Volunteer</a></li>' +
-              '<li><a href="https://www.evolvenation.org/businessdirectory" target="' + TOP + '">Business Directory</a></li>' +
+              '<li><a href="https://www.evolvenation.org/events-2" target="' + TOP + '">Events</a></li>' +
+              '<li><a href="https://www.evolvenation.org/volunteer-2" target="' + TOP + '">Volunteer</a></li>' +
+              '<li><a href="https://www.evolvenation.org/business-directory" target="' + TOP + '">Business Directory</a></li>' +
               '<li><a href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">Sermons</a></li>' +
             '</ul>' +
           '</div>' +
@@ -155,7 +155,7 @@
         '<div class="ef-actions">' +
           '<a class="ef-action ef-action--solid" href="https://www.evolvenation.org/planyourvisit" target="' + TOP + '">' + icon('pin', ACTION_ICONS) + ' Plan Your Visit</a>' +
           '<a class="ef-action" href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">' + icon('play', ACTION_ICONS) + ' Watch Online</a>' +
-          '<a class="ef-action" href="https://www.evolvenation.org/give" target="' + TOP + '">' + icon('heart', ACTION_ICONS) + ' Give</a>' +
+          '<a class="ef-action" href="https://pushpay.com/g/evolvenation?fnd=5AdLKlwoRKROWeb1iQq-AQ&r=No&lang=en&src=qrcode" target="' + TOP + '">' + icon('heart', ACTION_ICONS) + ' Give</a>' +
         '</div>' +
 
         '<div class="ef-bottom">' +
