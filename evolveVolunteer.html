@@ -824,6 +824,28 @@ const statsObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.js-count').forEach(el => statsObserver.observe(el));
 </script>
 
+<!-- SHARED FOOTER -->
+<div id="ef-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
+
+<script>
+// ─── IFRAME HEIGHT REPORTER ──────────────────────────────────────
+// This page was missing sendHeight() entirely; adding it now so the
+// TCC embed resizes correctly, matching the pattern used elsewhere.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+setTimeout(sendHeight, 300);
+setTimeout(sendHeight, 1000);
+</script>
 
 </body>
 </html>

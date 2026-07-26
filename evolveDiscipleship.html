@@ -595,6 +595,7 @@
     </a>
   </section>
 
+
 </div><!-- /disc-page -->
 
 <script>
@@ -624,7 +625,7 @@
   checkReveal();
 })();
 
-
+// sendHeight must be global so evolveFooter.js can call it after injecting footer HTML
 function sendHeight() {
   window.parent.postMessage(
     { type: 'iframeHeight', height: document.documentElement.scrollHeight },
@@ -637,5 +638,10 @@ if (typeof ResizeObserver !== 'undefined') {
   new ResizeObserver(sendHeight).observe(document.body);
 }
 </script>
+
+<!-- ── SHARED FOOTER ──────────────────────────────────── -->
+<!-- sendHeight() is defined above so evolveFooter.js can call it after injecting footer HTML -->
+<div id="evolve-footer-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
 </body>
 </html>
