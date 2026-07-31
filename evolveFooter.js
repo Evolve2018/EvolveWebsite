@@ -33,8 +33,7 @@
       "@media (max-width:900px){.ef-grid{grid-template-columns:1fr 1fr;}}" +
       "@media (max-width:560px){.ef-grid{grid-template-columns:1fr;text-align:center;}}" +
 
-      ".ef-brand-mark{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:1px;color:#fff;text-transform:uppercase;margin:0 0 4px;}" +
-      ".ef-brand-mark em{font-family:'Dynalight',cursive;font-style:normal;font-weight:400;color:#42B9D2;text-transform:none;font-size:1.25em;margin-left:2px;}" +
+      ".ef-logo{display:inline-block;height:44px;width:auto;margin:0 0 4px;}" +
 
       /* signature: self-drawing growth line under the wordmark */
       ".ef-growline{display:block;width:120px;height:10px;margin:6px 0 18px;overflow:visible;}" +
@@ -102,7 +101,7 @@
         '<div class="ef-grid">' +
 
           '<div class="ef-col">' +
-            '<div class="ef-brand-mark">Evolve <em>Church</em></div>' +
+            '<img class="ef-logo" src="https://media.thechurchcoassets.com/accounts/5782/3a4fc265-94ce-48e6-a6bb-05f572ff696b-./EvolveBlack-(1).jpeg" alt="Evolve Church">' +
             '<svg class="ef-growline" viewBox="0 0 120 10"><path d="M1 8 Q 30 2, 60 6 T 119 3"/></svg>' +
             '<p class="ef-addr">' +
               '6550 N 76th St<br>Milwaukee, WI 53223<br>' +
@@ -131,8 +130,8 @@
             '<h4>Ministries</h4>' +
             '<ul>' +
               '<li><a href="https://www.evolvenation.org/kids" target="' + TOP + '">Kids</a></li>' +
-              '<li><a href="https://www.evolvenation.org/evolve-teens-2" target="' + TOP + '">Teens</a></li>' +
-              '<li><a href="https://www.evolvenation.org/frwd" target="' + TOP + '">Frwd </a></li>' +
+              '<li><a href="https://www.evolvenation.org/teens" target="' + TOP + '">Teens</a></li>' +
+              '<li><a href="https://www.evolvenation.org/frwd" target="' + TOP + '">Frwd (19&ndash;28)</a></li>' +
               '<li><a href="https://www.evolvenation.org/lifegroups" target="' + TOP + '">Life Groups</a></li>' +
               '<li><a href="https://www.evolvenation.org/discipleship" target="' + TOP + '">Discipleship</a></li>' +
               '<li><a href="https://www.evolvenation.org/mentalhealth" target="' + TOP + '">Mental Health</a></li>' +
@@ -143,19 +142,21 @@
           '<div class="ef-col">' +
             '<h4>Get Involved</h4>' +
             '<ul>' +
-              '<li><a href="https://www.evolvenation.org/events-2" target="' + TOP + '">Events</a></li>' +
-              '<li><a href="https://www.evolvenation.org/volunteer-2" target="' + TOP + '">Volunteer</a></li>' +
-              '<li><a href="https://www.evolvenation.org/business-directory" target="' + TOP + '">Business Directory</a></li>' +
+              '<li><a href="https://www.evolvenation.org/events" target="' + TOP + '">Events</a></li>' +
+              '<li><a href="https://www.evolvenation.org/volunteer" target="' + TOP + '">Volunteer</a></li>' +
+              '<li><a href="https://www.evolvenation.org/businessdirectory" target="' + TOP + '">Business Directory</a></li>' +
               '<li><a href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">Sermons</a></li>' +
             '</ul>' +
           '</div>' +
 
         '</div>' +
 
-        '<div class="ef-actions">' +
-          '<a class="ef-action ef-action--solid" href="https://www.evolvenation.org/planyourvisit" target="' + TOP + '">' + icon('pin', ACTION_ICONS) + ' Plan Your Visit</a>' +
+            
+       '<div class="ef-actions">' +
           '<a class="ef-action" href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">' + icon('play', ACTION_ICONS) + ' Watch Online</a>' +
-          '<a class="ef-action" href="https://pushpay.com/g/evolvenation?fnd=5AdLKlwoRKROWeb1iQq-AQ&r=No&lang=en&src=qrcode" target="' + TOP + '">' + icon('heart', ACTION_ICONS) + ' Give</a>' +
+          '<a class="ef-action" href="https://www.evolvenation.org/give" target="' + TOP + '">' + icon('heart', ACTION_ICONS) + ' Give</a>' +
+        /* ----    '<a class="ef-action ef-action--solid" href="https://www.evolvenation.org/planyourvisit" target="' + TOP + '">' + icon('pin', ACTION_ICONS) + ' Plan Your Visit</a>' +   ---- */
+        /*----  '<a class="ef-action" href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">' + icon('play', ACTION_ICONS) + ' Watch Online</a>' + -----*/
         '</div>' +
 
         '<div class="ef-bottom">' +
