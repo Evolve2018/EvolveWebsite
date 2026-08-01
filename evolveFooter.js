@@ -101,7 +101,7 @@
         '<div class="ef-grid">' +
 
           '<div class="ef-col">' +
-            '<img class="ef-logo" src="https://media.thechurchcoassets.com/accounts/5782/3a4fc265-94ce-48e6-a6bb-05f572ff696b-./EvolveBlack-(1).jpeg" alt="Evolve Church">' +
+            '<img class="ef-logo" src="https://media.thechurchcoassets.com/accounts/5782/fc5e70e2-1d2d-4702-9d85-16fc7fc33efd-imported-asset__largepreview__.webp" alt="Evolve Church">' +
             '<svg class="ef-growline" viewBox="0 0 120 10"><path d="M1 8 Q 30 2, 60 6 T 119 3"/></svg>' +
             '<p class="ef-addr">' +
               '6550 N 76th St<br>Milwaukee, WI 53223<br>' +
