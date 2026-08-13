@@ -6,7 +6,7 @@
 ============================================================ -->
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Dynalight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ── TOKENS ─────────────────────────────────────────── */
 :root {
@@ -20,13 +20,13 @@
   --white:       #ffffff;
   --off-white:   #e8f4f7;
   --muted:       rgba(232,244,247,0.55);
-  --gold:        #d4a847;
+  --gold:        #42B9D2;
   --red-closed:  #c0392b;
   --green-open:  #27ae60;
 
   --font-display: 'Barlow Condensed', sans-serif;
-  --font-body:    'Barlow', sans-serif;
-  --font-accent:  'Dynalight', cursive;
+  --font-body:    'Open Sans', sans-serif;
+  --font-accent:  'Montserrat', sans-serif;
 
   --IMG: url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg');
 }
@@ -184,10 +184,10 @@
   color: var(--off-white); line-height: 1.5;
   margin-top: 32px;
 }
-.disc-what-verse-inline em {
+.disc-what-verse-inline span {
   display: block; font-size: 13px;
   color: var(--blue); letter-spacing: 0.1em;
-  text-transform: uppercase; font-style: normal; margin-top: 8px;
+  text-transform: uppercase;  margin-top: 8px;
 }
 
 /* ── CLASSES SECTION ─────────────────────────────────── */
@@ -437,7 +437,7 @@
       </p>
       <blockquote class="disc-what-verse-inline">
         "And this is eternal life, that they know you, the only true God, and Jesus Christ whom you have sent."
-        <em>— John 17:3</em>
+        <span>— John 17:3</span>
       </blockquote>
     </div>
   </section>

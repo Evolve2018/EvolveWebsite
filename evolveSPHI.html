@@ -7,7 +7,7 @@
 
 <style>
 /* ── FONTS via @import (TCC-compatible) ── */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
   --teal: #42B9D2;
@@ -32,7 +32,7 @@ body {
   position: relative; /* needed for ::before noise overlay */
   background: var(--navy);
   color: var(--off-white);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   width: 100%;
 }
@@ -133,7 +133,7 @@ body::before {
 }
 
 .hero-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(52px, 6.5vw, 88px);
   font-weight: 800;
   line-height: 0.95;
@@ -144,8 +144,8 @@ body::before {
 .hero-title .accent {
   color: var(--teal);
   display: block;
-  font-style: italic;
-  font-family: 'Playfair Display', serif;
+
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: clamp(56px, 7vw, 96px);
   line-height: 1;
@@ -179,7 +179,7 @@ body::before {
   background: var(--teal);
   color: var(--navy);
   text-decoration: none;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -208,7 +208,7 @@ body::before {
   background: transparent;
   color: var(--off-white);
   text-decoration: none;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -228,7 +228,7 @@ body::before {
 }
 .stat-item:last-child { border-right: none; }
 .stat-number {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 34px;
   font-weight: 800;
   color: var(--teal);
@@ -303,8 +303,8 @@ body::before {
   background: rgba(255,255,255,0.08);
 }
 .quote-bar-text {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+
   font-size: 18px;
   color: var(--navy);
   font-weight: 400;
@@ -312,7 +312,7 @@ body::before {
   z-index: 1;
 }
 .quote-bar-source {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -357,17 +357,17 @@ body::before {
 }
 
 .section-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(30px, 3.5vw, 46px);
   font-weight: 800;
   color: var(--white);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
-.section-title .italic {
-  font-family: 'Playfair Display', serif;
+.section-title .title-accent {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-style: italic;
+
   color: var(--teal);
 }
 
@@ -517,7 +517,7 @@ body::before {
 .step-card:hover::before { transform: scaleX(1); }
 
 .step-num {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 64px;
   font-weight: 800;
   color: rgba(66,185,210,0.1);
@@ -541,7 +541,7 @@ body::before {
   font-size: 20px;
 }
 .step-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--white);
@@ -598,7 +598,7 @@ body::before {
   margin-bottom: 16px;
 }
 .grants-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(28px, 3vw, 40px);
   font-weight: 800;
   color: var(--navy);
@@ -606,18 +606,18 @@ body::before {
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
-.grants-title em {
-  font-family: 'Playfair Display', serif;
+.grants-title span {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-style: italic;
+
   color: var(--navy-mid);
 }
 .grants-note {
   font-size: 14px;
   color: rgba(8,14,23,0.6);
-  font-style: italic;
+
   line-height: 1.6;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .grant-rows { position: relative; z-index: 1; }
@@ -636,7 +636,7 @@ body::before {
   letter-spacing: 0.04em;
 }
 .grant-value {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   font-weight: 800;
   color: var(--navy);
@@ -714,7 +714,7 @@ body::before {
   background: var(--teal);
   color: var(--navy);
   padding: 7px 14px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -737,7 +737,7 @@ body::before {
   flex-wrap: wrap;
 }
 .s-stat .n {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   font-weight: 800;
   color: var(--teal);
@@ -764,9 +764,9 @@ body::before {
   width: 100%;
 }
 .story-quote {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(22px, 2.5vw, 30px);
-  font-style: italic;
+
   font-weight: 400;
   color: var(--white);
   line-height: 1.5;
@@ -790,7 +790,7 @@ body::before {
   margin-bottom: 36px;
 }
 .story-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--teal);
@@ -841,7 +841,7 @@ body::before {
 }
 .elig-col:first-child { border-right: 1px solid var(--navy-border); }
 .elig-col-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--white);
@@ -893,15 +893,15 @@ body::before {
   flex-wrap: wrap;
 }
 .elig-cta p {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+  font-family: 'Montserrat', sans-serif;
+
   font-size: 17px;
   color: var(--off-white);
   line-height: 1.5;
 }
 .elig-cta strong {
   color: var(--teal);
-  font-style: normal;
+
   font-weight: 600;
 }
 
@@ -959,7 +959,7 @@ body::before {
   border-color: var(--teal);
 }
 .card-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--white);
@@ -974,7 +974,7 @@ body::before {
   margin-bottom: 28px;
 }
 .card-link {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -1022,7 +1022,7 @@ body::before {
 }
 .apply-eyebrow { margin-bottom: 16px; }
 .apply-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(36px, 4vw, 56px);
   font-weight: 800;
   color: var(--white);
@@ -1030,11 +1030,11 @@ body::before {
   letter-spacing: -0.03em;
   margin-bottom: 20px;
 }
-.apply-title em {
+.apply-title span {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-style: italic;
+
   color: var(--teal);
   text-shadow: 0 0 40px rgba(66,185,210,0.3);
 }
@@ -1086,7 +1086,7 @@ body::before {
   flex-shrink: 0;
 }
 .ac-label {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--white);
@@ -1132,7 +1132,7 @@ body::before {
   margin-bottom: 48px;
 }
 .footer-brand-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: var(--white);
@@ -1169,7 +1169,7 @@ body::before {
 .footer-contact a:hover { color: var(--teal); }
 
 .footer-col-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -1341,7 +1341,7 @@ body::before {
     </h1>
     <p class="hero-desc">The Single Parent Housing Initiative walks single parents in Milwaukee all the way from instability to homeownership — with housing, financial grants, and a community that never lets you go it alone.</p>
     <div class="hero-actions">
-      <a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank" class="btn-primary">Start Your Story →</a>
+      <a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank" class="btn-primary">Start Your Story</a>
       <a href="#story" class="btn-outline">Read a Success Story</a>
     </div>
     <div class="hero-stats">
@@ -1377,14 +1377,14 @@ body::before {
   <div class="slider-header fade-up">
     <div>
       <p class="eyebrow">Real Stories, Real People</p>
-      <h2 class="section-title">Moments that <span class="italic">change everything</span></h2>
+        <h2 class="section-title">Moments that <span class="title-accent">change everything</span></h2>
     </div>
     <div class="slider-controls">
       <button class="slider-btn" onclick="slide(-1)" aria-label="Previous slide">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15,18 9,12 15,6"/></svg>
+
       </button>
       <button class="slider-btn" onclick="slide(1)" aria-label="Next slide">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9,6 15,12 9,18"/></svg>
+
       </button>
     </div>
   </div>
@@ -1424,32 +1424,32 @@ body::before {
 <section class="program-section" id="program">
   <div class="program-header fade-up">
     <p class="eyebrow">The Program</p>
-    <h2 class="section-title">A real path to <span class="italic">ownership</span></h2>
+        <h2 class="section-title">A real path to <span class="title-accent">ownership</span></h2>
     <p class="program-subtitle">We provide a furnished home, a dedicated team, and up to 12 months to complete the journey to owning a home of your own.</p>
   </div>
 
   <div class="steps-container">
     <div class="step-card fade-up">
       <div class="step-num">01</div>
-      <div class="step-icon">🏠</div>
+
       <h3 class="step-title">Move into a program home</h3>
       <p class="step-desc">Rent a beautiful, partially furnished Evolve home near our North Milwaukee campus while you build toward homeownership.</p>
     </div>
     <div class="step-card fade-up" style="transition-delay:0.1s">
       <div class="step-num">02</div>
-      <div class="step-icon">📈</div>
+
       <h3 class="step-title">Build your financial foundation</h3>
       <p class="step-desc">Work with our team and partners like Self-Help Federal Credit Union to strengthen your credit, savings, and mortgage readiness.</p>
     </div>
     <div class="step-card fade-up" style="transition-delay:0.15s">
       <div class="step-num">03</div>
-      <div class="step-icon">🔑</div>
+
       <h3 class="step-title">Find and purchase your home</h3>
       <p class="step-desc">With up to 12 months of support and coaching, identify and close on a home that belongs to your family.</p>
     </div>
     <div class="step-card fade-up" style="transition-delay:0.2s">
       <div class="step-num">04</div>
-      <div class="step-icon">🎉</div>
+
       <h3 class="step-title">Receive your grants</h3>
       <p class="step-desc">Receive a $5,000 homeownership grant and a $2,000 furniture allowance upon successfully completing the program.</p>
     </div>
@@ -1461,7 +1461,7 @@ body::before {
   <div class="grants-inner fade-up">
     <div class="grants-left">
       <p class="grants-eyebrow">Financial Support Included</p>
-      <h3 class="grants-title">We invest in your <em>future,</em> not just your next step.</h3>
+      <h3 class="grants-title">We invest in your <span>future,</span> not just your next step.</h3>
       <p class="grants-note">Participants choose their own furniture — because giving someone the power of choice empowers them in a greater way.</p>
     </div>
     <div class="grants-right grant-rows">
@@ -1510,7 +1510,7 @@ body::before {
   <div class="elig-inner">
     <div class="elig-header fade-up">
       <p class="eyebrow" style="justify-content:center">Eligibility</p>
-      <h2 class="section-title">Do you <span class="italic">qualify?</span></h2>
+        <h2 class="section-title">Do you <span class="title-accent">qualify?</span></h2>
       <p>We look for single parents ready to commit to the process. Here is what is required to apply.</p>
     </div>
 
@@ -1540,8 +1540,8 @@ body::before {
     </div>
 
     <div class="elig-cta fade-up">
-      <p>Not sure if you qualify? Call <strong>(414) 510-4131</strong> or email <strong>sphi@evolvenation.org</strong> — we'll walk through your situation personally. <em>We are a church before we are a program.</em></p>
-      <a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank" class="btn-primary" style="white-space:nowrap;flex-shrink:0">Apply Now →</a>
+      <p>Not sure if you qualify? Call <strong>(414) 510-4131</strong> or email <strong>sphi@evolvenation.org</strong> — we'll walk through your situation personally. <span>We are a church before we are a program.</span></p>
+      <a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank" class="btn-primary" style="white-space:nowrap;flex-shrink:0">Apply Now</a>
     </div>
   </div>
 </section>
@@ -1550,26 +1550,26 @@ body::before {
 <section class="involved-section">
   <div class="involved-header fade-up">
     <p class="eyebrow">Get Involved</p>
-    <h2 class="section-title">More ways to <span class="italic">be part</span> of this</h2>
+        <h2 class="section-title">More ways to <span class="title-accent">be part</span> of this</h2>
   </div>
   <div class="involved-grid">
     <div class="involved-card fade-up">
-      <div class="card-icon">🏡</div>
+
       <h3 class="card-title">Donate a Property</h3>
       <p class="card-desc">Have a home you want to put toward something meaningful? Donating directly expands how many families we can serve.</p>
-      <a href="mailto:sphi@evolvenation.org" class="card-link">Get in touch →</a>
+      <a href="mailto:sphi@evolvenation.org" class="card-link">Get in touch</a>
     </div>
     <div class="involved-card fade-up" style="transition-delay:0.1s">
-      <div class="card-icon">🤍</div>
+
       <h3 class="card-title">Give Financially</h3>
       <p class="card-desc">Your giving funds the grants, program homes, and the team that makes every success story possible.</p>
-      <a href="https://evolvenation.org/give" target="_blank" class="card-link">Give today →</a>
+      <a href="https://evolvenation.org/give" target="_blank" class="card-link">Give today</a>
     </div>
     <div class="involved-card fade-up" style="transition-delay:0.2s">
-      <div class="card-icon">🤝</div>
+
       <h3 class="card-title">Partner With Us</h3>
       <p class="card-desc">We work with financial institutions, employers, and community organizations that share this mission.</p>
-      <a href="mailto:sphi@evolvenation.org" class="card-link">Start a conversation →</a>
+      <a href="mailto:sphi@evolvenation.org" class="card-link">Start a conversation</a>
     </div>
   </div>
 </section>
@@ -1580,32 +1580,32 @@ body::before {
     <div class="apply-glow"></div>
     <div class="apply-left fade-up">
       <p class="eyebrow apply-eyebrow">Ready to Take the Step</p>
-      <h2 class="apply-title">Your home is<br><em>waiting.</em></h2>
+      <h2 class="apply-title">Your home is<br><span>waiting.</span></h2>
       <p class="apply-desc">Whether you are ready to apply, have questions, or want to donate a property, we want to hear from you. This starts with one conversation.</p>
     </div>
     <div class="apply-right fade-up" style="transition-delay:0.15s">
       <p style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:16px;">Get Started Today</p>
       <div class="apply-cards">
         <a href="https://evolvenation.ccbchurch.com/goto/forms/360/responses/new" target="_blank" class="apply-card primary">
-          <div class="ac-icon">📋</div>
+
           <div class="ac-text">
             <div class="ac-label">Apply to the Program</div>
             <div class="ac-sub">Complete your application online</div>
           </div>
-          <span style="margin-left:auto;color:var(--teal);font-size:18px;">→</span>
+          <span style="margin-left:auto;color:var(--teal);font-size:18px;"></span>
         </a>
       </div>
       <div class="divider"><span>Or Reach Us Directly</span></div>
       <div class="apply-cards">
         <a href="mailto:sphi@evolvenation.org" class="apply-card">
-          <div class="ac-icon">✉️</div>
+
           <div class="ac-text">
             <div class="ac-label">Email Us</div>
             <div class="ac-sub">sphi@evolvenation.org</div>
           </div>
         </a>
         <a href="tel:4145104131" class="apply-card">
-          <div class="ac-icon">📞</div>
+
           <div class="ac-text">
             <div class="ac-label">Call Us Directly</div>
             <div class="ac-sub">(414) 510-4131</div>

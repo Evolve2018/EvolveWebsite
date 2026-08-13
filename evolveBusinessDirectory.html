@@ -1,13 +1,13 @@
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&family=Dynalight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --teal:        #4ECDE8;
-  --teal-dark:   #2BACC8;
-  --teal-glow:   rgba(78,205,232,0.18);
-  --teal-subtle: rgba(78,205,232,0.08);
+  --teal:        #42B9D2;
+  --teal-dark:   #2A8FA8;
+  --teal-glow:   rgba(66,185,210,0.18);
+  --teal-subtle: rgba(66,185,210,0.08);
   --navy:        #061a22;
   --navy-mid:    #0b3040;
   --navy-card:   rgba(11,48,64,0.75);
@@ -18,11 +18,11 @@
   --white-30:    rgba(255,255,255,0.30);
   --white-10:    rgba(255,255,255,0.10);
   --white-06:    rgba(255,255,255,0.06);
-  --accent-warn: #F5C842;
+  --accent-warn: #42B9D2;
 }
 
 body {
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background: var(--navy);
   color: var(--white);
   overflow-x: hidden;
@@ -41,8 +41,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(78,205,232,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 40% at 80% 100%, rgba(78,205,232,0.07) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(66,185,210,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 100%, rgba(66,185,210,0.07) 0%, transparent 60%);
   pointer-events: none;
 }
 /* animated teal orb */
@@ -51,7 +51,7 @@ body {
   position: absolute;
   width: 480px; height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(78,205,232,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(66,185,210,0.08) 0%, transparent 70%);
   top: -120px; left: 50%; transform: translateX(-50%);
   animation: pulse-orb 6s ease-in-out infinite;
   pointer-events: none;
@@ -78,11 +78,11 @@ body {
   margin-bottom: 16px;
   position: relative;
 }
-.dir-hero h1 em {
-  font-style: normal;
+.dir-hero h1 span {
+
   color: var(--teal);
   /* shimmer */
-  background: linear-gradient(90deg, #4ECDE8 20%, #a0eaf7 50%, #4ECDE8 80%);
+  background: linear-gradient(90deg, #42B9D2 20%, #d6f2f8 50%, #42B9D2 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -124,11 +124,11 @@ body {
   color: var(--navy);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 0 20px rgba(78,205,232,0.3);
+  box-shadow: 0 0 20px rgba(66,185,210,0.3);
 }
 .btn-primary:hover {
-  background: #6fd9ee;
-  box-shadow: 0 0 32px rgba(78,205,232,0.5);
+  background: #6cd0e6;
+  box-shadow: 0 0 32px rgba(66,185,210,0.5);
   transform: translateY(-1px);
 }
 .btn-ghost {
@@ -139,7 +139,7 @@ body {
   letter-spacing: 0.1em;
   padding: 11px 26px;
   border-radius: 8px;
-  border: 1.5px solid rgba(78,205,232,0.4);
+  border: 1.5px solid rgba(66,185,210,0.4);
   background: transparent;
   color: var(--teal);
   cursor: pointer;
@@ -228,7 +228,7 @@ body {
 }
 .search-input {
   width: 100%;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.88rem;
   color: var(--white-90);
   background: var(--white-06);
@@ -240,9 +240,9 @@ body {
 }
 .search-input::placeholder { color: var(--white-30); }
 .search-input:focus {
-  border-color: rgba(78,205,232,0.5);
-  background: rgba(78,205,232,0.05);
-  box-shadow: 0 0 0 3px rgba(78,205,232,0.1);
+  border-color: rgba(66,185,210,0.5);
+  background: rgba(66,185,210,0.05);
+  box-shadow: 0 0 0 3px rgba(66,185,210,0.1);
 }
 .search-clear {
   position: absolute;
@@ -274,7 +274,7 @@ body {
 .industry-select {
   width: 100%;
   height: 100%;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--white-90);
@@ -289,11 +289,11 @@ body {
   transition: all 0.2s ease;
 }
 .industry-select:hover {
-  border-color: rgba(78,205,232,0.35);
+  border-color: rgba(66,185,210,0.35);
 }
 .industry-select:focus {
-  border-color: rgba(78,205,232,0.5);
-  box-shadow: 0 0 0 3px rgba(78,205,232,0.1);
+  border-color: rgba(66,185,210,0.5);
+  box-shadow: 0 0 0 3px rgba(66,185,210,0.1);
 }
 .industry-select option {
   background: var(--navy-mid);
@@ -333,7 +333,7 @@ body {
   background: var(--teal);
   border-radius: 20px;
   padding: 5px 8px 5px 12px;
-  box-shadow: 0 0 14px rgba(78,205,232,0.3);
+  box-shadow: 0 0 14px rgba(66,185,210,0.3);
 }
 .active-chip.visible { display: inline-flex; }
 .active-chip button {
@@ -385,7 +385,7 @@ body {
 /* ─── CARD ──────────────────────────────────────────── */
 .biz-card {
   background: var(--navy-card);
-  border: 1px solid rgba(78,205,232,0.14);
+  border: 1px solid rgba(66,185,210,0.14);
   border-radius: 14px;
   padding: 0;
   display: flex;
@@ -397,14 +397,14 @@ body {
 }
 .biz-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(78,205,232,0.45);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(78,205,232,0.1) inset;
+  border-color: rgba(66,185,210,0.45);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(66,185,210,0.1) inset;
 }
 
 /* colored top accent strip */
 .biz-card-top {
   height: 4px;
-  background: linear-gradient(90deg, var(--teal) 0%, #2BACC8 60%, transparent 100%);
+  background: linear-gradient(90deg, var(--teal) 0%, #2A8FA8 60%, transparent 100%);
   opacity: 0;
   transition: opacity 0.22s ease;
 }
@@ -425,8 +425,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: var(--teal);
-  background: rgba(78,205,232,0.1);
-  border: 1px solid rgba(78,205,232,0.22);
+  background: rgba(66,185,210,0.1);
+  border: 1px solid rgba(66,185,210,0.22);
   border-radius: 4px;
   padding: 3px 9px;
   display: inline-block;
@@ -455,10 +455,10 @@ body {
   font-size: 0.85rem;
   line-height: 1.62;
   color: rgba(255,255,255,0.55);
-  font-style: italic;
+
   padding: 10px 14px;
-  border-left: 2px solid rgba(78,205,232,0.4);
-  background: rgba(78,205,232,0.05);
+  border-left: 2px solid rgba(66,185,210,0.4);
+  background: rgba(66,185,210,0.05);
   border-radius: 0 6px 6px 0;
   margin-bottom: 16px;
 }
@@ -515,7 +515,7 @@ body {
   gap: 6px;
   font-size: 0.76rem;
   font-weight: 600;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   padding: 6px 13px;
   border-radius: 6px;
   text-decoration: none;
@@ -542,7 +542,7 @@ body {
 /* ─── FORM SECTION ──────────────────────────────────── */
 .form-section {
   background: linear-gradient(160deg, #0a2535 0%, #0d3a4d 100%);
-  border-top: 1px solid rgba(78,205,232,0.12);
+  border-top: 1px solid rgba(66,185,210,0.12);
   padding: 64px 24px;
   position: relative;
   overflow: hidden;
@@ -551,7 +551,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(78,205,232,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(66,185,210,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .form-inner {
@@ -564,7 +564,7 @@ body {
   margin-bottom: 36px;
 }
 .form-eyebrow {
-  font-family: 'Dynalight', cursive;
+  font-family: 'Montserrat', sans-serif;
   color: var(--teal);
   font-size: 1.2rem;
   margin-bottom: 8px;
@@ -578,8 +578,8 @@ body {
   line-height: 1.1;
   margin-bottom: 12px;
 }
-.form-title em {
-  font-style: normal;
+.form-title span {
+
   color: var(--teal);
 }
 .form-desc {
@@ -594,8 +594,8 @@ body {
 .form-frame-wrap {
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(78,205,232,0.2);
-  box-shadow: 0 0 40px rgba(78,205,232,0.08), 0 24px 60px rgba(0,0,0,0.4);
+  border: 1px solid rgba(66,185,210,0.2);
+  box-shadow: 0 0 40px rgba(66,185,210,0.08), 0 24px 60px rgba(0,0,0,0.4);
   background: #fff;
 }
 .form-frame-wrap iframe {
@@ -621,7 +621,7 @@ body {
 <!-- ══ HERO ══════════════════════════════════════════════ -->
 <div class="dir-hero">
   <div class="dir-hero-eyebrow">Evolve Church</div>
-  <h1>Business <em>Directory</em></h1>
+  <h1>Business <span>Directory</span></h1>
   <p class="dir-hero-sub">Connect with fellow Evolve members who own and operate businesses in our community.</p>
   <div class="hero-ctas">
     <button class="btn-primary" onclick="document.getElementById('biz-form-section').scrollIntoView({behavior:'smooth'})">List Your Business</button>
@@ -632,7 +632,7 @@ body {
 <!-- ══ DISCLAIMER ═════════════════════════════════════════ -->
 <div class="disclaimer-band">
   <div class="disclaimer-inner">
-    <div class="disclaimer-icon">!</div>
+
     <div>
       <div class="disclaimer-head">Important Notice</div>
       <p class="disclaimer-text">
@@ -651,7 +651,7 @@ body {
   <div class="dir-body">
     <div class="controls-section">
       <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+
         <input type="text" id="searchInput" class="search-input" placeholder="Search businesses, owners, or services…" autocomplete="off">
         <button class="search-clear" id="searchClear" aria-label="Clear search">&#10005;</button>
       </div>
@@ -675,7 +675,7 @@ body {
   <div class="form-inner">
     <div class="form-header">
       <div class="form-eyebrow">Join the Directory</div>
-      <div class="form-title">List Your <em>Business</em></div>
+      <div class="form-title">List Your <span>Business</span></div>
       <p class="form-desc">Are you an Evolve member who owns or operates a business? Submit your information below to be featured in our Business Directory. Submissions are reviewed before publishing.</p>
     </div>
     <div class="form-frame-wrap">
@@ -1857,13 +1857,6 @@ const BUSINESSES = [
 
 BUSINESSES.sort((a, b) => a.industry.localeCompare(b.industry));
 
-const ICONS = {
-  facebook:  `<svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
-  instagram: `<svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
-  tiktok:    `<svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.79 1.52V6.75a4.85 4.85 0 01-1.02-.06z"/></svg>`,
-  linkedin:  `<svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`
-};
-
 function buildCard(biz) {
   const socials = [
     biz.facebook  && { key:'facebook',  label:'Facebook',  url:biz.facebook },
@@ -1891,7 +1884,7 @@ function buildCard(biz) {
         <div class="biz-sep"></div>
         <div class="biz-social-label">Follow on</div>
         <div class="biz-socials">
-          ${socials.map(s=>`<a class="biz-social-btn ${s.key}" href="${s.url}" target="_blank" rel="noopener">${ICONS[s.key]} ${s.label}</a>`).join('')}
+          ${socials.map(s=>`<a class="biz-social-btn ${s.key}" href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join('')}
         </div>` : ''}
     </div>
   </div>`;

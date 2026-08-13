@@ -23,6 +23,9 @@
        strict-origin-when-cross-origin (NOT no-referrer / same-origin). -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Evolve Church — Sermon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
@@ -81,14 +84,12 @@
 
   <div id="fallback">
     <div class="mark">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="#42B9D2">
-        <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
-      </svg>
+
     </div>
     <h2>Watch this sermon</h2>
     <p>Tap below to watch on YouTube — opens in a new tab.</p>
     <a id="fallbackLink" href="#" target="_blank" rel="noopener">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+
       Watch on YouTube
     </a>
   </div>
@@ -120,7 +121,7 @@
         if (playerBox) playerBox.style.display = 'none';
       }
 
-      // No video id → straight to the branded card.
+      // No video id straight to the branded card.
       if (!videoId) { showFallback(); return; }
 
       // If the player isn't ready in a few seconds, assume a config failure

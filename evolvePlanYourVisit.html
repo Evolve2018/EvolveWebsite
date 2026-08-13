@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Plan Your Visit — Evolve Church</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -26,7 +26,7 @@
   --radius:4px;
 }
 html{scroll-behavior:smooth;background:var(--dark)}
-body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);}
+body{font-family:'Open Sans',sans-serif;color:var(--text);background:var(--white);}
 
 /* ══ SCROLLBAR ══ */
 ::-webkit-scrollbar{width:4px}
@@ -113,13 +113,13 @@ body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);}
 .hero-badge-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
 .hero h1{
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Montserrat', sans-serif;
   font-size:clamp(3.6rem,8vw,7rem);font-weight:700;
   color:var(--white);line-height:1.0;
   margin-bottom:8px;
   animation:fadeUp .9s ease .1s both;
 }
-.hero h1 em{font-style:italic;color:var(--teal)}
+.hero h1 span {color:var(--teal)}
 .hero-tagline{
   font-size:clamp(1rem,2vw,1.25rem);color:rgba(255,255,255,.5);
   font-weight:300;max-width:520px;margin:20px auto 0;
@@ -159,7 +159,7 @@ body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--white);}
 }
 .hero-stat:last-child{border-right:none}
 .hero-stat-num{
-  font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;
+  font-family:'Montserrat', sans-serif;font-size:2.2rem;font-weight:700;
   color:var(--teal);line-height:1;
 }
 .hero-stat-label{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
@@ -187,11 +187,11 @@ section{position:relative;overflow:hidden}
 }
 .sec-label::before{content:'';width:28px;height:1px;background:var(--teal);opacity:.6}
 .sec-h{
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Montserrat', sans-serif;
   font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:700;
   line-height:1.15;color:var(--dark);
 }
-.sec-h em{font-style:italic;color:var(--teal)}
+.sec-h span {color:var(--teal)}
 .sec-h.light{color:var(--white)}
 .sec-p{font-size:1.05rem;color:var(--muted);font-weight:300;line-height:1.75;max-width:520px}
 .sec-p.light{color:rgba(255,255,255,.55)}
@@ -245,10 +245,10 @@ section{position:relative;overflow:hidden}
   color:var(--teal);margin-bottom:8px;
 }
 .panel-title{
-  font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;
+  font-family:'Montserrat', sans-serif;font-size:2.4rem;font-weight:700;
   color:var(--dark);line-height:1.1;margin-bottom:20px;
 }
-.panel-title em{font-style:italic;color:var(--teal)}
+.panel-title span {color:var(--teal)}
 .panel-body{font-size:.97rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:28px}
 
 /* time cards */
@@ -259,7 +259,7 @@ section{position:relative;overflow:hidden}
 }
 .time-card:hover{border-color:var(--teal);background:var(--teal-xl)}
 .tc-day{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
-.tc-time{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--dark);line-height:1}
+.tc-time{font-family:'Montserrat', sans-serif;font-size:2rem;font-weight:700;color:var(--dark);line-height:1}
 .tc-note{font-size:.78rem;color:var(--muted);margin-top:4px}
 
 /* checklist */
@@ -387,14 +387,14 @@ section{position:relative;overflow:hidden}
 .qr-btn{
   padding:7px 14px;background:rgba(66,185,210,.1);border:1px solid var(--border);
   color:rgba(255,255,255,.7);font-size:.78rem;cursor:pointer;
-  transition:all .2s;font-family:'Outfit',sans-serif;white-space:nowrap;
+  transition:all .2s;font-family:'Open Sans',sans-serif;white-space:nowrap;
 }
 .qr-btn:hover{background:var(--teal);color:var(--white);border-color:var(--teal)}
 
 .chat-input-area{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px}
 .chat-input{
   flex:1;background:rgba(255,255,255,.06);border:1px solid var(--border);
-  color:var(--white);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:.88rem;
+  color:var(--white);padding:12px 16px;font-family:'Open Sans',sans-serif;font-size:.88rem;
   outline:none;transition:border-color .2s;
 }
 .chat-input::placeholder{color:rgba(255,255,255,.25)}
@@ -442,7 +442,7 @@ section{position:relative;overflow:hidden}
 }
 
 .et-time{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
-.et-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--dark);margin-bottom:8px}
+.et-title{font-family:'Montserrat', sans-serif;font-size:1.7rem;font-weight:700;color:var(--dark);margin-bottom:8px}
 .et-desc{font-size:.93rem;color:var(--muted);line-height:1.75;font-weight:300}
 
 /* ══ KIDS SECTION ══ */
@@ -475,7 +475,7 @@ section{position:relative;overflow:hidden}
 .kac:hover{border-color:var(--teal);background:rgba(66,185,210,.06);transform:translateY(-4px)}
 .kac-emoji{font-size:2rem;margin-bottom:12px}
 .kac-label{font-size:.68rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
-.kac-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:6px}
+.kac-name{font-family:'Montserrat', sans-serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:6px}
 .kac-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.6}
 
 /* ══ FAQ ══ */
@@ -501,7 +501,7 @@ section{position:relative;overflow:hidden}
 .faq-q{
   width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:22px 0;background:none;border:none;cursor:pointer;text-align:left;
-  font-family:'Outfit',sans-serif;font-size:.97rem;font-weight:600;color:var(--dark);
+  font-family:'Open Sans',sans-serif;font-size:.97rem;font-weight:600;color:var(--dark);
   transition:color .2s;
 }
 .faq-q:hover,.faq-q.open{color:var(--teal)}
@@ -536,7 +536,7 @@ footer{
 }
 
 .footer-logo{
-  font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;
+  font-family:'Montserrat', sans-serif;font-size:2rem;font-weight:700;
   color:var(--white);text-decoration:none;display:block;margin-bottom:16px;
 }
 .footer-logo span{color:var(--teal)}
@@ -563,7 +563,7 @@ footer{
   transition:color .2s;display:flex;align-items:center;gap:6px;
 }
 .footer-col a:hover{color:rgba(255,255,255,.85)}
-.footer-col a::before{content:'→';font-size:.7rem;color:var(--teal);opacity:0;transform:translateX(-4px);transition:all .2s}
+.footer-col a::before{content:'';font-size:.7rem;color:var(--teal);opacity:0;transform:translateX(-4px);transition:all .2s}
 .footer-col a:hover::before{opacity:1;transform:translateX(0)}
 
 .footer-contact{
@@ -592,7 +592,7 @@ footer{
 /* ══ 3-COLUMN TIME GRID ══ */
 .time-grid-3{grid-template-columns:repeat(3,1fr)!important}
 .tc-meta{
-  font-size:.82rem;color:var(--muted);font-style:italic;
+  font-size:.82rem;color:var(--muted);
   margin-bottom:20px;font-weight:300;
 }
 
@@ -602,7 +602,7 @@ footer{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 22px;font-size:.82rem;font-weight:600;
   letter-spacing:.07em;text-transform:uppercase;text-decoration:none;
-  border:1px solid;cursor:pointer;transition:all .25s;font-family:'Outfit',sans-serif;
+  border:1px solid;cursor:pointer;transition:all .25s;font-family:'Open Sans',sans-serif;
 }
 .cal-btn-google{
   background:transparent;color:var(--teal);border-color:var(--border);
@@ -685,11 +685,11 @@ footer{
   </div>
   <div class="hero-content">
     <div class="hero-badge">
-      
+
       Services Every Sunday
     </div>
-    <h1>Your First Visit<br>Starts <em>Here</em></h1>
-    <p class="hero-tagline">We've thought of everything so you don't have to. Whether it's your first time or your hundredth — you belong at Evolve.</p>
+    <h1>Your First Visit<br>Starts <span>Here</span></h1>
+    <p class="hero-tagline">We've thought of everything so you don't have to. Whether it's your first time or your hundredth you belong at Evolve.</p>
     <div class="hero-actions">
       <a href="#planner" class="btn-hero">
         Plan My Visit
@@ -715,8 +715,8 @@ footer{
       <div class="planner-sidebar reveal-l">
         <div class="planner-intro">
           <div class="sec-label">Step by Step</div>
-          <h2 class="sec-h">Everything<br>You Need to<br><em>Know</em></h2>
-          <p class="sec-p" style="margin-top:16px">Tap each topic to get all the info you need — zero searching required.</p>
+          <h2 class="sec-h">Everything<br>You Need to<br><span>Know</span></h2>
+          <p class="sec-p" style="margin-top:16px">Tap each topic to get all the info you need. Zero searching required.</p>
         </div>
         <div class="step-nav">
           <button class="step-btn active" onclick="showPanel(0,this)">
@@ -748,26 +748,26 @@ footer{
           <!-- Panel 0: Times -->
           <div class="panel-content active" id="panel-0">
             <div class="panel-eyebrow">Join Us</div>
-            <div class="panel-title">Service <em>Times</em></div>
-            <div class="panel-body">We meet twice every Sunday morning. Both services are identical — same worship, same message. Pick the time that works best for you.</div>
+            <div class="panel-title">Service <span>Times</span></div>
+            <div class="panel-body">We meet twice every Sunday morning. Both services are identical same worship, same message. Pick the time that works best for you.</div>
             <div class="time-grid time-grid-3">
               <div class="time-card">
                 <div class="tc-day">Sunday Morning</div>
                 <div class="tc-time">9:00 AM</div>
-                <div class="tc-note">Doors open at 8:30 AM</div>
+                <div class="tc-note" > <a href="#" onclick="addToGoogleCalendar(event)" class="cal-btn cal-btn-google"> Doors open at 8:30 AM</a></div>
               </div>
               <div class="time-card">
                 <div class="tc-day">Sunday Morning</div>
                 <div class="tc-time">10:30 AM</div>
-                <div class="tc-note">Doors open at 10:00 AM</div>
+                <div class="tc-note"> <a href="#" onclick="addToGoogleCalendar(event)" class="cal-btn cal-btn-google"> Doors open at 10:00 AM</a></div>
               </div>
               <div class="time-card">
                 <div class="tc-day">Sunday Morning</div>
                 <div class="tc-time">12:00 PM</div>
-                <div class="tc-note">Doors open at 11:30 AM</div>
+                <div class="tc-note"> <a href="#" onclick="addToGoogleCalendar(event)" class="cal-btn cal-btn-google"> Doors open at 11:30 AM</a></div>
               </div>
             </div>
-            <div class="tc-meta">All services are identical — same worship, same message.</div>
+            <div class="tc-meta">All services are identical. Same worship, same message.</div>
             <div class="cal-btns">
               <a href="#" onclick="addToGoogleCalendar(event)" class="cal-btn cal-btn-google">Add to Google Calendar</a>
               <a href="#" onclick="addToAppleCalendar(event)" class="cal-btn cal-btn-apple">Add to Apple Calendar</a>
@@ -777,38 +777,38 @@ footer{
           <!-- Panel 1: Location -->
           <div class="panel-content" id="panel-1">
             <div class="panel-eyebrow">Find Us</div>
-            <div class="panel-title"><em>Location</em> & Parking</div>
+            <div class="panel-title"><span>Location</span> & Parking</div>
             <div class="map-block">
               <div class="map-pin-anim">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--teal)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+
                 <div class="map-addr" style="color:rgba(255,255,255,.5);font-size:.8rem;margin-top:6px">Milwaukee, WI</div>
               </div>
             </div>
             <div class="panel-body">Free parking is available on-site. Our parking team will be outside to guide you in. We recommend arriving 10–15 minutes early on your first visit. We now offer parking services at the DMV across the street. We have a designated bus service from the DMV to the church.</div>
             <div class="check-list">
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Free Parking</h4><p>On-site, no permit needed</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Parking Team</h4><p>Greeters guide you from the lot</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Accessible Entry</h4><p>ADA-compliant access throughout</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Free Parking</h4><p>On-site, no permit needed</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Parking Team</h4><p>Greeters guide you from the lot</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Accessible Entry</h4><p>ADA-compliant access throughout</p></div></div>
             </div>
           </div>
 
           <!-- Panel 2: Expect -->
           <div class="panel-content" id="panel-2">
             <div class="panel-eyebrow">First Timer?</div>
-            <div class="panel-title">What to <em>Expect</em></div>
-            <div class="panel-body">Here's a quick look at your first 75 minutes at Evolve. No surprises — just good music, honest teaching, and people who are glad you came.</div>
+            <div class="panel-title">What to <span>Expect</span></div>
+            <div class="panel-body">Here's a quick look at your first 75 minutes at Evolve. No surprises just good music, honest teaching, and people who are glad you came.</div>
             <div class="check-list">
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Worship (20–25 min)</h4><p>Live band. High energy. Lyrics on screen.</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Welcome & Announcements</h4><p>Brief &amp; never awkward for guests.</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Message (35–40 min)</h4><p>Practical, Bible-based teaching from Pastor Ken.</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>After Service</h4><p>Coffee, community, meet the team — no rush.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Worship (20–25 min)</h4><p>Live band. High energy. Lyrics on screen.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Welcome & Announcements</h4><p>Brief &amp; never awkward for guests.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Message (35–40 min)</h4><p>Practical, Bible-based teaching from Pastor Ken.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>After Service</h4><p>Coffee, community, meet the team.</p></div></div>
             </div>
           </div>
 
           <!-- Panel 3: Kids -->
           <div class="panel-content" id="panel-3">
             <div class="panel-eyebrow">Evolve Kids</div>
-            <div class="panel-title">Your Kids Will<br><em>Love It Here</em></div>
+            <div class="panel-title">Your Kids Will<br><span>Love It Here</span></div>
             <div class="panel-body">Safe, fun, age-appropriate environments for every child from birth through 5th grade. Available at both Sunday services.</div>
             <div class="kids-grid">
               <div class="kid-card"><div class="kid-age">Birth – 2 Yrs</div><div class="kid-name">Nursery</div></div>
@@ -821,12 +821,12 @@ footer{
           <!-- Panel 4: What to Wear -->
           <div class="panel-content" id="panel-4">
             <div class="panel-eyebrow">Come As You Are</div>
-            <div class="panel-title">No <em>Dress Code.</em><br>Ever.</div>
-            <div class="panel-body">Jeans and a hoodie, business casual, Sunday best — it's all welcome here. What matters is that you show up. We mean it.</div>
+            <div class="panel-title">No <span>Dress Code.</span><br>Ever.</div>
+            <div class="panel-body">Jeans and a hoodie, business casual, Sunday best. It's all welcome here. What matters is that you show up. We mean it.</div>
             <div class="check-list">
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Casual is perfect</h4><p>Jeans, t-shirts, sneakers — all good.</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>Dressed up? Also perfect</h4><p>Wear whatever makes you comfortable.</p></div></div>
-              <div class="check-item"><div class="check-icon check-icon-plain">—</div><div class="check-text"><h4>You won't be put on the spot</h4><p>No standing, no introductions, no pressure.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Casual is perfect</h4><p>Jeans, t-shirts, sneakers it's all good.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>Dressed up? Also perfect</h4><p>Wear whatever makes you comfortable.</p></div></div>
+              <div class="check-item"><div class="check-text"><h4>You won't be put on the spot</h4><p>No standing, no introductions, no pressure.</p></div></div>
             </div>
           </div>
 
@@ -842,12 +842,12 @@ footer{
   <div class="sec-inner">
     <div class="expect-intro reveal">
       <div class="sec-label" style="justify-content:center">Your Visit</div>
-      <h2 class="sec-h">A Look Inside<br>Your <em>First Sunday</em></h2>
-      <p class="sec-p">From the parking lot to the final song — here's exactly what your morning looks like at Evolve.</p>
+      <h2 class="sec-h">A Look Inside<br>Your <span>First Sunday</span></h2>
+      <p class="sec-p">From the parking lot to the final song, here's exactly what your morning looks like at Evolve.</p>
     </div>
     <div class="expect-timeline">
       <div class="et-item reveal d1">
-        <div class="et-icon-wrap et-icon-text">P</div>
+
         <div class="et-body">
           <div class="et-time">Arrive 10–15 min early</div>
           <div class="et-title">Parking & Welcome</div>
@@ -855,7 +855,7 @@ footer{
         </div>
       </div>
       <div class="et-item reveal d2">
-        <div class="et-icon-wrap et-icon-text">—</div>
+
         <div class="et-body">
           <div class="et-time">Before service</div>
           <div class="et-title">Coffee & Lobby</div>
@@ -863,7 +863,7 @@ footer{
         </div>
       </div>
       <div class="et-item reveal d3">
-        <div class="et-icon-wrap et-icon-text">—</div>
+
         <div class="et-body">
           <div class="et-time">First 20–25 minutes</div>
           <div class="et-title">Worship</div>
@@ -871,7 +871,7 @@ footer{
         </div>
       </div>
       <div class="et-item reveal d4">
-        <div class="et-icon-wrap et-icon-text">—</div>
+
         <div class="et-body">
           <div class="et-time">35–40 minutes</div>
           <div class="et-title">The Message</div>
@@ -879,7 +879,7 @@ footer{
         </div>
       </div>
       <div class="et-item reveal d5">
-        <div class="et-icon-wrap et-icon-text">—</div>
+
         <div class="et-body">
           <div class="et-time">After service</div>
           <div class="et-title">Connect & Community</div>
@@ -896,23 +896,23 @@ footer{
     <div class="chat-layout">
       <div class="reveal-l">
         <div class="sec-label">Got Questions?</div>
-        <h2 class="sec-h light">Ask Anything.<br><em>Get Answers</em><br>Instantly.</h2>
+        <h2 class="sec-h light">Ask Anything.<br><span>Get Answers</span><br>Instantly.</h2>
         <p class="sec-p light" style="margin-top:16px">Our AI assistant knows everything about Evolve. Tap a question below or type your own — no waiting, no phone calls.</p>
         <div class="chat-bubbles">
           <div class="chat-suggestion" onclick="sendSuggestion('What time are services?')">
-            <div class="chat-suggestion-icon"></div>
+
             <span>What time are services?</span>
           </div>
           <div class="chat-suggestion" onclick="sendSuggestion('Is there childcare available?')">
-            <div class="chat-suggestion-icon"></div>
+
             <span>Is there childcare available?</span>
           </div>
           <div class="chat-suggestion" onclick="sendSuggestion('Where is the church located?')">
-            <div class="chat-suggestion-icon"></div>
+
             <span>Where is the church located?</span>
           </div>
           <div class="chat-suggestion" onclick="sendSuggestion('What should I wear?')">
-            <div class="chat-suggestion-icon"></div>
+
             <span>What should I wear?</span>
           </div>
         </div>
@@ -941,7 +941,7 @@ footer{
           <div class="chat-input-area">
             <input class="chat-input" id="chat-input" type="text" placeholder="Type a question..." onkeydown="if(event.key==='Enter')sendMessage()"/>
             <button class="chat-send" onclick="sendMessage()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+
             </button>
           </div>
         </div>
@@ -956,52 +956,52 @@ footer{
     <div class="kids-layout">
       <div class="reveal-l">
         <div class="sec-label">Evolve Kids</div>
-        <h2 class="sec-h light">They'll Look Forward<br>to <em>Sunday</em> Too</h2>
+        <h2 class="sec-h light">They'll Look Forward<br>to <span>Sunday</span> Too</h2>
         <p class="sec-p light" style="margin-top:16px">Evolve Kids is a world-class children's ministry built on the belief that kids can have a genuine encounter with God — in their own language.</p>
         <div class="kids-features">
           <div class="kf-item">
-            <div class="kf-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="kf-check"></div>
             <p><strong>Secure check-in system</strong> — every child, every service</p>
           </div>
           <div class="kf-item">
-            <div class="kf-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="kf-check"></div>
             <p><strong>Background-checked volunteers</strong> — safety is our #1 priority</p>
           </div>
           <div class="kf-item">
-            <div class="kf-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="kf-check"></div>
             <p><strong>Age-specific curriculum</strong> — not just babysitting</p>
           </div>
           <div class="kf-item">
-            <div class="kf-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="kf-check"></div>
             <p><strong>Pickup tag system</strong> — parents get a tag at check-in</p>
           </div>
           <div class="kf-item">
-            <div class="kf-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <div class="kf-check"></div>
             <p><strong>Pager alert</strong> — we'll reach you instantly if needed</p>
           </div>
         </div>
       </div>
       <div class="kids-age-cards reveal-r d2">
         <div class="kac">
-          
+
           <div class="kac-label">Ages Birth – 2</div>
           <div class="kac-name">Nursery</div>
           <div class="kac-desc">A calm, safe space for your littlest ones with trained care workers.</div>
         </div>
         <div class="kac">
-          
+
           <div class="kac-label">Ages 3 – 5</div>
           <div class="kac-name">Preschool</div>
           <div class="kac-desc">Play, stories, and big truths in a small-world format they understand.</div>
         </div>
         <div class="kac">
-          
+
           <div class="kac-label">K – 2nd Grade</div>
           <div class="kac-name">Lower Elementary</div>
           <div class="kac-desc">High-energy worship, games, and lessons that spark faith.</div>
         </div>
         <div class="kac">
-          
+
           <div class="kac-label">3rd – 5th Grade</div>
           <div class="kac-name">Upper Elementary</div>
           <div class="kac-desc">Real conversations, real faith, designed for kids who are asking real questions.</div>
@@ -1017,7 +1017,7 @@ footer{
     <div class="faq-layout">
       <div class="faq-sticky reveal-l">
         <div class="sec-label">FAQs</div>
-        <h2 class="sec-h">Still<br>Have<br><em>Questions?</em></h2>
+        <h2 class="sec-h">Still<br>Have<br><span>Questions?</span></h2>
         <div class="faq-cta">
           <a href="mailto:info@evolvenation.org" class="faq-cta-card">
             <div class="fcc-text"><h4>Email Us</h4><p>info@evolvenation.org</p></div>
@@ -1032,27 +1032,27 @@ footer{
       </div>
       <div class="faq-accordion reveal-r">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Will I be asked to stand or introduce myself? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">Will I be asked to stand or introduce myself? </button>
           <div class="faq-a"><p>Never. We know walking into a new church can feel vulnerable. You will not be singled out, asked to raise your hand, or put on the spot in any way.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">What if I don't have a church background? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">What if I don't have a church background? </button>
           <div class="faq-a"><p>You're exactly who we're thinking about when we prepare each week. No prior knowledge required. Pastor Ken teaches in a way that meets you right where you are.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is there a specific parking area for first-timers? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">Is there a specific parking area for first-timers? </button>
           <div class="faq-a"><p>We have reserved "First Time Guest" parking spots close to the entrance. Look for the signage and our parking team will point you right to them.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Can I watch online instead? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">Can I watch online instead? </button>
           <div class="faq-a"><p>Yes! We stream live at <a href="https://www.evolvenation.org/home-2" target="_top">evolvenation.org</a>  every Sunday at 10:30 AM and 12 PM. It's a great way to check us out before you visit in person — no signup needed.</p></div>
         </div>
    <!--     <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is there coffee? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">Is there coffee? </button>
           <div class="faq-a"><p>Free coffee, always. It's one of the first things people notice and one of the most important things we do. Come early and grab a cup before you find your seat.</p></div>
         </div>-->
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How do I connect beyond Sunday? <span class="faq-q-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">How do I connect beyond Sunday? </button>
           <div class="faq-a"><p>Head to the Connect Table after service — our team will walk you through small groups, volunteer opportunities, and next steps. Or visit <a href="https://www.evolvenation.org/home-2" target="_top">evolvenation.org</a> to explore on your own time.</p></div>
         </div>
       </div>
@@ -1370,7 +1370,7 @@ function buildReply(raw) {
     return `Here's a full picture of a Sunday at Evolve: doors open 30 min early with <strong>free coffee</strong> in the lobby. Service kicks off with about 20–25 min of live contemporary worship from our band. Then Pastor Ken brings a 35–40 minute message — practical, honest, and grounded in scripture. We close with a moment to respond. Total time: about 75 minutes. Evolve Kids runs simultaneously for children. You'll never be put on the spot. Just show up and experience it.`;
   }
 
-  // ── IS THERE A DRESS CODE ──  
+  // ── IS THERE A DRESS CODE ──
   if (match(m, ['do i need to dress up', 'should i dress up', 'is there a dress', 'can i wear jeans', 'can i come casual', 'can i wear shorts', 'hoodies ok', 'is casual ok', 'can i wear'])) {
     chatCtx.lastTopic = 'dress';
     return `Yes, jeans are absolutely fine — hoodies too! There is <strong>no dress code</strong> at Evolve, period. People come in everything from sweats to Sunday best and nobody bats an eye. We care about you being there, not what you're wearing.`;

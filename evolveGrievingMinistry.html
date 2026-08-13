@@ -6,7 +6,7 @@
      ============================================================ -->
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&family=Dynalight&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 .egm-root{
   --teal:#42B9D2;
@@ -20,12 +20,11 @@
   --card:rgba(255,255,255,.035);
   --card-brd:rgba(255,255,255,.08);
   --glow:rgba(66,185,210,.35);
-  --serif:'Barlow',sans-serif;
-  --cond:'Barlow Condensed',sans-serif;
-  --script:'Dynalight',cursive;
-  --sans:'Open Sans',sans-serif;
+  --font-body:'Open Sans',sans-serif;
+  --font-display:'Barlow Condensed',sans-serif;
+  --font-accent:'Montserrat',sans-serif;
 
-  font-family:var(--sans);
+  font-family:var(--font-body);
   color:var(--ink);
   background:
     radial-gradient(1200px 600px at 50% -10%, rgba(66,185,210,.10), transparent 60%),
@@ -64,7 +63,7 @@
 }
 .egm-hero__inner{position:relative;padding:0 0 64px;width:100%;}
 .egm-eyebrow{
-  font-family:var(--cond);
+  font-family:var(--font-display);
   text-transform:uppercase;
   letter-spacing:.42em;
   font-weight:600;
@@ -74,7 +73,7 @@
   padding-left:4px;
 }
 .egm-script{
-  font-family:var(--script);
+  font-family:var(--font-accent);
   color:var(--teal);
   font-size:clamp(2rem,6vw,3.4rem);
   line-height:1;
@@ -83,7 +82,7 @@
   text-shadow:0 0 34px var(--glow);
 }
 .egm-hero h1{
-  font-family:var(--cond);
+  font-family:var(--font-display);
   font-weight:700;
   text-transform:uppercase;
   letter-spacing:.01em;
@@ -93,7 +92,7 @@
   max-width:16ch;
 }
 .egm-hero p{
-  font-family:var(--serif);
+  font-family:var(--font-body);
   font-weight:300;
   color:var(--ink);
   font-size:clamp(1.02rem,2.1vw,1.28rem);
@@ -102,7 +101,7 @@
 }
 .egm-cta-row{display:flex;flex-wrap:wrap;gap:14px;}
 .egm-btn{
-  font-family:var(--cond);
+  font-family:var(--font-display);
   text-transform:uppercase;
   letter-spacing:.14em;
   font-weight:600;
@@ -128,18 +127,18 @@
 .egm-section{padding:78px 0;}
 .egm-section--tight{padding:56px 0;}
 .egm-kicker{
-  font-family:var(--cond);
+  font-family:var(--font-display);
   text-transform:uppercase;letter-spacing:.34em;font-weight:600;
   color:var(--teal);font-size:.82rem;margin-bottom:16px;
   display:flex;align-items:center;gap:14px;
 }
 .egm-kicker::before{content:"";width:34px;height:1px;background:var(--teal);opacity:.6;}
 .egm-h2{
-  font-family:var(--cond);font-weight:700;text-transform:uppercase;
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
   font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.02;margin-bottom:20px;
 }
 .egm-lead{
-  font-family:var(--serif);font-weight:300;color:var(--muted);
+  font-family:var(--font-body);font-weight:300;color:var(--muted);
   font-size:clamp(1.02rem,2vw,1.18rem);max-width:66ch;
 }
 
@@ -166,13 +165,13 @@
 @keyframes egmFlicker{0%,100%{opacity:.85;transform:scale(1);}45%{opacity:1;transform:scale(1.12);}70%{opacity:.9;transform:scale(.98);}}
 .egm-verse__stage{min-height:170px;display:flex;flex-direction:column;justify-content:center;}
 .egm-verse__text{
-  font-family:var(--serif);font-weight:300;
+  font-family:var(--font-body);font-weight:300;
   font-size:clamp(1.3rem,3.4vw,2rem);line-height:1.4;
   max-width:24ch;margin:0 auto 16px;
   transition:opacity .7s ease;
 }
 .egm-verse__ref{
-  font-family:var(--cond);text-transform:uppercase;letter-spacing:.28em;
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.28em;
   color:var(--teal);font-size:.92rem;font-weight:600;transition:opacity .7s ease;
 }
 .egm-verse.egm-fade .egm-verse__text,
@@ -208,7 +207,7 @@
 }
 .egm-card__icon svg{width:26px;height:26px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .egm-card h3{
-  font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em;
+  font-family:var(--font-display);text-transform:uppercase;letter-spacing:.03em;
   font-size:1.34rem;font-weight:600;margin-bottom:12px;
 }
 .egm-card p{font-size:.96rem;color:var(--muted);line-height:1.6;}
@@ -226,7 +225,7 @@
   display:flex;align-items:center;justify-content:center;margin-top:2px;
 }
 .egm-assure__check svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-.egm-assure__item h4{font-family:var(--cond);text-transform:uppercase;letter-spacing:.04em;font-size:1.16rem;font-weight:600;margin-bottom:5px;}
+.egm-assure__item h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;font-size:1.16rem;font-weight:600;margin-bottom:5px;}
 .egm-assure__item p{font-size:.94rem;color:var(--muted);}
 
 /* ---------- REACH OUT ---------- */
@@ -239,7 +238,7 @@
 .egm-reach .egm-lead{margin:0 auto 34px;color:var(--ink);}
 .egm-contact{
   display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;margin-top:36px;
-  font-family:var(--cond);letter-spacing:.05em;
+  font-family:var(--font-display);letter-spacing:.05em;
 }
 .egm-contact a,.egm-contact span{
   color:var(--muted);text-decoration:none;font-size:1.02rem;
@@ -346,15 +345,15 @@
       </div>
       <div class="egm-contact">
         <a href="tel:14145104131">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+
           414-510-4131
         </a>
         <a href="mailto:info@evolvenation.org">
-          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+
           info@evolvenation.org
         </a>
         <span>
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+
           6550 N 76th St, Milwaukee WI 53223
         </span>
       </div>
@@ -370,17 +369,17 @@
 
   /* ---------- DATA: single source of truth ---------- */
   var SUPPORT = [
-    { icon:'group', title:'Grief Support Groups',
+    { title:'Grief Support Groups',
       body:'A safe, confidential circle of people walking a similar road, where you can share as much or as little as you like.' },
-    { icon:'listen', title:'One-on-One Care',
+    { title:'One-on-One Care',
       body:'A caring person to sit with you, listen without judgment, and simply be present in the hard moments.' },
-    { icon:'pray', title:'Prayer Covering',
+    { title:'Prayer Covering',
       body:'Our prayer team will lift you and your loved ones up by name, carrying you when you have no words left.' },
-    { icon:'hands', title:'Practical Support',
+    { title:'Practical Support',
       body:'From a meal to a phone call to a helping hand, practical love for the seasons when everyday life feels like too much.' },
-    { icon:'candle', title:'Remembrance',
+    { title:'Remembrance',
       body:'Space to honor and remember the ones we\u2019ve lost \u2014 because love, and memory, do not end.' },
-    { icon:'community', title:'Ongoing Community',
+    { title:'Ongoing Community',
       body:'Grief is a long road. Our Life Groups and church family are here for the whole journey, not just the first week.' }
   ];
 
@@ -398,23 +397,11 @@
     { text:'He will wipe every tear from their eyes; there will be no more death or mourning.', ref:'Revelation 21:4' }
   ];
 
-  /* ---------- ICONS ---------- */
-  var ICONS = {
-    group:'<circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6"/><path d="M17.5 13.5A6.5 6.5 0 0 1 21.5 20"/>',
-    listen:'<path d="M3 12a9 9 0 0 1 18 0"/><path d="M21 15v2a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3z"/><path d="M3 15v2a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3z"/>',
-    pray:'<path d="M12 3v9"/><path d="M12 12c-1.5 0-3 1-3 3v6h6v-6c0-2-1.5-3-3-3z"/><path d="M9 8c0-2 1.3-3 3-3s3 1 3 3"/>',
-    hands:'<path d="M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 6C19 16.5 12 21 12 21z"/>',
-    candle:'<path d="M12 3c1.5 1.6 1.5 3.4 0 5-1.5-1.6-1.5-3.4 0-5z"/><rect x="9" y="9" width="6" height="11" rx="1.4"/><path d="M8 20h8"/>',
-    community:'<circle cx="12" cy="7" r="3"/><path d="M6 21a6 6 0 0 1 12 0"/><path d="M4 13.5A3 3 0 0 1 6 12"/><path d="M20 13.5A3 3 0 0 0 18 12"/>'
-  };
-  var CHECK = '<path d="M20 6 9 17l-5-5"/>';
-
   /* ---------- RENDER: support cards ---------- */
   var cardsEl = document.getElementById('egmCards');
   if(cardsEl){
     cardsEl.innerHTML = SUPPORT.map(function(s){
       return '<div class="egm-card egm-reveal">'
-        + '<div class="egm-card__icon"><svg viewBox="0 0 24 24">'+(ICONS[s.icon]||'')+'</svg></div>'
         + '<h3>'+s.title+'</h3>'
         + '<p>'+s.body+'</p>'
         + '</div>';
@@ -426,7 +413,6 @@
   if(assureEl){
     assureEl.innerHTML = ASSURE.map(function(a){
       return '<div class="egm-assure__item">'
-        + '<span class="egm-assure__check"><svg viewBox="0 0 24 24">'+CHECK+'</svg></span>'
         + '<div><h4>'+a.title+'</h4><p>'+a.body+'</p></div>'
         + '</div>';
     }).join('');

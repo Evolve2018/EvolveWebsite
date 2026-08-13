@@ -4,15 +4,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Evolve Church — Life Groups</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     /* ─── RESET & BASE ─────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --gold:      #C9A84C;
-      --gold-lt:   #E8CC7A;
-      --gold-dk:   #9A7530;
+      --gold:      #42B9D2;
+      --gold-lt:   #d6f2f8;
+      --gold-dk:   #2A8FA8;
       --dark:      #0f1623;
       --dark-2:    #141d2e;
       --dark-3:    #1a2438;
@@ -31,7 +31,7 @@
     body {
       background: var(--dark);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 15px;
       line-height: 1.65;
       /* NOTE: overflow-x removed intentionally — it was preventing accurate
@@ -114,7 +114,7 @@
     .hero-eyebrow::after  { margin-left:  .75rem; }
 
     .hero-logo {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(3.2rem, 9vw, 6.5rem);
       font-weight: 900;
       line-height: 1;
@@ -124,12 +124,12 @@
       animation: fadeUp .7s .25s both;
     }
 
-    .hero-logo em { color: var(--gold); font-style: italic; }
+    .hero-logo span { color: var(--gold);  }
 
     .hero-sub {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(.95rem, 2.2vw, 1.35rem);
-      font-style: italic;
+
       font-weight: 400;
       color: var(--text-muted);
       margin-top: .6rem;
@@ -209,13 +209,13 @@
       top: -2rem; left: 50%;
       transform: translateX(-50%);
       pointer-events: none;
-      font-family: Georgia, serif;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .verse-text {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(1.05rem, 2.4vw, 1.5rem);
-      font-style: italic;
+
       color: var(--text);
       max-width: 660px;
       margin: 0 auto .9rem;
@@ -290,7 +290,7 @@
       border-radius: 100px;
       padding: .38rem 2.2rem .38rem 1.1rem;
       font-size: .8rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-weight: 500;
       cursor: pointer;
       transition: all var(--t);
@@ -330,7 +330,7 @@
       padding: .35rem 1.1rem;
       border-radius: 100px;
       font-size: .78rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-weight: 500;
       cursor: pointer;
       transition: all var(--t);
@@ -370,7 +370,7 @@
       border-radius: 100px;
       padding: .38rem 1.1rem .38rem 2.3rem;
       font-size: .82rem;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       width: 210px;
       transition: all var(--t);
       outline: none;
@@ -407,7 +407,7 @@
     }
 
     .stat-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
       color: var(--gold);
@@ -452,14 +452,14 @@
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(1.4rem, 2.8vw, 2rem);
       font-weight: 700;
       color: var(--text);
       white-space: nowrap;
     }
 
-    .section-title em { color: var(--gold); font-style: italic; }
+    .section-title span { color: var(--gold);  }
 
     .section-rule {
       flex: 1;
@@ -552,7 +552,7 @@
     }
 
     .card-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--text);
@@ -677,7 +677,7 @@
       letter-spacing: .1em;
     }
 
-    .site-footer em { color: var(--gold); font-style: normal; }
+    .site-footer span { color: var(--gold);  }
 
     /* ─── ANIMATIONS ────────────────────────────────────── */
     @keyframes fadeUp {
@@ -755,7 +755,7 @@
     .modal-pill-row { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem; }
 
     .modal-title {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.6rem;
       font-weight: 700;
       color: var(--text);
@@ -853,16 +853,14 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="top">
   <div class="hero-orb"></div>
-  <h1 class="hero-logo">Evolve <em>Church</em></h1>
+  <h1 class="hero-logo">Evolve <span>Church</span></h1>
   <p class="hero-sub">Active Life Groups</p>
   <div class="hero-rule"></div>
   <p class="hero-desc">Find your community. Join a life group. Grow together.</p>
   <div class="hero-cta">
     <a href="#groups" class="cta-btn">
       Explore Groups
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
-      </svg>
+
     </a>
   </div>
 </section>
@@ -892,9 +890,7 @@
     <button class="filter-btn" data-fmt="virtual">Virtual</button>
     <div class="search-wrap">
       <span class="search-ico">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>
+
       </span>
       <input class="search-input" id="searchInput" type="text" placeholder="Search groups, leaders…" autocomplete="off"/>
     </div>
@@ -931,27 +927,27 @@
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-details">
         <div class="modal-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>
+
           <span class="modal-detail-label">Leader</span>
           <strong id="modalLeader"></strong>
         </div>
         <div class="modal-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>
+
           <span class="modal-detail-label">Day</span>
           <strong id="modalDay"></strong>
         </div>
         <div class="modal-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/></svg>
+
           <span class="modal-detail-label">Time</span>
           <strong id="modalTime"></strong>
         </div>
         <div class="modal-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>
+
           <span class="modal-detail-label">Cadence</span>
           <strong id="modalCadence"></strong>
         </div>
         <div class="modal-detail-row">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/></svg>
+
           <span class="modal-detail-label">Format</span>
           <strong id="modalFormat"></strong>
         </div>
@@ -960,7 +956,7 @@
         <div class="modal-cadence"><div class="modal-cadence-dot"></div><span id="modalCadence2"></span></div>
         <a class="modal-join-btn" id="modalJoinBtn" href="#" target="_blank" rel="noopener noreferrer">
           Join on GroupMe
-          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/></svg>
+
         </a>
       </div>
     </div>
@@ -1017,9 +1013,9 @@ const SECTIONS = [
   { id:'multicultural', label:'',               accent:'Multicultural',      subs:['in-person'] },
 ];
 
-const ICO_PERSON = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg>`;
-const ICO_CAL   = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/></svg>`;
-const ICO_EXT   = `<svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/></svg>`;
+const ICO_PERSON = ``;
+const ICO_CAL   = ``;
+const ICO_EXT   = ``;
 
 function buildCard(g) {
   const fmtClass = g.fmt === 'virtual' ? 'pill-vr' : 'pill-ip';
@@ -1053,7 +1049,7 @@ function buildSections() {
     const titlePrefix = sec.label ? `${sec.label} ` : '';
     html += `<div class="section-wrap" data-section="${sec.id}">
       <div class="section-head">
-        <h2 class="section-title">${titlePrefix}<em>${sec.accent}</em></h2>
+        <h2 class="section-title">${titlePrefix}<span>${sec.accent}</span></h2>
         <div class="section-rule"></div>
         <span class="section-ct" id="ct-${sec.id}">${total} Group${total !== 1 ? 's' : ''}</span>
       </div>`;
