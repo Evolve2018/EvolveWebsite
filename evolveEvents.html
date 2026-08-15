@@ -1170,5 +1170,32 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 loadEvents();
 </script>
+
+<script>
+// ─── IFRAME HEIGHT REPORTER ──────────────────────────────────────
+// This page was missing sendHeight() entirely; adding it now so the
+// TCC embed resizes correctly, matching the pattern used elsewhere.
+// Must be defined BEFORE evolveFooter.js loads (function declarations
+// don't hoist across separate <script> tags), so evolveFooter.js's
+// `typeof sendHeight === 'function'` check picks it up correctly.
+function sendHeight() {
+  window.parent.postMessage(
+    { type: 'iframeHeight', height: document.documentElement.scrollHeight },
+    '*'
+  );
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(sendHeight).observe(document.body);
+}
+setTimeout(sendHeight, 300);
+setTimeout(sendHeight, 1000);
+</script>
+
+<!-- ═══ FOOTER ═══ -->
+<div id="evolve-footer-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
+
 </body>
 </html>

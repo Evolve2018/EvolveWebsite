@@ -33,7 +33,7 @@
       "@media (max-width:900px){.ef-grid{grid-template-columns:1fr 1fr;}}" +
       "@media (max-width:560px){.ef-grid{grid-template-columns:1fr;text-align:center;}}" +
 
-      ".ef-logo{display:inline-block;height:44px;width:auto;margin:0 0 4px;}" +
+      ".ef-logo{display:inline-block;height:60px;width:auto;margin:0 0 10px;}" +
 
       /* signature: self-drawing growth line under the wordmark */
       ".ef-growline{display:block;width:120px;height:10px;margin:6px 0 18px;overflow:visible;}" +
