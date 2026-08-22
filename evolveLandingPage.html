@@ -128,7 +128,7 @@
     z-index:2;
     display:flex;
     padding:clamp(1.4rem, 3vw, 2.6rem);
-    background-image:linear-gradient(180deg, rgba(7,20,26,0.55) 0%, rgba(7,20,26,0.85) 100%), url('https://media.thechurchcoassets.com/accounts/5782/a861353a-a5dc-47e3-812c-6857e7bf6104-./DSC09662.jpg');
+    background-image:linear-gradient(180deg, rgba(7,20,26,0.55) 0%, rgba(7,20,26,0.85) 100%), var(--panel-img);
     background-size:cover;
     background-position:center;
     overflow:hidden;
@@ -160,7 +160,7 @@
 
   .panel:hover,
   .panel:focus-visible{
-    background-image:linear-gradient(180deg, rgba(66,185,210,0.18) 0%, rgba(7,20,26,0.75) 100%), url('https://media.thechurchcoassets.com/accounts/5782/a861353a-a5dc-47e3-812c-6857e7bf6104-./DSC09662.jpg');
+    background-image:linear-gradient(180deg, rgba(66,185,210,0.18) 0%, rgba(7,20,26,0.75) 100%), var(--panel-img);
     transform:scale(1.025);
   }
 
@@ -392,7 +392,8 @@
 
 
 
-    <a class="panel" href="index.html" aria-label="Evolve Church">
+    <a class="panel" href="index.html" aria-label="Evolve Church"
+   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/d51b758e-e7dc-4741-8fda-53412ce2be93-./DSC09241.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Gather</span>
         <h2>Evolve Church</h2>
@@ -401,7 +402,8 @@
       </div>
     </a>
 
-    <a class="panel" href="#evolve-community" aria-label="Evolve Community">
+    <a class="panel" href="#evolve-community" aria-label="Evolve Community"
+   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/a861353a-a5dc-47e3-812c-6857e7bf6104-./DSC09662.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Connect</span>
         <h2>Evolve Community</h2>
@@ -411,14 +413,15 @@
     </a>
 
     <div class="give-wrap">
-      <a class="give-btn" href="#give" target="_top" aria-label="Give Online">
+      <a class="give-btn" href="https://pushpay.com/g/evolvenation?fnd=5AdLKlwoRKROWeb1iQq-AQ&r=No&lang=en&src=qrcode" target="_top" aria-label="Give Online">
 
         <span class="give-label">Give</span>
         <span class="give-sub">Online</span>
       </a>
     </div>
 
-    <a class="panel" href="#evolve-ministries" aria-label="Evolve Ministries">
+    <a class="panel" href="#evolve-ministries" aria-label="Evolve Ministries"
+   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Grow</span>
         <h2>Evolve Ministries</h2>
@@ -427,7 +430,8 @@
       </div>
     </a>
 
-    <a class="panel" href="#evolve-more" aria-label="More from Evolve">
+    <a class="panel" href="#evolve-more" aria-label="More from Evolve" 
+   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Discover</span>
         <h2>Evolve More Stuff</h2>
