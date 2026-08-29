@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Vision: Chosen | Evolve Church</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500;600&family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Barlow', 'Open Sans', sans-serif;
+      color: #e8eef2;
+      background: #07141a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Featured Image ─────────────────────────────── */
+    .wv-featured-img {
+      width: 100%;
+    }
+    .wv-featured-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── Intro Section ────────────────────────────── */
+    .wv-intro {
+      text-align: center;
+      padding: 56px 24px 40px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .wv-intro-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #42B9D2;
+      margin-bottom: 16px;
+    }
+    .wv-intro h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 44px);
+      line-height: 1.15;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+    .wv-intro h1 span {
+      color: #f0c94a;
+    }
+    .wv-intro p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #b0c4cf;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── Impact Strip ─────────────────────────────── */
+    .wv-impact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 32px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .wv-impact-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(66, 185, 210, 0.1);
+      border: 1px solid rgba(66, 185, 210, 0.25);
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      color: #42B9D2;
+      text-transform: uppercase;
+    }
+    /* ── Cost Callout ─────────────────────────────── */
+    .wv-cost {
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .wv-cost-box {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(66,185,210,0.12) 0%, rgba(14,34,68,0.6) 100%);
+      border: 1px solid rgba(66,185,210,0.2);
+      border-radius: 16px;
+      padding: 32px 48px;
+    }
+    .wv-cost-box .wv-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 56px);
+      color: #f0c94a;
+      line-height: 1;
+    }
+    .wv-cost-box .wv-price-sub {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      color: #b0c4cf;
+      margin-top: 8px;
+    }
+    .wv-cost-note {
+      font-size: 15px;
+      color: #8aa3b0;
+      max-width: 560px;
+      margin: 20px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ── Steps Section ────────────────────────────── */
+    .wv-steps {
+      padding: 48px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .wv-steps-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 4vw, 30px);
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 40px;
+    }
+    .wv-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+    .wv-step-num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #42B9D2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #07141a;
+    }
+    .wv-step-content h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .wv-step-content p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #b0c4cf;
+    }
+
+    /* ── Deadline Banner ──────────────────────────── */
+    .wv-deadline {
+      text-align: center;
+      padding: 36px 24px;
+      margin: 0 24px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(240, 201, 74, 0.08);
+      border: 1px solid rgba(240, 201, 74, 0.25);
+      border-radius: 12px;
+    }
+    .wv-deadline-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f0c94a;
+      margin-bottom: 8px;
+    }
+    .wv-deadline-date {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: clamp(20px, 3.5vw, 26px);
+      color: #ffffff;
+    }
+    .wv-deadline-note {
+      font-size: 14px;
+      color: #b0c4cf;
+      margin-top: 6px;
+    }
+
+    /* ── CTA Button ───────────────────────────────── */
+    .wv-cta {
+      text-align: center;
+      padding: 48px 24px 56px;
+    }
+    .wv-cta-btn {
+      display: inline-block;
+      background: #42B9D2;
+      color: #07141a;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 52px;
+      border-radius: 50px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .wv-cta-btn:hover {
+      background: #2A8FA8;
+      transform: translateY(-2px);
+    }
+    .wv-cta-sub {
+      font-size: 14px;
+      color: #8aa3b0;
+      margin-top: 16px;
+    }
+
+    /* ── Closing ──────────────────────────────────── */
+    .wv-closing {
+      text-align: center;
+      padding: 0 24px 56px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .wv-closing p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #b0c4cf;
+      font-style: italic;
+    }
+
+    /* ── Footer Mount ─────────────────────────────── */
+    #evolve-footer-mount { width: 100%; }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .wv-intro { padding: 40px 20px 32px; }
+      .wv-cost-box { padding: 24px 28px; }
+      .wv-step { gap: 14px; }
+      .wv-step-num { width: 40px; height: 40px; font-size: 17px; }
+      .wv-cta-btn { padding: 16px 36px; font-size: 16px; }
+      .wv-deadline { margin: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro -->
+  <section class="wv-intro">
+    <div class="wv-intro-eyebrow">World Vision + Evolve Church</div>
+    <h1>You Didn't Choose a Child.<br><span>A Child Chose You.</span></h1>
+    <p>
+      Poverty steals choices from children, but our church has decided to change that. Through this partnership with World Vision, we're putting the power of choice in the hands of children by empowering them to choose us.
+    </p>
+  </section>
+
+  <!-- Featured Image -->
+  <div class="wv-featured-img">
+    <img
+      src="https://media.thechurchcoassets.com/accounts/5782/bdddeaba-b633-4756-a8bb-98988d9d9b25-./GFX-for-web.png"
+      alt="World Vision Chosen, Encore at Evolve Church"
+      onerror="this.style.display='none'"
+    />
+  </div>
+
+  <!-- Impact Tags -->
+  <div class="wv-impact">
+    <div class="wv-impact-tag">Clean Water</div>
+    <div class="wv-impact-tag">Healthcare</div>
+    <div class="wv-impact-tag">Food Security</div>
+    <div class="wv-impact-tag">Education</div>
+    <div class="wv-impact-tag">Economic Development</div>
+    <div class="wv-impact-tag">The Love of Jesus</div>
+  </div>
+
+  <!-- Cost -->
+  <section class="wv-cost">
+    <div class="wv-cost-box">
+      <div class="wv-price">$39<span style="font-size:0.5em; color:#b0c4cf;">/mo</span></div>
+      <div class="wv-price-sub">per sponsorship</div>
+    </div>
+    <p class="wv-cost-note">
+      Your sponsorship is pooled together with others to provide for the whole community, not just one child.
+    </p>
+  </section>
+
+  <!-- Steps -->
+  <section class="wv-steps">
+    <h2 class="wv-steps-heading">Say YES to Being Chosen</h2>
+
+    <div class="wv-step">
+      <div class="wv-step-num">1</div>
+      <div class="wv-step-content">
+        <h3>Sign Up &amp; Upload Your Photo</h3>
+        <p>Click the button below to sign up through World Vision and upload a photo of yourself for the child who will choose you.</p>
+      </div>
+    </div>
+
+    <div class="wv-step">
+      <div class="wv-step-num">2</div>
+      <div class="wv-step-content">
+        <h3>Pray for the Choosing Party</h3>
+        <p>This Wednesday, children will gather to choose their sponsors. Cover this moment in prayer as they pick the person they want walking alongside them.</p>
+      </div>
+    </div>
+
+    <div class="wv-step">
+      <div class="wv-step-num">3</div>
+      <div class="wv-step-content">
+        <h3>Meet the Child Who Chose You</h3>
+        <p>Join us next Sunday for the big reveal! You'll receive an envelope with your child's photo holding your photo and get to meet the child who chose you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deadline -->
+  <div class="wv-deadline">
+    <div class="wv-deadline-label">Photo Submission Deadline</div>
+    <div class="wv-deadline-date">Sunday, August 30th at 9:00 PM CST</div>
+    <div class="wv-deadline-note">Please submit your photo before the deadline so children can choose you this week.</div>
+  </div>
+
+  <!-- CTA -->
+  <section class="wv-cta">
+    <a
+      class="wv-cta-btn"
+      href="https://www.worldvision.org/lp/evolve-church-2?campaign=400100141&utm_campaign=convert-fy26-chosen-activation&utm_medium=event&utm_source=evolvechurch&utm_content=link"
+      target="_top"
+      rel="noopener noreferrer"
+    >
+      Sign Up Now
+    </a>
+    <p class="wv-cta-sub">You'll be taken to World Vision's site to complete your sign-up.</p>
+  </section>
+
+  <!-- Closing -->
+  <div class="wv-closing">
+    <p>We are truly excited about this partnership with World Vision, and pray you'll join in on this meaningful journey.</p>
+  </div>
+
+  <!-- Shared Footer -->
+  <div id="evolve-footer-mount"></div>
+
+  <script>
+    /* ── iframe height reporting ─────────────────── */
+    function sendHeight() {
+      var h = document.documentElement.scrollHeight;
+      window.parent.postMessage({ type: 'iframeHeight', height: h }, '*');
+      window.parent.postMessage({ type: 'resize', height: h }, '*');
+    }
+
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(sendHeight).observe(document.body);
+    }
+    window.addEventListener('load', sendHeight);
+    setTimeout(sendHeight, 300);
+    setTimeout(sendHeight, 1000);
+  </script>
+
+  <!-- Shared footer script -->
+  <script src="evolveFooter.js?v=10"></script>
+</body>
+</html>
