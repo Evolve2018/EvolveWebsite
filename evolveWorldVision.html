@@ -19,7 +19,7 @@
     /* ── Featured Image ─────────────────────────────── */
     .wv-featured-img {
       max-width: 900px;
-      margin: 0 auto;
+      margin: 24px auto 0;
       padding: 0 24px;
     }
     .wv-featured-img img {
@@ -29,10 +29,24 @@
       object-fit: cover;
     }
 
+    /* ── Video ────────────────────────────────────── */
+    .wv-video {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px 0;
+    }
+    .wv-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      background: #000;
+    }
+
     /* ── Intro Section ────────────────────────────── */
     .wv-intro {
       text-align: center;
-      padding: 80px 24px 40px;
+      padding: 48px 24px 40px;
       max-width: 780px;
       margin: 0 auto;
     }
@@ -230,6 +244,9 @@
       color: #8aa3b0;
       margin-top: 16px;
     }
+    .wv-cta-upper {
+      padding: 8px 24px 24px;
+    }
 
     /* ── Closing ──────────────────────────────────── */
     .wv-closing {
@@ -261,6 +278,14 @@
 </head>
 <body>
 
+  <!-- Video -->
+  <div class="wv-video">
+    <video controls playsinline preload="metadata" poster="https://media.thechurchcoassets.com/accounts/5782/bdddeaba-b633-4756-a8bb-98988d9d9b25-./GFX-for-web.png">
+      <source src="PROMO_Chosen_In-Service__Multi-Sponsor_.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
   <!-- Intro -->
   <section class="wv-intro">
     <div class="wv-intro-eyebrow">World Vision + Evolve Church</div>
@@ -270,14 +295,17 @@
     </p>
   </section>
 
-  <!-- Featured Image -->
-  <div class="wv-featured-img">
-    <img
-      src="https://media.thechurchcoassets.com/accounts/5782/bdddeaba-b633-4756-a8bb-98988d9d9b25-./GFX-for-web.png"
-      alt="World Vision Chosen, Encore at Evolve Church"
-      onerror="this.style.display='none'"
-    />
-  </div>
+  <!-- Upper CTA -->
+  <section class="wv-cta wv-cta-upper">
+    <a
+      class="wv-cta-btn"
+      href="https://www.worldvision.org/lp/evolve-church-2?campaign=400100141&utm_campaign=convert-fy26-chosen-activation&utm_medium=event&utm_source=evolvechurch&utm_content=link"
+      target="_top"
+      rel="noopener noreferrer"
+    >
+      Sign Up Now
+    </a>
+  </section>
 
   <!-- Impact Tags -->
   <div class="wv-impact">
@@ -299,6 +327,15 @@
       Your sponsorship is pooled together with others to provide for the whole community, not just one child.
     </p>
   </section>
+
+  <!-- Featured Image -->
+  <div class="wv-featured-img">
+    <img
+      src="https://media.thechurchcoassets.com/accounts/5782/bdddeaba-b633-4756-a8bb-98988d9d9b25-./GFX-for-web.png"
+      alt="World Vision Chosen, Encore at Evolve Church"
+      onerror="this.style.display='none'"
+    />
+  </div>
 
   <!-- Steps -->
   <section class="wv-steps">
