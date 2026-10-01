@@ -104,20 +104,27 @@
     inset:0;
     width:100%;
     height:100%;
-    z-index:1;
+    z-index:3;
     pointer-events:none;
+    filter:drop-shadow(0 1px 4px rgba(0,0,0,0.65));
   }
 
   .roots path{
     fill:none;
     stroke:url(#rootGradient);
-    stroke-width:.35;
+    stroke-width:.6;
     stroke-linecap:round;
     vector-effect:non-scaling-stroke;
     stroke-dasharray:48;
     stroke-dashoffset:48;
     animation:draw 1s ease forwards;
-    opacity:.8;
+    opacity:.95;
+  }
+
+  .roots polygon{
+    fill:var(--gold);
+    opacity:0;
+    animation:popIn .4s ease forwards;
   }
 
   @keyframes draw{ to{ stroke-dashoffset:0; } }
@@ -127,6 +134,8 @@
     position:relative;
     z-index:2;
     display:flex;
+    align-items:flex-end;
+    justify-content:flex-end;
     padding:clamp(1.4rem, 3vw, 2.6rem);
     background-image:linear-gradient(180deg, rgba(7,20,26,0.55) 0%, rgba(7,20,26,0.85) 100%), var(--panel-img);
     background-size:cover;
@@ -139,15 +148,12 @@
     animation:fadeUp .8s ease forwards;
   }
 
-  .panel:nth-child(2){ animation-delay:.5s; align-items:flex-start; justify-content:flex-start; border-right:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(3){ animation-delay:.62s; align-items:flex-start; justify-content:flex-end;  border-bottom:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(4){ animation-delay:.74s; align-items:flex-end;   justify-content:flex-start; border-right:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(5){ animation-delay:.86s; align-items:flex-end;   justify-content:flex-end; }
+  .panel:nth-child(2){ animation-delay:.5s; border-right:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06); }
+  .panel:nth-child(3){ animation-delay:.62s; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .panel:nth-child(4){ animation-delay:.74s; border-right:1px solid rgba(255,255,255,0.06); }
+  .panel:nth-child(5){ animation-delay:.86s; }
 
-  .panel:nth-child(2) .panel-content{ text-align:left; }
-  .panel:nth-child(3) .panel-content{ text-align:right; }
-  .panel:nth-child(4) .panel-content{ text-align:left; }
-  .panel:nth-child(5) .panel-content{ text-align:right; }
+  .panel-content{ text-align:right; }
 
   .panel::before{
     content:"";
@@ -164,10 +170,7 @@
     transform:scale(1.025);
   }
 
-  .panel:nth-child(2):hover, .panel:nth-child(2):focus-visible{ transform-origin:top left; }
-  .panel:nth-child(3):hover, .panel:nth-child(3):focus-visible{ transform-origin:top right; }
-  .panel:nth-child(4):hover, .panel:nth-child(4):focus-visible{ transform-origin:bottom left; }
-  .panel:nth-child(5):hover, .panel:nth-child(5):focus-visible{ transform-origin:bottom right; }
+  .panel:hover, .panel:focus-visible{ transform-origin:bottom right; }
 
   .panel:hover::before,
   .panel:focus-visible::before{ opacity:1; }
@@ -175,10 +178,6 @@
   .panel:focus-visible{ outline:2px solid var(--teal); outline-offset:-4px; }
 
   .panel-content{ position:relative; max-width:340px; }
-
-
-
-
   .panel-eyebrow{
     display:block;
     font-family:'Montserrat', sans-serif;
@@ -230,20 +229,18 @@
     letter-spacing:.2em;
     text-transform:uppercase;
     color:var(--teal);
+    flex-direction:row-reverse;
   }
 
   .cta svg{ width:13px; height:13px; transition:transform .35s ease; }
-  .panel:nth-child(3) .cta, .panel:nth-child(5) .cta{ flex-direction:row-reverse; }
-  .panel:hover .cta svg, .panel:focus-visible .cta svg{ transform:translateX(5px); }
-  .panel:nth-child(3):hover .cta svg, .panel:nth-child(5):hover .cta svg,
-  .panel:nth-child(3):focus-visible .cta svg, .panel:nth-child(5):focus-visible .cta svg{ transform:translateX(-5px); }
+  .panel:hover .cta svg, .panel:focus-visible .cta svg{ transform:translateX(-5px); }
 
   /* ---------- GIVE BUTTON (hub center) ---------- */
   .give-wrap{
     position:absolute;
     top:50%; left:50%;
     transform:translate(-50%,-50%);
-    z-index:3;
+    z-index:4;
     opacity:0;
     animation:popIn .7s cubic-bezier(.22,1,.36,1) forwards;
     animation-delay:1s;
@@ -252,8 +249,8 @@
   .give-wrap::before{
     content:"";
     position:absolute;
-    inset:-14px;
-    border-radius:50%;
+    inset:-18px;
+    border-radius:40px;
     background:radial-gradient(circle, rgba(240,201,74,0.35), transparent 70%);
     animation:pulse 2.6s ease-in-out infinite;
   }
@@ -264,10 +261,10 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:.25rem;
-    width:clamp(108px, 11vw, 148px);
-    height:clamp(108px, 11vw, 148px);
-    border-radius:50%;
+    gap:.3rem;
+    width:clamp(170px, 16vw, 230px);
+    height:clamp(118px, 10vw, 150px);
+    border-radius:30px;
     background:radial-gradient(circle at 35% 30%, #ffdd8a, var(--gold) 55%, var(--gold-dark) 100%);
     color:var(--navy-deep);
     box-shadow:0 10px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.15) inset;
@@ -275,26 +272,26 @@
   }
 
   .give-btn:hover, .give-btn:focus-visible{
-    transform:scale(1.07);
+    transform:scale(1.06);
     box-shadow:0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.2) inset;
     outline:none;
   }
 
-  .give-btn svg{ width:26px; height:26px; }
+  .give-btn svg{ width:32px; height:32px; }
 
   .give-label{
     font-family:'Barlow Condensed', sans-serif;
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:.08em;
-    font-size:1.05rem;
+    font-size:1.3rem;
   }
 
   .give-sub{
     font-family:'Montserrat', sans-serif;
     font-weight:600;
-    font-size:.55rem;
-    letter-spacing:.15em;
+    font-size:.62rem;
+    letter-spacing:.18em;
     text-transform:uppercase;
     opacity:.75;
   }
@@ -390,23 +387,42 @@
 
   <div class="hub">
 
+    <svg class="roots" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="rootGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f0c94a"/>
+          <stop offset="100%" stop-color="#42B9D2"/>
+        </linearGradient>
+      </defs>
 
+      <path d="M50,50 Q35,40 25,25" style="animation-delay:1.15s"/>
+      <polygon points="0,-3 6,0 0,3" transform="translate(25,25) rotate(225)" style="animation-delay:2.0s"/>
+
+      <path d="M50,50 Q65,40 75,25" style="animation-delay:1.25s"/>
+      <polygon points="0,-3 6,0 0,3" transform="translate(75,25) rotate(-45)" style="animation-delay:2.1s"/>
+
+      <path d="M50,50 Q35,60 25,75" style="animation-delay:1.35s"/>
+      <polygon points="0,-3 6,0 0,3" transform="translate(25,75) rotate(135)" style="animation-delay:2.2s"/>
+
+      <path d="M50,50 Q65,60 75,75" style="animation-delay:1.45s"/>
+      <polygon points="0,-3 6,0 0,3" transform="translate(75,75) rotate(45)" style="animation-delay:2.3s"/>
+    </svg>
 
     <a class="panel" href="index.html" aria-label="Evolve Church"
    style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/d51b758e-e7dc-4741-8fda-53412ce2be93-./DSC09241.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Gather</span>
-        <h2>Sunday Worship Experience</h2>
+        <h2>Evolve Church</h2>
         <p>Sunday services, sermons, and everything about who we are as a church.</p>
         <span class="cta">Enter </span>
       </div>
     </a>
 
-    <a class="panel" href="https://evolvenation.org" aria-label="Evolve Community"
+    <a class="panel" href="#evolve-community" aria-label="Evolve Community"
    style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/a861353a-a5dc-47e3-812c-6857e7bf6104-./DSC09662.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Connect</span>
-        <h2>Discipleship</h2>
+        <h2>Evolve Community</h2>
         <p>Life groups, events, and the ways we stay connected throughout the week.</p>
         <span class="cta">Enter </span>
       </div>
@@ -424,7 +440,7 @@
    style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Grow</span>
-        <h2>Outreach</h2>
+        <h2>Evolve Ministries</h2>
         <p>Kids, students, men, and every ministry built to reach the next generation.</p>
         <span class="cta">Enter </span>
       </div>
@@ -434,7 +450,7 @@
    style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
       <div class="panel-content">
         <span class="panel-eyebrow">Discover</span>
-        <h2>Community</h2>
+        <h2>Evolve More Stuff</h2>
         <p>Replace this tile with whatever fourth destination you're planning next.</p>
         <span class="cta">Enter </span>
       </div>
@@ -443,6 +459,5 @@
   </div>
 
 </div>
-
 </body>
 </html>

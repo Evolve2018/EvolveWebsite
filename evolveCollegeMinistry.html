@@ -193,6 +193,73 @@
     to { transform: translateX(-50%); }
   }
 
+  /* ---------- PHOTO SLIDER ---------- */
+  .ec-photos {
+    position: relative;
+    padding: 48px 0 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .ec-photo-track {
+    display: flex;
+    width: max-content;
+    animation: ecPhotoScroll 45s linear infinite;
+  }
+
+  .ec-photos:hover .ec-photo-track { animation-play-state: paused; }
+
+  .ec-photo {
+    position: relative;
+    flex-shrink: 0;
+    width: 380px;
+    height: 260px;
+    margin-right: 18px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(66,185,210,0.22);
+    background: linear-gradient(135deg, #0d3a45 0%, #071f28 100%);
+  }
+
+  .ec-photo:nth-child(even) { transform: translateY(18px); }
+
+  .ec-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .ec-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7,20,26,0) 60%, rgba(7,20,26,0.45) 100%);
+    pointer-events: none;
+  }
+
+  .ec-photo:hover img { transform: scale(1.06); }
+
+  .ec-photos-pad { height: 18px; }
+
+  @keyframes ecPhotoScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 700px) {
+    .ec-photos { padding-top: 36px; }
+    .ec-photo { width: 250px; height: 180px; margin-right: 12px; border-radius: 14px; }
+    .ec-photo:nth-child(even) { transform: translateY(12px); }
+    .ec-photos-pad { height: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ec-photo-track { animation: none; }
+  }
+
   /* ---------- PILLARS ---------- */
   .ec-section {
     max-width: 1080px;
@@ -443,6 +510,93 @@
     .ec-campus-body .ec-btn { align-self: stretch; justify-content: center; }
   }
 
+  /* ---------- SCHOOL COLORS ---------- */
+  /* UWM: black and gold */
+  .ec-campus.ec-uwm {
+    --ec-accent: #FFBD00;
+    background: #0a0a0a;
+    border-color: rgba(255,189,0,0.35);
+  }
+
+  .ec-campus.ec-uwm:hover {
+    border-color: rgba(255,189,0,0.75);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,189,0,0.25);
+  }
+
+  .ec-campus.ec-uwm .ec-campus-top {
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,189,0,0.28), transparent 60%),
+      radial-gradient(circle at 5% 100%, rgba(255,189,0,0.10), transparent 55%),
+      linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    border-bottom: 2px solid #FFBD00;
+  }
+
+  .ec-campus.ec-uwm .ec-campus-body { background: #0a0a0a; }
+
+  /* UW-Whitewater: Warhawk Purple (Pantone 268) and white */
+  .ec-campus.ec-uww {
+    --ec-accent: #ffffff;
+    background: #2e1647;
+    border-color: rgba(255,255,255,0.28);
+  }
+
+  .ec-campus.ec-uww:hover {
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 24px 50px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.2);
+  }
+
+  .ec-campus.ec-uww .ec-campus-top {
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,0.18), transparent 60%),
+      radial-gradient(circle at 95% 100%, rgba(255,255,255,0.08), transparent 55%),
+      linear-gradient(135deg, #582C83 0%, #43206a 100%);
+    border-bottom: 2px solid #ffffff;
+  }
+
+  .ec-campus.ec-uww .ec-campus-body { background: #2e1647; }
+
+  /* shared accent wiring */
+  .ec-campus.ec-uwm .ec-campus-tag,
+  .ec-campus.ec-uww .ec-campus-tag {
+    color: var(--ec-accent);
+    border-color: var(--ec-accent);
+    background: rgba(0,0,0,0.3);
+  }
+
+  .ec-campus.ec-uwm .ec-campus-list svg,
+  .ec-campus.ec-uww .ec-campus-list svg { color: var(--ec-accent); }
+
+  .ec-campus.ec-uwm .ec-campus-list li { border-bottom-color: rgba(255,189,0,0.18); }
+  .ec-campus.ec-uww .ec-campus-list li { border-bottom-color: rgba(255,255,255,0.18); }
+
+  .ec-campus.ec-uwm .ec-campus-full { color: #FFBD00; }
+  .ec-campus.ec-uww .ec-campus-full { color: #e4d6f2; }
+
+  .ec-campus.ec-uwm .ec-campus-body p { color: #d9d9d9; }
+  .ec-campus.ec-uww .ec-campus-body p { color: #e4d6f2; }
+  .ec-campus.ec-uwm .ec-campus-list li { color: #f2f2f2; }
+  .ec-campus.ec-uww .ec-campus-list li { color: #ffffff; }
+
+  .ec-campus.ec-uwm .ec-campus-abbr { color: rgba(255,189,0,0.10); }
+  .ec-campus.ec-uwm:hover .ec-campus-abbr { color: rgba(255,189,0,0.20); }
+  .ec-campus.ec-uww .ec-campus-abbr { color: rgba(255,255,255,0.10); }
+  .ec-campus.ec-uww:hover .ec-campus-abbr { color: rgba(255,255,255,0.20); }
+
+  .ec-campus.ec-uwm .ec-btn-solid {
+    background: #FFBD00;
+    color: #000000;
+    box-shadow: 0 10px 26px rgba(255,189,0,0.28);
+  }
+
+  .ec-campus.ec-uww .ec-btn-solid {
+    background: #ffffff;
+    color: #582C83;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.3);
+  }
+
+  .ec-campus.ec-uwm:hover .ec-btn-solid { background: #ffffff; color: #000000; }
+  .ec-campus.ec-uww:hover .ec-btn-solid { background: #e4d6f2; color: #43206a; }
+
   /* ---------- NOT LISTED ---------- */
   .ec-other {
     max-width: 1080px;
@@ -555,6 +709,12 @@
         <span>Grow Together</span><span class="ec-star">&#10022;</span>
       </div>
     </div>
+  </section>
+
+  <!-- PHOTO SLIDER (images are set in the ecPhotos list in the script below) -->
+  <section class="ec-photos" aria-label="Evolve photos">
+    <div class="ec-photo-track" id="ec-photo-track"></div>
+    <div class="ec-photos-pad"></div>
   </section>
 
   <!-- PILLARS -->
@@ -702,6 +862,35 @@
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    // Infinite photo slider: edit this list to change the photos
+    var ecPhotos = [
+      'https://media.thechurchcoassets.com/accounts/5782/af5fc50b-e17a-49c6-8d0a-831dee85ec12-./20260719-Sunday-MB-0885.jpg',
+      'https://media.thechurchcoassets.com/accounts/5782/8ddf38c2-4b30-4c53-8db3-59eef9f91014-./20260425-Mens-Breakfast-MS-0030.jpg',
+      'https://media.thechurchcoassets.com/accounts/5782/fb457604-353b-49bc-9f60-680d697739a1-./DSC09670.jpg',
+      'https://media.thechurchcoassets.com/accounts/5782/8f958184-d7f1-456b-a685-8d275e580138-./EC-Sunday-Next-DA-0164.jpg'
+    ];
+
+    var ecTrack = document.getElementById('ec-photo-track');
+    if (ecTrack && ecPhotos.length) {
+      // Repeat the list so one set is wider than any screen, then double it for a seamless loop
+      var ecSet = [];
+      while (ecSet.length < 8) { ecSet = ecSet.concat(ecPhotos); }
+      var ecAll = ecSet.concat(ecSet);
+      ecAll.forEach(function(src, i) {
+        var wrap = document.createElement('div');
+        wrap.className = 'ec-photo';
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Evolve Church';
+        img.loading = i < ecSet.length ? 'eager' : 'lazy';
+        img.onerror = function() { this.style.display = 'none'; };
+        wrap.appendChild(img);
+        ecTrack.appendChild(wrap);
+      });
+      // Keep the speed steady no matter how many photos are in the list
+      ecTrack.style.animationDuration = (ecSet.length * 6) + 's';
+    }
 
     // Staggered reveal
     var ecReveals = ecRoot.querySelectorAll('.ec-reveal');
