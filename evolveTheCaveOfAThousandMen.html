@@ -83,7 +83,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       padding: 10px 20px;
-      border-radius: 2px;
+      border-radius: 10px;
       text-decoration: none;
       transition: background 0.15s;
     }
@@ -106,11 +106,13 @@
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
+      text-align: center;
     }
 
     .hero-title {
       display: flex;
       flex-direction: column;
+      align-items: center;
       line-height: 1;
       margin-bottom: 36px;
       opacity: 0;
@@ -150,7 +152,7 @@
       width: 64px;
       height: 2px;
       background: var(--teal);
-      margin-bottom: 28px;
+      margin: 0 auto 28px;
       opacity: 0;
       animation: fadeUp 0.7s 0.55s forwards;
     }
@@ -189,6 +191,7 @@
       margin-bottom: 20px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
       opacity: 0;
       animation: fadeUp 0.7s 0.2s forwards;
@@ -237,7 +240,7 @@
       line-height: 1.8;
       color: var(--text-3);
       max-width: 540px;
-      margin-bottom: 48px;
+      margin: 0 auto 48px;
       opacity: 0;
       animation: fadeUp 0.7s 0.7s forwards;
     }
@@ -251,6 +254,7 @@
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
+      justify-content: center;
       opacity: 0;
       animation: fadeUp 0.7s 0.85s forwards;
     }
@@ -262,7 +266,7 @@
       font-size: 18px;
       letter-spacing: 3px;
       padding: 16px 40px;
-      border-radius: 2px;
+      border-radius: 10px;
       text-decoration: none;
       transition: background 0.15s, transform 0.1s;
       display: inline-block;
@@ -282,7 +286,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       padding: 16px 32px;
-      border-radius: 2px;
+      border-radius: 10px;
       border: 1px solid var(--border);
       text-decoration: none;
       transition: border-color 0.15s, color 0.15s;
@@ -1204,7 +1208,7 @@
       color: var(--text-2);
       width: 40px;
       height: 40px;
-      border-radius: 2px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
       transition: border-color 0.15s, color 0.15s;
@@ -1319,7 +1323,7 @@
   <!-- NAV -->
   <nav>
     <div class="nav-brand">The <span>Cave</span></div>
-    <div class="nav-church">Evolve Church   Milwaukee</div>
+    <div class="nav-church">Evolve Church &nbsp;&bull;&nbsp; Milwaukee</div>
     <a href="https://my.community.com/pastorken?t=Join%20the%20Cave" target="_blank" rel="noopener" class="nav-cta">Join the Brotherhood</a>
   </nav>
 
@@ -1356,12 +1360,12 @@
     <div class="scripture-inner">
       <div class="scripture-label">The Foundation</div>
 
-      <div class="scripture-ref-big">1 Samuel 22:1&ndash;2</div>
+      <div class="scripture-ref-big">1 Samuel 22:1 to 2</div>
 
       <blockquote class="scripture-block">
         <span class="open-quote">&ldquo;</span>
         <p>So David left Gath and escaped to the cave of Adullam. Soon his brothers and all his other relatives joined him there.</p>
-        <p>Then others began coming&mdash;men who were in trouble or in debt or who were just discontented&mdash;until David was the captain of about 400 men.</p>
+        <p>Then others began coming, men who were in trouble or in debt or who were just discontented, until David was the captain of about 400 men.</p>
         <span class="close-quote">&rdquo;</span>
       </blockquote>
 
@@ -1485,7 +1489,7 @@
           Enter the Cave &nbsp;&#8599;
         </a>
         <p style="margin-top: 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-4);">
-          Opens secure registration form   Evolve Nation
+          Opens secure registration form &nbsp;&bull;&nbsp; Evolve Nation
         </p>
       </div>
     </div>
@@ -1493,26 +1497,13 @@
 
   <!-- CLOSING VERSE -->
   <div style="background: var(--bg-3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 28px 32px; text-align: center;">
-    <p style="font-family: 'Open Sans', sans-serif;  font-size: 17px; line-height: 1.7; color: var(--text-3); max-width: 540px; margin: 0 auto 8px;">"As iron sharpens iron, so one person sharpens another."</p>
+    <p style="font-family: 'Open Sans', sans-serif; font-size: 17px; line-height: 1.7; color: var(--text-3); max-width: 540px; margin: 0 auto 8px;">"As iron sharpens iron, so one person sharpens another."</p>
     <div style="font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--teal);">Proverbs 27:17</div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-brand-name">A Cave of a<br /><span>Thousand Men</span></div>
-      <div class="footer-tagline">Men being men. No permission needed.</div>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-church-info">
-      <div class="footer-church-name">Evolve Church</div>
-      <a href="https://evolvenation.org/home-2-3" target="_blank" rel="noopener" class="footer-church-link">evolvenation.org</a>
-    </div>
-  </footer>
-
-  <div class="footer-bottom">
-    <p>&copy; 2026 Evolve Church Milwaukee &nbsp;|&nbsp; All Rights Reserved</p>
-  </div>
+  <!-- SHARED FOOTER -->
+  <div id="evolve-footer-mount"></div>
+  <script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js?v=1"></script>
 
 </body>
 </html>

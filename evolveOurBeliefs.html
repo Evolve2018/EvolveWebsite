@@ -6,7 +6,7 @@
 .eb-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
 
 .eb-wrap {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #1a1a2e;
   background: #ffffff;
   line-height: 1.6;
@@ -83,8 +83,8 @@
   z-index: 2;
 }
 .eb-hero-title {
-  font-family: 'Montserrat', sans-serif;
-
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
   font-size: clamp(3rem, 10vw, 7rem);
   letter-spacing: 2px;
   color: #ffffff;
@@ -135,9 +135,9 @@
 
 /* Accent typography */
 .eb-dy {
-  font-family: 'Montserrat', sans-serif;
-
-  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   letter-spacing: 1px;
   line-height: 1;
   vertical-align: middle;
@@ -181,7 +181,8 @@
   opacity: 0.5;
 }
 .eb-section-header h2 {
-  font-size: clamp(24px, 4vw, 40px);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 4.5vw, 46px);
   font-weight: 800;
   color: #0e2244;
   line-height: 1.15;
@@ -249,10 +250,12 @@
   text-transform: uppercase;
 }
 .eb-belief-card h3 {
-  font-size: clamp(15px, 1.8vw, 17px);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(17px, 2vw, 21px);
   font-weight: 700;
   color: #0e2244;
   margin-bottom: 10px;
+  letter-spacing: 0.02em;
 }
 .eb-belief-card p {
   font-size: clamp(13px, 1.4vw, 14px);
@@ -322,9 +325,8 @@
   margin-bottom: 14px;
 }
 .eb-mvg-block h3 {
-  font-family: 'Montserrat', sans-serif;
-
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
   letter-spacing: 1px;
   color: #ffffff;
   line-height: 1.15;
@@ -393,9 +395,11 @@
   background: #2a9ab8;
 }
 .eb-accordion-trigger-text {
-  font-size: clamp(14px, 2vw, 16px);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(16px, 2.2vw, 20px);
   font-weight: 700;
   color: #0e2244;
+  letter-spacing: 0.02em;
 }
 .eb-accordion-arrow {
   width: 20px;
@@ -444,17 +448,14 @@
 .eb-values-section .eb-section-header p  { color: rgba(255,255,255,0.5); }
 .eb-values-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(10px, 1.5vw, 16px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 20px);
   width: 100%;
 }
-@media (max-width: 1100px) {
-  .eb-values-grid { grid-template-columns: repeat(4, 1fr); }
-}
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .eb-values-grid { grid-template-columns: repeat(3, 1fr); }
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .eb-values-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .eb-value-item {
@@ -470,8 +471,8 @@
   transform: translateY(-2px);
 }
 .eb-value-item h4 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(10px, 1.2vw, 12px);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px, 1.6vw, 17px);
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -516,9 +517,8 @@
   z-index: 1;
 }
 .eb-cta h2 {
-  font-family: 'Montserrat', sans-serif;
-
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
   letter-spacing: 2px;
   color: #ffffff;
   line-height: 1.05;
@@ -643,17 +643,16 @@
   opacity: 0.5;
 }
 .eb-const-left h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(22px, 3.5vw, 36px);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(26px, 4vw, 42px);
   font-weight: 800;
   color: #ffffff;
   line-height: 1.2;
   margin-bottom: 16px;
 }
 .eb-const-left h2 span {
-  font-family: 'Montserrat', sans-serif;
-
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   letter-spacing: 1px;
   color: #42B9D2;
   display: block;
@@ -965,6 +964,119 @@
 }
 
 
+
+/* ── SCROLL-REVEAL ANIMATIONS ── */
+.eb-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.eb-reveal.eb-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.eb-reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.eb-reveal-left.eb-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.eb-reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.eb-reveal-right.eb-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+/* Stagger delays for belief cards */
+.eb-beliefs-grid .eb-belief-card:nth-child(1)  { transition-delay: 0.00s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(2)  { transition-delay: 0.07s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(3)  { transition-delay: 0.14s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(4)  { transition-delay: 0.21s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(5)  { transition-delay: 0.28s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(6)  { transition-delay: 0.35s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(7)  { transition-delay: 0.42s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(8)  { transition-delay: 0.49s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(9)  { transition-delay: 0.56s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(10) { transition-delay: 0.63s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(11) { transition-delay: 0.70s; }
+.eb-beliefs-grid .eb-belief-card:nth-child(12) { transition-delay: 0.77s; }
+/* Stagger delays for culture value items */
+.eb-values-grid .eb-value-item:nth-child(1)  { transition-delay: 0.00s; }
+.eb-values-grid .eb-value-item:nth-child(2)  { transition-delay: 0.08s; }
+.eb-values-grid .eb-value-item:nth-child(3)  { transition-delay: 0.16s; }
+.eb-values-grid .eb-value-item:nth-child(4)  { transition-delay: 0.24s; }
+.eb-values-grid .eb-value-item:nth-child(5)  { transition-delay: 0.32s; }
+.eb-values-grid .eb-value-item:nth-child(6)  { transition-delay: 0.40s; }
+.eb-values-grid .eb-value-item:nth-child(7)  { transition-delay: 0.48s; }
+.eb-values-grid .eb-value-item:nth-child(8)  { transition-delay: 0.56s; }
+
+/* Smooth accordion transition */
+.eb-accordion-body {
+  display: block !important;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.38s ease, padding 0.38s ease;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.eb-accordion-item.open .eb-accordion-body {
+  max-height: 600px;
+  padding-bottom: clamp(20px, 3vw, 28px) !important;
+}
+
+/* Hero entrance animations */
+.eb-hero-eyebrow,
+.eb-hero-super,
+.eb-hero-title,
+.eb-hero-sub {
+  animation: ebHeroFade 0.9s ease both;
+}
+.eb-hero-eyebrow { animation-delay: 0.1s; }
+.eb-hero-super   { animation-delay: 0.22s; }
+.eb-hero-title   { animation-delay: 0.38s; }
+.eb-hero-sub     { animation-delay: 0.54s; }
+@keyframes ebHeroFade {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulsing CTA button */
+.eb-cta-btn {
+  animation: ebBtnPulse 3.5s ease-in-out 2s infinite;
+}
+.eb-cta-btn:hover { animation: none; }
+@keyframes ebBtnPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 4px 30px rgba(66,185,210,0.45), 0 0 0 8px rgba(66,185,210,0.08); }
+}
+
+/* Intro quote accent */
+.eb-intro-inner {
+  position: relative;
+}
+
+/* Body font overrides for readability */
+.eb-belief-card p,
+.eb-accordion-body p,
+.eb-const-left p,
+.eb-value-item p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Modal heading Barlow Condensed */
+.eb-modal-head h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
 /* ── MODAL SCROLL LOCK (iframe-safe) ── */
 html.eb-no-scroll,
 html.eb-no-scroll body {
@@ -1002,80 +1114,80 @@ html.eb-no-scroll body {
 
   <!-- SECTION 01: CORE BELIEFS -->
   <div class="eb-section">
-    <div class="eb-section-header">
+    <div class="eb-section-header eb-reveal">
       <div class="eb-section-tag">01 — Foundation</div>
       <h2>What We <span class="eb-dy eb-dy-blue">Believe</span></h2>
       <p>The foundational convictions that anchor everything at Evolve Church</p>
     </div>
     <div class="eb-beliefs-grid-wrap">
     <div class="eb-beliefs-grid">
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">01 · Scripture</div>
         <h3>The Bible</h3>
         <p>The Bible is God's word to humanity, written by human authors under the supernatural guidance of the Holy Spirit. It is truth without any mixture of error and completely relevant to our daily lives.</p>
         <span class="eb-scripture">2 Timothy 3:15–17 · Hebrews 4:12</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">02 · Doctrine</div>
         <h3>The Trinity</h3>
         <p>God has existed in relationship with Himself for all eternity — one substance in three persons: the Father, the Son, and the Holy Spirit. Each member possesses equal power and authority.</p>
         <span class="eb-scripture">Matthew 28:19 · 1 John 5:7</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">03 · God</div>
         <h3>The Father</h3>
         <p>God is all-powerful, all-knowing, and ever-present. He is our Father — loving, compassionate, and eternally faithful to His people and His promises. In Him we live, move, and exist.</p>
         <span class="eb-scripture">John 3:16 · Psalm 11:4–6</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">04 · Christ</div>
         <h3>Jesus Christ</h3>
         <p>Jesus is completely human and completely God. He lived a perfect life, died as our substitute, and rose from the dead — making it possible for all of us to be restored to God.</p>
         <span class="eb-scripture">John 1:1,14 · Romans 3:23–26</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">05 · Spirit</div>
         <h3>Holy Spirit</h3>
         <p>The Holy Spirit guides believers into truth, convicts people of sin, comforts us, and gives spiritual gifts. Evidence of His presence is seen in the fruit He produces in our lives.</p>
         <span class="eb-scripture">John 16:7–14 · Galatians 5:22–23</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">06 · Grace</div>
         <h3>Salvation</h3>
         <p>Salvation is a gift of grace — not earned through our own efforts, but received through faith in Christ's death and resurrection. The blood of Jesus is the only way of forgiveness.</p>
         <span class="eb-scripture">Ephesians 2:8–10 · Romans 10:9–10</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">07 · Community</div>
         <h3>The Church</h3>
         <p>The Church is a local community of baptized believers unified through faith in Christ — working together in love and unity to bring the Gospel to the world and glorify Christ.</p>
         <span class="eb-scripture">Matthew 16:18 · Ephesians 1:22–23</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">08 · Connection</div>
         <h3>Prayer</h3>
         <p>Prayer is our direct line of communication with God. Through Jesus, we can come to the Father personally. No meaningful work happens without prayer preceding and continuing through it.</p>
         <span class="eb-scripture">Philippians 4:6 · 1 Thessalonians 5:17</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">09 · Obedience</div>
         <h3>Baptism</h3>
         <p>Baptism is a symbolic act to publicly declare one's salvation. We practice full-immersion baptism, symbolizing the death and resurrection that Jesus went through for us.</p>
         <span class="eb-scripture">Matthew 28:19 · Acts 2:38</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">10 · Remembrance</div>
         <h3>Communion</h3>
         <p>Communion is a sacred time when the bread and cup express the body and blood of Christ. Believers take communion in remembrance of Christ's sacrifice on the cross.</p>
         <span class="eb-scripture">1 Corinthians 11:23–25 · Matthew 26:26–28</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">11 · Power</div>
         <h3>Divine Healing</h3>
         <p>We believe God's supernatural power to heal is still for today. Through the power of the Holy Spirit and prayer, Jesus can heal our earthly bodies and restore wholeness.</p>
         <span class="eb-scripture">Isaiah 53:4–5 · James 5:14–17</span>
       </div>
-      <div class="eb-belief-card">
+      <div class="eb-belief-card eb-reveal">
         <div class="eb-belief-num">12 · Hope</div>
         <h3>Eternity</h3>
         <p>Man was created to exist forever — either eternally separated from God by sin, or in eternal union with God through salvation. Heaven and Hell are real places of eternal existence.</p>
@@ -1090,17 +1202,17 @@ html.eb-no-scroll body {
     <div class="eb-image-banner-bg"></div>
     <div class="eb-image-banner-overlay"></div>
     <div class="eb-image-banner-content">
-      <div class="eb-mvg-block">
+      <div class="eb-mvg-block eb-reveal">
         <span class="eb-eyebrow">Our Mission</span>
         <h3>Love God.<br/>Love People.<br/>Love Ourselves.</h3>
         <p>Everything we do flows from these three life-giving commitments.</p>
       </div>
-      <div class="eb-mvg-block">
+      <div class="eb-mvg-block eb-reveal">
         <span class="eb-eyebrow">Our Vision</span>
         <h3>Worship.<br/>Word.<br/>Works.</h3>
         <p>Three pillars that guide how we engage with God and one another.</p>
       </div>
-      <div class="eb-mvg-block">
+      <div class="eb-mvg-block eb-reveal">
         <span class="eb-eyebrow">Our Passion</span>
         <h3>Reaching<br/>the Lost.<br/>Serving Our City.</h3>
         <p>Our actions are proof of God's love — we show what we believe.</p>
@@ -1111,7 +1223,7 @@ html.eb-no-scroll body {
   <!-- MORE BELIEFS (Accordion) -->
   <div class="eb-accordion-section">
     <div class="eb-accordion-inner">
-      <div class="eb-section-header" style="margin-bottom:40px;">
+      <div class="eb-section-header eb-reveal" style="margin-bottom:40px;">
         <div class="eb-section-tag">02 — Deeper</div>
         <h2>More of What We Believe</h2>
         <p>Expanding on the foundations of our faith</p>
@@ -1177,24 +1289,20 @@ html.eb-no-scroll body {
   <!-- CULTURE CODE -->
   <div class="eb-values-section">
     <div class="eb-values-inner">
-      <div class="eb-section-header" style="margin-bottom:44px;">
+      <div class="eb-section-header eb-reveal" style="margin-bottom:44px;">
         <div class="eb-section-tag">03 — Culture</div>
         <h2>Our Culture Code</h2>
         <p>The irrefutable principles that guide how we live, lead, and serve</p>
       </div>
       <div class="eb-values-grid">
-        <div class="eb-value-item"><h4>Evolve</h4><p>We believe the church should evolve to meet the needs of every generation, culture, and context.</p></div>
-        <div class="eb-value-item"><h4>Love</h4><p>We love first, because God is love.</p></div>
-        <div class="eb-value-item"><h4>Faith</h4><p>We have faith in God, faith in people, and faith for miracles.</p></div>
-        <div class="eb-value-item"><h4>T.R.U.</h4><p>We are transparent, real, and unedited. This is the best way to walk in integrity.</p></div>
-        <div class="eb-value-item"><h4>Generosity</h4><p>We give just to give, not to get.</p></div>
-        <div class="eb-value-item"><h4>Service</h4><p>We use our hands to show our hearts.</p></div>
-        <div class="eb-value-item"><h4>Worship</h4><p>We use our lives to express God's worth. We fully engage to show appreciation to God.</p></div>
-        <div class="eb-value-item"><h4>Excellence</h4><p>We hold ourselves to a high standard in our words, actions, and appearance.</p></div>
-        <div class="eb-value-item"><h4>Discipline</h4><p>We are committed to training, structure, and lifestyles that generate growth.</p></div>
-        <div class="eb-value-item"><h4>Relationship</h4><p>We belong together. We love together. We serve together.</p></div>
-        <div class="eb-value-item"><h4>Honor</h4><p>We honor God, value people, and add value to everyone around us.</p></div>
-        <div class="eb-value-item"><h4>Fun</h4><p>We enjoy every moment. God wants laughter.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>T.R.U.</h4><p>We are transparent, real, and unedited. This is the best way to walk in integrity.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Service</h4><p>We use our hands to show our hearts.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Worship</h4><p>We use our lives to express God's worth. We fully engage to show appreciation to God.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Excellence</h4><p>We hold ourselves to a high standard in our words, actions, and appearance.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Discipline</h4><p>We are committed to training, structure, and lifestyles that generate growth.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Relationship</h4><p>We belong together. We love together. We serve together.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Honor</h4><p>We honor God, value people, and add value to everyone around us.</p></div>
+        <div class="eb-value-item eb-reveal"><h4>Fun</h4><p>We enjoy every moment. God wants laughter.</p></div>
       </div>
     </div>
   </div>
@@ -1206,7 +1314,7 @@ html.eb-no-scroll body {
       <div class="eb-const-card">
 
         <!-- Left: intro + buttons -->
-        <div class="eb-const-left">
+        <div class="eb-const-left eb-reveal-left">
           <div class="eb-const-tag">04 — Foundation</div>
           <h2>Our Church<span>Constitution</span></h2>
           <p>Adopted in January 2024, our Constitution and Bylaws define who we are, what we believe, and how we are governed as a body of believers in Milwaukee, Wisconsin. Rooted in the Word, accountable to one another.</p>
@@ -1223,7 +1331,7 @@ html.eb-no-scroll body {
         </div>
 
         <!-- Right: 16 fundamental truths grid preview -->
-        <div class="eb-const-right">
+        <div class="eb-const-right eb-reveal-right">
           <div class="eb-const-truth"><div class="eb-const-truth-num">01</div><h4>Scripture Inspired</h4></div>
           <div class="eb-const-truth"><div class="eb-const-truth-num">02</div><h4>One True God</h4></div>
           <div class="eb-const-truth"><div class="eb-const-truth-num">03</div><h4>Man's Fall &amp; Redemption</h4></div>
@@ -1396,8 +1504,8 @@ html.eb-no-scroll body {
 
   <!-- CTA -->
   <div class="eb-cta">
-    <div class="eb-cta-tag">Take a Next Step</div>
-    <h2>You Belong Here</h2>
+    <div class="eb-cta-tag eb-reveal">Take a Next Step</div>
+    <h2 class="eb-reveal" style="transition-delay:0.12s">You Belong Here</h2>
     <p>Whether you're new to faith or ready to go deeper, there's a place for you at Evolve. We'd love to connect with you.</p>
     <a class="eb-cta-btn" href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new" target="_blank" rel="noopener">Connect With Us</a>
   </div>
@@ -1454,4 +1562,30 @@ function ebToggle(btn) {
   document.querySelectorAll('.eb-accordion-item.open').forEach(function(el) { el.classList.remove('open'); });
   if (!isOpen) item.classList.add('open');
 }
+
+// ── SCROLL-REVEAL ──────────────────────────────────────────────────────────
+(function() {
+  function reveal() {
+    var els = document.querySelectorAll('.eb-reveal, .eb-reveal-left, .eb-reveal-right');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el) { el.classList.add('eb-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('eb-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    els.forEach(function(el) { io.observe(el); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', reveal);
+  } else {
+    reveal();
+  }
+})();
+
 </script>

@@ -1,5 +1,5 @@
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -80,11 +80,7 @@ html, body { background: #ffffff; }
 
 .ms-hero-eyebrow::before,
 .ms-hero-eyebrow::after {
-  content: '';
-  width: 40px;
-  height: 1px;
-  background: var(--blue);
-  opacity: 0.5;
+  content: none;
 }
 
 .ms-hero-title {
@@ -103,9 +99,9 @@ html, body { background: #ffffff; }
 .ms-hero-script {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(30px, 6vw, 54px);
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 1px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   color: var(--blue);
   display: block;
   line-height: 1.2;
@@ -413,6 +409,7 @@ html, body { background: #ffffff; }
 .ms-verse-open-quote {
   font-family: 'Montserrat', sans-serif;
   font-size: 72px;
+  font-weight: 900;
   line-height: 0.8;
   color: rgba(66,185,210,0.2);
   margin-bottom: 8px;
@@ -422,8 +419,8 @@ html, body { background: #ffffff; }
 }
 
 .ms-verse blockquote {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(22px, 4vw, 34px);
+  font-family: 'Open Sans', sans-serif;
+  font-size: clamp(20px, 3.5vw, 28px);
   color: rgba(255,255,255,0.82);
   max-width: 680px;
   margin: 0 auto 14px;
@@ -439,7 +436,7 @@ html, body { background: #ffffff; }
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--blue);
-
+  font-style: normal;
   position: relative;
   z-index: 1;
 }
@@ -466,10 +463,7 @@ html, body { background: #ffffff; }
 }
 
 .ms-cta-eyebrow::before, .ms-cta-eyebrow::after {
-  content: '';
-  width: 32px; height: 1px;
-  background: var(--blue);
-  opacity: 0.5;
+  content: none;
 }
 
 .ms-cta h2 {
@@ -488,8 +482,9 @@ html, body { background: #ffffff; }
   font-size: clamp(22px, 4vw, 38px);
   color: var(--blue-dark);
   display: block;
-  font-weight: 400;
-  text-transform: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   line-height: 1.3;
   margin-bottom: 20px;
 }
@@ -521,7 +516,7 @@ html, body { background: #ffffff; }
   color: var(--blue-dark);
   background: transparent;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 10px;
   transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
@@ -563,10 +558,12 @@ html, body { background: #ffffff; }
 
 .ms-footer-brand-script {
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   color: var(--blue);
   display: block;
-  letter-spacing: 1px;
   margin-bottom: 16px;
 }
 
@@ -721,8 +718,8 @@ html, body { background: #ffffff; }
     <button class="ms-filter-btn active" data-filter="all">All Staff</button>
     <button class="ms-filter-btn" data-filter="pastoral">Pastoral</button>
     <button class="ms-filter-btn" data-filter="ministry">Ministry</button>
-    <!--<button class="ms-filter-btn" data-filter="operations">Operations</button>-->
-    <!--<button class="ms-filter-btn" data-filter="creative">Creative</button>-->
+    <button class="ms-filter-btn" data-filter="operations">Operations</button>
+    <button class="ms-filter-btn" data-filter="creative">Creative</button>
   </div>
 
   <div class="ms-section">
@@ -736,7 +733,7 @@ html, body { background: #ffffff; }
 
       <div class="ms-card-featured" data-dept="pastoral">
         <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/9a0829e4-40c2-4ac0-bb1c-c2737915ee1c-imported-asset.png" alt="Staff Photo">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">PK</span></div>
           <div class="ms-img-accent"></div>
         </div>
         <div class="ms-card-content">
@@ -744,117 +741,35 @@ html, body { background: #ffffff; }
           <div class="ms-card-divider"></div>
           <div class="ms-card-name">Pastor Ken</div>
           <p class="ms-card-bio">Pastor Ken founded Evolve Church with a vision to transform lives and communities in Milwaukee through the power of the Gospel. His passionate preaching, heart for the city, and unwavering faith have been the driving force behind everything we do at Evolve.</p>
-          <a class="ms-card-email" href="mailto:ken@evolvenation.org">ken@evolvenation.org</a>
+          <a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
         </div>
       </div>
 
       <div class="ms-card" data-dept="pastoral">
         <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/f245149b-4b47-4fa4-9347-0cca9a6e6805-imported-asset.jpg" alt="Staff Photo">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div>
           <div class="ms-img-accent"></div>
         </div>
         <div class="ms-card-content">
-          <div class="ms-card-title">EXECUTIVE PASTOR</div>
+          <div class="ms-card-title">Associate Pastor</div>
           <div class="ms-card-divider"></div>
-          <div class="ms-card-name">DEVON JACKSON</div>
-              <a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
-          <!--<button class="ms-expand-btn" onclick="msToggle(this)"> About</button>
-          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.</div></div>-->
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
         </div>
       </div>
 
       <div class="ms-card" data-dept="pastoral">
         <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/c4e07339-abdd-4015-b4d6-f5bb472fd84c-imported-asset.jpg" alt="Staff Photo">
+          <div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div>
           <div class="ms-img-accent"></div>
         </div>
         <div class="ms-card-content">
-          <div class="ms-card-title">WORSHIP PASTOR</div>
+          <div class="ms-card-title">Youth Pastor</div>
           <div class="ms-card-divider"></div>
-          <div class="ms-card-name">AMBER JACKSON</div>
-            <a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
-          <!--<button class="ms-expand-btn" onclick="msToggle(this)"> About</button>
-          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.</div></div>-->
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/c9467fe3-aee2-4792-99b2-b21a1336b0c5-imported-asset.jpg" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title">CONNECTIONS PASTOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">EDMOND DUGAR</div>
-              <a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
-          <!--<button class="ms-expand-btn" onclick="msToggle(this)"> About</button>
-          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.</div></div>-->
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/9746e574-0694-4b32-badf-30d37efa8205-imported-asset.jpg" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title">DISCIPLESHIP PASTOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">BRYAN MACK</div>
-          <a class="ms-card-email" href="mailto:bryan@evolvenation.org">bryan@evolvenation.org</a>
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/9e14fb6c-a409-4ae7-aca0-c3147e999431-imported-asset.jpg" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title">OPERATIONS PASTOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">SHAWN KENNEDY</div>
-          <a class="ms-card-email" href="mailto:shawn@evolvenation.org">shawn@evolvenation.org</a>
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/c0d3ee28-8574-4479-86e9-b5bcd27f0ada-imported-asset.jpg" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title"> PASTOR &AMP; FAITH BASED COUNSELOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">JAVETA PAASEWE</div>
-            <a class="ms-card-email" href="mailto:javeta@evolvenation.org">javeta@evolvenation.org</a>
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/c1f070ad-f53f-479c-9994-2408decba6f9-./3.png" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title">ONLINE PASTOR &AMP; OUTREACH DIRECTOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">JORDAN DICKERSON</div>
-            <a class="ms-card-email" href="mailto:jordan@evolvenation.org">jordan@evolvenation.org</a>
-        </div>
-      </div>
-
-      <div class="ms-card" data-dept="pastoral">
-        <div class="ms-img-wrap">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/2903acad-8cfb-47a7-8a65-6be1d234f106-imported-asset.png" alt="Staff Photo">
-          <div class="ms-img-accent"></div>
-        </div>
-        <div class="ms-card-content">
-          <div class="ms-card-title">COMMUNITY DIRECTOR &AMP; RESIDENT PASTOR</div>
-          <div class="ms-card-divider"></div>
-          <div class="ms-card-name">CHARMON PITTMAN</div>
-            <a class="ms-card-email" href="mailto:charmon@evolvenation.org">charmon@evolvenation.org</a>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
         </div>
       </div>
 
@@ -868,22 +783,119 @@ html, body { background: #ffffff; }
     <div class="ms-grid" data-dept="ministry">
 
       <div class="ms-card" data-dept="ministry">
-        <div class="ms-img-wrap"><img src="https://media.thechurchcoassets.com/accounts/5782/ac58fa40-bb37-4164-b4aa-eae54f4ef2fb-./amerra.png" alt="Staff Photo"><div class="ms-img-accent"></div></div>
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
         <div class="ms-card-content">
-          <div class="ms-card-title">NEXTGEN Ministry Director</div>
+          <div class="ms-card-title">Kids Ministry Director</div>
           <div class="ms-card-divider"></div>
-          <div class="ms-card-name">AMERRA EASON</div>
-            <a class="ms-card-email" href="mailto:amerra@evolvenation.org">amerra@evolvenation.org</a>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
         </div>
       </div>
 
       <div class="ms-card" data-dept="ministry">
-        <div class="ms-img-wrap"><img src="https://media.thechurchcoassets.com/accounts/5782/981609d5-bbde-4509-9747-554a7e52ad56-./1.png" alt="Staff Photo"><div class="ms-img-accent"></div></div>
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
         <div class="ms-card-content">
           <div class="ms-card-title">Teens Ministry Director</div>
           <div class="ms-card-divider"></div>
-          <div class="ms-card-name">EBONY HAYNES</div>
-            <a class="ms-card-email" href="mailto:ebony@evolvenation.org">ebony@evolvenation.org</a>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Life Groups Coordinator</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="ministry">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Discipleship Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-dept-row" data-dept="operations">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Operations</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="operations">
+
+      <div class="ms-card" data-dept="operations">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Church Administrator</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="operations">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Finance Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-dept-row" data-dept="creative">
+      <div class="ms-dept-dot"></div>
+      <div class="ms-dept-label">Creative &amp; Communications</div>
+      <div class="ms-dept-line"></div>
+    </div>
+    <div class="ms-grid" data-dept="creative">
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Worship Director</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Media &amp; Communications</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
+        </div>
+      </div>
+
+      <div class="ms-card" data-dept="creative">
+        <div class="ms-img-wrap"><div class="ms-placeholder"><span class="ms-placeholder-initials">SM</span></div><div class="ms-img-accent"></div></div>
+        <div class="ms-card-content">
+          <div class="ms-card-title">Graphic Designer</div>
+          <div class="ms-card-divider"></div>
+          <div class="ms-card-name">Staff Member</div>
+          <button class="ms-expand-btn" onclick="msToggle(this)"><span class="ms-expand-icon">+</span> About</button>
+          <div class="ms-bio-wrap"><div class="ms-bio-text">Add bio here.<a class="ms-card-email" href="mailto:info@evolvenation.org">info@evolvenation.org</a></div></div>
         </div>
       </div>
 
@@ -894,7 +906,7 @@ html, body { background: #ffffff; }
   <div class="ms-verse">
     <span class="ms-verse-open-quote">"</span>
     <blockquote>And let us consider how we may spur one another on toward love and good deeds.</blockquote>
-    <cite>— Hebrews 10:24</cite>
+    <cite>Hebrews 10:24</cite>
   </div>
 
   <div class="ms-cta">
@@ -903,17 +915,86 @@ html, body { background: #ffffff; }
       Want to
       <span class="ms-cta-script">Connect with Us?</span>
     </h2>
-    <p>Reach out — we're always happy to talk, answer questions, or pray with you.</p>
+    <p>We're always happy to talk, answer questions, or pray with you.</p>
     <div class="ms-btn-group">
-      <a class="ms-btn primary" href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new">Connect Card</a>
+      <a class="ms-btn primary" href="https://www.evolvenation.org/connect-card">Connect Card</a>
       <a class="ms-btn" href="mailto:info@evolvenation.org">Email Us</a>
       <a class="ms-btn" href="https://www.evolvenation.org/contact">Contact Page</a>
     </div>
   </div>
-</div>
 
-<div id="evolve-footer-mount"></div>
-<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
+  <!-- FOOTER -->
+  <footer class="ms-footer">
+    <div class="ms-footer-inner">
+
+      <!-- Brand -->
+      <div class="ms-footer-brand">
+        <div class="ms-footer-brand-name">Evolve Church</div>
+        <span class="ms-footer-brand-script">Milwaukee, Wisconsin</span>
+        <p>We exist to help people in Milwaukee and beyond know, grow, and show the love of Jesus. Everyone is welcome here.</p>
+        <div class="ms-footer-socials">
+          <a class="ms-social-btn" href="https://www.facebook.com/evolvenation" aria-label="Facebook">f</a>
+          <a class="ms-social-btn" href="https://www.instagram.com/evolvenation" aria-label="Instagram">&#9674;</a>
+          <a class="ms-social-btn" href="https://www.youtube.com/@evolvenation" aria-label="YouTube">&#9658;</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="ms-footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="https://www.evolvenation.org/home">Home</a></li>
+          <li><a href="https://www.evolvenation.org/who-we-are">Who We Are</a></li>
+          <li><a href="https://www.evolvenation.org/leadership">Leadership</a></li>
+          <li><a href="https://www.evolvenation.org/sermons">Sermons</a></li>
+          <li><a href="https://www.evolvenation.org/events">Events</a></li>
+        </ul>
+      </div>
+
+      <!-- Ministries -->
+      <div class="ms-footer-col">
+        <h4>Ministries</h4>
+        <ul>
+          <li><a href="https://www.evolvenation.org/evolve-kids">Evolve Kids</a></li>
+          <li><a href="https://www.evolvenation.org/evolve-teens">Evolve Teens</a></li>
+          <li><a href="https://www.evolvenation.org/life-groups">Life Groups</a></li>
+          <li><a href="https://www.evolvenation.org/discipleship">Discipleship</a></li>
+          <li><a href="https://www.evolvenation.org/cave">Evolving Men</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="ms-footer-col">
+        <h4>Contact</h4>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Address</span>
+          <a class="ms-footer-info-val" href="https://www.google.com/maps/place/Evolve+Church" target="_blank">6550 N 76th St<br>Milwaukee, WI 53223</a>
+        </div>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Phone</span>
+          <a class="ms-footer-info-val" href="tel:4145104131">(414) 510-4131</a>
+        </div>
+        <div class="ms-footer-info-item">
+          <span class="ms-footer-info-label">Email</span>
+          <a class="ms-footer-info-val" href="mailto:info@evolvenation.org">info@evolvenation.org</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ms-footer-bottom">
+      <div class="ms-footer-copy">
+        &copy; 2026 <span>Evolve Church</span> &mdash; All Rights Reserved
+      </div>
+      <div class="ms-footer-legal">
+        <a href="https://www.evolvenation.org/connect-card">Connect Card</a>
+        <a href="https://www.evolvenation.org/give">Give Online</a>
+        <a href="https://www.evolvenation.org/contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
 
 <script>
 function msToggle(btn) {

@@ -6,458 +6,295 @@
 <title>Evolve Nation — Choose Your Path</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Montserrat:wght@500;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-deep:#07141a;
-    --navy-mid:#0e2244;
+    --navy-deep:#06121a;
     --navy-alt:#071f28;
+    --navy-mid:#0e2244;
     --teal:#42B9D2;
     --teal-dark:#2A8FA8;
-    --gold:#f0c94a;
-    --gold-dark:#c9992f;
+    --teal-light:#8ee0f2;
     --ink:#eef6f8;
     --ink-dim:#9fb9c4;
+
+    /* width of the rounded frame; the drawing inside keeps a 1000 : 760 shape */
+    --w:min(96vw, calc((100vh - 200px) * 1.316), 1240px);
   }
 
-  *{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
 
   html,body{
     margin:0;
-    padding:0;
+    min-height:100%;
     background:var(--navy-deep);
     color:var(--ink);
     font-family:'Open Sans', sans-serif;
-    overflow-x:hidden;
   }
 
   a{ color:inherit; text-decoration:none; }
 
-  .stage{
+  /* ---------- PAGE ---------- */
+  .page{
+    position:relative;
     min-height:100vh;
     display:flex;
     flex-direction:column;
-    background:
-      radial-gradient(60% 45% at 50% 0%, rgba(66,185,210,0.16), transparent 70%),
-      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-alt) 55%, var(--navy-mid) 100%);
+    overflow:hidden;
+    isolation:isolate;
   }
 
-  /* ---------- HEADER ---------- */
-  .brand{
-    text-align:center;
-    padding:clamp(2rem, 5vw, 3.4rem) 1.5rem .6rem;
-    opacity:0;
-    animation:fadeUp .9s ease forwards;
-  }
-
-  .eyebrow{
-    display:inline-block;
-    font-family:'Montserrat', sans-serif;
-    font-weight:600;
-    font-size:.7rem;
-    letter-spacing:.32em;
-    color:var(--teal);
-    text-transform:uppercase;
-    margin-bottom:.9rem;
-  }
-
-  .wordmark{
-    margin:0;
-    font-family:'Barlow Condensed', sans-serif;
-    font-weight:700;
-    letter-spacing:.05em;
-    font-size:clamp(2.2rem, 5.5vw, 3.6rem);
-    text-transform:uppercase;
-    color:var(--ink);
-  }
-
-  .wordmark .script{
-    font-family: 'Montserrat', sans-serif;
-    font-weight:400;
-    text-transform:none;
-    letter-spacing:0;
-    font-size:1.5em;
-    color:var(--teal);
-    padding-right:.15em;
-    vertical-align:middle;
-  }
-
-  .tagline{
-    margin:.6rem 0 0;
-    font-size:1rem;
-    color:var(--ink-dim);
-    font-weight:400;
-  }
-
-  /* ---------- HUB (grid of panels + give button) ---------- */
-  .hub{
-    position:relative;
-    flex:1;
-    min-height:520px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:1fr 1fr;
-  }
-
-  .roots{
+  /* the photo: full-bleed, quiet, behind everything */
+  .bg{
     position:absolute;
     inset:0;
-    width:100%;
-    height:100%;
-    z-index:3;
-    pointer-events:none;
-    filter:drop-shadow(0 1px 4px rgba(0,0,0,0.65));
+    z-index:-1;
+    background:
+      linear-gradient(180deg, rgba(6,18,26,0.58) 0%, rgba(7,31,40,0.70) 55%, rgba(14,34,68,0.84) 100%),
+      url('https://media.thechurchcoassets.com/accounts/5782/f060dbaa-9570-4e01-96f4-21a1771a8928-./Copy-of-6M7A5115-2.jpg') center/cover;
+    background-color:var(--navy-alt);
   }
-
-  .roots path{
-    fill:none;
-    stroke:url(#rootGradient);
-    stroke-width:.6;
-    stroke-linecap:round;
-    vector-effect:non-scaling-stroke;
-    stroke-dasharray:48;
-    stroke-dashoffset:48;
-    animation:draw 1s ease forwards;
-    opacity:.95;
-  }
-
-  .roots polygon{
-    fill:var(--gold);
-    opacity:0;
-    animation:popIn .4s ease forwards;
-  }
-
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-
-  /* ---------- PANELS ---------- */
-  .panel{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:flex-end;
-    justify-content:flex-end;
-    padding:clamp(1.4rem, 3vw, 2.6rem);
-    background-image:linear-gradient(180deg, rgba(7,20,26,0.55) 0%, rgba(7,20,26,0.85) 100%), var(--panel-img);
-    background-size:cover;
-    background-position:center;
-    overflow:hidden;
-    cursor:pointer;
-    transition:transform .5s cubic-bezier(.22,1,.36,1), background-image .5s ease;
-    opacity:0;
-    transform:translateY(18px) scale(1);
-    animation:fadeUp .8s ease forwards;
-  }
-
-  .panel:nth-child(2){ animation-delay:.5s; border-right:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(3){ animation-delay:.62s; border-bottom:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(4){ animation-delay:.74s; border-right:1px solid rgba(255,255,255,0.06); }
-  .panel:nth-child(5){ animation-delay:.86s; }
-
-  .panel-content{ text-align:right; }
-
-  .panel::before{
+  .bg::after{
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(140% 120% at 50% 50%, rgba(66,185,210,0.22), transparent 65%);
-    opacity:0;
-    transition:opacity .5s ease;
+    background:radial-gradient(55% 55% at 50% 52%, rgba(66,185,210,0.20), transparent 70%);
   }
 
-  .panel:hover,
-  .panel:focus-visible{
-    background-image:linear-gradient(180deg, rgba(66,185,210,0.18) 0%, rgba(7,20,26,0.75) 100%), var(--panel-img);
-    transform:scale(1.025);
+  /* ---------- HEADER / FOOTER ---------- */
+  .brand{
+    text-align:center;
+    padding:clamp(1.1rem, 3vw, 1.8rem) 1.5rem 0;
+    animation:rise .9s ease backwards;
   }
-
-  .panel:hover, .panel:focus-visible{ transform-origin:bottom right; }
-
-  .panel:hover::before,
-  .panel:focus-visible::before{ opacity:1; }
-
-  .panel:focus-visible{ outline:2px solid var(--teal); outline-offset:-4px; }
-
-  .panel-content{ position:relative; max-width:340px; }
-  .panel-eyebrow{
+  .eyebrow{
     display:block;
     font-family:'Montserrat', sans-serif;
     font-weight:600;
-    font-size:.65rem;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    color:var(--ink-dim);
-    margin-bottom:.4rem;
-  }
-
-  .panel h2{
-    margin:0;
-    font-family:'Barlow Condensed', sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.03em;
-    font-size:clamp(1.4rem, 2.4vw, 1.9rem);
-    line-height:1.05;
-    color:var(--ink);
-  }
-
-  .panel p{
-    max-height:0;
-    opacity:0;
-    overflow:hidden;
-    margin:0;
-    font-size:.88rem;
-    line-height:1.5;
-    color:var(--ink-dim);
-    transition:max-height .5s ease, opacity .4s ease, margin .5s ease;
-  }
-
-  .panel:hover p,
-  .panel:focus-visible p{
-    max-height:6rem;
-    opacity:1;
-    margin-top:.6rem;
-  }
-
-  .cta{
-    display:inline-flex;
-    align-items:center;
-    gap:.4rem;
-    margin-top:1rem;
-    font-family:'Montserrat', sans-serif;
-    font-weight:600;
-    font-size:.7rem;
-    letter-spacing:.2em;
+    font-size:.72rem;
+    letter-spacing:.34em;
     text-transform:uppercase;
     color:var(--teal);
-    flex-direction:row-reverse;
+  }
+  .tagline{
+    margin:.5rem 0 0;
+    font-size:1rem;
+    color:var(--ink-dim);
   }
 
-  .cta svg{ width:13px; height:13px; transition:transform .35s ease; }
-  .panel:hover .cta svg, .panel:focus-visible .cta svg{ transform:translateX(-5px); }
-
-  /* ---------- GIVE BUTTON (hub center) ---------- */
-  .give-wrap{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
-    z-index:4;
-    opacity:0;
-    animation:popIn .7s cubic-bezier(.22,1,.36,1) forwards;
-    animation-delay:1s;
+  .foot{
+    text-align:center;
+    padding:0 1.5rem clamp(.8rem, 2vw, 1.2rem);
+    font-family:'Montserrat', sans-serif;
+    font-size:.66rem;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:rgba(159,185,196,0.65);
+    animation:rise .9s .4s ease backwards;
   }
 
-  .give-wrap::before{
-    content:"";
-    position:absolute;
-    inset:-18px;
-    border-radius:40px;
-    background:radial-gradient(circle, rgba(240,201,74,0.35), transparent 70%);
-    animation:pulse 2.6s ease-in-out infinite;
+  /* ---------- THE FRAME + DRAWING ---------- */
+  .stage{
+    flex:1;
+    display:grid;
+    place-items:center;
+    padding:.6rem 0;
   }
 
-  .give-btn{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:.3rem;
-    width:clamp(170px, 16vw, 230px);
-    height:clamp(118px, 10vw, 150px);
-    border-radius:30px;
-    background:radial-gradient(circle at 35% 30%, #ffdd8a, var(--gold) 55%, var(--gold-dark) 100%);
-    color:var(--navy-deep);
-    box-shadow:0 10px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.15) inset;
-    transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  .frame{
+    width:var(--w);
+    padding:clamp(10px, 2vw, 28px);
+    border:1px solid rgba(66,185,210,0.24);
+    border-radius:clamp(24px, 4.5vw, 56px);
+    background:rgba(6,18,26,0.28);
+    animation:fade 1s ease backwards;
   }
 
-  .give-btn:hover, .give-btn:focus-visible{
-    transform:scale(1.06);
-    box-shadow:0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.2) inset;
-    outline:none;
+  .map{
+    display:block;
+    width:100%;
+    height:auto;
+    overflow:visible;
   }
 
-  .give-btn svg{ width:32px; height:32px; }
+  .orbit{
+    fill:rgba(66,185,210,0.07);
+    stroke:rgba(142,224,242,0.38);
+    stroke-width:2;
+  }
 
-  .give-label{
+  /* four regions: bulging inner edges, open diagonal channels between them */
+  .regions{ filter:drop-shadow(0 18px 24px rgba(0,0,0,0.5)); }
+
+  .region{
+    cursor:pointer;
+    transition:transform .45s cubic-bezier(.22,1,.36,1);
+    transform-origin:500px 380px;
+    animation:bloom 1s cubic-bezier(.22,1,.36,1) backwards;
+  }
+  .r-top{    animation-delay:.5s; }
+  .r-right{  animation-delay:.6s; }
+  .r-bottom{ animation-delay:.7s; }
+  .r-left{   animation-delay:.8s; }
+
+  .region path{
+    fill:url(#wedge);
+    stroke:url(#wedge);
+    stroke-width:12;               /* round joins on a same-color stroke soften the corners */
+    stroke-linejoin:round;
+  }
+  .region:hover path,
+  .region:focus-visible path{
+    fill:url(#wedgeHover);
+    stroke:url(#wedgeHover);
+  }
+  .r-top:hover,    .r-top:focus-visible{    transform:translate(0,-9px); }
+  .r-bottom:hover, .r-bottom:focus-visible{ transform:translate(0, 9px); }
+  .r-left:hover,   .r-left:focus-visible{   transform:translate(-9px,0); }
+  .r-right:hover,  .r-right:focus-visible{  transform:translate( 9px,0); }
+  .region:focus-visible{ outline:none; }
+
+  .region text{ pointer-events:none; }
+  .name{
     font-family:'Barlow Condensed', sans-serif;
     font-weight:700;
+    font-size:40px;
+    letter-spacing:.04em;
     text-transform:uppercase;
-    letter-spacing:.08em;
-    font-size:1.3rem;
+    fill:#fff;
+  }
+  .desc{
+    font-family:'Open Sans', sans-serif;
+    font-weight:400;
+    font-size:17px;
+    fill:rgba(238,246,248,0.84);
   }
 
-  .give-sub{
-    font-family:'Montserrat', sans-serif;
-    font-weight:600;
-    font-size:.62rem;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    opacity:.75;
+  /* GIVE */
+  .give{
+    cursor:pointer;
+    transform-origin:500px 380px;
+    transition:transform .4s cubic-bezier(.22,1,.36,1);
+    animation:pop .8s 1.1s cubic-bezier(.22,1,.36,1) backwards;
   }
-
-  @keyframes pulse{
-    0%,100%{ transform:scale(1); opacity:.7; }
-    50%{ transform:scale(1.18); opacity:.25; }
+  .give:hover, .give:focus-visible{ transform:scale(1.06); outline:none; }
+  .give .disc{ fill:url(#giveFill); }
+  .give .halo1{ fill:none; stroke:rgba(66,185,210,0.20); stroke-width:10; }
+  .give .halo2{ fill:none; stroke:rgba(66,185,210,0.09); stroke-width:10; }
+  .give .ping{
+    fill:none;
+    stroke:rgba(142,224,242,0.75);
+    stroke-width:2;
+    transform-origin:500px 380px;
+    animation:ping 2.8s 2.2s ease-out infinite;
   }
+  .give .word{
+    font-family:'Barlow Condensed', sans-serif;
+    font-weight:800;
+    font-size:86px;
+    letter-spacing:.12em;
+    fill:#05212c;
+  }
+  .give:focus-visible .disc{ stroke:#fff; stroke-width:4; }
 
-  @keyframes popIn{ to{ opacity:1; } }
+  /* ---------- MOTION ---------- */
+  @keyframes bloom{ from{ transform:scale(.82); opacity:0; } }
+  @keyframes pop{ from{ transform:scale(.6); opacity:0; } }
+  @keyframes ping{ from{ transform:scale(1); opacity:.75; } to{ transform:scale(1.7); opacity:0; } }
+  @keyframes fade{ from{ opacity:0; } }
+  @keyframes rise{ from{ opacity:0; transform:translateY(-10px); } }
 
   @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-    .roots path{ stroke-dashoffset:0; }
-    .give-wrap::before{ animation:none; opacity:.4; }
+    *, *::before, *::after{ animation:none !important; transition:none !important; }
   }
 
-  /* ---------- MOBILE ---------- */
-  @media (max-width:899px){
-    .hub{
-      display:flex;
-      flex-direction:column;
-      min-height:auto;
-    }
-    .roots{ display:none; }
-
-    .panel{
-      align-items:flex-start !important;
-      justify-content:flex-start !important;
-      padding:1.5rem 1.4rem;
-      border:none !important;
-      border-top:1px solid rgba(255,255,255,0.06) !important;
-    }
-    .panel:nth-child(2){ order:1; border-top:none !important; }
-    .panel:nth-child(3){ order:2; }
-    .panel:nth-child(4){ order:4; }
-    .panel:nth-child(5){ order:5; }
-    .panel .panel-content{ text-align:left !important; max-width:none; }
-    .panel .cta{ flex-direction:row !important; }
-    .panel:hover .cta svg, .panel:focus-visible .cta svg{ transform:translateX(5px) !important; }
-
-    .panel p{
-      max-height:none;
-      opacity:1;
-      overflow:visible;
-      margin-top:.5rem;
-    }
-    .panel::before{ opacity:.5; }
-
-    .give-wrap{
-      position:relative;
-      order:3;
-      top:auto; left:auto;
-      transform:none;
-      width:100%;
-      padding:1.1rem 1.4rem;
-      display:flex;
-      justify-content:center;
-      animation:fadeUp .8s ease forwards;
-      animation-delay:.6s;
-      opacity:0;
-      border-top:1px solid rgba(255,255,255,0.06);
-      border-bottom:1px solid rgba(255,255,255,0.06);
-      background:rgba(240,201,74,0.06);
-    }
-    .give-wrap::before{ display:none; }
-
-    .give-btn{
-      width:100%;
-      height:auto;
-      border-radius:999px;
-      flex-direction:row;
-      padding:.9rem 1.4rem;
-      gap:.7rem;
-    }
-    .give-btn svg{ width:22px; height:22px; }
-    .give-label{ font-size:1rem; }
+  @media (max-width:600px){
+    :root{ --w:94vw; }
+    .desc{ display:none; }          /* no room for the sentences at phone size */
+    .name{ font-size:46px; }
   }
-
-  @keyframes fadeUp{ to{ opacity:1; transform:translateY(0) scale(1); } }
-  .brand{ transform:translateY(-10px); }
 </style>
 </head>
 <body>
 
-<div class="stage">
+<div class="page">
+  <div class="bg" aria-hidden="true"></div>
 
   <header class="brand">
     <span class="eyebrow">Evolve Nation &middot; Milwaukee</span>
-    <!-- <h1 class="wordmark"><span class="script">Evolve</span>Nation</h1> -->
     <p class="tagline">Choose where you'd like to begin.</p>
   </header>
 
-  <div class="hub">
+  <main class="stage">
+    <div class="frame">
+      <svg class="map" viewBox="0 0 1000 760" role="group" aria-label="Evolve Nation sections">
+        <defs>
+          <linearGradient id="wedge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1f6e86"/><stop offset=".55" stop-color="#0f4a60"/><stop offset="1" stop-color="#0a3446"/>
+          </linearGradient>
+          <linearGradient id="wedgeHover" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2d92b0"/><stop offset=".55" stop-color="#17708d"/><stop offset="1" stop-color="#0f5068"/>
+          </linearGradient>
+          <radialGradient id="giveFill" cx=".32" cy=".26" r=".9">
+            <stop offset="0" stop-color="#c9f3fc"/><stop offset=".4" stop-color="#42B9D2"/><stop offset=".78" stop-color="#2A8FA8"/><stop offset="1" stop-color="#17677c"/>
+          </radialGradient>
+        </defs>
 
-    <svg class="roots" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="rootGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f0c94a"/>
-          <stop offset="100%" stop-color="#42B9D2"/>
-        </linearGradient>
-      </defs>
+        <!-- the big circle that holds everything -->
+        <ellipse class="orbit" cx="500" cy="380" rx="486" ry="366"/>
 
-      <path d="M50,50 Q35,40 25,25" style="animation-delay:1.15s"/>
-      <polygon points="0,-3 6,0 0,3" transform="translate(25,25) rotate(225)" style="animation-delay:2.0s"/>
+        <g class="regions">
 
-      <path d="M50,50 Q65,40 75,25" style="animation-delay:1.25s"/>
-      <polygon points="0,-3 6,0 0,3" transform="translate(75,25) rotate(-45)" style="animation-delay:2.1s"/>
+          <!-- TOP -->
+          <a class="region r-top" href="#sunday-worship-experience" aria-label="Sunday Worship Experience">
+            <path d="M189.2 117.5 A470 350 0 0 1 810.8 117.5 L722.8 183.5 C640 256 360 256 277.2 183.5 Z"/>
+            <text class="name" x="500" y="96" text-anchor="middle">Sunday Worship</text>
+            <text class="name" x="500" y="140" text-anchor="middle">Experience</text>
+            <text class="desc" x="500" y="178" text-anchor="middle">Gather on Sundays for worship,</text>
+            <text class="desc" x="500" y="200" text-anchor="middle">teaching and a place to belong.</text>
+          </a>
 
-      <path d="M50,50 Q35,60 25,75" style="animation-delay:1.35s"/>
-      <polygon points="0,-3 6,0 0,3" transform="translate(25,75) rotate(135)" style="animation-delay:2.2s"/>
+          <!-- RIGHT -->
+          <a class="region r-right" href="#evolve-community" aria-label="Community">
+            <path d="M852.5 148.5 A470 350 0 0 1 852.5 611.5 L764.5 545.5 C612 470 612 290 764.5 214.5 Z"/>
+            <text class="name" x="810" y="362" text-anchor="middle">Community</text>
+            <text class="desc" x="810" y="402" text-anchor="middle">Life groups, events and</text>
+            <text class="desc" x="810" y="424" text-anchor="middle">a place to belong.</text>
+          </a>
 
-      <path d="M50,50 Q65,60 75,75" style="animation-delay:1.45s"/>
-      <polygon points="0,-3 6,0 0,3" transform="translate(75,75) rotate(45)" style="animation-delay:2.3s"/>
-    </svg>
+          <!-- BOTTOM -->
+          <a class="region r-bottom" href="#discipleship" aria-label="Discipleship">
+            <path d="M810.8 642.5 A470 350 0 0 1 189.2 642.5 L277.2 576.5 C360 504 640 504 722.8 576.5 Z"/>
+            <text class="name" x="500" y="608" text-anchor="middle">Discipleship</text>
+            <text class="desc" x="500" y="648" text-anchor="middle">Grow in your faith,</text>
+            <text class="desc" x="500" y="670" text-anchor="middle">one step at a time.</text>
+          </a>
 
-    <a class="panel" href="index.html" aria-label="Evolve Church"
-   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/d51b758e-e7dc-4741-8fda-53412ce2be93-./DSC09241.jpg');">
-      <div class="panel-content">
-        <span class="panel-eyebrow">Gather</span>
-        <h2>Evolve Church</h2>
-        <p>Sunday services, sermons, and everything about who we are as a church.</p>
-        <span class="cta">Enter </span>
-      </div>
-    </a>
+          <!-- LEFT -->
+          <a class="region r-left" href="#evolve-outreach" aria-label="Evolve Outreach">
+            <path d="M147.5 611.5 A470 350 0 0 1 147.5 148.5 L235.5 214.5 C388 290 388 470 235.5 545.5 Z"/>
+            <text class="name" x="190" y="340" text-anchor="middle">Evolve</text>
+            <text class="name" x="190" y="384" text-anchor="middle">Outreach</text>
+            <text class="desc" x="190" y="422" text-anchor="middle">Serving our city and</text>
+            <text class="desc" x="190" y="444" text-anchor="middle">meeting real needs.</text>
+          </a>
 
-    <a class="panel" href="#evolve-community" aria-label="Evolve Community"
-   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/a861353a-a5dc-47e3-812c-6857e7bf6104-./DSC09662.jpg');">
-      <div class="panel-content">
-        <span class="panel-eyebrow">Connect</span>
-        <h2>Evolve Community</h2>
-        <p>Life groups, events, and the ways we stay connected throughout the week.</p>
-        <span class="cta">Enter </span>
-      </div>
-    </a>
+        </g>
 
-    <div class="give-wrap">
-      <a class="give-btn" href="https://pushpay.com/g/evolvenation?fnd=5AdLKlwoRKROWeb1iQq-AQ&r=No&lang=en&src=qrcode" target="_top" aria-label="Give Online">
-
-        <span class="give-label">Give</span>
-        <span class="give-sub">Online</span>
-      </a>
+        <!-- GIVE, in the open center -->
+        <a class="give" href="https://pushpay.com/g/evolvenation?fnd=5AdLKlwoRKROWeb1iQq-AQ&amp;r=No&amp;lang=en&amp;src=qrcode" target="_top" aria-label="Give online">
+          <circle class="halo2" cx="500" cy="380" r="138"/>
+          <circle class="halo1" cx="500" cy="380" r="124"/>
+          <circle class="ping"  cx="500" cy="380" r="112"/>
+          <circle class="disc"  cx="500" cy="380" r="112"/>
+          <text class="word" x="500" y="410" text-anchor="middle">GIVE</text>
+        </a>
+      </svg>
     </div>
+  </main>
 
-    <a class="panel" href="#evolve-ministries" aria-label="Evolve Ministries"
-   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
-      <div class="panel-content">
-        <span class="panel-eyebrow">Grow</span>
-        <h2>Evolve Ministries</h2>
-        <p>Kids, students, men, and every ministry built to reach the next generation.</p>
-        <span class="cta">Enter </span>
-      </div>
-    </a>
-
-    <a class="panel" href="#evolve-more" aria-label="More from Evolve" 
-   style="--panel-img:url('https://media.thechurchcoassets.com/accounts/5782/9c6f9631-5af5-4a9a-9575-873749f24841-./volunteer.jpg');">
-      <div class="panel-content">
-        <span class="panel-eyebrow">Discover</span>
-        <h2>Evolve More Stuff</h2>
-        <p>Replace this tile with whatever fourth destination you're planning next.</p>
-        <span class="cta">Enter </span>
-      </div>
-    </a>
-
-  </div>
-
+  <footer class="foot">evolvenation.org</footer>
 </div>
+
 </body>
 </html>
