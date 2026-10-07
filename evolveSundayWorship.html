@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunday Worship Experience | Evolve Church Milwaukee</title>
+  <meta name="description" content="Experience Sunday worship at Evolve Church Milwaukee. Services at 9:00 AM, 10:30 AM and 12:00 PM at 6550 N. 76th St. Watch live, send a prayer request and find your next step." />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+    /* ══════════════════════════════════════════════════════════════
+       SUNDAY WORSHIP EXPERIENCE  |  class prefix: sw-
+       TCC iframe rules: no fixed/sticky, no 100vh, no overflow:hidden
+       with height:100%, external links use target _top or _blank.
+       ══════════════════════════════════════════════════════════════ */
+    :root {
+      --sw-teal: #42B9D2;
+      --sw-teal-dk: #2A8FA8;
+      --sw-navy: #07141a;
+      --sw-navy-2: #0e2244;
+      --sw-gold: #ffffff;
+      --sw-ink: #e8eef2;
+      --sw-mute: #9fb3bf;
+      --sw-line: rgba(255,255,255,.09);
+      --sw-glass: rgba(255,255,255,.045);
+      --sw-accent: var(--sw-teal);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Barlow', 'Open Sans', sans-serif;
+      color: var(--sw-ink);
+      background: var(--sw-navy);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button { font: inherit; color: inherit; }
+    .sw-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .sw-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+      font-size: 13px; color: var(--sw-teal);
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .sw-eyebrow::before { content: ''; width: 28px; height: 2px; background: currentColor; border-radius: 2px; }
+    .sw-h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .01em;
+      font-size: clamp(38px, 5.4vw, 64px); line-height: .95; margin: 14px 0 16px;
+    }
+    .sw-h2 .sw-script { color: var(--sw-teal); }
+    .sw-lead { color: var(--sw-mute); font-size: 18px; max-width: 620px; }
+
+    .sw-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+      letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+      padding: 15px 26px; border-radius: 999px; border: 0; cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+    .sw-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .sw-btn--solid { background: var(--sw-teal); color: #04161d; box-shadow: 0 10px 30px -8px rgba(66,185,210,.65); }
+    .sw-btn--solid:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -8px rgba(66,185,210,.8); }
+    .sw-btn--ghost { background: rgba(255,255,255,.06); color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22); }
+    .sw-btn--ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-2px); }
+    .sw-btn--gold { background: var(--sw-gold); color: #04161d; box-shadow: 0 10px 30px -8px rgba(255,255,255,.55); }
+    .sw-btn--gold:hover { transform: translateY(-2px); }
+    .sw-btn:focus-visible, .sw-chip:focus-visible, .sw-seg-btn:focus-visible, .sw-path:focus-visible {
+      outline: 3px solid var(--sw-gold); outline-offset: 3px;
+    }
+
+    /* Scroll reveal */
+    .sw-reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .sw-reveal.is-in { opacity: 1; transform: none; }
+    .sw-d1 { transition-delay: .08s; } .sw-d2 { transition-delay: .16s; } .sw-d3 { transition-delay: .24s; }
+
+    /* ══════════ HERO ══════════ */
+    .sw-hero {
+      position: relative; isolation: isolate;
+      min-height: 720px; display: flex; align-items: center;
+      padding: 110px 0 90px;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(66,185,210,.28), transparent 60%),
+        radial-gradient(900px 500px at -10% 110%, rgba(255,255,255,.14), transparent 60%),
+        linear-gradient(180deg, #081a24 0%, var(--sw-navy) 100%);
+      overflow: clip;
+    }
+    .sw-hero-media {
+      position: absolute; inset: 0; z-index: -2;
+      background: url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg') center/cover no-repeat;
+      opacity: .22; filter: saturate(1.1) contrast(1.05);
+      transform: scale(1.08); animation: sw-drift 28s ease-in-out infinite alternate;
+    }
+    .sw-hero-media::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(7,20,26,.35) 0%, rgba(7,20,26,.85) 70%, var(--sw-navy) 100%);
+    }
+    @keyframes sw-drift { from { transform: scale(1.08) translate(0,0); } to { transform: scale(1.16) translate(-2%, -1.5%); } }
+
+    .sw-rays {
+      position: absolute; z-index: -1; top: -40%; left: 50%; width: 1600px; height: 1600px;
+      transform: translateX(-50%);
+      background: conic-gradient(from 180deg at 50% 50%,
+        transparent 0deg, rgba(66,185,210,.10) 12deg, transparent 24deg,
+        transparent 40deg, rgba(255,255,255,.07) 52deg, transparent 64deg,
+        transparent 90deg, rgba(66,185,210,.08) 104deg, transparent 118deg,
+        transparent 150deg, rgba(255,255,255,.05) 160deg, transparent 172deg,
+        transparent 360deg);
+      animation: sw-spin 90s linear infinite;
+      mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 62%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 62%);
+    }
+    @keyframes sw-spin { to { transform: translateX(-50%) rotate(360deg); } }
+    #swParticles { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+
+    .sw-hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+    .sw-hero-kicker {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--sw-teal);
+      text-transform: uppercase; letter-spacing: .3em; font-size: clamp(15px, 1.6vw, 18px); line-height: 1;
+      opacity: 0; animation: sw-up .9s .1s forwards;
+    }
+    .sw-hero h1 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase;
+      font-size: clamp(56px, 9vw, 118px); line-height: .86; letter-spacing: -.005em; margin: 6px 0 22px;
+    }
+    .sw-hero h1 span { display: block; opacity: 0; animation: sw-up .9s forwards; }
+    .sw-hero h1 span:nth-child(1) { animation-delay: .2s; }
+    .sw-hero h1 span:nth-child(2) {
+      animation-delay: .35s;
+      background: linear-gradient(90deg, #fff 0%, var(--sw-teal) 45%, #fff 90%);
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: sw-up .9s .35s forwards, sw-shine 6s 1.4s linear infinite;
+    }
+    @keyframes sw-shine { to { background-position: -200% center; } }
+    @keyframes sw-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    .sw-hero-sub { font-size: 19px; color: #c6d4dc; max-width: 560px; opacity: 0; animation: sw-up .9s .5s forwards; }
+    .sw-hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; opacity: 0; animation: sw-up .9s .65s forwards; }
+
+    /* Countdown card */
+    .sw-count {
+      position: relative; border-radius: 28px; padding: 30px 28px 26px;
+      background: linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.025));
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 30px 80px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
+      opacity: 0; animation: sw-up 1s .55s forwards;
+    }
+    .sw-count::before {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: linear-gradient(140deg, rgba(66,185,210,.8), transparent 40%, transparent 60%, rgba(255,255,255,.6));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+    .sw-count-label {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; font-size: 13px; color: var(--sw-mute);
+    }
+    .sw-live-pill {
+      display: none; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,72,72,.16); color: #ff7b7b; letter-spacing: .14em;
+    }
+    .sw-live-pill i { width: 8px; height: 8px; border-radius: 50%; background: #ff4d4d; box-shadow: 0 0 0 0 rgba(255,77,77,.7); animation: sw-pulse 1.6s infinite; }
+    @keyframes sw-pulse { 70% { box-shadow: 0 0 0 10px rgba(255,77,77,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,77,0); } }
+    .sw-count.is-live .sw-live-pill { display: inline-flex; }
+    .sw-count-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 20px; margin: 12px 0 18px; }
+    .sw-digits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .sw-digit {
+      text-align: center; padding: 14px 4px 10px; border-radius: 16px;
+      background: rgba(7,20,26,.55); border: 1px solid var(--sw-line);
+    }
+    .sw-digit b {
+      display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 44px; line-height: 1; font-variant-numeric: tabular-nums; color: #fff;
+    }
+    .sw-digit span { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--sw-mute); }
+    .sw-digit.tick b { animation: sw-tick .4s ease; }
+    @keyframes sw-tick { 0% { transform: translateY(-6px); opacity: .3; } 100% { transform: none; opacity: 1; } }
+    .sw-live-now { display: none; text-align: center; padding: 8px 0 4px; }
+    .sw-live-now strong { font-family: 'Barlow Condensed', sans-serif; font-size: 40px; text-transform: uppercase; display: block; line-height: 1; }
+    .sw-live-now p { color: var(--sw-mute); margin-top: 8px; }
+    .sw-count.is-live .sw-digits { display: none; }
+    .sw-count.is-live .sw-live-now { display: block; }
+
+    .sw-chips { display: flex; gap: 8px; margin-top: 18px; }
+    .sw-chip {
+      flex: 1; text-align: center; padding: 10px 6px; border-radius: 14px; cursor: default;
+      background: rgba(255,255,255,.04); border: 1px solid var(--sw-line);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: .04em;
+      transition: all .3s ease;
+    }
+    .sw-chip small { display: block; font-family: 'Barlow', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--sw-mute); }
+    .sw-chip.is-next { background: rgba(66,185,210,.16); border-color: rgba(66,185,210,.6); box-shadow: 0 0 24px -6px rgba(66,185,210,.6); }
+    .sw-chip.is-next small { color: var(--sw-teal); }
+    .sw-chip.is-live { background: rgba(255,77,77,.14); border-color: rgba(255,77,77,.55); }
+    .sw-chip.is-live small { color: #ff8a8a; }
+    .sw-chip.is-done { opacity: .45; }
+    .sw-count-foot { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: var(--sw-mute); font-size: 14px; }
+    .sw-count-foot svg { width: 18px; height: 18px; color: var(--sw-teal); flex-shrink: 0; }
+    .sw-count-foot a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(66,185,210,.5); }
+
+    .sw-scroll-cue {
+      position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+      width: 26px; height: 42px; border-radius: 14px; border: 2px solid rgba(255,255,255,.3);
+    }
+    .sw-scroll-cue::after {
+      content: ''; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px;
+      border-radius: 2px; background: var(--sw-teal); animation: sw-cue 1.8s infinite;
+    }
+    @keyframes sw-cue { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+    /* ══════════ MARQUEE ══════════ */
+    .sw-marquee {
+      border-block: 1px solid var(--sw-line); background: rgba(66,185,210,.05);
+      overflow: clip; padding: 18px 0; white-space: nowrap;
+    }
+    .sw-marquee-track { display: inline-flex; gap: 48px; animation: sw-marq 38s linear infinite; padding-left: 48px; }
+    .sw-marquee span {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase;
+      font-size: 26px; letter-spacing: .08em; color: rgba(255,255,255,.75);
+      display: inline-flex; align-items: center; gap: 48px;
+    }
+    .sw-marquee span::after { content: '\2726'; color: var(--sw-gold); font-size: 16px; }
+    @keyframes sw-marq { to { transform: translateX(-50%); } }
+
+
+    /* ══════════ PHOTO SLIDER ══════════ */
+    .sw-gallery { padding: 56px 0 10px; position: relative; }
+    .sw-gal-viewport { overflow: clip; position: relative; touch-action: pan-y; }
+    .sw-gal-track { display: flex; gap: 22px; transition: transform .8s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+    .sw-gal-slide {
+      flex: 0 0 68%; aspect-ratio: 16 / 9; border-radius: 28px; overflow: clip; position: relative;
+      background: #0d2433; cursor: pointer;
+      transform: scale(.88); opacity: .4; filter: saturate(.7);
+      transition: transform .8s cubic-bezier(.2,.7,.2,1), opacity .8s ease, filter .8s ease, box-shadow .8s ease;
+    }
+    .sw-gal-slide.is-active {
+      transform: none; opacity: 1; filter: none; cursor: default;
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(66,185,210,.25);
+    }
+    .sw-gal-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.02); }
+    .sw-gal-slide.is-active img { animation: sw-kb 7s ease-out forwards; }
+    @keyframes sw-kb { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+    .sw-gal-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(7,20,26,.85)); pointer-events: none; }
+    .sw-gal-cap {
+      position: absolute; left: 28px; right: 28px; bottom: 24px; z-index: 1;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase;
+      font-size: clamp(22px, 3vw, 38px); line-height: 1; letter-spacing: .02em;
+      opacity: 0; transform: translateY(14px); transition: opacity .6s .3s ease, transform .6s .3s ease;
+    }
+    .sw-gal-cap small { display: block; font-size: 13px; letter-spacing: .26em; color: var(--sw-teal); margin-bottom: 8px; font-weight: 700; }
+    .sw-gal-slide.is-active .sw-gal-cap { opacity: 1; transform: none; }
+    .sw-gal-ui { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 26px; }
+    .sw-gal-ui button.sw-gal-arrow {
+      width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.05);
+      cursor: pointer; display: grid; place-items: center; transition: all .25s ease;
+    }
+    .sw-gal-ui button.sw-gal-arrow:hover { background: var(--sw-teal); color: #04161d; border-color: var(--sw-teal); }
+    .sw-gal-ui svg { width: 20px; height: 20px; }
+    .sw-gal-dots { display: flex; gap: 8px; }
+    .sw-gal-dots button {
+      width: 28px; height: 4px; border-radius: 4px; border: 0; cursor: pointer; background: rgba(255,255,255,.2);
+      position: relative; overflow: clip; padding: 0; transition: width .4s ease;
+    }
+    .sw-gal-dots button i { position: absolute; inset: 0; width: 0; background: var(--sw-teal); }
+    .sw-gal-dots button.is-on { width: 54px; }
+    .sw-gal-dots button.is-on i { animation: sw-fill var(--sw-gal-ms, 5500ms) linear forwards; }
+    .sw-gal-paused .sw-gal-dots button.is-on i { animation-play-state: paused; }
+    @keyframes sw-fill { to { width: 100%; } }
+    .sw-gal-arrow:focus-visible, .sw-gal-dots button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+    /* ══════════ WORSHIP SEGMENTS ══════════ */
+    .sw-section { padding: 110px 0; position: relative; }
+    .sw-head { margin-bottom: 48px; }
+    .sw-flow { display: grid; grid-template-columns: 340px 1fr; gap: 28px; align-items: stretch; }
+    .sw-seg-list { list-style: none; display: flex; flex-direction: column; gap: 6px; position: relative; }
+    .sw-seg-list::before {
+      content: ''; position: absolute; left: 27px; top: 24px; bottom: 24px; width: 2px;
+      background: linear-gradient(180deg, var(--sw-teal), rgba(66,185,210,.08));
+    }
+    .sw-seg-btn {
+      width: 100%; display: flex; align-items: center; gap: 16px; text-align: left; cursor: pointer;
+      padding: 12px 16px 12px 10px; border-radius: 18px; border: 1px solid transparent; background: transparent;
+      transition: background .3s ease, border-color .3s ease, transform .3s ease;
+      position: relative;
+    }
+    .sw-seg-btn:hover { background: rgba(255,255,255,.04); transform: translateX(4px); }
+    .sw-seg-num {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; position: relative; z-index: 1;
+      display: grid; place-items: center; margin-left: 0;
+      background: var(--sw-navy); border: 2px solid rgba(66,185,210,.45);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; color: var(--sw-teal);
+      transition: all .35s ease;
+    }
+    .sw-seg-txt b { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; }
+    .sw-seg-txt small { color: var(--sw-mute); font-size: 13px; }
+    .sw-seg-now {
+      margin-left: auto; display: none; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 11px; letter-spacing: .18em; color: #ff8a8a; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 999px; background: rgba(255,77,77,.14);
+    }
+    .sw-seg-btn.is-now .sw-seg-now { display: inline-block; }
+    .sw-seg-btn[aria-selected="true"] {
+      background: linear-gradient(90deg, rgba(66,185,210,.16), rgba(66,185,210,.03));
+      border-color: rgba(66,185,210,.35);
+    }
+    .sw-seg-btn[aria-selected="true"] .sw-seg-num {
+      background: var(--sw-accent); border-color: var(--sw-accent); color: #04161d;
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--sw-accent) 22%, transparent);
+    }
+
+    .sw-stage {
+      position: relative; border-radius: 32px; overflow: clip; min-height: 520px;
+      background: #0a1d27; border: 1px solid var(--sw-line);
+      box-shadow: 0 40px 90px -40px rgba(0,0,0,.8);
+      isolation: isolate;
+    }
+    .sw-stage-bg {
+      position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(600px 380px at 85% 10%, color-mix(in srgb, var(--sw-accent) 45%, transparent), transparent 65%),
+        radial-gradient(500px 360px at 0% 100%, color-mix(in srgb, var(--sw-accent) 22%, transparent), transparent 60%),
+        linear-gradient(160deg, #0d2433, #07141a);
+      transition: background .8s ease;
+    }
+    .sw-stage-glyph {
+      position: absolute; right: -30px; bottom: -70px; z-index: -1;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 320px; line-height: 1;
+      color: rgba(255,255,255,.035); letter-spacing: -.02em; user-select: none;
+    }
+    .sw-stage-inner { padding: 48px 48px 40px; display: flex; flex-direction: column; height: 100%; min-height: 520px; }
+    .sw-stage-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .sw-stage-icon {
+      width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center;
+      background: color-mix(in srgb, var(--sw-accent) 20%, transparent);
+      border: 1px solid color-mix(in srgb, var(--sw-accent) 50%, transparent);
+      color: var(--sw-accent);
+    }
+    .sw-stage-icon svg { width: 30px; height: 30px; }
+    .sw-stage-meta { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; font-size: 13px; color: var(--sw-accent); }
+    .sw-stage-meta span { display: block; color: var(--sw-mute); letter-spacing: .14em; font-weight: 600; }
+    .sw-stage h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase;
+      font-size: clamp(44px, 5vw, 72px); line-height: .92; margin: 28px 0 16px;
+    }
+    .sw-stage p.sw-stage-copy { font-size: 18px; color: #cfdbe2; max-width: 560px; }
+    .sw-stage ul.sw-expect { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .sw-stage ul.sw-expect li {
+      padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+      background: rgba(255,255,255,.06); border: 1px solid var(--sw-line);
+    }
+    .sw-verse {
+      margin-top: auto; padding-top: 36px; display: flex; gap: 16px; align-items: flex-start;
+    }
+    .sw-verse::before { content: '\201C'; font-family: Georgia, serif; font-size: 72px; line-height: .8; color: var(--sw-gold); }
+    .sw-verse blockquote { font-size: 19px; color: #e7eef2; }
+    .sw-verse cite { display: block; margin-top: 8px; font-style: normal; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; font-size: 13px; color: var(--sw-gold); }
+    .sw-stage-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+    .sw-stage-nav { display: flex; gap: 10px; margin-top: 28px; align-items: center; }
+    .sw-stage-nav button {
+      width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.05); cursor: pointer; display: grid; place-items: center; transition: all .25s ease;
+    }
+    .sw-stage-nav button:hover { background: var(--sw-accent); color: #04161d; border-color: var(--sw-accent); }
+    .sw-stage-nav svg { width: 20px; height: 20px; }
+    .sw-progress { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: clip; }
+    .sw-progress i { display: block; height: 100%; width: 0; background: var(--sw-accent); transition: width .6s ease; }
+    .sw-eq { display: inline-flex; gap: 3px; align-items: flex-end; height: 22px; margin-left: auto; }
+    .sw-eq i { width: 4px; border-radius: 2px; background: var(--sw-accent); animation: sw-eq 1s ease-in-out infinite; }
+    .sw-eq i:nth-child(1) { animation-delay: -.2s; } .sw-eq i:nth-child(2) { animation-delay: -.5s; }
+    .sw-eq i:nth-child(3) { animation-delay: -.1s; } .sw-eq i:nth-child(4) { animation-delay: -.7s; } .sw-eq i:nth-child(5) { animation-delay: -.35s; }
+    @keyframes sw-eq { 0%,100% { height: 4px; } 50% { height: 22px; } }
+
+    .sw-anim { animation: sw-swap .55s cubic-bezier(.2,.7,.2,1); }
+    @keyframes sw-swap { from { opacity: 0; transform: translateY(16px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+
+    /* ══════════ LATEST MESSAGE ══════════ */
+    .sw-msg {
+      background: linear-gradient(180deg, transparent, rgba(14,34,68,.55) 30%, rgba(14,34,68,.55) 70%, transparent);
+    }
+    .sw-msg-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+    .sw-player {
+      position: relative; aspect-ratio: 16 / 9; border-radius: 26px; overflow: clip; cursor: pointer;
+      background: #000 center/cover no-repeat; border: 1px solid var(--sw-line);
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(66,185,210,.15);
+    }
+    .sw-player img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+    .sw-player:hover img { transform: scale(1.04); }
+    .sw-player::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.65)); pointer-events: none; }
+    .sw-play {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 2;
+      width: 92px; height: 92px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(66,185,210,.92); color: #04161d; border: 0; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(66,185,210,.5); animation: sw-ring 2.2s infinite;
+      transition: transform .3s ease;
+    }
+    .sw-player:hover .sw-play { transform: translate(-50%,-50%) scale(1.08); }
+    .sw-play svg { width: 34px; height: 34px; margin-left: 5px; }
+    @keyframes sw-ring { 70% { box-shadow: 0 0 0 28px rgba(66,185,210,0); } 100% { box-shadow: 0 0 0 0 rgba(66,185,210,0); } }
+    .sw-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; z-index: 3; }
+    .sw-msg-tag {
+      position: absolute; left: 20px; bottom: 18px; z-index: 2; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: .18em; text-transform: uppercase; font-size: 13px;
+      padding: 7px 12px; border-radius: 999px; background: rgba(7,20,26,.7); border: 1px solid var(--sw-line);
+    }
+    .sw-msg-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; margin: 14px 0 10px; }
+    .sw-msg-date { color: var(--sw-teal); font-weight: 600; letter-spacing: .04em; }
+    .sw-msg-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .sw-skel { background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.12), rgba(255,255,255,.05)); background-size: 200% 100%; animation: sw-skel 1.4s infinite; border-radius: 8px; color: transparent !important; }
+    @keyframes sw-skel { to { background-position: -200% 0; } }
+
+    /* ══════════ PRAYER + JOIN ══════════ */
+    .sw-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+    .sw-card {
+      position: relative; border-radius: 30px; padding: 40px 36px;
+      background: linear-gradient(165deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 30px 70px -40px rgba(0,0,0,.9);
+      overflow: clip; isolation: isolate;
+    }
+    .sw-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 44px; line-height: .95; margin: 12px 0 10px; }
+    .sw-card .sw-card-sub { color: var(--sw-mute); font-size: 16px; }
+
+    /* Prayer card */
+    .sw-prayer::before {
+      content: ''; position: absolute; z-index: -1; width: 420px; height: 420px; right: -160px; top: -160px;
+      background: radial-gradient(circle, rgba(255,255,255,.22), transparent 65%);
+      animation: sw-glow 6s ease-in-out infinite alternate;
+    }
+    @keyframes sw-glow { to { transform: translate(-30px, 30px) scale(1.15); opacity: .7; } }
+    .sw-embed {
+      position: relative; margin-top: 24px; border-radius: 20px; overflow: clip;
+      background: #fff; border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 50px -30px rgba(0,0,0,.9);
+    }
+    .sw-embed iframe { display: block; width: 100%; height: 760px; border: 0; background: #fff; position: relative; z-index: 1; }
+    .sw-embed-load {
+      position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+      background: linear-gradient(165deg, #0d2433, #081820); color: var(--sw-mute);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: 13px;
+      transition: opacity .5s ease;
+    }
+    .sw-embed.is-loaded .sw-embed-load { opacity: 0; pointer-events: none; }
+    .sw-embed-alt { margin-top: 14px; font-size: 14px; color: var(--sw-mute); text-align: center; }
+    .sw-embed-alt a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.6); }
+    .sw-flame { width: 80px; height: 120px; margin: 0 auto 14px; position: relative; }
+    .sw-flame i {
+      position: absolute; left: 50%; bottom: 46px; width: 30px; height: 52px; margin-left: -15px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: radial-gradient(circle at 50% 75%, #fff 0%, #e6f8fc 30%, rgba(150,225,240,.9) 55%, rgba(66,185,210,.6) 75%, transparent 78%);
+      filter: blur(.4px); transform-origin: 50% 100%; animation: sw-flicker 1.6s ease-in-out infinite alternate;
+      box-shadow: 0 0 40px 14px rgba(66,185,210,.35);
+    }
+    .sw-flame b { position: absolute; left: 50%; bottom: 0; width: 26px; height: 48px; margin-left: -13px; border-radius: 6px 6px 4px 4px; background: linear-gradient(90deg, #cfd8dc, #fff 50%, #c5ced2); }
+    @keyframes sw-flicker { 0% { transform: scaleY(1) rotate(-2deg); } 50% { transform: scaleY(1.08) rotate(2deg); } 100% { transform: scaleY(.95) rotate(-1deg); } }
+    /* Join card */
+    .sw-join { --sw-accent: var(--sw-teal); background: linear-gradient(165deg, color-mix(in srgb, var(--sw-accent) 22%, #0b1f2b), #081820 70%); transition: background .6s ease; transform-style: preserve-3d; }
+    .sw-join::after {
+      content: ''; position: absolute; z-index: -1; inset: 0;
+      background: radial-gradient(500px 300px at var(--mx, 70%) var(--my, 0%), color-mix(in srgb, var(--sw-accent) 35%, transparent), transparent 70%);
+      transition: background .2s ease;
+    }
+    .sw-join-badge {
+      position: absolute; right: 28px; top: 28px; width: 92px; height: 92px; border-radius: 50%;
+      display: grid; place-items: center; text-align: center;
+    }
+    .sw-join-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: sw-spin2 18s linear infinite; }
+    @keyframes sw-spin2 { to { transform: rotate(360deg); } }
+    .sw-join-badge span { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: 18px; color: #fff; line-height: .9; }
+    .sw-paths { display: grid; gap: 8px; margin-top: 24px; }
+    .sw-path {
+      display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; cursor: pointer;
+      padding: 14px 16px; border-radius: 16px; background: rgba(7,20,26,.45); border: 1px solid rgba(255,255,255,.1);
+      font-weight: 600; font-size: 16px; transition: all .25s ease;
+    }
+    .sw-path:hover { border-color: color-mix(in srgb, var(--sw-accent) 60%, transparent); transform: translateX(4px); }
+    .sw-path .sw-path-ico { font-size: 20px; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.06); flex-shrink: 0; }
+    .sw-path .sw-path-arrow { margin-left: auto; opacity: .5; transition: transform .25s ease, opacity .25s ease; }
+    .sw-path[aria-pressed="true"] { background: color-mix(in srgb, var(--sw-accent) 22%, rgba(7,20,26,.6)); border-color: var(--sw-accent); }
+    .sw-path[aria-pressed="true"] .sw-path-arrow { opacity: 1; transform: rotate(90deg); color: var(--sw-accent); }
+    .sw-reveal-panel {
+      margin-top: 18px; border-radius: 20px; padding: 24px; background: rgba(7,20,26,.6);
+      border: 1px solid color-mix(in srgb, var(--sw-accent) 40%, transparent);
+      display: none;
+    }
+    .sw-reveal-panel.is-open { display: block; animation: sw-swap .5s ease; }
+    .sw-reveal-panel h4 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2; }
+    .sw-reveal-panel p { color: #cfdbe2; margin-top: 8px; }
+    .sw-steps { list-style: none; counter-reset: s; margin-top: 16px; display: grid; gap: 8px; }
+    .sw-steps li { counter-increment: s; display: flex; gap: 12px; align-items: center; font-size: 15px; color: #dfe8ed; }
+    .sw-steps li::before {
+      content: counter(s); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+      background: var(--sw-accent); color: #04161d; font-weight: 800; font-size: 13px;
+    }
+    .sw-reveal-panel .sw-stage-actions { margin-top: 20px; }
+
+    /* ══════════ ESSENTIALS ══════════ */
+    .sw-ess { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .sw-ess a {
+      display: block; text-decoration: none; padding: 26px 22px; border-radius: 22px;
+      background: var(--sw-glass); border: 1px solid var(--sw-line); transition: all .3s ease; position: relative; overflow: clip;
+    }
+    .sw-ess a::after {
+      content: ''; position: absolute; inset: auto 0 0 0; height: 3px; background: var(--sw-teal);
+      transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
+    }
+    .sw-ess a:hover { transform: translateY(-4px); background: rgba(66,185,210,.08); border-color: rgba(66,185,210,.35); }
+    .sw-ess a:hover::after { transform: scaleX(1); }
+    .sw-ess svg { width: 30px; height: 30px; color: var(--sw-teal); }
+    .sw-ess b { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 22px; letter-spacing: .03em; margin: 14px 0 4px; }
+    .sw-ess span { color: var(--sw-mute); font-size: 15px; }
+
+    /* ══════════ CLOSING CTA ══════════ */
+    .sw-close {
+      margin: 0 24px 90px; border-radius: 36px; padding: 80px 32px; text-align: center; position: relative; overflow: clip; isolation: isolate;
+      background: linear-gradient(135deg, var(--sw-teal-dk), #0e2244 70%);
+    }
+    .sw-close::before {
+      content: ''; position: absolute; inset: -50%; z-index: -1;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,.18), transparent 30%, rgba(66,185,210,.25), transparent 60%);
+      animation: sw-spin3 24s linear infinite;
+    }
+    @keyframes sw-spin3 { to { transform: rotate(360deg); } }
+    .sw-close h2 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(42px, 6vw, 80px); line-height: .92; }
+    .sw-close h2 em { font-style: normal; color: #9fe6f5; }
+    .sw-close p { color: #d6e5ec; font-size: 18px; max-width: 560px; margin: 16px auto 30px; }
+    .sw-close .sw-hero-ctas { justify-content: center; opacity: 1; animation: none; }
+
+    #evolve-footer-mount { width: 100%; }
+
+    /* ══════════ RESPONSIVE ══════════ */
+    @media (max-width: 980px) {
+      .sw-hero { min-height: 0; padding: 90px 0 80px; }
+      .sw-hero-grid, .sw-msg-grid, .sw-duo { grid-template-columns: 1fr; }
+      .sw-hero-grid { gap: 40px; }
+      .sw-flow { grid-template-columns: 1fr; }
+      .sw-seg-list { flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 6px; scrollbar-width: none; }
+      .sw-seg-list::-webkit-scrollbar { display: none; }
+      .sw-seg-list::before { display: none; }
+      .sw-seg-btn { width: auto; flex-shrink: 0; padding: 8px 14px 8px 8px; border-color: var(--sw-line); }
+      .sw-seg-btn:hover { transform: none; }
+      .sw-seg-txt small { display: none; }
+      .sw-seg-txt b { font-size: 17px; white-space: nowrap; }
+      .sw-seg-num { width: 30px; height: 30px; font-size: 14px; }
+      .sw-ess { grid-template-columns: 1fr 1fr; }
+      .sw-scroll-cue { display: none; }
+      .sw-gal-slide { flex-basis: 84%; border-radius: 22px; }
+      .sw-gal-track { gap: 14px; }
+    }
+    @media (max-width: 600px) {
+      .sw-wrap { padding: 0 18px; }
+      .sw-section { padding: 76px 0; }
+      .sw-stage-inner { padding: 30px 24px 26px; min-height: 0; }
+      .sw-stage { min-height: 0; }
+      .sw-stage-glyph { font-size: 200px; }
+      .sw-card { padding: 30px 22px; border-radius: 24px; }
+      .sw-card h3 { font-size: 36px; padding-right: 0; }
+      .sw-embed iframe { height: 880px; }
+      .sw-join-badge { display: none; }
+      .sw-digit b { font-size: 34px; }
+      .sw-count { padding: 24px 18px 20px; }
+      .sw-ess { grid-template-columns: 1fr; }
+      .sw-close { margin: 0 14px 60px; padding: 60px 22px; border-radius: 28px; }
+      .sw-hero-ctas .sw-btn { flex: 1 1 100%; }
+      .sw-play { width: 72px; height: 72px; }
+      .sw-gal-slide { flex-basis: 88%; border-radius: 18px; }
+      .sw-gal-cap { left: 18px; bottom: 16px; }
+      .sw-gallery { padding-top: 40px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+      .sw-reveal { opacity: 1; transform: none; }
+      #swParticles { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="sw-hero" id="sw-top">
+  <div class="sw-hero-media" aria-hidden="true"></div>
+  <div class="sw-rays" aria-hidden="true"></div>
+  <canvas id="swParticles" aria-hidden="true"></canvas>
+
+  <div class="sw-wrap sw-hero-grid">
+    <div>
+      <div class="sw-hero-kicker">Sundays at Evolve</div>
+      <h1><span>The Worship</span><span>Experience</span></h1>
+      <p class="sw-hero-sub">Real worship. A real Word. Real people who are glad you came. Come as you are and leave changed, in person on the Northwest Side or online from anywhere.</p>
+      <div class="sw-hero-ctas">
+        <a class="sw-btn sw-btn--solid" href="https://www.evolvenation.org/planyourvisit" target="_top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          Plan Your Visit
+        </a>
+        <a class="sw-btn sw-btn--ghost" id="swWatchLive" href="https://www.youtube.com/@evolvenationmke/live" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          Watch Live
+        </a>
+      </div>
+    </div>
+
+    <aside class="sw-count" id="swCount" aria-live="polite">
+      <div class="sw-count-label">
+        <span id="swCountLabel">Next Service</span>
+        <span class="sw-live-pill"><i></i>Live</span>
+      </div>
+      <div class="sw-count-title" id="swCountTitle">Sunday at 9:00 AM</div>
+      <div class="sw-digits">
+        <div class="sw-digit"><b id="swD">0</b><span>Days</span></div>
+        <div class="sw-digit"><b id="swH">00</b><span>Hours</span></div>
+        <div class="sw-digit"><b id="swM">00</b><span>Min</span></div>
+        <div class="sw-digit"><b id="swS">00</b><span>Sec</span></div>
+      </div>
+      <div class="sw-live-now">
+        <strong>We're Live Right Now</strong>
+        <p>Worship is happening. Join us in the room or stream it from wherever you are.</p>
+        <a class="sw-btn sw-btn--solid" style="margin-top:16px" href="https://www.youtube.com/@evolvenationmke/live" target="_blank" rel="noopener">Join the Stream</a>
+      </div>
+      <div class="sw-chips" id="swChips">
+        <div class="sw-chip" data-svc="0">9:00<small>AM</small></div>
+        <div class="sw-chip" data-svc="1">10:30<small>AM</small></div>
+        <div class="sw-chip" data-svc="2">12:00<small>PM</small></div>
+      </div>
+      <div class="sw-count-foot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span><a href="https://maps.google.com/?q=6550+N+76th+St+Milwaukee+WI+53223" target="_blank" rel="noopener">6550 N. 76th St., Milwaukee</a>. Doors open 30 minutes early.</span>
+      </div>
+    </aside>
+  </div>
+  <div class="sw-scroll-cue" aria-hidden="true"></div>
+</header>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="sw-marquee" aria-hidden="true">
+  <div class="sw-marquee-track">
+    <span>Come As You Are</span><span>Worship Loud</span><span>Pray Bold</span><span>Grow Deep</span><span>Serve Together</span><span>Evolve Nation</span>
+    <span>Come As You Are</span><span>Worship Loud</span><span>Pray Bold</span><span>Grow Deep</span><span>Serve Together</span><span>Evolve Nation</span>
+  </div>
+</div>
+
+<!-- ══════════ PHOTO SLIDER ══════════ -->
+<section class="sw-gallery" id="swGallery" aria-roledescription="carousel" aria-label="Sundays at Evolve photos">
+  <div class="sw-gal-viewport" id="swGalView">
+    <div class="sw-gal-track" id="swGalTrack"></div>
+  </div>
+  <div class="sw-gal-ui">
+    <button type="button" class="sw-gal-arrow" id="swGalPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="sw-gal-dots" id="swGalDots"></div>
+    <button type="button" class="sw-gal-arrow" id="swGalNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
+</section>
+
+<!-- ══════════ WORSHIP SEGMENTS ══════════ -->
+<section class="sw-section" id="sw-flow">
+  <div class="sw-wrap">
+    <div class="sw-head sw-reveal">
+      <span class="sw-eyebrow">The Flow of Sunday</span>
+      <h2 class="sw-h2">Every Moment <span class="sw-script">Matters</span></h2>
+      <p class="sw-lead">Here is what a Sunday at Evolve looks like from the moment you walk in. Tap through each part of the service so nothing catches you off guard.</p>
+    </div>
+
+    <div class="sw-flow sw-reveal sw-d1">
+      <ul class="sw-seg-list" id="swSegList" role="tablist" aria-label="Parts of the worship service"></ul>
+
+      <div class="sw-stage" id="swStage" role="tabpanel" aria-live="polite">
+        <div class="sw-stage-bg"></div>
+        <div class="sw-stage-glyph" id="swGlyph" aria-hidden="true">01</div>
+        <div class="sw-stage-inner" id="swStageInner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LATEST MESSAGE ══════════ -->
+<section class="sw-section sw-msg" id="sw-message">
+  <div class="sw-wrap sw-msg-grid">
+    <div class="sw-player sw-reveal" id="swPlayer" role="button" tabindex="0" aria-label="Play the latest message">
+      <img id="swThumb" alt="" src="https://i.ytimg.com/vi/2KGYfHnLhk8/maxresdefault.jpg"
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%232A8FA8%22/><stop offset=%221%22 stop-color=%22%230e2244%22/></linearGradient></defs><rect width=%2216%22 height=%229%22 fill=%22url(%23g)%22/></svg>'" />
+      <button class="sw-play" type="button" tabindex="-1" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <span class="sw-msg-tag">Latest Message</span>
+    </div>
+    <div class="sw-reveal sw-d1">
+      <span class="sw-eyebrow">Missed Sunday?</span>
+      <h2 class="sw-msg-title sw-skel" id="swMsgTitle">Loading the latest message</h2>
+      <div class="sw-msg-date" id="swMsgDate">&nbsp;</div>
+      <p class="sw-lead" style="margin-top:14px">Catch up on the most recent message, share it with someone who needs it, and get ready for this Sunday.</p>
+      <div class="sw-msg-links">
+        <a class="sw-btn sw-btn--solid" href="https://youtube.com/@evolvenationmke" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>
+          All Messages
+        </a>
+        <button class="sw-btn sw-btn--ghost" type="button" id="swShare">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+          <span id="swShareTxt">Share Message</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PRAYER + JOIN ══════════ -->
+<section class="sw-section" id="sw-connect">
+  <div class="sw-wrap">
+    <div class="sw-head sw-reveal" style="text-align:center">
+      <span class="sw-eyebrow">Don't Leave the Same</span>
+      <h2 class="sw-h2">Pray With Us. <span class="sw-script">Belong Here.</span></h2>
+    </div>
+
+    <div class="sw-duo">
+      <!-- Prayer Card -->
+      <article class="sw-card sw-prayer sw-reveal" id="swPrayer">
+        <span class="sw-eyebrow" style="color:var(--sw-gold)">Prayer Request</span>
+        <h3>How Can We Pray for You?</h3>
+        <p class="sw-card-sub">Our prayer team reads every request and prays over it this week. Share as much or as little as you want.</p>
+
+        <div class="sw-embed" id="swPrayerEmbed">
+          <div class="sw-embed-load" id="swPrayerLoad" aria-hidden="true">
+            <div class="sw-flame"><i></i><b></b></div>
+            <span>Loading the prayer form</span>
+          </div>
+          <iframe id="swPrayerFrame" title="Prayer request form" loading="lazy"
+                  data-src="https://evolvenation.ccbchurch.com/goto/forms/149/responses/new"></iframe>
+        </div>
+        <p class="sw-embed-alt">Form not showing? <a id="swPrayerAlt" href="https://evolvenation.ccbchurch.com/goto/forms/149/responses/new" target="_blank" rel="noopener">Open the prayer request form</a></p>
+      </article>
+
+      <!-- Join Card -->
+      <article class="sw-card sw-join sw-reveal sw-d1" id="swJoin">
+        <div class="sw-join-badge" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><defs><path id="swCirc" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+            <text font-family="Barlow Condensed" font-weight="700" font-size="10.5" letter-spacing="3.2" fill="#e8eef2"><textPath href="#swCirc">EVOLVE NATION &#8226; WELCOME HOME &#8226;</textPath></text></svg>
+          <span>Home</span>
+        </div>
+        <span class="sw-eyebrow">Your Next Step</span>
+        <h3 style="padding-right:96px">There's a Seat With Your Name on It</h3>
+        <p class="sw-card-sub">Wherever you are on your journey, there is a next step for you here. Pick the one that sounds most like you.</p>
+
+        <div class="sw-paths" id="swPaths" role="group" aria-label="Choose where you are"></div>
+        <div class="sw-reveal-panel" id="swPathPanel" aria-live="polite"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ESSENTIALS ══════════ -->
+<section class="sw-section" style="padding-top:0">
+  <div class="sw-wrap">
+    <div class="sw-head sw-reveal">
+      <span class="sw-eyebrow">Before You Come</span>
+      <h2 class="sw-h2">Sunday <span class="sw-script">Essentials</span></h2>
+    </div>
+    <div class="sw-ess">
+      <a class="sw-reveal" href="https://maps.google.com/?q=6550+N+76th+St+Milwaukee+WI+53223" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <b>Get Directions</b><span>6550 N. 76th St. on Milwaukee's Northwest Side</span>
+      </a>
+      <a class="sw-reveal sw-d1" href="https://www.evolvenation.org/kids" target="_top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><path d="M4 11l2 2M20 11l-2 2"/></svg>
+        <b>Evolve Kids</b><span>Safe, fun, Bible-centered rooms for your kids every service</span>
+      </a>
+      <a class="sw-reveal sw-d2" href="https://www.evolvenation.org/give" target="_top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <b>Give Online</b><span>Worship through generosity anytime through PushPay</span>
+      </a>
+      <a class="sw-reveal sw-d3" href="https://www.evolvenation.org/events" target="_top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+        <b>What's Happening</b><span>See upcoming events and ways to get involved</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CLOSING CTA ══════════ -->
+<section class="sw-close sw-reveal">
+  <h2>We Saved You <em>a Seat</em></h2>
+  <p>Sunday is better together. Bring a friend, bring your family, bring your questions. We can't wait to meet you.</p>
+  <div class="sw-hero-ctas">
+    <a class="sw-btn sw-btn--gold" href="https://www.evolvenation.org/planyourvisit" target="_top">Plan Your Visit</a>
+    <button class="sw-btn sw-btn--ghost" type="button" id="swInvite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4M12 2v13"/></svg>
+      <span id="swInviteTxt">Invite a Friend</span>
+    </button>
+  </div>
+</section>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIG
+   ══════════════════════════════════════════════════════════════ */
+var SW_CONFIG = {
+  // Prayer request form hosted elsewhere, embedded in the prayer card
+  prayerFormUrl: 'https://evolvenation.ccbchurch.com/goto/forms/149/responses/new',
+  connectCardUrl: 'https://evolvenation.ccbchurch.com/goto/forms/37/responses/new',
+  ytProxyPage: 'https://evolve2018.github.io/EvolveWebsite/youtube.html',
+  ytFeedWorker: 'https://evolve-yt-proxy.chrisdawolo.workers.dev/',
+  fallbackVideo: { id: '2KGYfHnLhk8', title: 'From Encounter to Invitation | Pastor Kenneth Lock II', date: '2026-03-08' },
+  // Photo slider. Swap or add images here. Keep each file under about 2MB.
+  galleryBase: 'https://evolve2018.github.io/EvolveWebsite/Photo%20Slider%20Images/',
+  gallery: [
+    { file: '20260628-Sunday-MS-28.jpg', kicker: 'Sunday Worship', caption: 'Lift Your Voice' },
+    { file: '578A3712.jpg',              kicker: 'Praise and Worship', caption: 'Hands Up, Hearts Open' },
+    { file: '578A4428.jpg',              kicker: 'First Time Here', caption: 'We Saved You a Seat' },
+    { file: '578A9246.jpg',              kicker: 'Worship Team', caption: 'Real Worship, Real People' },
+    { file: 'DSC09978.jpg',              kicker: 'Evolve Nation', caption: 'Come As You Are' }
+  ],
+  galleryInterval: 5500,
+  liveUrl: 'https://www.youtube.com/@evolvenationmke/live',
+  pageUrl: 'https://www.evolvenation.org/sunday',
+  // Service starts in Central time, [hour, minute]. Length in minutes.
+  services: [[9, 0], [10, 30], [12, 0]],
+  serviceLength: 80
+};
+
+/* ══════════════════════════════════════════════════════════════
+   IFRAME HEIGHT REPORTER (must load before evolveFooter.js)
+   ══════════════════════════════════════════════════════════════ */
+function sendHeight() {
+  window.parent.postMessage({ type: 'iframeHeight', height: document.documentElement.scrollHeight }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+if (typeof ResizeObserver !== 'undefined') { new ResizeObserver(sendHeight).observe(document.body); }
+setTimeout(sendHeight, 300);
+setTimeout(sendHeight, 1000);
+
+/* ══════════════════════════════════════════════════════════════
+   WORSHIP SEGMENTS
+   start / end are minutes from the start of service, used for the
+   "Now" marker while a service is live. Adjust to match the real run of show.
+   ══════════════════════════════════════════════════════════════ */
+var SW_ICONS = {
+  door: '<path d="M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><circle cx="14.5" cy="12" r="1"/>',
+  music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+  pray: '<path d="M12 3c-1 2-4 5-4 9v4l-3 3h14l-3-3v-4c0-4-3-7-4-9z"/><path d="M12 3v15"/>',
+  heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/>',
+  book: '<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/>',
+  hand: '<path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/>',
+  send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>'
+};
+var SW_SEGMENTS = [
+  { key: 'arrive', title: 'Arrive and Connect', short: 'Doors open early', time: '30 min before', icon: 'door', color: '#42B9D2', start: -30, end: 0,
+    copy: 'Doors open 30 minutes before every service. Grab a coffee, meet our Guest Experience team and get your kids checked in at Evolve Kids so you can settle in before worship starts.',
+    expect: ['Friendly greeters', 'Kids check-in', 'Coffee and conversation', 'Saved seating for guests'],
+    verse: 'I was glad when they said unto me, Let us go into the house of the LORD.', ref: 'Psalm 122:1',
+    action: { label: 'Plan Your Visit', href: 'https://www.evolvenation.org/planyourvisit', target: '_top' } },
+  { key: 'praise', title: 'Praise and Worship', short: 'Lift your voice', time: 'About 25 min', icon: 'music', color: '#ffffff', start: 0, end: 25, eq: true,
+    copy: 'We open with high energy praise and move into worship. Sing loud, sit and listen, raise your hands or just take it in. There is no wrong way to worship here.',
+    expect: ['Live worship', 'Lyrics on screen', 'Come as you are'],
+    verse: 'Enter into his gates with thanksgiving, and into his courts with praise.', ref: 'Psalm 100:4' },
+  { key: 'prayer', title: 'Prayer', short: 'Bring it to God', time: 'About 5 min', icon: 'pray', color: '#8fd3e3', start: 25, end: 30,
+    copy: 'We pause together to pray for our church, our city and the needs in the room. If something is weighing on you, send it to our prayer team below and we will pray with you.',
+    expect: ['Corporate prayer', 'Prayer for our city', 'Prayer team available'],
+    verse: 'In every thing by prayer and supplication with thanksgiving let your requests be made known unto God.', ref: 'Philippians 4:6',
+    action: { label: 'Send a Prayer Request', href: '#sw-connect', target: '' } },
+  { key: 'give', title: 'Giving', short: 'Worship through generosity', time: 'About 5 min', icon: 'heart', color: '#ffffff', start: 30, end: 35,
+    copy: 'Generosity is part of our worship. Give in the room, online or through the PushPay app. Every gift fuels ministry across Milwaukee and beyond.',
+    expect: ['Give in person', 'Give online', 'Give through PushPay'],
+    verse: 'Every man according as he purposeth in his heart, so let him give. For God loveth a cheerful giver.', ref: '2 Corinthians 9:7',
+    action: { label: 'Give Online', href: 'https://www.evolvenation.org/give', target: '_top' } },
+  { key: 'word', title: 'The Word', short: 'A message for real life', time: 'About 35 min', icon: 'book', color: '#42B9D2', start: 35, end: 70,
+    copy: 'A Bible-centered, practical message from Pastor Kenneth Lock II or one of our teaching pastors. Expect truth you can take home and use on Monday morning.',
+    expect: ['Bring a Bible or use your phone', 'Take notes', 'Real life application'],
+    verse: 'Thy word is a lamp unto my feet, and a light unto my path.', ref: 'Psalm 119:105',
+    action: { label: 'Watch the Latest Message', href: '#sw-message', target: '' } },
+  { key: 'respond', title: 'Response', short: 'An open altar', time: 'About 10 min', icon: 'hand', color: '#c99cf0', start: 70, end: 78,
+    copy: 'We close the message with an open altar. Prayer partners are ready to pray with you about salvation, baptism or whatever God is stirring in you.',
+    expect: ['Prayer partners up front', 'Salvation and baptism', 'No pressure, ever'],
+    verse: 'Draw nigh to God, and he will draw nigh to you.', ref: 'James 4:8',
+    action: { label: 'Knowing Jesus', href: 'https://www.evolvenation.org/knowingjesus', target: '_top' } },
+  { key: 'sent', title: 'Sent Out', short: 'Carry it into the week', time: 'Final moments', icon: 'send', color: '#7ee0b0', start: 78, end: 80,
+    copy: 'We send you out with purpose for the week ahead. Stick around after service, stop by Next Steps and meet some of the people who will become your church family.',
+    expect: ['Next Steps area', 'Meet the pastors', 'Find a Life Group'],
+    verse: 'Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.', ref: 'Matthew 5:16',
+    action: { label: 'Find a Life Group', href: 'https://www.evolvenation.org/lifegroups', target: '_top' } }
+];
+
+var swSegIndex = 0;
+var swNowKey = null;
+
+function swSvg(name) {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + SW_ICONS[name] + '</svg>';
+}
+function swEsc(s) {
+  return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+}
+
+function swBuildSegList() {
+  var list = document.getElementById('swSegList');
+  list.innerHTML = SW_SEGMENTS.map(function (s, i) {
+    return '<li role="presentation"><button class="sw-seg-btn" role="tab" id="swTab' + i + '" aria-controls="swStage" aria-selected="false" data-i="' + i + '">' +
+      '<span class="sw-seg-num">' + (i + 1) + '</span>' +
+      '<span class="sw-seg-txt"><b>' + s.title + '</b><small>' + s.short + '</small></span>' +
+      '<span class="sw-seg-now">Now</span></button></li>';
+  }).join('');
+  list.addEventListener('click', function (e) {
+    var btn = e.target.closest('.sw-seg-btn');
+    if (btn) { swShowSeg(+btn.dataset.i, true); }
+  });
+  list.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    var dir = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : -1;
+    swShowSeg((swSegIndex + dir + SW_SEGMENTS.length) % SW_SEGMENTS.length, true);
+    document.getElementById('swTab' + swSegIndex).focus();
+  });
+}
+
+function swShowSeg(i, userAction) {
+  swSegIndex = i;
+  var s = SW_SEGMENTS[i];
+  var stage = document.getElementById('swStage');
+  var flow = document.getElementById('sw-flow');
+  flow.style.setProperty('--sw-accent', s.color);
+  document.getElementById('swGlyph').textContent = String(i + 1).padStart(2, '0');
+
+  document.querySelectorAll('.sw-seg-btn').forEach(function (b, j) {
+    b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+    b.tabIndex = j === i ? 0 : -1;
+  });
+  stage.setAttribute('aria-labelledby', 'swTab' + i);
+
+  var actionHtml = '';
+  if (s.action) {
+    var tgt = s.action.target ? ' target="' + s.action.target + '"' : '';
+    actionHtml = '<div class="sw-stage-actions"><a class="sw-btn sw-btn--solid" style="background:' + s.color + '" href="' + s.action.href + '"' + tgt + ' data-jump="' + (s.action.target ? '' : s.action.href) + '">' + s.action.label + '</a></div>';
+  }
+  var isNow = swNowKey === s.key;
+  var inner = document.getElementById('swStageInner');
+  inner.innerHTML =
+    '<div class="sw-anim">' +
+      '<div class="sw-stage-top">' +
+        '<div class="sw-stage-icon">' + swSvg(s.icon) + '</div>' +
+        '<div class="sw-stage-meta">Part ' + (i + 1) + ' of ' + SW_SEGMENTS.length + '<span>' + s.time + (isNow ? ' &#8226; Happening now' : '') + '</span></div>' +
+        (s.eq ? '<div class="sw-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>' : '') +
+      '</div>' +
+      '<h3>' + s.title + '</h3>' +
+      '<p class="sw-stage-copy">' + s.copy + '</p>' +
+      '<ul class="sw-expect">' + s.expect.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+      actionHtml +
+    '</div>' +
+    '<div class="sw-verse sw-anim"><div><blockquote>' + s.verse + '</blockquote><cite>' + s.ref + '</cite></div></div>' +
+    '<div class="sw-stage-nav">' +
+      '<button type="button" id="swPrev" aria-label="Previous part"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>' +
+      '<button type="button" id="swNext" aria-label="Next part"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>' +
+      '<div class="sw-progress"><i style="width:' + ((i + 1) / SW_SEGMENTS.length * 100) + '%"></i></div>' +
+    '</div>';
+
+  document.getElementById('swPrev').onclick = function () { swShowSeg((swSegIndex - 1 + SW_SEGMENTS.length) % SW_SEGMENTS.length, true); };
+  document.getElementById('swNext').onclick = function () { swShowSeg((swSegIndex + 1) % SW_SEGMENTS.length, true); };
+  var jump = inner.querySelector('[data-jump^="#"]');
+  if (jump) {
+    jump.addEventListener('click', function (e) {
+      e.preventDefault();
+      swJumpTo(jump.getAttribute('data-jump'));
+    });
+  }
+
+  // Keep the selected tab visible on mobile where the list scrolls sideways
+  var tab = document.getElementById('swTab' + i);
+  var list = document.getElementById('swSegList');
+  if (userAction && tab && list.scrollWidth > list.clientWidth) {
+    list.scrollTo({ left: tab.offsetLeft - 18, behavior: 'smooth' });
+  }
+}
+
+// In-page jumps. Inside the TCC iframe the parent page scrolls, so we ask it to.
+function swJumpTo(hash) {
+  var el = document.querySelector(hash);
+  if (!el) return;
+  var top = el.getBoundingClientRect().top + window.pageYOffset;
+  window.parent.postMessage({ type: 'scrollTo', top: top }, '*');
+  try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SERVICE COUNTDOWN (Central time, DST safe)
+   ══════════════════════════════════════════════════════════════ */
+var swFmt = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/Chicago', weekday: 'short', hour: 'numeric', minute: 'numeric', second: 'numeric', hourCycle: 'h23'
+});
+var SW_DAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+var swLast = {};
+
+function swCentralNow() {
+  var p = {};
+  swFmt.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+  return { dow: SW_DAYS[p.weekday], sec: (+p.hour % 24) * 3600 + (+p.minute) * 60 + (+p.second) };
+}
+function swLabel(svc) {
+  var h = svc[0], m = svc[1];
+  return (h > 12 ? h - 12 : h) + ':' + String(m).padStart(2, '0') + (h >= 12 ? ' PM' : ' AM');
+}
+function swSetDigit(id, val) {
+  var el = document.getElementById(id);
+  if (swLast[id] !== val) {
+    el.textContent = val;
+    el.parentNode.classList.remove('tick'); void el.parentNode.offsetWidth; el.parentNode.classList.add('tick');
+    swLast[id] = val;
+  }
+}
+
+function swTick() {
+  var now = swCentralNow();
+  var len = SW_CONFIG.serviceLength * 60;
+  var starts = SW_CONFIG.services.map(function (s) { return s[0] * 3600 + s[1] * 60; });
+  var liveIdx = -1, nextIdx = -1, secsToNext = 0;
+
+  if (now.dow === 0) {
+    starts.forEach(function (st, i) {
+      if (now.sec >= st && now.sec < st + len) liveIdx = i;
+    });
+    for (var i = 0; i < starts.length; i++) { if (starts[i] > now.sec) { nextIdx = i; secsToNext = starts[i] - now.sec; break; } }
+  }
+  if (nextIdx === -1) {
+    var daysAhead = (7 - now.dow) % 7 || 7;
+    nextIdx = 0;
+    secsToNext = daysAhead * 86400 - now.sec + starts[0];
+  }
+
+  var card = document.getElementById('swCount');
+  var chips = document.querySelectorAll('#swChips .sw-chip');
+  chips.forEach(function (c, i) {
+    c.classList.remove('is-next', 'is-live', 'is-done');
+    var small = c.querySelector('small');
+    var base = SW_CONFIG.services[i][0] >= 12 ? 'PM' : 'AM';
+    small.textContent = base;
+    if (now.dow === 0 && i === liveIdx) { c.classList.add('is-live'); small.textContent = 'Live'; }
+    else if (now.dow === 0 && now.sec >= starts[i] + len) { c.classList.add('is-done'); }
+    else if (i === nextIdx && liveIdx === -1) { c.classList.add('is-next'); small.textContent = 'Next'; }
+  });
+
+  if (liveIdx > -1) {
+    card.classList.add('is-live');
+    document.getElementById('swCountLabel').textContent = 'Happening Now';
+    document.getElementById('swCountTitle').textContent = 'The ' + swLabel(SW_CONFIG.services[liveIdx]) + ' Service';
+    var minIn = Math.floor((now.sec - starts[liveIdx]) / 60);
+    var seg = SW_SEGMENTS.filter(function (s) { return minIn >= s.start && minIn < s.end; })[0];
+    swSetNow(seg ? seg.key : null);
+  } else {
+    card.classList.remove('is-live');
+    var dayWord = secsToNext < 86400 && now.dow === 0 ? 'Today' : 'Sunday';
+    document.getElementById('swCountLabel').textContent = 'Next Service';
+    document.getElementById('swCountTitle').textContent = dayWord + ' at ' + swLabel(SW_CONFIG.services[nextIdx]);
+    // Doors open 30 minutes early, show Arrive as "now" in that window
+    swSetNow(now.dow === 0 && secsToNext <= 1800 ? 'arrive' : null);
+    swSetDigit('swD', String(Math.floor(secsToNext / 86400)));
+    swSetDigit('swH', String(Math.floor(secsToNext % 86400 / 3600)).padStart(2, '0'));
+    swSetDigit('swM', String(Math.floor(secsToNext % 3600 / 60)).padStart(2, '0'));
+    swSetDigit('swS', String(secsToNext % 60).padStart(2, '0'));
+  }
+}
+
+function swSetNow(key) {
+  if (key === swNowKey) return;
+  swNowKey = key;
+  document.querySelectorAll('.sw-seg-btn').forEach(function (b, i) {
+    b.classList.toggle('is-now', SW_SEGMENTS[i].key === key);
+  });
+  if (key) {
+    var idx = SW_SEGMENTS.findIndex(function (s) { return s.key === key; });
+    swShowSeg(idx, false);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LATEST MESSAGE (same Worker as the homepage)
+   ══════════════════════════════════════════════════════════════ */
+var swVideo = SW_CONFIG.fallbackVideo;
+
+function swApplyVideo(v) {
+  swVideo = v;
+  var t = document.getElementById('swMsgTitle');
+  t.classList.remove('sw-skel');
+  t.textContent = (v.title || 'Latest Message').replace(/\s*\|\s*Evolve Church\s*$/i, '');
+  if (v.date) {
+    var d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(v.date) ? v.date + 'T12:00:00' : v.date);
+    if (!isNaN(d)) {
+      document.getElementById('swMsgDate').textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+  }
+  var img = document.getElementById('swThumb');
+  img.onerror = swThumbFallback;
+  var hi = 'https://i.ytimg.com/vi/' + v.id + '/maxresdefault.jpg';
+  var probe = new Image();
+  probe.onload = function () { img.src = (probe.naturalWidth > 200) ? hi : 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg'; };
+  probe.onerror = function () { img.src = 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg'; };
+  probe.src = hi;
+  img.alt = t.textContent;
+}
+
+function swThumbFallback() {
+  this.onerror = null;
+  this.src = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A8FA8"/><stop offset="1" stop-color="#0e2244"/></linearGradient></defs><rect width="16" height="9" fill="url(#g)"/></svg>');
+}
+
+function swLoadVideo() {
+  var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 7000);
+  fetch(SW_CONFIG.ytFeedWorker, ctrl ? { signal: ctrl.signal } : {})
+    .then(function (r) { if (!r.ok) throw new Error('feed ' + r.status); return r.json(); })
+    .then(function (d) {
+      if (!d.ok || !d.videoId) throw new Error('bad feed');
+      swApplyVideo({ id: d.videoId, title: d.title, date: d.published });
+    })
+    .catch(function () { swApplyVideo(SW_CONFIG.fallbackVideo); })
+    .then(function () { clearTimeout(timer); });
+}
+
+function swPlay() {
+  var p = document.getElementById('swPlayer');
+  if (p.querySelector('iframe')) return;
+  var f = document.createElement('iframe');
+  f.src = SW_CONFIG.ytProxyPage + '?v=' + encodeURIComponent(swVideo.id) + '&autoplay=1';
+  f.title = 'Latest message';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen = true;
+  p.appendChild(f);
+  p.removeAttribute('role'); p.removeAttribute('tabindex');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SHARE HELPERS
+   ══════════════════════════════════════════════════════════════ */
+function swShare(data, labelId, doneText) {
+  var label = document.getElementById(labelId);
+  var orig = label.textContent;
+  function flash(t) { label.textContent = t; setTimeout(function () { label.textContent = orig; }, 2200); }
+  if (navigator.share) {
+    navigator.share(data).catch(function () {});
+    return;
+  }
+  var text = data.text + ' ' + data.url;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { flash(doneText); }, function () { window.open(data.url, '_blank', 'noopener'); });
+  } else {
+    window.open(data.url, '_blank', 'noopener');
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRAYER REQUEST
+   ══════════════════════════════════════════════════════════════ */
+function swInitPrayer() {
+  var wrap = document.getElementById('swPrayerEmbed');
+  var frame = document.getElementById('swPrayerFrame');
+  var url = SW_CONFIG.prayerFormUrl;
+  document.getElementById('swPrayerAlt').href = url;
+  frame.addEventListener('load', function () { wrap.classList.add('is-loaded'); sendHeight(); });
+  frame.src = url;
+  // If the form never reports in, uncover it anyway so the backup link is the guide
+  setTimeout(function () { wrap.classList.add('is-loaded'); }, 8000);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PHOTO SLIDER
+   ══════════════════════════════════════════════════════════════ */
+function swInitGallery() {
+  var root = document.getElementById('swGallery');
+  var view = document.getElementById('swGalView');
+  var track = document.getElementById('swGalTrack');
+  var dotsWrap = document.getElementById('swGalDots');
+  var items = SW_CONFIG.gallery;
+  var ms = SW_CONFIG.galleryInterval;
+  var cur = 0, timer = null, hovering = false;
+  root.style.setProperty('--sw-gal-ms', ms + 'ms');
+
+  track.innerHTML = items.map(function (it, i) {
+    return '<figure class="sw-gal-slide" role="group" aria-roledescription="slide" aria-label="' + (i + 1) + ' of ' + items.length + '" data-i="' + i + '">' +
+      '<img src="' + SW_CONFIG.galleryBase + encodeURIComponent(it.file) + '" alt="' + swEsc(it.caption) + '" loading="' + (i < 2 ? 'eager' : 'lazy') + '" decoding="async" />' +
+      '<figcaption class="sw-gal-cap"><small>' + swEsc(it.kicker) + '</small>' + swEsc(it.caption) + '</figcaption></figure>';
+  }).join('');
+  dotsWrap.innerHTML = items.map(function (it, i) {
+    return '<button type="button" aria-label="Show photo ' + (i + 1) + '" data-i="' + i + '"><i></i></button>';
+  }).join('');
+  var slides = track.children, dots = dotsWrap.children;
+  Array.prototype.forEach.call(track.querySelectorAll('img'), function (img) {
+    img.addEventListener('error', function () { img.style.visibility = 'hidden'; });
+  });
+
+  function go(i) {
+    cur = (i + items.length) % items.length;
+    var slide = slides[cur];
+    var offset = slide.offsetLeft - (view.clientWidth - slide.offsetWidth) / 2;
+    track.style.transform = 'translateX(' + (-offset) + 'px)';
+    for (var j = 0; j < slides.length; j++) {
+      slides[j].classList.toggle('is-active', j === cur);
+      slides[j].setAttribute('aria-hidden', j === cur ? 'false' : 'true');
+      dots[j].classList.toggle('is-on', j === cur);
+      dots[j].setAttribute('aria-current', j === cur ? 'true' : 'false');
+      var bar = dots[j].firstChild; bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
+    }
+    restart();
+  }
+  function restart() {
+    clearTimeout(timer);
+    if (!hovering) timer = setTimeout(function () { go(cur + 1); }, ms);
+  }
+
+  document.getElementById('swGalPrev').onclick = function () { go(cur - 1); };
+  document.getElementById('swGalNext').onclick = function () { go(cur + 1); };
+  dotsWrap.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) go(+b.dataset.i); });
+  track.addEventListener('click', function (e) {
+    var s = e.target.closest('.sw-gal-slide');
+    if (s && +s.dataset.i !== cur) go(+s.dataset.i);
+  });
+  root.addEventListener('mouseenter', function () { hovering = true; root.classList.add('sw-gal-paused'); clearTimeout(timer); });
+  root.addEventListener('mouseleave', function () { hovering = false; root.classList.remove('sw-gal-paused'); restart(); });
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+  });
+
+  var x0 = null;
+  view.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  view.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+  });
+
+  window.addEventListener('resize', function () { go(cur); });
+  go(0);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   JOIN CARD
+   ══════════════════════════════════════════════════════════════ */
+var SW_PATHS = [
+  { ico: '&#128075;', label: "I'm thinking about visiting", color: '#42B9D2',
+    title: 'We would love to meet you this Sunday.',
+    copy: 'Tell us you are coming and we will have someone ready to welcome you, show you around and help check in your kids.',
+    steps: ['Pick a service time', 'Let us know you are coming', 'Look for our greeters at the door'],
+    cta: { label: 'Plan Your Visit', href: 'https://www.evolvenation.org/planyourvisit', target: '_top' },
+    alt: { label: 'Watch Online First', href: 'https://youtube.com/@evolvenationmke', target: '_blank' } },
+  { ico: '&#9749;', label: "I've visited a few times", color: '#ffffff',
+    title: 'You are not a visitor anymore.',
+    copy: 'Fill out a Connect Card so we can learn your name, pray for you and help you find your people.',
+    steps: ['Fill out a Connect Card', 'Get a call from our team', 'Try a Life Group'],
+    cta: { label: 'Fill Out a Connect Card', href: SW_CONFIG.connectCardUrl, target: '_blank' },
+    alt: { label: 'Explore Life Groups', href: 'https://www.evolvenation.org/lifegroups', target: '_top' } },
+  { ico: '&#127968;', label: "I'm ready to make Evolve home", color: '#7ee0b0',
+    title: 'Welcome to the family.',
+    copy: 'Let us know you are ready to join. Our team will reach out with next steps toward membership and help you get planted.',
+    steps: ['Tell us you are ready', 'Learn what we believe', 'Connect with a pastor'],
+    cta: { label: 'Join Evolve', href: SW_CONFIG.connectCardUrl, target: '_blank' },
+    alt: { label: 'Our Beliefs', href: 'https://www.evolvenation.org/ourbeliefs', target: '_top' } },
+  { ico: '&#10013;', label: 'I just said yes to Jesus', color: '#c99cf0',
+    title: 'This is the best decision you will ever make.',
+    copy: 'Heaven is celebrating and so are we. Let us walk with you through what comes next, including baptism.',
+    steps: ['Tell us about your decision', 'Learn about baptism', 'Start growing in faith'],
+    cta: { label: 'I Made a Decision', href: SW_CONFIG.connectCardUrl, target: '_blank' },
+    alt: { label: 'Knowing Jesus', href: 'https://www.evolvenation.org/knowingjesus', target: '_top' } },
+  { ico: '&#128170;', label: 'I want to grow and serve', color: '#ffffff',
+    title: 'Your gifts were made for this.',
+    copy: 'Join a serve team and make Sunday happen for someone else, or go deeper through discipleship classes.',
+    steps: ['Find where you fit', 'Join a serve team', 'Grow through discipleship'],
+    cta: { label: 'Start Serving', href: 'https://www.evolvenation.org/volunteer', target: '_top' },
+    alt: { label: 'Discipleship', href: 'https://www.evolvenation.org/discipleship', target: '_top' } }
+];
+
+function swInitJoin() {
+  var wrap = document.getElementById('swPaths');
+  var panel = document.getElementById('swPathPanel');
+  var card = document.getElementById('swJoin');
+  wrap.innerHTML = SW_PATHS.map(function (p, i) {
+    return '<button type="button" class="sw-path" aria-pressed="false" data-i="' + i + '">' +
+      '<span class="sw-path-ico" aria-hidden="true">' + p.ico + '</span>' + p.label +
+      '<svg class="sw-path-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>';
+  }).join('');
+
+  wrap.addEventListener('click', function (e) {
+    var b = e.target.closest('.sw-path');
+    if (!b) return;
+    var i = +b.dataset.i;
+    var p = SW_PATHS[i];
+    var already = b.getAttribute('aria-pressed') === 'true';
+    wrap.querySelectorAll('.sw-path').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    if (already) { panel.classList.remove('is-open'); card.style.setProperty('--sw-accent', '#42B9D2'); return; }
+    b.setAttribute('aria-pressed', 'true');
+    card.style.setProperty('--sw-accent', p.color);
+    function rel(t) { return t === '_blank' ? ' rel="noopener"' : ''; }
+    panel.innerHTML =
+      '<h4>' + p.title + '</h4><p>' + p.copy + '</p>' +
+      '<ol class="sw-steps">' + p.steps.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol>' +
+      '<div class="sw-stage-actions">' +
+        '<a class="sw-btn sw-btn--solid" style="background:' + p.color + '" href="' + p.cta.href + '" target="' + p.cta.target + '"' + rel(p.cta.target) + '>' + p.cta.label + '</a>' +
+        '<a class="sw-btn sw-btn--ghost" href="' + p.alt.href + '" target="' + p.alt.target + '"' + rel(p.alt.target) + '>' + p.alt.label + '</a>' +
+      '</div>';
+    panel.classList.remove('is-open'); void panel.offsetWidth; panel.classList.add('is-open');
+  });
+
+  // Spotlight that follows the pointer
+  card.addEventListener('pointermove', function (e) {
+    var r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO PARTICLES (soft rising light)
+   ══════════════════════════════════════════════════════════════ */
+function swParticles() {
+  var c = document.getElementById('swParticles');
+  if (!c || !c.getContext) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ctx = c.getContext('2d'), dots = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function size() {
+    var r = c.parentNode.getBoundingClientRect();
+    w = r.width; h = r.height;
+    c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener('resize', size);
+  var count = w < 700 ? 34 : 70;
+  for (var i = 0; i < count; i++) {
+    dots.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.2 + .4, v: Math.random() * .35 + .08, a: Math.random() * .6 + .15, d: Math.random() * Math.PI * 2, gold: Math.random() < .3 });
+  }
+  var running = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { running = en[0].isIntersecting; if (running) requestAnimationFrame(loop); }).observe(c);
+  }
+  function loop() {
+    if (!running) return;
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < dots.length; i++) {
+      var p = dots[i];
+      p.y -= p.v; p.d += .01; p.x += Math.sin(p.d) * .25;
+      if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+      var tw = p.a * (.6 + .4 * Math.sin(p.d * 3));
+      ctx.beginPath();
+      ctx.fillStyle = p.gold ? 'rgba(255,255,255,' + tw + ')' : 'rgba(150,225,240,' + tw + ')';
+      ctx.shadowBlur = 10; ctx.shadowColor = p.gold ? 'rgba(255,255,255,.8)' : 'rgba(66,185,210,.8)';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ══════════════════════════════════════════════════════════════ */
+function swReveal() {
+  var els = document.querySelectorAll('.sw-reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+  }, { threshold: .12 });
+  els.forEach(function (e) { io.observe(e); });
+  // Safety net in case the host page never reports visibility
+  setTimeout(function () { els.forEach(function (e) { e.classList.add('is-in'); }); }, 4000);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════════════ */
+(function swInit() {
+  swBuildSegList();
+  swShowSeg(0, false);
+  swNowKey = undefined;
+  swTick();
+  setInterval(swTick, 1000);
+
+  swLoadVideo();
+  var player = document.getElementById('swPlayer');
+  player.addEventListener('click', swPlay);
+  player.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); swPlay(); } });
+
+  document.getElementById('swShare').addEventListener('click', function () {
+    swShare({ title: swVideo.title, text: 'Watch this message from Evolve Church:', url: 'https://youtu.be/' + swVideo.id }, 'swShareTxt', 'Link Copied');
+  });
+  document.getElementById('swInvite').addEventListener('click', function () {
+    swShare({ title: 'Sunday at Evolve Church', text: 'Come to church with me this Sunday at Evolve. Services at 9:00, 10:30 and 12:00.', url: SW_CONFIG.pageUrl }, 'swInviteTxt', 'Invite Copied');
+  });
+
+  swInitGallery();
+  swInitPrayer();
+  swInitJoin();
+  swParticles();
+  swReveal();
+})();
+</script>
+
+<div id="evolve-footer-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js?v=10"></script>
+
+</body>
+</html>

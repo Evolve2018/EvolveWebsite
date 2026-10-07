@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <!-- Ensures the browser sends a valid origin to YouTube embeds (fixes Error 153 /
        embedder.identity.missing.referrer). Must be strict-origin-when-cross-origin,
        NOT no-referrer / same-origin, or nested YouTube iframes fail to configure. -->
@@ -50,7 +50,15 @@
     html, body {
       max-width: 100% !important;
       width: 100% !important;
+      overflow-x: hidden;          /* fallback for older Safari */
+      overflow-x: clip;            /* modern: clips without creating a scroll container */
+      overscroll-behavior-x: none; /* stop sideways rubber-band in the iframe */
     }
+    body { position: relative; }
+    /* Every top-level block clips its own horizontal overflow too, so no single
+       wide child (photo strip, ghost letters, decorative circles) can widen
+       the document on mobile. */
+    body > section, body > div { max-width: 100%; overflow-x: clip; }
 
     /* Locks the iframe's own scroll position while a video modal is open —
        pairs with window.scrollTo({top:0}) in openLivestream()/openSermonModal()
@@ -590,7 +598,7 @@
       content: '';
       position: absolute;
       bottom: -20px;
-      right: -20px;
+      right: 0;
       width: 140px;
       height: 140px;
       background: var(--blue);
@@ -1739,7 +1747,6 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
-      .announce-card { flex: 0 0 calc(50% - 12px); }
       .welcome-text { padding-left: 0; }
     }
 
@@ -1803,6 +1810,7 @@
 
     /* Each row is an infinite-scroll strip */
     .photo-row {
+      touch-action: pan-y;
       display: flex;
       gap: 6px;
       width: max-content;
@@ -2419,8 +2427,6 @@
     </div>
   </section>
 
-  </section>
-
   <!-- ===== ANNOUNCEMENTS AUTO-SLIDER ===== -->
   <section class="announcements-section section-pad" id="announcements">
     <div class="container">
@@ -2739,9 +2745,6 @@
             <p>How was your visit? We want to hear from you. Your feedback helps us serve you better.</p>
           </div>
         </a>
-      </div>
-
-        </a></div>
       </div>
 
     </div>

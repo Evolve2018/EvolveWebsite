@@ -1,0 +1,117 @@
+{
+  "_howToUpdate": [
+    "This file drives evolveDiscipleshipTraining.html. Edit this file only; the page never needs to change for a new session.",
+    "Dates are YYYY-MM-DD in Milwaukee time. A session shows as OPEN from registrationOpens through the end of the registrationCloses day, then disappears on its own.",
+    "registrationOpens is optional. Leave it out and the session is open right away until it closes. If it is a future date, the class shows under Opening Soon.",
+    "registrationCloses and formUrl are required for a session to appear.",
+    "startDate, schedule, and format are optional details shown on the card.",
+    "Set hidden to true to pull a session early, for example if the class fills up.",
+    "To add a new round, add a new object to that course's sessions list. Old sessions can stay; expired ones are ignored.",
+    "Preview any date by opening the page with ?preview=2026-09-10 on the end of the GitHub Pages URL."
+  ],
+  "updated": "2026-10-07",
+  "tracks": [
+    {
+      "id": "foundations",
+      "number": 1,
+      "name": "Foundations",
+      "summary": "Get grounded in your identity and intimacy with Christ."
+    },
+    {
+      "id": "maturity",
+      "number": 2,
+      "name": "Maturity",
+      "summary": "Build spiritual discipline and see God's power at work in everyday life."
+    },
+    {
+      "id": "equipping",
+      "number": 3,
+      "name": "Equipping",
+      "summary": "Go deep in the Word and carry your faith to others."
+    }
+  ],
+  "courses": [
+    {
+      "id": "faith-foundations-1",
+      "track": "foundations",
+      "name": "Faith Foundations Pt. 1",
+      "audience": "For new and growing disciples looking to be grounded in their identity and intimacy with Christ.",
+      "topics": ["Salvation", "Faith", "Baptism", "The Holy Trinity", "Forgiveness"],
+      "image": "",
+      "sessions": []
+    },
+    {
+      "id": "faith-foundations-2",
+      "track": "foundations",
+      "name": "Faith Foundations Pt. 2",
+      "audience": "Picks up where Part I leaves off for new and growing disciples ready to build daily habits of faith.",
+      "topics": ["Daily Devotion", "Dying to Self", "Financial Stewardship", "Servant Leadership"],
+      "image": "",
+      "sessions": []
+    },
+    {
+      "id": "life-of-a-disciple",
+      "track": "maturity",
+      "name": "Life of a Disciple",
+      "audience": "For those seeking the spiritual discipline and maturity Christ calls His followers to.",
+      "topics": ["Building on Salvation", "Daily Rhythms", "Operating in Faith", "Heart Posture", "Spiritual Warfare"],
+      "image": "",
+      "sessions": [
+        {
+          "label": "Spring 2026",
+          "registrationCloses": "2026-04-28",
+          "format": "In person or virtual",
+          "formUrl": "https://evolvenation.ccbchurch.com/goto/forms/315/responses/new"
+        }
+      ]
+    },
+    {
+      "id": "life-more-abundantly",
+      "track": "maturity",
+      "name": "Life More Abundantly",
+      "audience": "For disciples seeking everyday evidence of God's power working in them and around them.",
+      "topics": ["Discerning God's Voice", "Godly Relationships", "Healthy Thinking", "Financial Freedom", "Self-Discipline"],
+      "image": "",
+      "sessions": [
+        {
+          "label": "Spring 2026",
+          "registrationCloses": "2026-05-05",
+          "format": "In person or virtual",
+          "formUrl": "https://evolvenation.ccbchurch.com/goto/forms/316/responses/new"
+        }
+      ]
+    },
+    {
+      "id": "sword-of-the-spirit",
+      "track": "equipping",
+      "name": "Sword of the Spirit",
+      "audience": "For disciples who want to radically improve their understanding of God's Word.",
+      "topics": ["How to Study Scripture", "Old and New Testament Connection", "The Power of the Word"],
+      "image": "",
+      "sessions": [
+        {
+          "label": "Fall 2026",
+          "registrationCloses": "2026-09-15",
+          "format": "In person or virtual",
+          "formUrl": "https://evolvenation.ccbchurch.com/goto/forms/317/responses/new"
+        }
+      ]
+    },
+    {
+      "id": "work-of-an-evangelist",
+      "track": "equipping",
+      "name": "Work of an Evangelist",
+      "audience": "For disciples who are ready to take their faith to others.",
+      "topics": ["Evangelism and Witnessing", "Witnessing Through Hardship", "Fulfilling God's Will"],
+      "image": "",
+      "sessions": [
+        {
+          "label": "Fall 2026",
+          "registrationCloses": "2026-09-22",
+          "format": "In person or virtual",
+          "formUrl": "https://evolvenation.ccbchurch.com/goto/forms/318/responses/new"
+        }
+      ]
+    }
+  ]
+}

@@ -1,41 +1,38 @@
-<!-- ============================================================
-     EVOLVE CHURCH — DISCIPLESHIP PAGE
-     TCC-compatible HTML fragment (no html/head/body wrappers)
-     Image placeholder: https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg
-     Replace course images, hero image, and CCB form links as needed.
-============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discipleship | Evolve Church</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap');
 
 /* ── TOKENS ─────────────────────────────────────────── */
 :root {
   --blue:        #42B9D2;
   --blue-dark:   #2A8FA8;
-  --blue-glow:   rgba(66,185,210,0.18);
   --navy:        #07141a;
-  --navy-mid:    #0e2244;
+  --navy-mid:    #0c1d2b;
   --navy-card:   #0a1e2a;
-  --navy-border: rgba(66,185,210,0.22);
+  --navy-border: rgba(66,185,210,0.18);
   --white:       #ffffff;
   --off-white:   #e8f4f7;
   --muted:       rgba(232,244,247,0.55);
-  --gold:        #42B9D2;
-  --red-closed:  #c0392b;
-  --green-open:  #27ae60;
+  --gold:        #d4a847;
 
   --font-display: 'Barlow Condensed', sans-serif;
-  --font-body:    'Open Sans', sans-serif;
-  --font-accent:  'Montserrat', sans-serif;
+  --font-body:    'Barlow', sans-serif;
+  --font-accent:  'Barlow Condensed', sans-serif;
 
   --IMG: url('https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg');
 }
 
 /* ── RESET / BASE ────────────────────────────────────── */
-.disc-page * { box-sizing: border-box; margin: 0; padding: 0; }
-.disc-page { font-family: var(--font-body); color: var(--white); background: var(--navy); line-height: 1.6; }
-.disc-page a { text-decoration: none; }
-.disc-page img { display: block; max-width: 100%; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); color: var(--white); background: var(--navy); line-height: 1.6; }
+a { text-decoration: none; }
+img { display: block; max-width: 100%; }
 
 /* ── HERO ────────────────────────────────────────────── */
 .disc-hero {
@@ -44,8 +41,10 @@
   background-size: cover;
   background-position: center 30%;
   display: flex;
-  align-items: flex-end;
-  padding: 0 0 72px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 32px;
   position: relative;
   overflow: hidden;
 }
@@ -54,41 +53,43 @@
   position: absolute; inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(7,20,26,0.35) 0%,
-    rgba(7,20,26,0.55) 40%,
-    rgba(7,20,26,0.92) 80%,
+    rgba(7,20,26,0.4) 0%,
+    rgba(7,20,26,0.6) 40%,
+    rgba(7,20,26,0.92) 85%,
     var(--navy) 100%
   );
 }
 .disc-hero-inner {
   position: relative; z-index: 2;
-  max-width: 1100px; margin: 0 auto; padding: 0 32px; width: 100%;
+  max-width: 900px; width: 100%;
 }
 .disc-hero-eyebrow {
   font-family: var(--font-display);
   font-weight: 400; font-size: 13px; letter-spacing: 0.32em;
   text-transform: uppercase; color: var(--blue);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 .disc-hero-title {
   font-family: var(--font-display);
-  font-weight: 900; font-size: clamp(64px, 10vw, 120px);
+  font-weight: 900; font-size: clamp(72px, 11vw, 130px);
   line-height: 0.9; letter-spacing: -0.01em;
   text-transform: uppercase; color: var(--white);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
-.disc-hero-title span {
-  color: var(--blue);
-}
+.disc-hero-title span { color: var(--blue); }
 .disc-hero-sub {
-  font-family: var(--font-accent);
-  font-size: clamp(28px, 4vw, 46px);
-  color: var(--off-white); opacity: 0.85;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(18px, 2.5vw, 28px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--off-white); opacity: 0.7;
   margin-bottom: 28px;
 }
 .disc-hero-desc {
-  font-size: 16px; color: var(--muted); max-width: 560px;
-  line-height: 1.75; margin-bottom: 36px;
+  font-size: 17px; color: var(--muted);
+  line-height: 1.8; margin-bottom: 40px;
+  max-width: 580px; margin-left: auto; margin-right: auto;
 }
 .disc-hero-cta {
   display: inline-block;
@@ -97,7 +98,8 @@
   font-family: var(--font-display);
   font-weight: 700; font-size: 14px; letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 16px 40px;
+  padding: 16px 44px;
+  border-radius: 4px;
   transition: background 0.25s, transform 0.2s;
 }
 .disc-hero-cta:hover { background: var(--blue-dark); transform: translateY(-2px); }
@@ -147,6 +149,7 @@
   background-image: var(--IMG);
   background-size: cover; background-position: center;
   position: relative;
+  border-radius: 2px;
 }
 .disc-what-image::after {
   content: '';
@@ -184,168 +187,168 @@
   color: var(--off-white); line-height: 1.5;
   margin-top: 32px;
 }
-.disc-what-verse-inline span {
+.disc-what-verse-inline em {
   display: block; font-size: 13px;
   color: var(--blue); letter-spacing: 0.1em;
-  text-transform: uppercase;  margin-top: 8px;
+  text-transform: uppercase; font-style: normal; margin-top: 8px;
 }
 
-/* ── CLASSES SECTION ─────────────────────────────────── */
-.disc-classes {
+/* ── MINISTRY HUB SECTION ────────────────────────────── */
+.disc-hub {
   background: var(--navy-mid);
-  padding: 96px 32px;
+  padding: 96px 32px 112px;
 }
-.disc-classes-inner { max-width: 1100px; margin: 0 auto; }
-.disc-section-label {
+.disc-hub-inner { max-width: 1140px; margin: 0 auto; }
+
+.disc-hub-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.disc-hub-label {
   font-family: var(--font-display);
   font-size: 11px; letter-spacing: 0.35em;
   text-transform: uppercase; color: var(--blue);
-  margin-bottom: 12px; display: block;
+  margin-bottom: 14px; display: block;
 }
-.disc-section-heading {
+.disc-hub-heading {
   font-family: var(--font-display);
-  font-weight: 900; font-size: clamp(40px, 5vw, 64px);
+  font-weight: 900; font-size: clamp(40px, 5vw, 66px);
   text-transform: uppercase; line-height: 0.95;
-  margin-bottom: 18px; color: var(--white);
+  margin-bottom: 20px; color: var(--white);
 }
-.disc-section-sub {
-  font-size: 16px; color: var(--muted); max-width: 640px;
-  line-height: 1.75; margin-bottom: 56px;
-}
-
-/* Track / journey line */
-.disc-track {
-  display: flex; flex-direction: column; gap: 0;
-}
-.disc-track-group-label {
-  font-family: var(--font-display);
-  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--blue); opacity: 0.7;
-  padding: 0 0 16px 32px;
-  position: relative;
-}
-.disc-track-group-label::before {
-  content: '';
-  position: absolute; left: 0; top: 7px;
-  width: 20px; height: 1px; background: var(--blue); opacity: 0.5;
+.disc-hub-sub {
+  font-size: 16px; color: var(--muted); max-width: 560px;
+  line-height: 1.75; margin: 0 auto;
 }
 
-/* ── COURSE CARD ─────────────────────────────────────── */
-.disc-courses-grid {
+/* ── MINISTRY GRID ───────────────────────────────────── */
+.disc-ministry-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 48px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
-.disc-course-card {
+
+.disc-ministry-card {
   background: var(--navy-card);
   border: 1px solid var(--navy-border);
-  border-left: 4px solid var(--blue);
+  border-top: 3px solid var(--blue);
   display: flex; flex-direction: column;
   overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s, border-top-color 0.25s;
+  border-radius: 0 0 4px 4px;
 }
-.disc-course-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(66,185,210,0.12);
+.disc-ministry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px rgba(66,185,210,0.13);
+  border-top-color: var(--blue-dark);
 }
-.disc-course-card.closed { border-left-color: rgba(66,185,210,0.25); }
-.disc-course-card-img {
-  height: 180px;
+.disc-ministry-card.coming-soon {
+  border-top-color: rgba(66,185,210,0.25);
+  opacity: 0.7;
+}
+.disc-ministry-card.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+  border-top-color: rgba(66,185,210,0.35);
+}
+
+.disc-ministry-img {
+  height: 160px;
   background-image: var(--IMG);
   background-size: cover; background-position: center;
   position: relative;
 }
-.disc-course-badge {
-  position: absolute; top: 14px; right: 14px;
-  font-family: var(--font-display);
-  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 5px 12px;
+.disc-ministry-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(7,20,26,0.7) 100%);
 }
-.badge-open   { background: var(--green-open); color: #fff; }
-.badge-closed { background: rgba(0,0,0,0.6); color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.12); }
 
-.disc-course-body { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
-.disc-course-name {
+.disc-ministry-badge {
+  position: absolute; top: 12px; right: 12px;
   font-family: var(--font-display);
-  font-weight: 800; font-size: 22px; letter-spacing: 0.01em;
-  text-transform: uppercase; color: var(--white);
-  margin-bottom: 12px; line-height: 1.1;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  background: rgba(7,20,26,0.75);
+  color: rgba(232,244,247,0.5);
+  border: 1px solid rgba(66,185,210,0.2);
+  border-radius: 2px;
 }
-.disc-course-desc {
-  font-size: 14px; color: var(--muted); line-height: 1.75;
+
+.disc-ministry-body {
+  padding: 22px 22px 26px;
+  flex: 1; display: flex; flex-direction: column;
+}
+.disc-ministry-name {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 20px; letter-spacing: 0.01em;
+  text-transform: uppercase; color: var(--white);
+  margin-bottom: 10px; line-height: 1.1;
+}
+.disc-ministry-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.7;
   flex: 1; margin-bottom: 20px;
 }
-.disc-course-meta {
-  font-family: var(--font-display);
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--blue); opacity: 0.7;
-  margin-bottom: 18px;
-}
-.disc-course-meta.deadline { color: var(--gold); opacity: 1; }
-.disc-course-cta {
+.disc-ministry-cta {
   display: inline-block;
   font-family: var(--font-display);
-  font-weight: 700; font-size: 12px; letter-spacing: 0.2em;
+  font-weight: 700; font-size: 11px; letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 12px 24px;
+  padding: 11px 22px;
   border: 1.5px solid var(--blue); color: var(--blue);
+  border-radius: 4px;
   transition: background 0.22s, color 0.22s;
   align-self: flex-start;
 }
-.disc-course-cta:hover { background: var(--blue); color: var(--navy); }
-.disc-course-cta.cta-disabled {
-  border-color: rgba(66,185,210,0.2); color: rgba(66,185,210,0.3);
+.disc-ministry-cta:hover { background: var(--blue); color: var(--navy); }
+.disc-ministry-cta.cta-soon {
+  border-color: rgba(66,185,210,0.2);
+  color: rgba(66,185,210,0.35);
   pointer-events: none;
+  border-radius: 4px;
 }
 
-/* ── LIFE GROUPS PROMO ───────────────────────────────── */
-.disc-lifegroups {
-  position: relative; overflow: hidden;
-  min-height: 420px;
-  background-image: var(--IMG);
-  background-size: cover; background-position: center 60%;
-  display: flex; align-items: center;
+/* ── TRAINING CTA BAND ───────────────────────────────── */
+.disc-training-band {
+  background: var(--navy);
+  border-top: 1px solid var(--navy-border);
+  border-bottom: 1px solid var(--navy-border);
+  padding: 72px 32px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 64px;
 }
-.disc-lifegroups::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(7,20,26,0.95) 45%, rgba(7,20,26,0.3) 100%);
-}
-.disc-lifegroups-inner {
-  position: relative; z-index: 2;
-  max-width: 1100px; margin: 0 auto; padding: 72px 32px;
-  max-width: 560px;
-}
-.disc-lifegroups-label {
+.disc-training-band-text { max-width: 520px; }
+.disc-training-label {
   font-family: var(--font-display);
   font-size: 11px; letter-spacing: 0.35em;
-  text-transform: uppercase; color: var(--blue); margin-bottom: 14px; display: block;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 14px; display: block;
 }
-.disc-lifegroups-heading {
+.disc-training-heading {
   font-family: var(--font-display);
-  font-weight: 900; font-size: clamp(36px, 5vw, 58px);
+  font-weight: 900; font-size: clamp(32px, 4vw, 52px);
   text-transform: uppercase; line-height: 0.95;
-  color: var(--white); margin-bottom: 20px;
+  color: var(--white); margin-bottom: 16px;
 }
-.disc-lifegroups-body {
-  font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 32px;
+.disc-training-body {
+  font-size: 16px; color: var(--muted); line-height: 1.8;
 }
-.disc-lifegroups-cta {
+.disc-training-cta-wrap { flex-shrink: 0; }
+.disc-training-cta {
   display: inline-block;
   background: var(--blue); color: var(--navy);
   font-family: var(--font-display); font-weight: 700;
   font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
-  padding: 16px 40px;
+  padding: 18px 48px;
+  border-radius: 4px;
   transition: background 0.25s, transform 0.2s;
+  white-space: nowrap;
 }
-.disc-lifegroups-cta:hover { background: var(--blue-dark); transform: translateY(-2px); }
+.disc-training-cta:hover { background: var(--blue-dark); transform: translateY(-2px); }
 
-/* ── QUESTIONS / CONTACT BAND ────────────────────────── */
+/* ── CONTACT BAND ────────────────────────────────────── */
 .disc-contact {
   background: var(--navy);
-  border-top: 1px solid var(--navy-border);
   padding: 72px 32px;
   text-align: center;
 }
@@ -354,7 +357,7 @@
   font-weight: 800; font-size: clamp(32px, 4vw, 52px);
   text-transform: uppercase; color: var(--white); margin-bottom: 14px;
 }
-.disc-contact-body { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+.disc-contact-body { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
 .disc-contact-email {
   font-family: var(--font-display);
   font-size: 20px; font-weight: 600; letter-spacing: 0.05em;
@@ -371,15 +374,18 @@
 .disc-reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .disc-ministry-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 768px) {
   .disc-what { grid-template-columns: 1fr; gap: 40px; padding: 60px 20px; }
   .disc-what-image { aspect-ratio: 16/9; }
-  .disc-hero-inner { padding: 0 20px; }
-  .disc-classes { padding: 60px 20px; }
-  .disc-courses-grid { grid-template-columns: 1fr; }
-  .disc-hero { min-height: 75vh; padding-bottom: 56px; }
+  .disc-hero { min-height: 80vh; }
   .disc-hero-scroll { display: none; }
-  .disc-lifegroups-inner { max-width: 100%; padding: 56px 20px; }
+  .disc-hub { padding: 60px 20px 80px; }
+  .disc-ministry-grid { grid-template-columns: 1fr; }
+  .disc-training-band { flex-direction: column; gap: 32px; text-align: center; padding: 56px 20px; }
+  .disc-training-cta-wrap { width: 100%; text-align: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .disc-reveal { opacity: 1; transform: none; transition: none; }
@@ -387,216 +393,236 @@
 }
 </style>
 
-<div class="disc-page">
+<body>
 
-  <!-- ── HERO ─────────────────────────────────────────── -->
-  <section class="disc-hero">
-    <div class="disc-hero-inner">
-      <p class="disc-hero-eyebrow">Evolve Church · Discipleship</p>
-      <h1 class="disc-hero-title">FORTI<span>FY</span></h1>
-      <p class="disc-hero-sub">Discipleship at Evolve</p>
-      <p class="disc-hero-desc">
-        Grow deeper in your faith. Our discipleship journey equips followers of Jesus
-        to understand the Word, build community, and take their faith into the world.
-      </p>
-      <a href="#disc-classes" class="disc-hero-cta">Explore Classes</a>
-    </div>
-    <div class="disc-hero-scroll">
-      <div class="disc-hero-scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <!-- ── VERSE BAND ──────────────────────────────────── -->
-  <div class="disc-verse">
-    <p class="disc-verse-text">"In all your getting, get understanding."</p>
-    <p class="disc-verse-ref">Proverbs 4:7</p>
-  </div>
-
-  <!-- ── WHAT IS DISCIPLESHIP ──────────────────────── -->
-  <section class="disc-what">
-    <div class="disc-what-image disc-reveal">
-      <div class="disc-what-image-accent"></div>
-    </div>
-    <div class="disc-reveal" style="transition-delay:0.15s">
-      <p class="disc-what-label">Our Foundation</p>
-      <h2 class="disc-what-heading">What Is<br>Discipleship?</h2>
-      <p class="disc-what-body">
-        The ongoing mission of <strong>building disciples that follow Jesus</strong> in every aspect of their lives.
-        A disciple is anyone under the teaching of something or someone — and as disciples of Christ,
-        we submit our lives to His example and His Word.
-      </p>
-      <p class="disc-what-body">
-        Jesus emulated the nature of His Father through the Holy Spirit, and as Christ followers
-        we <strong>share in that everlasting relationship with the Father</strong> — gifted that same Spirit
-        to navigate life, the very Spirit that raised Christ from the dead.
-      </p>
-      <p class="disc-what-body">
-        Discipleship reveals the power of both, and propels us toward a life devoted
-        to sharing this good news with others.
-      </p>
-      <blockquote class="disc-what-verse-inline">
-        "And this is eternal life, that they know you, the only true God, and Jesus Christ whom you have sent."
-        <span>— John 17:3</span>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ── DISCIPLESHIP CLASSES ────────────────────── -->
-  <section class="disc-classes" id="disc-classes">
-    <div class="disc-classes-inner">
-      <span class="disc-section-label">11-Week Bible-Centered Courses</span>
-      <h2 class="disc-section-heading">Discipleship<br>Classes</h2>
-      <p class="disc-section-sub">
-        Each course pairs <strong style="color:var(--off-white)">deep Scripture teaching</strong> with
-        community-building through small groups — available both in-person and virtually.
-        Indicate your preference at registration.
-      </p>
-
-      <!-- Track: Foundations -->
-      <div class="disc-track">
-        <div class="disc-track-group-label">Track 1 — Foundations</div>
-        <div class="disc-courses-grid">
-
-          <!-- Faith Foundations Pt. 1 -->
-          <div class="disc-course-card closed disc-reveal">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-closed">Registration Closed</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Faith Foundations Pt. 1</h3>
-              <p class="disc-course-desc">
-                Grounded identity and intimacy with Christ. Covers salvation, faith, baptism,
-                the Holy Trinity, forgiveness, and the core tenets of Christian belief.
-              </p>
-              <p class="disc-course-meta">Registration Closed</p>
-              <a class="disc-course-cta cta-disabled">Registration Closed</a>
-            </div>
-          </div>
-
-          <!-- Faith Foundations Pt. 2 -->
-          <div class="disc-course-card closed disc-reveal" style="transition-delay:0.1s">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-closed">Registration Closed</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Faith Foundations Pt. 2</h3>
-              <p class="disc-course-desc">
-                Building on Part I with daily devotion, dying to self, financial stewardship,
-                and servant leadership as core teachings.
-              </p>
-              <p class="disc-course-meta">Registration Closed</p>
-              <a class="disc-course-cta cta-disabled">Registration Closed</a>
-            </div>
-          </div>
-
-        </div><!-- /grid -->
-
-        <!-- Track: Maturity -->
-        <div class="disc-track-group-label" style="margin-top:16px">Track 2 — Maturity</div>
-        <div class="disc-courses-grid">
-
-          <!-- Life of a Disciple -->
-          <div class="disc-course-card disc-reveal">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-open">Open</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Life of a Disciple</h3>
-              <p class="disc-course-desc">
-                For those seeking spiritual discipline and maturity. Covers building on salvation,
-                daily rhythms, operating in faith, heart posture, and spiritual warfare.
-              </p>
-              <p class="disc-course-meta deadline">⏱ Registration Deadline: April 28, 2026</p>
-              <a href="https://evolvenation.ccbchurch.com/goto/forms/315/responses/new" class="disc-course-cta" target="_blank" rel="noopener">Register Now</a>
-            </div>
-          </div>
-
-          <!-- Life More Abundantly -->
-          <div class="disc-course-card disc-reveal" style="transition-delay:0.1s">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-open">Open</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Life More Abundantly</h3>
-              <p class="disc-course-desc">
-                Everyday evidence of God's power in you and around you. Covers discerning God's voice,
-                Godly relationships, healthy thinking, financial freedom, and self-discipline.
-              </p>
-              <p class="disc-course-meta deadline">⏱ Registration Deadline: May 5, 2026</p>
-              <a href="https://evolvenation.ccbchurch.com/goto/forms/316/responses/new" class="disc-course-cta" target="_blank" rel="noopener">Register Now</a>
-            </div>
-          </div>
-
-        </div><!-- /grid -->
-
-        <!-- Track: Equipping -->
-        <div class="disc-track-group-label" style="margin-top:16px">Track 3 — Equipping</div>
-        <div class="disc-courses-grid">
-
-          <!-- Sword of the Spirit -->
-          <div class="disc-course-card disc-reveal">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-open">Open</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Sword of the Spirit</h3>
-              <p class="disc-course-desc">
-                Radically improve your understanding of God's Word. Covers how to effectively study
-                Scripture, the Old and New Testament connection, and the power of God's word through submission.
-              </p>
-              <p class="disc-course-meta deadline">⏱ Registration Deadline: September 15, 2026</p>
-              <a href="https://evolvenation.ccbchurch.com/goto/forms/317/responses/new" class="disc-course-cta" target="_blank" rel="noopener">Register Now</a>
-            </div>
-          </div>
-
-          <!-- Work of an Evangelist -->
-          <div class="disc-course-card disc-reveal" style="transition-delay:0.1s">
-            <div class="disc-course-card-img">
-              <span class="disc-course-badge badge-open">Open</span>
-            </div>
-            <div class="disc-course-body">
-              <h3 class="disc-course-name">Work of an Evangelist</h3>
-              <p class="disc-course-desc">
-                Take your faith to others. Covers the difference between the gift of evangelism and
-                everyday witnessing, witnessing through hardship, and fulfilling God's will through evangelism.
-              </p>
-              <p class="disc-course-meta deadline">⏱ Registration Deadline: September 22, 2026</p>
-              <a href="https://evolvenation.ccbchurch.com/goto/forms/318/responses/new" class="disc-course-cta" target="_blank" rel="noopener">Sign Up</a>
-            </div>
-          </div>
-
-        </div><!-- /grid -->
-      </div><!-- /track -->
-    </div>
-  </section>
-
-  <!-- ── LIFE GROUPS PROMO ──────────────────────────── -->
-  <section class="disc-lifegroups">
-    <div class="disc-lifegroups-inner disc-reveal">
-      <span class="disc-lifegroups-label">Also at Evolve</span>
-      <h2 class="disc-lifegroups-heading">Go Deeper<br>Together</h2>
-      <p class="disc-lifegroups-body">
-        Discipleship thrives in community. Life Groups connect you to others walking
-        the same journey — meeting weekly in homes and online across the Milwaukee area.
-      </p>
-      <a href="https://www.evolvenation.org/life-groups" target="_top" class="disc-lifegroups-cta">Find a Life Group</a>
-    </div>
-  </section>
-
-  <!-- ── CONTACT / QUESTIONS ───────────────────────── -->
-  <section class="disc-contact">
-    <h2 class="disc-contact-heading disc-reveal">Have Questions?</h2>
-    <p class="disc-contact-body disc-reveal" style="transition-delay:0.1s">
-      We'd love to help you find the right discipleship path for where you are on your journey.
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="disc-hero">
+  <div class="disc-hero-inner">
+    <p class="disc-hero-eyebrow">Evolve Church · Discipleship</p>
+    <h1 class="disc-hero-title">FORTI<span>FY</span></h1>
+    <p class="disc-hero-sub">Discipleship at Evolve</p>
+    <p class="disc-hero-desc">
+      Every pathway below is part of one mission: building followers of Jesus
+      who grow in the Word, grow in community, and carry their faith into the world.
     </p>
-    <a href="mailto:info@evolvenation.org" class="disc-contact-email disc-reveal" style="transition-delay:0.2s">
-      info@evolvenation.org
+    <a href="#disc-hub" class="disc-hero-cta">Explore Pathways</a>
+  </div>
+  <div class="disc-hero-scroll">
+    <div class="disc-hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── VERSE BAND ──────────────────────────────────── -->
+<div class="disc-verse">
+  <p class="disc-verse-text">"In all your getting, get understanding."</p>
+  <p class="disc-verse-ref">Proverbs 4:7</p>
+</div>
+
+<!-- ── WHAT IS DISCIPLESHIP ──────────────────────── -->
+<section class="disc-what">
+  <div class="disc-what-image disc-reveal">
+    <div class="disc-what-image-accent"></div>
+  </div>
+  <div class="disc-reveal" style="transition-delay:0.15s">
+    <p class="disc-what-label">Our Foundation</p>
+    <h2 class="disc-what-heading">What Is<br>Discipleship?</h2>
+    <p class="disc-what-body">
+      The ongoing mission of <strong>building disciples that follow Jesus</strong> in every
+      aspect of their lives. A disciple is anyone under the teaching of something or someone,
+      and as disciples of Christ, we submit our lives to His example and His Word.
+    </p>
+    <p class="disc-what-body">
+      Jesus emulated the nature of His Father through the Holy Spirit, and as Christ followers
+      we <strong>share in that everlasting relationship with the Father</strong>, gifted that
+      same Spirit to navigate life — the very Spirit that raised Christ from the dead.
+    </p>
+    <p class="disc-what-body">
+      Discipleship reveals the power of both, and propels us toward a life devoted
+      to sharing this good news with others.
+    </p>
+    <blockquote class="disc-what-verse-inline">
+      "And this is eternal life, that they know you, the only true God,
+      and Jesus Christ whom you have sent."
+      <em>John 17:3</em>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ── MINISTRY HUB ───────────────────────────────── -->
+<section class="disc-hub" id="disc-hub">
+  <div class="disc-hub-inner">
+
+    <div class="disc-hub-header disc-reveal">
+      <span class="disc-hub-label">Find Your Place</span>
+      <h2 class="disc-hub-heading">Discipleship<br>Pathways</h2>
+      <p class="disc-hub-sub">
+        Every person is at a different point in their journey. Choose the pathway
+        that fits where you are right now.
+      </p>
+    </div>
+
+    <div class="disc-ministry-grid">
+
+      <!-- Life Groups -->
+      <div class="disc-ministry-card disc-reveal">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Life Groups</h3>
+          <p class="disc-ministry-desc">
+            Weekly small groups where real community happens. Study the Word, do life
+            together, and grow in a circle where everyone knows your name.
+          </p>
+          <a href="https://www.evolvenation.org/life-groups" target="_top" class="disc-ministry-cta">Find a Group</a>
+        </div>
+      </div>
+
+      <!-- Cave of 1,000 Men -->
+      <div class="disc-ministry-card disc-reveal" style="transition-delay:0.08s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Cave of 1,000 Men</h3>
+          <p class="disc-ministry-desc">
+            A brotherhood built around prayer, accountability, and the call to become
+            the men God created us to be. Iron sharpens iron.
+          </p>
+          <a href="https://www.evolvenation.org/cave-of-men" target="_top" class="disc-ministry-cta">Join the Cave</a>
+        </div>
+      </div>
+
+      <!-- Evolving Singles -->
+      <div class="disc-ministry-card coming-soon disc-reveal" style="transition-delay:0.16s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+          <span class="disc-ministry-badge">Coming Soon</span>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Evolving Singles</h3>
+          <p class="disc-ministry-desc">
+            Community and discipleship for single adults walking out their faith
+            with purpose, identity, and intentionality.
+          </p>
+          <a class="disc-ministry-cta cta-soon">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- Women's Ministry -->
+      <div class="disc-ministry-card coming-soon disc-reveal" style="transition-delay:0.24s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+          <span class="disc-ministry-badge">Coming Soon</span>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Women of Evolve</h3>
+          <p class="disc-ministry-desc">
+            A space for women to connect, be encouraged in the Word, and walk
+            boldly in the fullness of who God called them to be.
+          </p>
+          <a class="disc-ministry-cta cta-soon">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- Marriage -->
+      <div class="disc-ministry-card coming-soon disc-reveal" style="transition-delay:0.08s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+          <span class="disc-ministry-badge">Coming Soon</span>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Marriage</h3>
+          <p class="disc-ministry-desc">
+            Resources and community for married couples pursuing a covenant built
+            on Christ, growing together through every season.
+          </p>
+          <a class="disc-ministry-cta cta-soon">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- College Ministries -->
+      <div class="disc-ministry-card disc-reveal" style="transition-delay:0.16s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">College Ministries</h3>
+          <p class="disc-ministry-desc">
+            Faith and community for college students navigating one of the most
+            defining seasons of life. You belong here.
+          </p>
+          <a href="https://www.evolvenation.org/college-ministry" target="_top" class="disc-ministry-cta">Get Connected</a>
+        </div>
+      </div>
+
+      <!-- FRWD -->
+      <div class="disc-ministry-card disc-reveal" style="transition-delay:0.24s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">FRWD</h3>
+          <p class="disc-ministry-desc">
+            Moving forward is a choice. FRWD is for people ready to press past
+            what held them back and step into what God has next.
+          </p>
+          <a href="https://www.evolvenation.org/forward" target="_top" class="disc-ministry-cta">Move Forward</a>
+        </div>
+      </div>
+
+      <!-- Discipleship Training -->
+      <div class="disc-ministry-card disc-reveal" style="transition-delay:0.32s">
+        <div class="disc-ministry-img">
+          <div class="disc-ministry-img-overlay"></div>
+        </div>
+        <div class="disc-ministry-body">
+          <h3 class="disc-ministry-name">Discipleship Training</h3>
+          <p class="disc-ministry-desc">
+            Structured 11-week courses grounded in Scripture. From faith foundations
+            to evangelism, deepen your understanding and grow as a disciple.
+          </p>
+          <a href="https://www.evolvenation.org/discipleship-training" target="_top" class="disc-ministry-cta">View Classes</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TRAINING SPOTLIGHT ─────────────────────────── -->
+<div class="disc-training-band disc-reveal">
+  <div class="disc-training-band-text">
+    <span class="disc-training-label">Ready to Go Deeper?</span>
+    <h3 class="disc-training-heading">Discipleship<br>Training Classes</h3>
+    <p class="disc-training-body">
+      Our 11-week Bible-centered courses cover everything from faith foundations
+      to spiritual warfare to evangelism. Classes are available in-person and virtually.
+    </p>
+  </div>
+  <div class="disc-training-cta-wrap">
+    <a href="https://www.evolvenation.org/discipleship-training" target="_top" class="disc-training-cta">
+      See Open Classes
     </a>
-  </section>
+  </div>
+</div>
 
+<!-- ── CONTACT ────────────────────────────────────── -->
+<section class="disc-contact">
+  <h2 class="disc-contact-heading disc-reveal">Not Sure Where to Start?</h2>
+  <p class="disc-contact-body disc-reveal" style="transition-delay:0.1s">
+    We would love to help you find the right pathway for where you are on your journey.
+  </p>
+  <a href="mailto:info@evolvenation.org" class="disc-contact-email disc-reveal" style="transition-delay:0.2s">
+    info@evolvenation.org
+  </a>
+</section>
 
-</div><!-- /disc-page -->
+<!-- ── SHARED FOOTER ──────────────────────────────── -->
+<!-- sendHeight() defined below so evolveFooter.js can call it after injecting footer HTML -->
+<div id="evolve-footer-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
 
 <script>
 (function() {
@@ -604,7 +630,7 @@
   var heroBtn = document.querySelector('.disc-hero-cta');
   if (heroBtn) {
     heroBtn.addEventListener('click', function(e) {
-      var target = document.getElementById('disc-classes');
+      var target = document.getElementById('disc-hub');
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -625,7 +651,6 @@
   checkReveal();
 })();
 
-// sendHeight must be global so evolveFooter.js can call it after injecting footer HTML
 function sendHeight() {
   window.parent.postMessage(
     { type: 'iframeHeight', height: document.documentElement.scrollHeight },
@@ -639,9 +664,5 @@ if (typeof ResizeObserver !== 'undefined') {
 }
 </script>
 
-<!-- ── SHARED FOOTER ──────────────────────────────────── -->
-<!-- sendHeight() is defined above so evolveFooter.js can call it after injecting footer HTML -->
-<div id="evolve-footer-mount"></div>
-<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js"></script>
 </body>
 </html>
