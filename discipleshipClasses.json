@@ -1,15 +1,22 @@
 {
   "_howToUpdate": [
-    "This file drives evolveDiscipleshipTraining.html. Edit this file only; the page never needs to change for a new session.",
-    "Dates are YYYY-MM-DD in Milwaukee time. A session shows as OPEN from registrationOpens through the end of the registrationCloses day, then disappears on its own.",
-    "registrationOpens is optional. Leave it out and the session is open right away until it closes. If it is a future date, the class shows under Opening Soon.",
-    "registrationCloses and formUrl are required for a session to appear.",
-    "startDate, schedule, and format are optional details shown on the card.",
-    "Set hidden to true to pull a session early, for example if the class fills up.",
-    "To add a new round, add a new object to that course's sessions list. Old sessions can stay; expired ones are ignored.",
-    "Preview any date by opening the page with ?preview=2026-09-10 on the end of the GitHub Pages URL."
+    "Registration dates now come live from CCB. Set the form's Start and End dates in CCB and the page follows them automatically.",
+    "Each course finds its CCB form by the ids in ccbFormIds, or by a form title containing any phrase in match. Name new CCB forms with the course name and they appear on their own with no edit here.",
+    "A form shows as OPEN when it is published, its status is Available, and today falls between its start and end dates. It drops off the day after its end date.",
+    "A published form with a future start date shows under Opening Soon.",
+    "Forms with no end date stay open for up to openEndedMaxDays after they start. Setting an end date in CCB is the better habit.",
+    "Add a form id to ignoreFormIds to keep a form off the page.",
+    "formDetails adds class info CCB does not store, keyed by form id: startDate (YYYY-MM-DD), schedule, format, label.",
+    "fallbackSessions are only used if the CCB connection is down. Keep them roughly current or leave them empty.",
+    "Preview any date by adding ?preview=2026-09-10 to the GitHub Pages URL."
   ],
-  "updated": "2026-10-07",
+  "updated": "2026-10-09",
+  "openEndedMaxDays": 120,
+  "ignoreFormIds": [],
+  "formDetails": {
+    "317": { "format": "In person or virtual" },
+    "318": { "format": "In person or virtual" }
+  },
   "tracks": [
     {
       "id": "foundations",
@@ -35,28 +42,34 @@
       "id": "faith-foundations-1",
       "track": "foundations",
       "name": "Faith Foundations Pt. 1",
+      "match": ["Faith Foundations Pt 1", "Faith Foundations Part 1", "Faith Foundations Part I", "Faith Foundations 1", "Faith Foundations I"],
+      "ccbFormIds": [],
       "audience": "For new and growing disciples looking to be grounded in their identity and intimacy with Christ.",
       "topics": ["Salvation", "Faith", "Baptism", "The Holy Trinity", "Forgiveness"],
       "image": "",
-      "sessions": []
+      "fallbackSessions": []
     },
     {
       "id": "faith-foundations-2",
       "track": "foundations",
       "name": "Faith Foundations Pt. 2",
+      "match": ["Faith Foundations Pt 2", "Faith Foundations Part 2", "Faith Foundations Part II", "Faith Foundations 2", "Faith Foundations II"],
+      "ccbFormIds": [],
       "audience": "Picks up where Part I leaves off for new and growing disciples ready to build daily habits of faith.",
       "topics": ["Daily Devotion", "Dying to Self", "Financial Stewardship", "Servant Leadership"],
       "image": "",
-      "sessions": []
+      "fallbackSessions": []
     },
     {
       "id": "life-of-a-disciple",
       "track": "maturity",
       "name": "Life of a Disciple",
+      "match": ["Life of a Disciple"],
+      "ccbFormIds": [315],
       "audience": "For those seeking the spiritual discipline and maturity Christ calls His followers to.",
       "topics": ["Building on Salvation", "Daily Rhythms", "Operating in Faith", "Heart Posture", "Spiritual Warfare"],
       "image": "",
-      "sessions": [
+      "fallbackSessions": [
         {
           "label": "Spring 2026",
           "registrationCloses": "2026-04-28",
@@ -69,10 +82,12 @@
       "id": "life-more-abundantly",
       "track": "maturity",
       "name": "Life More Abundantly",
+      "match": ["Life More Abundantly"],
+      "ccbFormIds": [316],
       "audience": "For disciples seeking everyday evidence of God's power working in them and around them.",
       "topics": ["Discerning God's Voice", "Godly Relationships", "Healthy Thinking", "Financial Freedom", "Self-Discipline"],
       "image": "",
-      "sessions": [
+      "fallbackSessions": [
         {
           "label": "Spring 2026",
           "registrationCloses": "2026-05-05",
@@ -85,10 +100,12 @@
       "id": "sword-of-the-spirit",
       "track": "equipping",
       "name": "Sword of the Spirit",
+      "match": ["Sword of the Spirit"],
+      "ccbFormIds": [317],
       "audience": "For disciples who want to radically improve their understanding of God's Word.",
       "topics": ["How to Study Scripture", "Old and New Testament Connection", "The Power of the Word"],
       "image": "",
-      "sessions": [
+      "fallbackSessions": [
         {
           "label": "Fall 2026",
           "registrationCloses": "2026-09-15",
@@ -101,10 +118,12 @@
       "id": "work-of-an-evangelist",
       "track": "equipping",
       "name": "Work of an Evangelist",
+      "match": ["Work of an Evangelist", "Work of the Evangelist"],
+      "ccbFormIds": [318],
       "audience": "For disciples who are ready to take their faith to others.",
       "topics": ["Evangelism and Witnessing", "Witnessing Through Hardship", "Fulfilling God's Will"],
       "image": "",
-      "sessions": [
+      "fallbackSessions": [
         {
           "label": "Fall 2026",
           "registrationCloses": "2026-09-22",

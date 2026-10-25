@@ -9,9 +9,10 @@
 
 /* ============================================================
    EVOLVE CHURCH | DISCIPLESHIP TRAINING AND TEACHING
-   Class data lives in discipleshipClasses.json on GitHub Pages.
-   Open registration is shown automatically and expired
-   sessions drop off on their own. Prefix: dt-
+   Course content lives in discipleshipClasses.json on GitHub Pages.
+   Registration dates come live from CCB forms through the
+   evolve-discipleship Cloudflare Worker. Open forms show
+   automatically and expired ones drop off. Prefix: dt-
    ============================================================ */
 
 :root {
@@ -45,7 +46,8 @@ html, body { margin: 0; padding: 0; background: var(--dt-navy); }
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
-.dt-page h1, .dt-page h2, .dt-page h3, .dt-page h4, .dt-page p { margin: 0; }
+/* :where() keeps this reset at zero specificity so section margins (like margin: 0 auto) still apply */
+:where(.dt-page) :where(h1, h2, h3, h4, p) { margin: 0; }
 .dt-wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
 
 /* ── SHARED TYPE ───────────────────────────────────────── */
@@ -355,12 +357,13 @@ html, body { margin: 0; padding: 0; background: var(--dt-navy); }
   text-transform: uppercase;
 }
 .dt-verse-text span { color: var(--dt-teal); }
-.dt-verse-ref { font: 600 13px/1 var(--dt-display); letter-spacing: 0.32em; text-transform: uppercase; color: var(--dt-muted); }
+.dt-verse-ref { display: block; text-align: center; font: 600 13px/1 var(--dt-display); letter-spacing: 0.32em; text-transform: uppercase; color: var(--dt-muted); }
 .dt-verse-body { max-width: 620px; margin: 26px auto 0; font-size: 16px; line-height: 1.75; color: var(--dt-muted); }
 
 /* ── PATHWAY ───────────────────────────────────────────── */
 .dt-pathway { padding: 104px 0; background: var(--dt-navy); }
-.dt-pathway-head { margin-bottom: 56px; }
+.dt-pathway-head { margin-bottom: 56px; text-align: center; }
+.dt-pathway-head .dt-sub { margin: 0 auto; }
 .dt-track {
   display: grid; grid-template-columns: 270px 1fr; gap: 44px;
   padding: 46px 0;
@@ -554,7 +557,7 @@ html, body { margin: 0; padding: 0; background: var(--dt-navy); }
       <div class="dt-fact-sub">Foundations to equipping</div>
     </div>
     <div class="dt-fact dt-reveal">
-      <div class="dt-fact-big">6</div>
+      <div class="dt-fact-big" id="dt-course-count">6</div>
       <div class="dt-fact-label">Courses</div>
       <div class="dt-fact-sub">Built to grow with you</div>
     </div>
@@ -648,7 +651,7 @@ html, body { margin: 0; padding: 0; background: var(--dt-navy); }
 
   <!-- ── NEXT STEPS ───────────────────────────────────── -->
   <div class="dt-next">
-    <a class="dt-next-panel" href="https://www.evolvenation.org/discipleship-2" target="_top">
+    <a class="dt-next-panel" href="https://www.evolvenation.org/discipleship" target="_top">
       <span class="dt-label">Discipleship at Evolve</span>
       <h2 class="dt-next-title">Explore Every<br>Pathway</h2>
       <p class="dt-next-body">See all the ways to grow at Evolve, from Life Groups to ministries for men, college students, and more.</p>
@@ -697,6 +700,9 @@ setTimeout(sendHeight, 1000);
 
   /* ── CONFIG ─────────────────────────────────────────── */
   var DATA_URL = 'https://evolve2018.github.io/EvolveWebsite/discipleshipClasses.json';
+  var FORMS_URL = 'https://evolve-discipleship.chrisdawolo.workers.dev/';
+  var FORMS_TIMEOUT_MS = 6000;
+  var CCB_FORM_URL = 'https://evolvenation.ccbchurch.com/goto/forms/{id}/responses/new';
   var TIME_ZONE = 'America/Chicago';
   var FALLBACK_IMG = 'https://media.thechurchcoassets.com/accounts/5782/58ec6724-4280-4d9f-b0ff-89c52a96fcfd-imported-asset.jpg';
   var SOON_DAYS = 7;
@@ -767,31 +773,145 @@ setTimeout(sendHeight, 1000);
       'onerror="this.onerror=null;this.remove();">';
   }
 
+  /* ── FETCH WITH TIMEOUT ─────────────────────────────── */
+  function fetchJSON(url, timeoutMs) {
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctrl && timeoutMs ? setTimeout(function () { ctrl.abort(); }, timeoutMs) : null;
+    var sep = url.indexOf('?') === -1 ? '?' : '&';
+    return fetch(url + sep + 't=' + Date.now(), { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) {
+        if (timer) clearTimeout(timer);
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' from ' + url);
+        return r.json();
+      }, function (err) { if (timer) clearTimeout(timer); throw err; });
+  }
+
+  /* ── MATCH CCB FORMS TO COURSES ─────────────────────── */
+  function norm(s) {
+    return String(s || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function titleMatches(course, title) {
+    var t = ' ' + norm(title) + ' ';
+    var phrases = (course.match && course.match.length) ? course.match : [course.name];
+    return phrases.some(function (p) {
+      var n = norm(p);
+      return n && t.indexOf(' ' + n + ' ') !== -1;
+    });
+  }
+
+  function seasonLabel(iso) {
+    if (!isISO(iso)) return '';
+    var p = iso.split('-'), y = +p[0], m = +p[1];
+    if (m === 12) return 'Winter ' + (y + 1);
+    if (m <= 2) return 'Winter ' + y;
+    if (m <= 5) return 'Spring ' + y;
+    if (m <= 8) return 'Summer ' + y;
+    return 'Fall ' + y;
+  }
+
+  function isAvailable(status) {
+    var s = String(status || '').toLowerCase();
+    if (!s) return true;
+    return s.indexOf('avail') !== -1 && s.indexOf('not') === -1 && s.indexOf('unavail') === -1;
+  }
+
+  function formToSession(form, details) {
+    details = details || {};
+    return {
+      source: 'ccb',
+      formId: String(form.id),
+      label: details.label || seasonLabel(details.startDate || form.end || form.start),
+      registrationOpens: isISO(form.start) ? form.start : '',
+      registrationCloses: isISO(form.end) ? form.end : '',
+      startDate: details.startDate || '',
+      schedule: details.schedule || '',
+      format: details.format || '',
+      formUrl: CCB_FORM_URL.replace('{id}', encodeURIComponent(form.id)),
+      ccbStatus: form.status || '',
+      published: form.published !== false
+    };
+  }
+
+  /* Live CCB forms become each course's sessions. Without CCB, use fallbackSessions. */
+  function attachSessions(data, forms) {
+    var courses = data.courses || [];
+    var useLive = Array.isArray(forms);
+
+    courses.forEach(function (c) { c._sessions = []; });
+
+    if (!useLive) {
+      courses.forEach(function (c) { c._sessions = (c.fallbackSessions || c.sessions || []).slice(); });
+      return;
+    }
+
+    var ignore = (data.ignoreFormIds || []).map(String);
+    var details = data.formDetails || {};
+    var claimed = {};
+    var pool = forms.filter(function (f) { return f && f.id != null && ignore.indexOf(String(f.id)) === -1; });
+
+    /* Pass 1: explicit form ids win */
+    courses.forEach(function (c) {
+      var ids = (c.ccbFormIds || []).map(String);
+      pool.forEach(function (f) {
+        var id = String(f.id);
+        if (!claimed[id] && ids.indexOf(id) !== -1) {
+          claimed[id] = true;
+          c._sessions.push(formToSession(f, details[id]));
+        }
+      });
+    });
+
+    /* Pass 2: match remaining forms by title, so new CCB forms show up on their own */
+    pool.forEach(function (f) {
+      var id = String(f.id);
+      if (claimed[id]) return;
+      for (var i = 0; i < courses.length; i++) {
+        if (titleMatches(courses[i], f.title)) {
+          claimed[id] = true;
+          courses[i]._sessions.push(formToSession(f, details[id]));
+          break;
+        }
+      }
+    });
+  }
+
   /* ── CLASSIFY SESSIONS ──────────────────────────────── */
   function classify(data, today) {
     var tracks = {};
     (data.tracks || []).forEach(function (t) { tracks[t.id] = t; });
 
     var open = [], upcoming = [], byCourse = {};
+    var maxOpenEnded = +data.openEndedMaxDays || 120;
 
     (data.courses || []).forEach(function (course) {
-      (course.sessions || []).forEach(function (s) {
-        if (!s || s.hidden) return;
-        if (!isISO(s.registrationCloses) || !s.formUrl) return;
-        if (today > s.registrationCloses) return;              /* expired: drop it */
+      (course._sessions || []).forEach(function (s) {
+        if (!s || s.hidden || !s.formUrl) return;
+        if (s.published === false) return;
+
+        var opens = isISO(s.registrationOpens) ? s.registrationOpens : '';
+        var closes = isISO(s.registrationCloses) ? s.registrationCloses : '';
+
+        if (closes && today > closes) return;                  /* expired: drop it */
+        if (!closes && s.source !== 'ccb') return;              /* manual sessions need a deadline */
 
         var item = { course: course, session: s, track: tracks[course.track] || null };
 
-        if (isISO(s.registrationOpens) && today < s.registrationOpens) {
+        if (opens && today < opens) {
           item.state = 'upcoming';
-          item.daysUntil = daysBetween(today, s.registrationOpens);
+          item.daysUntil = daysBetween(today, opens);
           upcoming.push(item);
         } else {
+          if (s.source === 'ccb' && !isAvailable(s.ccbStatus)) return;   /* full, disabled, or closed in CCB */
+          if (!closes) {
+            /* No end date in CCB: keep it open for a limited time after it started */
+            if (!opens || daysBetween(opens, today) > maxOpenEnded) return;
+            item.openEnded = true;
+          } else {
+            item.daysLeft = daysBetween(today, closes);
+            item.windowDays = opens ? Math.max(1, daysBetween(opens, closes)) : 30;
+          }
           item.state = 'open';
-          item.daysLeft = daysBetween(today, s.registrationCloses);
-          item.windowDays = isISO(s.registrationOpens)
-            ? Math.max(1, daysBetween(s.registrationOpens, s.registrationCloses))
-            : 30;
           open.push(item);
         }
 
@@ -800,7 +920,11 @@ setTimeout(sendHeight, 1000);
       });
     });
 
-    open.sort(function (a, b) { return a.session.registrationCloses < b.session.registrationCloses ? -1 : 1; });
+    open.sort(function (a, b) {
+      var ac = a.session.registrationCloses || '9999-12-31';
+      var bc = b.session.registrationCloses || '9999-12-31';
+      return ac < bc ? -1 : ac > bc ? 1 : 0;
+    });
     upcoming.sort(function (a, b) { return a.session.registrationOpens < b.session.registrationOpens ? -1 : 1; });
 
     return { tracks: tracks, open: open, upcoming: upcoming, byCourse: byCourse };
@@ -831,6 +955,7 @@ setTimeout(sendHeight, 1000);
 
   /* ── RENDER: OPEN CARDS ─────────────────────────────── */
   function countdownHTML(item) {
+    if (item.openEnded) return '';
     var d = item.daysLeft, label, cls = '';
     if (d <= 0) { label = 'Last day to register'; cls = 'is-final'; }
     else if (d === 1) { label = 'Closes tomorrow'; cls = 'is-final'; }
@@ -843,16 +968,22 @@ setTimeout(sendHeight, 1000);
 
   function openCardHTML(item) {
     var c = item.course, s = item.session;
-    var rows = '<li><span>Register By</span><strong>' + esc(fmtDate(s.registrationCloses, true)) + '</strong></li>';
+    var rows = item.openEnded
+      ? '<li><span>Registration</span><strong>Open now</strong></li>'
+      : '<li><span>Register By</span><strong>' + esc(fmtDate(s.registrationCloses, true)) + '</strong></li>';
     if (isISO(s.startDate)) rows += '<li><span>Classes Begin</span><strong>' + esc(fmtDate(s.startDate, true)) + '</strong></li>';
     if (s.schedule) rows += '<li><span>When</span><strong>' + esc(s.schedule) + '</strong></li>';
     rows += '<li><span>Format</span><strong>' + esc(s.format || 'In person or virtual') + '</strong></li>';
 
-    var cal = calendarLink(
-      'Register for ' + c.name,
-      s.registrationCloses,
-      'Last day to register for ' + c.name + ' at Evolve Church.\n' + s.formUrl
-    );
+    var calLink = '';
+    if (!item.openEnded) {
+      var cal = calendarLink(
+        'Register for ' + c.name,
+        s.registrationCloses,
+        'Last day to register for ' + c.name + ' at Evolve Church.\n' + s.formUrl
+      );
+      calLink = '<a class="dt-textlink" href="' + esc(cal) + '" target="_blank" rel="noopener">Add Deadline to Calendar</a>';
+    }
 
     return '' +
       '<article class="dt-card dt-reveal" id="dt-card-' + esc(c.id) + '">' +
@@ -868,7 +999,7 @@ setTimeout(sendHeight, 1000);
           countdownHTML(item) +
           '<div class="dt-card-actions">' +
             '<a class="dt-btn dt-btn-primary" href="' + esc(s.formUrl) + '" target="_blank" rel="noopener">Register Now</a>' +
-            '<a class="dt-textlink" href="' + esc(cal) + '" target="_blank" rel="noopener">Add Deadline to Calendar</a>' +
+            calLink +
           '</div>' +
         '</div>' +
       '</article>';
@@ -1044,9 +1175,25 @@ setTimeout(sendHeight, 1000);
     observeReveals();
     var today = todayISO();
 
-    fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(function (data) {
+    var liveForms = fetchJSON(FORMS_URL, FORMS_TIMEOUT_MS)
+      .then(function (res) {
+        if (!res || !Array.isArray(res.forms)) throw new Error('Unexpected forms response');
+        return res.forms;
+      })
+      .catch(function (err) {
+        if (window.console) console.warn('[discipleship] live CCB dates unavailable, using fallback', err);
+        return null;
+      });
+
+    Promise.all([fetchJSON(DATA_URL, 10000), liveForms])
+      .then(function (both) {
+        var data = both[0], forms = both[1];
+        attachSessions(data, forms);
+        document.documentElement.setAttribute('data-dt-source', forms ? 'ccb-live' : 'fallback');
+        if (window.console) console.info('[discipleship] dates source: ' + (forms ? 'CCB live (' + forms.length + ' forms)' : 'fallback JSON'));
+
+        if (data.courses && data.courses.length) $('dt-course-count').textContent = data.courses.length;
+
         var result = classify(data, today);
         renderHero(result);
         renderOpen(result);

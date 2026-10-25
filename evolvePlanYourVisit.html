@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Plan Your Visit Evolve Church</title>
+<title>Plan Your Visit — Evolve Church</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
@@ -984,7 +984,7 @@ footer{
               <button class="time-card time-card-btn" onclick="openCalPicker(9, 0, this)">
                 <div class="tc-day">Sunday Morning</div>
                 <div class="tc-time">9:00 AM</div>
-                <div class="tc-note">Doors open at 8:30 AM</div>
+                <div class="tc-note">Doors open at 8:45 AM</div>
                 <div class="tc-cal-hint">Tap to add to calendar</div>
               </button>
               <button class="time-card time-card-btn" onclick="openCalPicker(10, 30, this)">
@@ -1167,12 +1167,12 @@ footer{
             <div class="chat-avatar">E</div>
             <div class="chat-header-info">
               <h4>Evolve Assistant</h4>
-              <p><span class="online-dot"></span> Online — ready to help</p>
+              <p><span class="online-dot"></span> <span id="chat-status-text">Online — ready to help</span></p>
             </div>
           </div>
           <div class="chat-messages" id="chat-messages">
             <div class="msg msg-bot">
-              <div class="msg-bubble">Hey! 👋 Welcome to Evolve. I'm here to answer any questions you have about visiting. What's on your mind?</div>
+              <div class="msg-bubble">Welcome to Evolve! I'm here to answer any questions about visiting, our services, or getting connected. What would you like to know?</div>
               <div class="msg-time">Just now</div>
             </div>
           </div>
@@ -1354,7 +1354,7 @@ const KB = {
   },
   services: {
     times: ["9:00 AM", "10:30 AM", "12:00 PM"],
-    doors: ["8:30 AM", "10:00 AM", "11:30 AM"],
+    doors: ["8:45 AM", "10:00 AM", "11:30 AM"], // Doors open 15 minutes before each service
     length: "about 75 minutes",
     identical: true,
     online: "Both live streamed at <a href=\"index.html\">evolvenation.org</a> — no signup required"
@@ -1439,7 +1439,7 @@ function buildReply(msg) {
 
   // ── Times / Services ──
   if (/\b(time|times|when|schedule|service|services|sunday|start|begin|hour|9|10:?30|12|noon|am|pm)\b/.test(m) && !/baptism|communion/.test(m)) {
-    return `We have three identical Sunday services — <strong>9:00 AM</strong>, <strong>10:30 AM</strong>, and <strong>12:00 PM</strong>. Doors open 30 minutes before each. Every service is the same worship and message, so pick whichever fits your schedule best! Each runs about 75 minutes.`;
+    return `We have three identical Sunday services — <strong>9:00 AM</strong>, <strong>10:30 AM</strong>, and <strong>12:00 PM</strong>. Doors open 15 minutes before each. Every service is the same worship and message, so pick whichever fits your schedule best! Each runs about 75 minutes.`;
   }
 
   // ── Online / Stream ──
@@ -1566,11 +1566,169 @@ function buildReply(msg) {
   return `Great question! I want to make sure you get the right answer. For details on that, your best bet is to visit <a href="https://evolvenation.org" target="_blank" style="color:var(--teal)">evolvenation.org</a> or email us directly at <a href="mailto:info@evolvenation.org" style="color:var(--teal)">info@evolvenation.org</a> — our team responds quickly and would love to help!`;
 }
 
+// ══════════════════════════════════════════════════════════════════
+//  GEMINI AI CONFIGURATION
+//  1. Get a free API key → https://aistudio.google.com/app/apikey
+//  2. Restrict it to domains: evolvenation.org & evolve2018.github.io
+//     (Google Cloud Console → API Restrictions → HTTP referrers)
+//  3. Paste key below replacing YOUR_GEMINI_API_KEY_HERE
+// ══════════════════════════════════════════════════════════════════
+const GEMINI_API_KEY = 'GEMINI_API_KEY';
+
+const GEMINI_SYSTEM = `You are an official AI assistant for Evolve Church in Milwaukee, Wisconsin. You help people plan their first visit and answer questions about the church. Be warm, genuine, and direct — avoid hollow openers like "Great question!" or filler phrases. Get right to the helpful answer.
+
+CHURCH DETAILS:
+- Name: Evolve Church (evolvenation.org)
+- Location: Milwaukee, Wisconsin
+- Contact: info@evolvenation.org
+
+SERVICE TIMES (every Sunday, three identical services):
+- 9:00 AM — Doors open 8:45 AM
+- 10:30 AM — General service
+- 12:00 PM — Noon service
+Each service runs approximately 75 minutes with the same worship and message.
+
+PARKING & ARRIVAL:
+- Free on-site parking with a parking team to guide you
+- Reserved "First Time Guest" spots near the entrance
+- ADA-accessible facility
+- Recommend arriving 10–15 minutes early on first visit
+
+EVOLVE KIDS (birth–5th grade, all services):
+- Nursery (birth–age 2)
+- Preschool (ages 3–5)
+- Lower Elementary (K–2nd grade)
+- Upper Elementary (3rd–5th grade)
+- Parents receive a pickup tag for secure child pickup
+
+EVOLVE STUDENTS: Middle and high school ministry. See evolvenation.org for event times.
+
+YOUNG ADULTS: Active young adult ministry. Details at evolvenation.org.
+
+SMALL GROUPS: Mid-week small groups throughout Milwaukee. Great for connection and community.
+
+WORSHIP STYLE: Contemporary Christian worship — live band with vocalists. Casual and engaging atmosphere. Dress code: come as you are.
+
+THEOLOGY & BELIEFS:
+- Non-denominational Christian church
+- Believe in the authority of Scripture, the Trinity (Father, Son, Holy Spirit), salvation by grace through faith in Jesus Christ
+- Welcoming and inclusive community — everyone is accepted where they are in their journey
+- Not affiliated with a specific denomination
+
+BAPTISM: Believer's baptism by immersion. Contact info@evolvenation.org or speak to a team member after service to learn more.
+
+COMMUNION: Celebrated regularly during services. Open communion — all are welcome to participate.
+
+FIRST VISIT EXPERIENCE (in order):
+1. Parking & Welcome — greeted by parking team, then door greeters
+2. Coffee Bar — free coffee and light refreshments in the lobby
+3. Worship — 20–25 minutes of live contemporary music
+4. Message — relevant, practical teaching from Scripture (~35–40 min)
+5. Connect Table — after service; meet the team, ask questions, get connected
+
+MENS MINISTRY — The Cave of a Thousand Men:
+A brotherhood built on authentic faith, accountability, and purpose. Men gather to grow together and be real with each other. For meeting times, visit evolvenation.org or ask at the Connect Table.
+
+WOMENS MINISTRY:
+Community events, Bible studies, and spaces for women to grow together in faith. Visit evolvenation.org for details.
+
+FORTIFY (Young Adults / Students discipleship program):
+A discipleship and leadership development program. Check evolvenation.org for the current schedule.
+
+BUS SERVICE / TRANSPORTATION: Evolve provides a bus service to help people get to church. Contact info@evolvenation.org for routes and pickup information.
+
+SPHI (Spiritual & Personal Health Initiative): A ministry focused on holistic wellness — spiritual, emotional, and mental health. The church takes mental health seriously and provides resources and support.
+
+GRIEF & MENTAL HEALTH: Evolve has pastoral care and resources for those going through grief, loss, or mental health challenges. Reach out at info@evolvenation.org to connect with someone.
+
+PRAYER: Submit prayer requests at evolvenation.org or speak to a team member after any service.
+
+GIVING: Via Pushpay (online), in-person offering during service, or text-to-give. First-time guests are NEVER pressured to give.
+
+VOLUNTEER: Opportunities available in kids ministry, parking, greeting, worship, tech/media, and more. Ask at the Connect Table or visit evolvenation.org.
+
+PASTORS & LEADERSHIP: For specific pastor information, direct the person to evolvenation.org/about or the Connect Table after service.
+
+DRESS CODE: No dress code. Come as you are — jeans, casual clothes, anything goes.
+
+WHAT TO EXPECT AS A FIRST-TIME GUEST:
+- No one will single you out or ask you to stand up and introduce yourself
+- You won't be asked to give
+- The service is welcoming, energetic, and authentic
+- Kids ministry is available so the whole family can participate
+
+If a question is outside your knowledge, direct them to info@evolvenation.org or evolvenation.org. Never make up information. Keep answers concise and human — like a knowledgeable church member helping a friend, not a brochure.`;
+
+// Conversation history for multi-turn context (Gemini format)
 const chatHistory = [];
 
 async function getReply(userMsg) {
-  // Small simulated delay for natural feel
-  await new Promise(r => setTimeout(r, 700 + Math.random() * 500));
+  // Try Gemini API first if a real key is set
+  if (GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE') {
+    try {
+      // Build the contents array: system prompt as first user turn (Gemini pattern),
+      // then the conversation history, then the current message
+      const contents = [];
+
+      // Inject system context as a preamble user/model exchange so it has context
+      contents.push({ role: 'user', parts: [{ text: GEMINI_SYSTEM + '\n\n---\nBeginning of conversation.' }] });
+      contents.push({ role: 'model', parts: [{ text: 'Understood. I\'m ready to help visitors learn about Evolve Church. How can I help you?' }] });
+
+      // Add conversation history (last 8 turns max to keep tokens reasonable)
+      const historySlice = chatHistory.slice(-8);
+      for (const turn of historySlice) {
+        contents.push(turn);
+      }
+
+      // Add the new user message
+      contents.push({ role: 'user', parts: [{ text: userMsg }] });
+
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents,
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 500,
+              topP: 0.9
+            },
+            safetySettings: [
+              { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
+              { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' }
+            ]
+          })
+        }
+      );
+
+      if (!res.ok) throw new Error(`Gemini API error: ${res.status}`);
+      const data = await res.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) throw new Error('Empty Gemini response');
+
+      // Save to history for multi-turn context
+      chatHistory.push({ role: 'user', parts: [{ text: userMsg }] });
+      chatHistory.push({ role: 'model', parts: [{ text }] });
+
+      // Keep history manageable (max 20 turns)
+      if (chatHistory.length > 20) chatHistory.splice(0, 2);
+
+      // Convert any markdown bold (**text**) to HTML <strong>
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\n/g, '<br><br>')
+        .replace(/\n/g, ' ');
+
+    } catch (err) {
+      console.warn('Gemini API unavailable, using local engine:', err.message);
+      // Fall through to local engine below
+    }
+  }
+
+  // Local fallback engine (always works, no API key required)
+  await new Promise(r => setTimeout(r, 650 + Math.random() * 400));
   return buildReply(userMsg);
 }
 
@@ -1603,6 +1761,19 @@ function hideTyping() {
   if (t) t.remove();
 }
 
+// Update chat status label based on API key presence
+(function initChatStatus() {
+  window.addEventListener('DOMContentLoaded', function() {
+    const el = document.getElementById('chat-status-text');
+    if (!el) return;
+    if (GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE') {
+      el.textContent = 'Live AI — ask me anything';
+    } else {
+      el.textContent = 'Online — ready to help';
+    }
+  });
+})();
+
 async function sendMessage() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
@@ -1610,6 +1781,11 @@ async function sendMessage() {
   input.value = '';
   input.disabled = true;
   document.querySelector('.chat-send').disabled = true;
+
+  // Hide quick replies after first use
+  const qr = document.getElementById('quick-replies');
+  if (qr) qr.style.display = 'none';
+
   await addMsg(text, false);
   showTyping();
   try {

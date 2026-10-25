@@ -1,9 +1,6 @@
-<!-- ============================================================
-     EVOLVE CHURCH — GRIEVING MINISTRY ("Have You Lost Someone?")
-     Self-contained TCC Custom HTML fragment.
-     No <html>/<body> wrappers · no position:fixed/sticky · no 100vh.
-     iFrame height reported via egmSendHeight() (ResizeObserver).
-     ============================================================ -->
+<!-- Evolve Church — Grieving Ministry ("Have You Lost Someone?")
+     TCC Custom HTML fragment. No html/body wrappers, no fixed/sticky, no 100vh.
+     Global sendHeight() reports iframe height and is shared with evolveFooter.js. -->
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
@@ -75,6 +72,7 @@
 .egm-script{
   font-family:var(--font-accent);
   color:var(--teal);
+  font-weight:300;
   font-size:clamp(2rem,6vw,3.4rem);
   line-height:1;
   display:block;
@@ -106,8 +104,8 @@
   letter-spacing:.14em;
   font-weight:600;
   font-size:.98rem;
-  padding:15px 30px;
-  border-radius:2px;
+  padding:15px 32px;
+  border-radius:999px;
   text-decoration:none;
   display:inline-flex;align-items:center;gap:10px;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
@@ -189,7 +187,7 @@
   gap:22px;margin-top:44px;
 }
 .egm-card{
-  background:var(--card);border:1px solid var(--card-brd);border-radius:6px;
+  background:var(--card);border:1px solid var(--card-brd);border-radius:12px;
   padding:34px 30px;position:relative;overflow:hidden;
   transition:transform .3s ease,border-color .3s ease,background .3s ease;
 }
@@ -200,32 +198,19 @@
 }
 .egm-card:hover{transform:translateY(-4px);border-color:var(--line);background:rgba(255,255,255,.055);}
 .egm-card:hover::before{opacity:1;}
-.egm-card__icon{
-  width:52px;height:52px;border-radius:12px;margin-bottom:20px;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(66,185,210,.10);border:1px solid var(--line);color:var(--teal);
-}
-.egm-card__icon svg{width:26px;height:26px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .egm-card h3{
   font-family:var(--font-display);text-transform:uppercase;letter-spacing:.03em;
-  font-size:1.34rem;font-weight:600;margin-bottom:12px;
+  font-size:1.34rem;font-weight:600;margin-bottom:12px;color:var(--ink);
 }
 .egm-card p{font-size:.96rem;color:var(--muted);line-height:1.6;}
 
-/* ---------- WELCOME HERE (reassurance) ---------- */
+/* ---------- THINGS TO KNOW (reassurance) ---------- */
 .egm-assure{
   background:linear-gradient(180deg, rgba(13,58,69,.35), rgba(7,31,40,.15));
-  border:1px solid var(--line);border-radius:10px;padding:50px clamp(26px,5vw,54px);
+  border:1px solid var(--line);border-radius:14px;padding:50px clamp(26px,5vw,54px);
 }
 .egm-assure__grid{display:grid;grid-template-columns:1fr 1fr;gap:30px 46px;margin-top:34px;}
-.egm-assure__item{display:flex;gap:16px;align-items:flex-start;}
-.egm-assure__check{
-  flex:0 0 auto;width:30px;height:30px;border-radius:50%;
-  background:rgba(66,185,210,.12);border:1px solid var(--line);color:var(--teal);
-  display:flex;align-items:center;justify-content:center;margin-top:2px;
-}
-.egm-assure__check svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-.egm-assure__item h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;font-size:1.16rem;font-weight:600;margin-bottom:5px;}
+.egm-assure__item h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.04em;font-size:1.16rem;font-weight:600;margin-bottom:6px;color:var(--teal);}
 .egm-assure__item p{font-size:.94rem;color:var(--muted);}
 
 /* ---------- REACH OUT ---------- */
@@ -237,15 +222,13 @@
 }
 .egm-reach .egm-lead{margin:0 auto 34px;color:var(--ink);}
 .egm-contact{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;margin-top:36px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px;margin-top:36px;
   font-family:var(--font-display);letter-spacing:.05em;
 }
 .egm-contact a,.egm-contact span{
-  color:var(--muted);text-decoration:none;font-size:1.02rem;
-  display:inline-flex;align-items:center;gap:9px;transition:color .25s;
+  color:var(--muted);text-decoration:none;font-size:1.02rem;transition:color .25s;
 }
 .egm-contact a:hover{color:var(--teal);}
-.egm-contact svg{width:17px;height:17px;stroke:var(--teal);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
 /* ---------- REVEAL ---------- */
 .egm-reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease;}
@@ -279,9 +262,9 @@
       <div class="egm-eyebrow">Grieving Ministry</div>
       <span class="egm-script">You don't have to</span>
       <h1>Walk Through Grief Alone</h1>
-      <p>Loss changes everything. Whether it happened last week or years ago, there is a place for you here — to be seen, to be held, and to heal at your own pace.</p>
+      <p>Loss changes everything. Whether it happened last week or years ago, you are welcome here, and you can grieve at your own pace.</p>
       <div class="egm-cta-row">
-        <a class="egm-btn egm-btn--solid" href="https://evolvenation.ccbchurch.com/goto/forms/348/responses/new">Reach Out for Support</a>
+        <a class="egm-btn egm-btn--solid" href="https://evolvenation.ccbchurch.com/goto/forms/348/responses/new" target="_top">Reach Out for Support</a>
         <a class="egm-btn egm-btn--ghost" href="#egm-support">See How We Help</a>
       </div>
     </div>
@@ -291,13 +274,13 @@
   <section class="egm-section">
     <div class="egm-wrap egm-welcome egm-reveal">
       <div class="egm-kicker">You Are Welcome Here</div>
-      <h2 class="egm-h2">Grief Is Not Something to Get Over — It's Something to Walk Through</h2>
-      <p class="egm-lead">There is no timeline, no right way, and no expiration date on grief. At Evolve, our Grieving Ministry exists to come alongside anyone who has lost someone they love — a spouse, a child, a parent, a friend — and to remind you that you were never meant to carry it by yourself.</p>
-      <p class="egm-lead">We won't rush you. We won't hand you easy answers. We'll simply walk with you, pray with you, and make space for both your tears and your memories, for as long as you need.</p>
+      <h2 class="egm-h2">Grief Takes Time, and You Don't Have to Face It Alone</h2>
+      <p class="egm-lead">Everyone grieves differently, and there's no set timeline for it. Our Grieving Ministry is here for anyone who has lost someone they love, whether that's a spouse, a child, a parent, or a friend. You were never meant to carry that weight by yourself.</p>
+      <p class="egm-lead">We won't rush you or pretend to have all the answers. We'll listen, pray with you, and give you room to grieve for as long as you need.</p>
     </div>
   </section>
 
-  <!-- ===== COMFORT VERSE ROTATOR ===== -->
+  <!-- ===== COMFORT VERSE ===== -->
   <section class="egm-verse" aria-label="Words of comfort">
     <div class="egm-wrap egm-verse__inner">
       <div class="egm-candle" aria-hidden="true"></div>
@@ -315,13 +298,13 @@
       <div class="egm-reveal">
         <div class="egm-kicker">How We Walk With You</div>
         <h2 class="egm-h2">Ways We Come Alongside You</h2>
-        <p class="egm-lead">Everyone grieves differently, so support looks different from person to person. Here are some of the ways our church family is ready to walk with you.</p>
+        <p class="egm-lead">Everyone grieves differently. Here are some of the ways our church family is ready to walk with you.</p>
       </div>
       <div class="egm-grid" id="egmCards"></div>
     </div>
   </section>
 
-  <!-- ===== WHAT TO EXPECT / REASSURANCE ===== -->
+  <!-- ===== THINGS TO KNOW ===== -->
   <section class="egm-section--tight">
     <div class="egm-wrap egm-reveal">
       <div class="egm-assure">
@@ -338,56 +321,65 @@
     <div class="egm-wrap egm-reveal">
       <div class="egm-kicker" style="justify-content:center;">We're Here for You</div>
       <h2 class="egm-h2">Let Us Walk With You</h2>
-      <p class="egm-lead">You don't need the right words. Just reach out however feels easiest, and someone from our care team will gently follow up.</p>
+      <p class="egm-lead">You don't need to have the right words. Reach out in whatever way is easiest, and someone from our care team will follow up with you.</p>
       <div class="egm-cta-row" style="justify-content:center;">
-        <a class="egm-btn egm-btn--solid" href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new">Fill Out a Connect Card</a>
-        <a class="egm-btn egm-btn--ghost" href="mailto:info@evolvenation.org?subject=Grieving%20Ministry%20—%20I'd%20like%20support">Email Our Care Team</a>
+        <a class="egm-btn egm-btn--solid" href="https://evolvenation.ccbchurch.com/goto/forms/37/responses/new" target="_top">Fill Out a Connect Card</a>
+        <a class="egm-btn egm-btn--ghost" href="mailto:info@evolvenation.org?subject=Grieving%20Ministry%20Support">Email Our Care Team</a>
       </div>
-      <div class="egm-contact">
-        <a href="tel:14145104131">
-
-          414-510-4131
-        </a>
-        <a href="mailto:info@evolvenation.org">
-
-          info@evolvenation.org
-        </a>
-        <span>
-
-          6550 N 76th St, Milwaukee WI 53223
-        </span>
-      </div>
+      <!-- <div class="egm-contact">
+        <a href="tel:14145104131">414-510-4131</a>
+        <a href="mailto:info@evolvenation.org">info@evolvenation.org</a>
+        <span>6550 N 76th St, Milwaukee WI 53223</span>
+      </div> -->
     </div>
   </section>
 
 </div>
+
+<!-- shared site footer -->
+<div id="evolve-footer-mount"></div>
+
+<script>
+  /* iframe height reporting — global so evolveFooter.js can call it */
+  function sendHeight(){
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type:'iframeHeight', height:h }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  setTimeout(sendHeight, 300);
+  setTimeout(sendHeight, 1000);
+  if('ResizeObserver' in window){
+    new ResizeObserver(sendHeight).observe(document.body);
+  }
+</script>
 
 <script>
 (function(){
   var root = document.querySelector('.egm-root');
   if(!root) return;
 
-  /* ---------- DATA: single source of truth ---------- */
+  /* ---------- Content data ---------- */
   var SUPPORT = [
     { title:'Grief Support Groups',
-      body:'A safe, confidential circle of people walking a similar road, where you can share as much or as little as you like.' },
+      body:'A small, confidential group of people who understand what you\u2019re going through, where you can share as much or as little as you want.' },
     { title:'One-on-One Care',
-      body:'A caring person to sit with you, listen without judgment, and simply be present in the hard moments.' },
+      body:'Someone to sit with you, listen without judgment, and be there through the hard moments.' },
     { title:'Prayer Covering',
-      body:'Our prayer team will lift you and your loved ones up by name, carrying you when you have no words left.' },
+      body:'Our prayer team will pray for you and your family by name, especially when you don\u2019t have the words yourself.' },
     { title:'Practical Support',
-      body:'From a meal to a phone call to a helping hand, practical love for the seasons when everyday life feels like too much.' },
+      body:'Help with the everyday things, like a meal or a ride, during the stretches when ordinary life feels like too much.' },
     { title:'Remembrance',
-      body:'Space to honor and remember the ones we\u2019ve lost \u2014 because love, and memory, do not end.' },
+      body:'A place to honor and remember the people we\u2019ve lost, and to keep their memory alive.' },
     { title:'Ongoing Community',
-      body:'Grief is a long road. Our Life Groups and church family are here for the whole journey, not just the first week.' }
+      body:'Grief lasts far longer than the first few weeks. Our Life Groups and church family will stay with you well beyond that.' }
   ];
 
   var ASSURE = [
-    { title:'No Pressure, Ever', body:'Come as you are, share what you want, and stop whenever you need to. This is your pace, not ours.' },
-    { title:'Held in Confidence', body:'What you share with our care team stays with our care team. Trust is where healing begins.' },
-    { title:'No Faith Requirements', body:'You don\u2019t need to have it all figured out spiritually. Wherever you are, you\u2019re welcome.' },
-    { title:'A Real Person Follows Up', body:'When you reach out, someone from our team will personally and gently connect with you \u2014 not a form letter.' }
+    { title:'No Pressure, Ever', body:'Come as you are and share only what you want to. You set the pace.' },
+    { title:'Held in Confidence', body:'Anything you share with our care team stays private.' },
+    { title:'No Faith Requirements', body:'You don\u2019t need to have your faith all figured out. Wherever you\u2019re at, you\u2019re welcome here.' },
+    { title:'A Real Person Follows Up', body:'When you reach out, someone from our care team will personally follow up with you.' }
   ];
 
   var VERSES = [
@@ -397,34 +389,30 @@
     { text:'He will wipe every tear from their eyes; there will be no more death or mourning.', ref:'Revelation 21:4' }
   ];
 
-  /* ---------- RENDER: support cards ---------- */
+  /* ---------- Render: support cards ---------- */
   var cardsEl = document.getElementById('egmCards');
   if(cardsEl){
     cardsEl.innerHTML = SUPPORT.map(function(s){
-      return '<div class="egm-card egm-reveal">'
-        + '<h3>'+s.title+'</h3>'
-        + '<p>'+s.body+'</p>'
-        + '</div>';
+      return '<div class="egm-card egm-reveal"><h3>'+s.title+'</h3><p>'+s.body+'</p></div>';
     }).join('');
   }
 
-  /* ---------- RENDER: assurance items ---------- */
+  /* ---------- Render: things to know ---------- */
   var assureEl = document.getElementById('egmAssure');
   if(assureEl){
     assureEl.innerHTML = ASSURE.map(function(a){
-      return '<div class="egm-assure__item">'
-        + '<div><h4>'+a.title+'</h4><p>'+a.body+'</p></div>'
-        + '</div>';
+      return '<div class="egm-assure__item"><h4>'+a.title+'</h4><p>'+a.body+'</p></div>';
     }).join('');
   }
 
-  /* ---------- COMFORT VERSE ROTATOR (fixed-height, no frame jitter) ---------- */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Comfort verse rotator (fixed height, no frame jitter) ---------- */
   var vText = document.getElementById('egmVerseText');
   var vRef  = document.getElementById('egmVerseRef');
   var vWrap = document.querySelector('.egm-verse');
   var vDots = document.getElementById('egmVerseDots');
   var vIdx = 0, vTimer = null;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if(vText && vRef && vDots){
     vDots.innerHTML = VERSES.map(function(_,i){
@@ -434,8 +422,7 @@
     function paint(i){
       vText.textContent = VERSES[i].text;
       vRef.textContent  = VERSES[i].ref;
-      var dots = vDots.querySelectorAll('button');
-      dots.forEach(function(d,di){ d.classList.toggle('on', di===i); });
+      vDots.querySelectorAll('button').forEach(function(d,di){ d.classList.toggle('on', di===i); });
       vIdx = i;
     }
     function go(i){
@@ -457,7 +444,7 @@
     start();
   }
 
-  /* ---------- REVEAL ON SCROLL ---------- */
+  /* ---------- Reveal on scroll ---------- */
   var reveals = root.querySelectorAll('.egm-reveal');
   if('IntersectionObserver' in window && !reduce){
     var io = new IntersectionObserver(function(entries){
@@ -470,28 +457,14 @@
     reveals.forEach(function(el){ el.classList.add('egm-in'); });
   }
 
-  /* ---------- TCC iFRAME HEIGHT REPORTER ---------- */
-  function egmSendHeight(){
-    var h = Math.ceil(root.scrollHeight);
-    // multiple channel names for compatibility with TCC embed listeners
-    try{ window.parent.postMessage({ type:'evolve-embed-height', height:h }, '*'); }catch(e){}
-    try{ window.parent.postMessage({ height:h }, '*'); }catch(e){}
-    try{ window.parent.postMessage('height:'+h, '*'); }catch(e){}
+  /* ---------- Height nudges after render / image load ---------- */
+  if(typeof sendHeight === 'function'){
+    sendHeight();
+    var heroImg = root.querySelector('.egm-hero__img');
+    if(heroImg && !heroImg.complete){ heroImg.addEventListener('load', sendHeight); }
+    setTimeout(sendHeight, 900);
   }
-  window.addEventListener('load', function(){ egmSendHeight(); setTimeout(egmSendHeight, 400); });
-  window.addEventListener('resize', egmSendHeight);
-  var heroImg = root.querySelector('.egm-hero__img');
-  if(heroImg){
-    if(heroImg.complete) egmSendHeight();
-    else heroImg.addEventListener('load', egmSendHeight);
-  }
-  if('ResizeObserver' in window){
-    var ro = new ResizeObserver(function(){ egmSendHeight(); });
-    ro.observe(root);
-  }
-  // reveal transitions can nudge layout; re-report shortly after they run
-  setTimeout(egmSendHeight, 900);
-  setTimeout(egmSendHeight, 1800);
-  egmSendHeight();
 })();
 </script>
+
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js?v=2"></script>
