@@ -1,0 +1,1249 @@
+<!-- ============================================================
+     Evolve Community · Single Parent Housing Initiative
+     Donor & Partner page (prospectus theme)
+     Fragment for GitHub Pages + TCC iframe embed. Class prefix: sph-
+     ============================================================ -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+.sph{
+  --ink:#1b201e;
+  --ink-2:#252d2a;
+  --ink-3:#2b3431;
+  --green:#2d4a3e;
+  --green-2:#365a4b;
+  --gold:#c89a3c;
+  --gold-2:#ddb25a;
+  --cream:#f5f2ec;
+  --white:#ffffff;
+  --muted:#6f716c;
+  --sage:#7d978a;
+  --sage-2:#a9bbb1;
+  --line:#e8e1d2;
+  --shadow:0 10px 30px rgba(27,32,30,.08), 0 2px 6px rgba(27,32,30,.05);
+  --shadow-lg:0 24px 60px rgba(27,32,30,.16), 0 6px 16px rgba(27,32,30,.08);
+  font-family:'Inter',Helvetica,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.5;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+.sph *,.sph *::before,.sph *::after{box-sizing:border-box}
+.sph img,.sph svg{display:block}
+.sph a{color:inherit}
+.sph button{font-family:inherit}
+
+.sph-wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.sph-sec{padding:104px 0;position:relative}
+.sph-white{background:var(--white)}
+.sph-cream{background:var(--cream)}
+.sph-dark{background:var(--ink);color:#fff}
+.sph-forest{background:var(--green);color:#fff}
+
+.sph-eyebrow{font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.sph-h2{font-size:clamp(30px,4.3vw,50px);font-weight:800;letter-spacing:-.025em;line-height:1.06;margin:0 0 18px;max-width:900px}
+.sph-lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:760px;line-height:1.6;margin:0}
+.sph-dark .sph-lead,.sph-forest .sph-lead{color:#cfd6d1}
+.sph-head{margin-bottom:56px}
+
+/* Icon sprite */
+.sph-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.sph-ico{width:28px;height:28px;color:var(--gold);flex:none}
+
+/* Buttons */
+.sph-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:12px;font-weight:700;font-size:15px;letter-spacing:.02em;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease}
+.sph-btn svg{width:18px;height:18px;transition:transform .25s ease}
+.sph-btn:hover{transform:translateY(-2px)}
+.sph-btn:hover svg{transform:translateX(4px)}
+.sph-btn-gold{background:var(--gold);color:var(--ink)}
+.sph-btn-gold:hover{background:var(--gold-2);box-shadow:0 12px 28px rgba(200,154,60,.35)}
+.sph-btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.sph-btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.sph-btn:focus-visible,.sph button:focus-visible,.sph a:focus-visible,.sph input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Reveal */
+.sph-js .sph-r{opacity:0;transform:translateY(30px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.sph-js .sph-r.is-in{opacity:1;transform:none}
+
+/* ---------- HERO ---------- */
+.sph-hero{display:grid;grid-template-columns:1.6fr 1fr;background:var(--ink);color:#fff;position:relative}
+.sph-hero-main{position:relative;padding:120px 64px 64px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate}
+.sph-hero-main::before{content:"";position:absolute;width:620px;height:620px;left:-180px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,60,.16),rgba(200,154,60,0) 65%);z-index:-1;animation:sph-drift 14s ease-in-out infinite alternate}
+.sph-hero-main::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);z-index:-2}
+@keyframes sph-drift{to{transform:translate(160px,120px)}}
+.sph-hero h1{font-size:clamp(44px,6.6vw,88px);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0 0 28px}
+.sph-hero h1 span{display:block}
+.sph-hero-sub{font-size:clamp(17px,1.8vw,21px);color:#d9ddd9;max-width:620px;line-height:1.55;margin:0 0 38px}
+.sph-goal{display:inline-flex;align-items:baseline;gap:14px;background:var(--gold);color:var(--ink);padding:20px 28px;border-radius:14px;margin-bottom:34px;align-self:flex-start;box-shadow:0 18px 40px rgba(200,154,60,.22)}
+.sph-goal b{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.01em}
+.sph-goal small{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.sph-hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.sph-hero-tag{margin-top:72px;font-size:13px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sage)}
+.sph-hero-side{background:var(--green);display:flex;flex-direction:column;justify-content:flex-end;padding:40px;min-height:560px;position:relative;overflow:hidden;isolation:isolate}
+.sph-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% 40%;z-index:-2;transform:scale(1.1);animation:sph-kenburns 14s cubic-bezier(.2,.6,.3,1) forwards}
+@keyframes sph-kenburns{to{transform:scale(1)}}
+.sph-hero-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(27,32,30,0) 35%,rgba(27,32,30,.35) 60%,rgba(27,32,30,.9) 100%),linear-gradient(90deg,rgba(27,32,30,.55) 0%,rgba(27,32,30,0) 22%)}
+.sph-hero-side.no-img .sph-hero-photo{display:none}
+.sph-hero-side.no-img .sph-hero-shade{background:radial-gradient(circle at 70% 20%,rgba(200,154,60,.22),transparent 60%)}
+.sph-hero-stat{display:flex;align-items:center;gap:20px;background:rgba(45,74,62,.78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left:4px solid var(--gold);border-radius:16px;padding:22px 26px;opacity:0;transform:translateY(24px);animation:sph-rise .9s cubic-bezier(.2,.7,.2,1) .9s forwards}
+@keyframes sph-rise{to{opacity:1;transform:none}}
+.sph-hero-stat b{display:block;font-size:clamp(56px,5.6vw,80px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--gold)}
+.sph-hero-stat span{font-size:17px;color:#e6ebe7;line-height:1.4}
+
+/* Photo band */
+.sph-band{position:relative;margin:0 0 64px;border-radius:22px;overflow:hidden;aspect-ratio:21/9;background:var(--green);isolation:isolate}
+.sph-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 38%;z-index:-2;transform:scale(1.12);transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.sph-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(27,32,30,.88) 0%,rgba(27,32,30,.45) 38%,rgba(27,32,30,0) 65%)}
+.sph-js .sph-band.sph-r{opacity:1;transform:none}
+.sph-js .sph-band img{clip-path:inset(0 0 0 100%);transition:clip-path 1.3s cubic-bezier(.7,0,.2,1), transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.sph-js .sph-band figcaption{opacity:0;transform:translateY(16px);transition:opacity .8s ease .9s, transform .8s ease .9s}
+.sph-band.is-in img{clip-path:inset(0 0 0 0);transform:scale(1)}
+.sph-band.is-in figcaption{opacity:1;transform:none}
+.sph-band figcaption{position:absolute;left:48px;bottom:44px;max-width:420px}
+.sph-band figcaption b{display:block;font-size:clamp(22px,2.4vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.01em}
+.sph-band.no-img img{display:none}
+
+/* Proof photo */
+.sph-proof-media{position:relative}
+.sph-proof-photo{margin:0;border-radius:22px;overflow:hidden;aspect-ratio:1/1;background:var(--ink);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.sph-proof-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;transition:transform 1.2s ease}
+.sph-proof-media:hover .sph-proof-photo img{transform:scale(1.04)}
+.sph-proof-photo.no-img img{display:none}
+.sph-pill{position:absolute;top:22px;left:22px;background:var(--gold);color:var(--ink);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px}
+.sph-pill svg{width:16px;height:16px}
+
+/* ---------- NEED ---------- */
+.sph-need{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.sph-ratio{text-align:left}
+.sph-ratio-big{font-size:clamp(84px,12vw,168px);font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--green);margin:0}
+.sph-ratio-big em{font-style:normal;color:var(--gold)}
+.sph-ratio-cap{font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:16px 0 30px}
+.sph-ratio-row{display:flex;gap:18px}
+.sph-ratio-row svg{width:clamp(58px,8vw,92px);height:auto;color:var(--line);transition:color .8s ease, transform .8s cubic-bezier(.3,1.6,.5,1)}
+.sph-ratio-row.is-in svg:first-child{color:var(--gold);transform:translateY(-8px)}
+.sph-need-card{background:var(--cream);border-radius:20px;padding:44px;box-shadow:var(--shadow)}
+.sph-need-card p{font-size:19px;line-height:1.55;margin:0 0 22px}
+.sph-need-card strong{font-size:30px;font-weight:800;color:var(--green);letter-spacing:-.01em}
+.sph-need-card .sph-accent{font-weight:800;color:var(--green);margin:0}
+.sph-src{margin-top:40px;font-size:13px;font-style:italic;color:var(--muted)}
+
+/* ---------- MISSION ---------- */
+.sph-cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sph-mcard{background:var(--white);border-radius:20px;padding:42px 40px 46px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .35s ease, box-shadow .35s ease}
+.sph-mcard::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--gold);transition:width .5s ease}
+.sph-mcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.sph-mcard:hover::after{width:100%}
+.sph-mcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:34px}
+.sph-circle{width:88px;height:88px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:background .35s ease, transform .35s ease}
+.sph-circle .sph-ico{width:38px;height:38px;transition:color .35s ease}
+.sph-mcard:hover .sph-circle{background:var(--gold);transform:rotate(-6deg) scale(1.05)}
+.sph-mcard:hover .sph-circle .sph-ico{color:var(--ink)}
+.sph-num{font-size:18px;font-weight:800;color:var(--gold)}
+.sph-mcard h3{font-size:28px;font-weight:800;letter-spacing:-.01em;margin:0 0 12px}
+.sph-mcard p{font-size:17px;color:var(--muted);margin:0;line-height:1.55}
+
+/* ---------- PATHWAY ---------- */
+.sph-path{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;list-style:none;margin:0;padding:0}
+.sph-path-track{position:absolute;top:50px;left:10%;right:10%;height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.sph-path-fill{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold));transition:width 2.2s cubic-bezier(.5,0,.2,1) .2s}
+.sph-path.is-in .sph-path-fill{width:100%}
+.sph-step{text-align:center;position:relative;z-index:1}
+.sph-node{width:100px;height:100px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:800;margin:0 auto 26px;box-shadow:0 0 0 8px var(--white);transform:scale(.4);opacity:0;transition:transform .7s cubic-bezier(.3,1.6,.5,1), opacity .5s ease, background .3s ease}
+.sph-step:last-child .sph-node{background:var(--gold);color:var(--ink)}
+.sph-path.is-in .sph-node{transform:scale(1);opacity:1}
+.sph-path.is-in .sph-step:nth-child(2) .sph-node{transition-delay:.15s}
+.sph-path.is-in .sph-step:nth-child(3) .sph-node{transition-delay:.55s}
+.sph-path.is-in .sph-step:nth-child(4) .sph-node{transition-delay:.95s}
+.sph-path.is-in .sph-step:nth-child(5) .sph-node{transition-delay:1.35s}
+.sph-path.is-in .sph-step:nth-child(6) .sph-node{transition-delay:1.75s}
+.sph-step:hover .sph-node{transform:scale(1.08)}
+.sph-step h3{font-size:17px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;margin:0 0 8px}
+.sph-step p{font-size:15.5px;color:var(--muted);margin:0;line-height:1.5}
+.sph-banner{margin-top:64px;background:var(--ink);color:#fff;border-radius:18px;padding:30px 40px;font-size:clamp(17px,1.8vw,21px);text-align:center;line-height:1.5}
+.sph-banner b{color:var(--gold)}
+
+/* ---------- DIFFERENCE ---------- */
+.sph-diff{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.sph-prox{background:var(--green);border-radius:22px;padding:52px 48px;position:relative;overflow:hidden}
+.sph-prox::after{content:"";position:absolute;right:-90px;bottom:-90px;width:260px;height:260px;border-radius:50%;border:30px solid rgba(200,154,60,.12)}
+.sph-prox .sph-ico{width:56px;height:56px;margin-bottom:32px}
+.sph-prox h3{font-size:clamp(34px,3.6vw,46px);font-weight:800;line-height:1.02;letter-spacing:-.01em;margin:0 0 18px}
+.sph-prox p{font-size:18px;color:#dbe3de;margin:0;line-height:1.55;max-width:440px}
+.sph-checks{list-style:none;margin:0;padding:0;display:grid;gap:26px}
+.sph-checks li{display:flex;align-items:center;gap:20px;font-size:clamp(19px,2vw,24px);font-weight:500}
+.sph-chk{width:44px;height:44px;border-radius:50%;background:var(--gold);display:grid;place-items:center;flex:none;transform:scale(0);transition:transform .6s cubic-bezier(.3,1.6,.5,1);transition-delay:var(--d,0s)}
+.sph-chk svg{width:22px;height:22px;stroke:var(--ink);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;transition:stroke-dashoffset .5s ease;transition-delay:calc(var(--d,0s) + .35s)}
+.sph-checks.is-in .sph-chk{transform:scale(1)}
+.sph-checks.is-in .sph-chk svg{stroke-dashoffset:0}
+.sph-checks li span{transition:color .3s ease}
+.sph-checks li:hover span{color:var(--gold)}
+
+/* ---------- PROGRESS ---------- */
+.sph-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.sph-stat{background:var(--white);border-radius:20px;padding:40px 36px 44px;box-shadow:var(--shadow);transition:transform .35s ease, box-shadow .35s ease}
+.sph-stat:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.sph-stat .sph-ico{width:46px;height:46px;margin-bottom:34px}
+.sph-stat b{display:block;font-size:clamp(54px,5.4vw,78px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--green);margin-bottom:28px}
+.sph-stat h3{font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+.sph-stat p{font-size:16px;color:var(--muted);margin:0;line-height:1.5}
+.sph-stat-dark{background:var(--ink);color:#fff}
+.sph-stat-dark b{color:var(--gold)}
+.sph-stat-dark p{color:#cfd6d1}
+
+/* ---------- PROOF ---------- */
+.sph-proof{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+.sph-quote-mark{width:84px;height:auto;color:var(--gold);margin-bottom:26px}
+.sph-quote{font-size:clamp(28px,3.4vw,44px);font-weight:800;line-height:1.18;letter-spacing:-.015em;margin:0 0 34px}
+.sph-quote mark{background:linear-gradient(transparent 62%,rgba(200,154,60,.45) 62%);color:inherit;background-size:0 100%;background-repeat:no-repeat;transition:background-size 1.2s ease .6s}
+.sph-r.is-in .sph-quote mark{background-size:100% 100%}
+.sph-proof-note{font-size:18px;color:#d5ddd8;max-width:600px;margin:0;line-height:1.55}
+.sph-proof-card{background:var(--ink);border-radius:20px;padding:30px 32px;box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;width:86%;margin:-96px 0 0 auto;border-top:4px solid var(--gold)}
+.sph-proof-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sph-proof-card b{display:block;font-size:clamp(46px,4.4vw,64px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.sph-proof-card .sph-gold{color:var(--gold)}
+.sph-proof-card small{display:block;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-top:12px}
+.sph-months{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin:24px 0 0}
+.sph-months i{height:10px;border-radius:3px;background:rgba(255,255,255,.1);transition:background .3s ease}
+.sph-months.is-on i{background:var(--green-2)}
+.sph-months.is-on i:last-child{background:var(--gold)}
+.sph-divider{height:1px;background:rgba(125,151,138,.35);margin:34px 0}
+
+/* ---------- MODEL / FLYWHEEL ---------- */
+.sph-model{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:64px;align-items:center}
+.sph-wheel{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:0 auto}
+.sph-wheel-ring{position:absolute;inset:44px;border-radius:50%;border:2px dashed rgba(45,74,62,.25)}
+.sph-wheel-rot{position:absolute;inset:44px;border-radius:50%;transition:transform 1s cubic-bezier(.6,0,.2,1)}
+.sph-wheel-rot::before{content:"";position:absolute;inset:-2px;border-radius:50%;background:conic-gradient(from -45deg,rgba(200,154,60,0) 0deg,rgba(200,154,60,.85) 90deg,rgba(200,154,60,0) 91deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px));mask:radial-gradient(farthest-side,transparent calc(100% - 5px),#000 calc(100% - 4px))}
+.sph-wheel-center{position:absolute;inset:30%;border-radius:50%;background:var(--white);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px}
+.sph-wheel-center svg{width:38px;height:38px;color:var(--gold);animation:sph-spin 9s linear infinite;margin-bottom:8px}
+.sph-wheel-center span{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);line-height:1.35}
+@keyframes sph-spin{to{transform:rotate(360deg)}}
+.sph-wnode{position:absolute;width:88px;height:88px;margin:-44px 0 0 -44px;border-radius:50%;background:var(--cream);border:2px solid var(--line);display:grid;place-items:center;cursor:pointer;transition:background .4s ease, border-color .4s ease, transform .4s cubic-bezier(.3,1.6,.5,1), box-shadow .4s ease;padding:0}
+.sph-wnode .sph-ico{width:36px;height:36px;color:var(--green);transition:color .4s ease}
+.sph-wnode em{position:absolute;top:-6px;right:-6px;width:28px;height:28px;border-radius:50%;background:var(--white);color:var(--gold);font-style:normal;font-weight:800;font-size:13px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.sph-wnode:hover{transform:scale(1.06)}
+.sph-wnode.is-active{background:var(--green);border-color:var(--green);transform:scale(1.14);box-shadow:0 14px 30px rgba(45,74,62,.35)}
+.sph-wnode.is-active .sph-ico{color:var(--gold)}
+.sph-wnode[data-i="0"]{left:50%;top:44px}
+.sph-wnode[data-i="1"]{left:calc(100% - 44px);top:50%}
+.sph-wnode[data-i="2"]{left:50%;top:calc(100% - 44px)}
+.sph-wnode[data-i="3"]{left:44px;top:50%}
+.sph-panel{background:var(--white);border-radius:22px;padding:42px 44px;box-shadow:var(--shadow);min-height:250px;position:relative;overflow:hidden}
+.sph-panel-num{font-size:14px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.sph-panel h3{font-size:clamp(26px,2.6vw,34px);font-weight:800;letter-spacing:-.015em;margin:0 0 14px}
+.sph-panel p{font-size:18px;color:var(--muted);margin:0;line-height:1.55}
+.sph-panel-body{transition:opacity .35s ease, transform .35s ease}
+.sph-panel-body.is-swap{opacity:0;transform:translateY(10px)}
+.sph-panel-bar{position:absolute;left:0;bottom:0;height:4px;background:var(--gold);width:0}
+.sph-panel-bar.is-run{animation:sph-bar 4.2s linear forwards}
+@keyframes sph-bar{to{width:100%}}
+.sph-dots{display:flex;gap:8px;margin-top:28px}
+.sph-dots button{width:34px;height:6px;border-radius:6px;border:0;background:var(--line);cursor:pointer;padding:0;transition:background .3s ease, width .3s ease}
+.sph-dots button.is-active{background:var(--green);width:52px}
+.sph-cost{display:flex;gap:26px;align-items:center;background:var(--green);color:#fff;border-radius:22px;padding:30px 36px;margin-top:22px}
+.sph-cost b{font-size:clamp(40px,4vw,54px);font-weight:800;color:var(--gold);letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.sph-cost h4{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin:0 0 6px}
+.sph-cost p{margin:0;font-size:16px;color:#dbe3de;line-height:1.45}
+.sph-loopline{display:flex;align-items:center;gap:14px;margin-top:22px;font-weight:700;color:var(--green);font-size:17px;line-height:1.4}
+.sph-loopline svg{width:34px;height:34px;color:var(--gold);flex:none}
+
+/* ---------- DPA ---------- */
+.sph-dpa{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
+.sph-dpa-card{background:var(--green);color:#fff;border-radius:22px;padding:64px 56px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.sph-dpa-card::before{content:"";position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,60,.25),transparent 70%)}
+.sph-dpa-card small{display:block;font-size:14px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sage-2)}
+.sph-dpa-card b{display:block;font-size:clamp(68px,8vw,110px);font-weight:800;line-height:1;letter-spacing:-.04em;margin:6px 0 10px}
+.sph-dpa-card span{font-size:22px;color:var(--gold)}
+.sph-dpa-list{list-style:none;margin:0;padding:0;display:grid;gap:34px}
+.sph-dpa-list li{display:flex;gap:22px;align-items:flex-start}
+.sph-dpa-list .sph-chk{background:var(--gold);transform:scale(1);margin-top:2px}
+.sph-dpa-list .sph-chk svg{stroke:#fff;stroke-dashoffset:0}
+.sph-dpa-list h3{font-size:22px;font-weight:800;margin:0 0 6px}
+.sph-dpa-list p{font-size:17px;color:var(--muted);margin:0;line-height:1.5}
+
+/* ---------- CAMPAIGN ---------- */
+.sph-camp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:64px;align-items:center}
+.sph-donut{position:relative;max-width:400px;width:100%;margin:0 auto}
+.sph-donut svg{width:100%;height:auto;transform:rotate(-90deg)}
+.sph-donut circle{fill:none;stroke-width:34;transition:stroke-dasharray 1.6s cubic-bezier(.5,0,.2,1), stroke-width .35s ease, opacity .35s ease;cursor:pointer}
+.sph-donut .sph-dbg{stroke:var(--cream);cursor:default}
+.sph-donut.has-active circle.sph-seg{opacity:.3}
+.sph-donut.has-active circle.sph-seg.is-active{opacity:1;stroke-width:44}
+.sph-donut-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 22%}
+.sph-donut-c b{font-size:clamp(36px,4.4vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.sph-donut-c span{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:10px;line-height:1.35}
+.sph-legend{display:grid;gap:14px}
+.sph-leg{display:grid;grid-template-columns:22px 1fr;gap:4px 20px;text-align:left;background:transparent;border:2px solid transparent;border-radius:18px;padding:22px 24px;cursor:pointer;transition:background .3s ease, border-color .3s ease, transform .3s ease;color:inherit}
+.sph-leg:hover,.sph-leg.is-active{background:var(--cream);border-color:var(--line);transform:translateX(6px)}
+.sph-leg-dot{width:22px;height:22px;border-radius:50%;margin-top:6px}
+.sph-leg-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px}
+.sph-leg-top b{font-size:clamp(26px,2.6vw,32px);font-weight:800;letter-spacing:-.01em}
+.sph-leg-top strong{font-size:19px;font-weight:800;color:var(--green)}
+.sph-leg p{grid-column:2;margin:0;font-size:16px;color:var(--muted);line-height:1.5}
+.sph-leg-pct{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--gold)}
+.sph-camp-note{margin-top:22px;background:var(--cream);border-radius:14px;padding:20px 24px;font-style:italic;font-size:16px;line-height:1.5;box-shadow:var(--shadow)}
+
+/* ---------- CALCULATOR ---------- */
+.sph-calc{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:stretch}
+.sph-calc-in{background:var(--ink-2);border:1px solid rgba(255,255,255,.07);border-radius:22px;padding:44px}
+.sph-calc-label{font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin:0 0 10px}
+.sph-calc-amt{font-size:clamp(52px,6vw,80px);font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--gold);margin:0 0 30px;font-variant-numeric:tabular-nums}
+.sph-range{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:10px;background:linear-gradient(90deg,var(--gold) var(--p,30%),rgba(255,255,255,.12) var(--p,30%));outline:none;cursor:pointer;margin:0}
+.sph-range::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:6px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:grab}
+.sph-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:6px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:grab}
+.sph-range-ends{display:flex;justify-content:space-between;font-size:13px;color:var(--sage);margin-top:12px}
+.sph-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.sph-chip{background:transparent;border:1.5px solid rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;transition:all .25s ease}
+.sph-chip:hover{border-color:var(--gold);color:var(--gold)}
+.sph-chip.is-active{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.sph-calc-out{background:var(--green);border-radius:22px;padding:44px;display:flex;flex-direction:column;gap:26px}
+.sph-out-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.sph-out{background:rgba(0,0,0,.18);border-radius:16px;padding:22px 24px}
+.sph-out b{display:block;font-size:clamp(32px,3.4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.sph-out span{display:block;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-2);margin-top:10px;line-height:1.35}
+.sph-goalbar{height:12px;border-radius:12px;background:rgba(0,0,0,.22);overflow:hidden}
+.sph-goalbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));border-radius:12px;transition:width .5s ease}
+.sph-out-tier{font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+.sph-out-say{font-size:20px;font-weight:600;line-height:1.45;margin:0;min-height:58px}
+.sph-calc-fine{font-size:13px;color:var(--sage-2);margin:auto 0 0;line-height:1.5}
+
+/* ---------- POSSIBLE ---------- */
+.sph-poss{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
+.sph-pcard{background:var(--ink);border-radius:22px;padding:44px 40px;transition:transform .35s ease}
+.sph-pcard:hover{transform:translateY(-6px)}
+.sph-pcard b{display:block;font-size:clamp(46px,5vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--gold);margin-bottom:26px}
+.sph-pcard h3{font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px}
+.sph-pcard p{font-size:17px;color:#d3dad5;margin:0;line-height:1.5}
+.sph-units{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin:0 0 30px;max-width:360px}
+.sph-units svg{width:100%;height:auto;color:var(--green-2)}
+.sph-units svg.sph-new{color:rgba(200,154,60,.18);transition:color .5s ease, transform .5s cubic-bezier(.3,1.6,.5,1)}
+.sph-units.is-in svg.sph-new{color:var(--gold);transform:translateY(-3px)}
+
+/* ---------- ACCOUNTABILITY ---------- */
+.sph-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.sph-metric{background:var(--white);border-radius:16px;padding:28px 26px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);font-size:18px;font-weight:700;line-height:1.25;transition:transform .3s ease, box-shadow .3s ease}
+.sph-metric:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.sph-metric .sph-ico{width:40px;height:40px}
+.sph-metric-hi{background:var(--green);color:#fff;justify-content:center;text-align:center}
+.sph-acc-note{margin:44px 0 0;font-size:19px;line-height:1.55;max-width:880px}
+
+/* ---------- LEADERSHIP ---------- */
+.sph-lead-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px}
+.sph-leader{background:var(--cream);border-radius:22px;padding:48px;box-shadow:var(--shadow)}
+.sph-leader-head{display:flex;gap:20px;align-items:center;margin-bottom:30px}
+.sph-avatar{width:72px;height:72px;border-radius:50%;background:var(--ink);display:grid;place-items:center;flex:none}
+.sph-avatar .sph-ico{width:36px;height:36px}
+.sph-leader h3{font-size:30px;font-weight:800;letter-spacing:-.01em;margin:0}
+.sph-leader-role{font-size:17px;font-weight:700;color:var(--gold);margin:2px 0 0}
+.sph-leader ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.sph-leader li{position:relative;padding-left:28px;font-size:17.5px;line-height:1.5}
+.sph-leader li::before{content:"";position:absolute;left:0;top:10px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.sph-board{background:var(--ink);color:#fff;border-radius:22px;padding:48px 44px;display:flex;flex-direction:column}
+.sph-board-head{display:flex;align-items:center;gap:16px;font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.sph-board-head .sph-ico{width:44px;height:44px}
+.sph-board ul{list-style:none;margin:0;padding:0}
+.sph-board li{font-size:22px;font-weight:700;padding:20px 0;border-bottom:1px solid rgba(125,151,138,.3);transition:padding .3s ease, color .3s ease}
+.sph-board li:hover{padding-left:10px;color:var(--gold-2)}
+.sph-board p{margin:auto 0 0;padding-top:28px;font-size:15px;color:var(--sage);line-height:1.5}
+
+/* ---------- PARTNER ---------- */
+.sph-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.sph-tier{position:relative;display:flex;flex-direction:column;background:var(--ink-3);border-radius:20px;padding:40px 32px 32px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.05);overflow:hidden;isolation:isolate;transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease}
+.sph-tier::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(200,154,60,.22),transparent 60%);opacity:0;transition:opacity .4s ease;z-index:-1}
+.sph-tier:hover{transform:translateY(-8px);box-shadow:0 28px 50px rgba(0,0,0,.4);border-color:rgba(200,154,60,.45)}
+.sph-tier:hover::before{opacity:1}
+.sph-tier-lead{background:var(--green)}
+.sph-tier .sph-ico{width:44px;height:44px;margin-bottom:30px}
+.sph-tier b{font-size:clamp(26px,2.6vw,34px);font-weight:800;color:var(--gold);letter-spacing:-.01em;line-height:1.1;margin-bottom:22px}
+.sph-tier h3{font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+.sph-tier p{font-size:16.5px;color:#d3dad5;margin:0 0 28px;line-height:1.5}
+.sph-tier-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--gold);letter-spacing:.04em}
+.sph-tier-go svg{width:16px;height:16px;transition:transform .3s ease}
+.sph-tier:hover .sph-tier-go svg{transform:translateX(5px)}
+.sph-welcome{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:17px}
+.sph-welcome b{color:var(--gold);margin-right:6px}
+.sph-welcome span{border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:9px 18px;color:#e2e7e3}
+
+/* ---------- CLOSE ---------- */
+.sph-close{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:center}
+.sph-close .sph-ico{width:68px;height:68px;margin-bottom:30px}
+.sph-close-quote{font-size:clamp(18px,1.9vw,22px);font-style:italic;color:var(--sage);margin:0 0 34px;max-width:620px;line-height:1.5}
+.sph-close h2{font-size:clamp(38px,5vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.04;margin:0 0 30px}
+.sph-next{font-size:18px;font-weight:800;color:var(--gold);margin:0 0 30px}
+.sph-contact{background:var(--green);border-radius:22px;padding:48px 44px}
+.sph-contact small{display:block;font-size:13px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-2)}
+.sph-contact .sph-big{display:block;font-size:clamp(64px,7vw,96px);font-weight:800;color:var(--gold);letter-spacing:-.03em;line-height:1;margin:6px 0 34px}
+.sph-contact hr{border:0;height:1px;background:rgba(169,187,177,.35);margin:0 0 30px}
+.sph-contact h3{font-size:26px;font-weight:800;margin:0}
+.sph-contact .sph-role{color:#d3dbd6;font-size:17px;margin:2px 0 30px}
+.sph-clink{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;font-size:18px;padding:12px 0;transition:color .25s ease, transform .25s ease;word-break:break-word}
+.sph-clink .sph-ico{width:30px;height:30px;margin:0}
+.sph-clink:hover{color:var(--gold-2);transform:translateX(6px)}
+.sph-foot-tag{margin-top:64px;font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1040px){
+  .sph-hero{grid-template-columns:1fr}
+  .sph-hero-main{padding:96px 32px 56px}
+  .sph-hero-side{padding:28px;min-height:480px}
+  .sph-hero-tag{margin-top:48px}
+  .sph-need,.sph-diff,.sph-proof,.sph-model,.sph-dpa,.sph-camp,.sph-calc,.sph-close,.sph-lead-grid{grid-template-columns:1fr;gap:44px}
+  .sph-stats,.sph-tiers,.sph-metrics{grid-template-columns:repeat(2,1fr)}
+  .sph-poss{grid-template-columns:1fr 1fr}
+  .sph-poss .sph-pcard:first-child{grid-column:1 / -1}
+  .sph-cards3{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .sph-sec{padding:76px 0}
+  .sph-wrap{padding:0 16px}
+  .sph-hero-main{padding:80px 20px 48px}
+  .sph-hero-side{padding:16px;min-height:420px}
+  .sph-hero-stat{padding:18px 20px;gap:16px}
+  .sph-band{aspect-ratio:4/5;margin-bottom:44px}
+  .sph-band::after{background:linear-gradient(180deg,rgba(27,32,30,0) 35%,rgba(27,32,30,.9) 100%)}
+  .sph-band img{object-position:66% 40%}
+  .sph-band figcaption{left:22px;right:22px;bottom:24px}
+  .sph-proof-card{width:auto;margin:-56px 12px 0}
+  .sph-proof-card,.sph-proof-card.sph-r{padding:24px 22px}
+  .sph-goal{flex-direction:column;gap:2px;align-items:flex-start}
+  .sph-hero-ctas .sph-btn{flex:1 1 100%;justify-content:center}
+  .sph-need-card,.sph-prox,.sph-leader,.sph-board,.sph-contact,.sph-calc-in,.sph-calc-out,.sph-panel,.sph-dpa-card,.sph-proof-card{padding:34px 26px}
+  .sph-path{grid-template-columns:1fr;gap:30px}
+  .sph-path-track{top:30px;bottom:30px;left:30px;right:auto;width:4px;height:auto}
+  .sph-path-fill{width:100%;height:0;transition:height 2.2s cubic-bezier(.5,0,.2,1) .2s}
+  .sph-path.is-in .sph-path-fill{width:100%;height:100%}
+  .sph-step{display:grid;grid-template-columns:64px 1fr;gap:4px 20px;text-align:left;align-items:start}
+  .sph-node{width:64px;height:64px;font-size:20px;margin:0;grid-row:span 2;box-shadow:0 0 0 6px var(--white)}
+  .sph-step h3{margin-top:10px}
+  .sph-banner{padding:24px 22px}
+  .sph-stats,.sph-tiers,.sph-metrics,.sph-poss,.sph-out-row{grid-template-columns:1fr}
+  .sph-poss .sph-pcard:first-child{grid-column:auto}
+  .sph-wnode{width:70px;height:70px;margin:-35px 0 0 -35px}
+  .sph-wnode .sph-ico{width:28px;height:28px}
+  .sph-wnode[data-i="0"]{top:35px}
+  .sph-wnode[data-i="1"]{left:calc(100% - 35px)}
+  .sph-wnode[data-i="2"]{top:calc(100% - 35px)}
+  .sph-wnode[data-i="3"]{left:35px}
+  .sph-wheel-ring,.sph-wheel-rot{inset:35px}
+  .sph-wheel-center span{font-size:11px}
+  .sph-cost{flex-direction:column;align-items:flex-start;gap:14px;padding:28px 26px}
+  .sph-checks li{font-size:19px}
+  .sph-ratio-row{gap:12px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .sph *,.sph *::before,.sph *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;transition-delay:0s !important}
+  .sph-js .sph-r{opacity:1;transform:none}
+}
+</style>
+
+<div class="sph" id="sph-root">
+<script>document.getElementById('sph-root').classList.add('sph-js');</script>
+
+<!-- Icon sprite -->
+<svg class="sph-sprite" aria-hidden="true" focusable="false">
+  <symbol id="sph-i-house" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6 1.3 11.4l1.4 1.7L4.5 11.6V21.5h5.7v-6.2h3.6v6.2h5.7v-9.9l1.8 1.5 1.4-1.7L18.2 8V3.5h-3v2z"/></symbol>
+  <symbol id="sph-i-cap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5 0.8 8.6 12 13.7l8.3-3.8v5.6h1.9V8.6zM5 12.4v4.1c0 1.9 3.1 3.6 7 3.6s7-1.7 7-3.6v-4.1l-7 3.2z"/></symbol>
+  <symbol id="sph-i-key" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M15 1.8a7.2 7.2 0 0 0-6.9 9.4L1.8 17.5V22h4.4v-2.2h2.2v-2.2h2.2l2.2-2.2A7.2 7.2 0 1 0 15 1.8zm1.6 3.4a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4z"/></symbol>
+  <symbol id="sph-i-building" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.5 1.5h15v19.5h1.5v1.5H3v-1.5h1.5zm3 3v2.5h2.5V4.5zm6.5 0v2.5h2.5V4.5zM7.5 9v2.5h2.5V9zm6.5 0v2.5h2.5V9zm-6.5 4.5V16h2.5v-2.5zm6.5 0V16h2.5v-2.5zM10.2 21h3.6v-3.4h-3.6z"/></symbol>
+  <symbol id="sph-i-users" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5a3.6 3.6 0 1 1 0 7.2 3.6 3.6 0 0 1 0-7.2zm-7 2.3a2.6 2.6 0 1 1 0 5.2 2.6 2.6 0 0 1 0-5.2zm14 0a2.6 2.6 0 1 1 0 5.2 2.6 2.6 0 0 1 0-5.2zM12 12.3c4 0 6.6 2 6.6 4.6v2.6H5.4v-2.6c0-2.6 2.6-4.6 6.6-4.6zM5 12.4c.6 0 1.2.1 1.7.2a5.7 5.7 0 0 0-2.8 4.4v2.5H0v-2.4c0-2.6 2.2-4.7 5-4.7zm14 0c2.8 0 5 2.1 5 4.7v2.4h-3.9V17a5.7 5.7 0 0 0-2.8-4.4c.5-.1 1.1-.2 1.7-.2z"/></symbol>
+  <symbol id="sph-i-heart" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21.3s-9-5.6-9-12A5 5 0 0 1 12 6a5 5 0 0 1 9 3.3c0 6.4-9 12-9 12z"/></symbol>
+  <symbol id="sph-i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4.5 3 3L20 7m-4.5 0H20v4.5"/></symbol>
+  <symbol id="sph-i-loop" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 0 0-14.3-4.9M4 13a8 8 0 0 0 14.3 4.9M5.5 2.5v4h4M18.5 21.5v-4h-4"/></symbol>
+  <symbol id="sph-i-tools" viewBox="0 0 24 24"><path fill="currentColor" d="M21.7 6.3 18 10l-3.9-1-1-3.9L16.8 1.4a6 6 0 0 0-7.5 7.3L1.8 16.2a2.6 2.6 0 0 0 3.7 3.7L13 12.4a6 6 0 0 0 8.7-6.1z"/></symbol>
+  <symbol id="sph-i-person" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 11.5c5 0 8.5 2.6 8.5 6V22h-17v-2.5c0-3.4 3.5-6 8.5-6z"/></symbol>
+  <symbol id="sph-i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 2.2 9.5 6c.5.7.4 1.6-.2 2.2L7.7 9.8a12.3 12.3 0 0 0 6.5 6.5l1.6-1.6c.6-.6 1.5-.7 2.2-.2l3.8 2.9c.8.6.9 1.7.3 2.4l-1.6 2c-.6.7-1.6 1-2.5.8C10.6 21 3 13.4 1.4 6c-.2-.9.1-1.9.8-2.5l2-1.6c.7-.6 1.8-.5 2.4.3z"/></symbol>
+  <symbol id="sph-i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v.6l-10 6.3L2 6.1zm0 3 10 6.3 10-6.3v10A1.5 1.5 0 0 1 20.5 20h-17A1.5 1.5 0 0 1 2 18.5z"/></symbol>
+  <symbol id="sph-i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+  <symbol id="sph-i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4v15m-6-6 6 6 6-6"/></symbol>
+</svg>
+
+<!-- ============ HERO ============ -->
+<header class="sph-hero">
+  <div class="sph-hero-main">
+    <p class="sph-eyebrow sph-r">Evolve Community</p>
+    <h1 class="sph-r" style="--d:.1s"><span>Single Parent</span><span>Housing Initiative</span></h1>
+    <p class="sph-hero-sub sph-r" style="--d:.2s">A personalized pathway from stable housing to sustainable homeownership for single-parent families on Milwaukee’s Northside.</p>
+    <div class="sph-goal sph-r" style="--d:.3s"><b>$<span data-count="3">0</span> MILLION</b><small>2027 Campaign Goal</small></div>
+    <div class="sph-hero-ctas sph-r" style="--d:.4s">
+      <a class="sph-btn sph-btn-gold" href="#sph-partner" data-jump="sph-partner">Become a Partner <svg><use href="#sph-i-arrow"/></svg></a>
+      <a class="sph-btn sph-btn-ghost" href="#sph-how" data-jump="sph-how">See How It Works <svg><use href="#sph-i-down"/></svg></a>
+    </div>
+    <p class="sph-hero-tag sph-r" style="--d:.5s">Donor &amp; Partner Prospectus</p>
+  </div>
+  <div class="sph-hero-side">
+    <img class="sph-hero-photo" src="https://media.thechurchcoassets.com/heic-jpg-accounts/5782/463b8682-993f-4033-90e2-5c8fc105fe9e-./IMG_1145.HEIC" alt="A new homeowner celebrating with a SOLD sign" fetchpriority="high" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+    <div class="sph-hero-shade" aria-hidden="true"></div>
+    <div class="sph-hero-stat">
+      <b data-count="13">0</b>
+      <span>single-parent families served since 2024</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ THE NEED ============ -->
+<section class="sph-sec sph-white">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">The Need</p>
+      <h2 class="sph-h2">In Milwaukee, the door to ownership is not open equally</h2>
+    </div>
+    <div class="sph-need">
+      <div class="sph-ratio sph-r">
+        <p class="sph-ratio-big">1 <em>in</em> 4</p>
+        <p class="sph-ratio-cap">Fewer than this many Black residents own their home</p>
+        <div class="sph-ratio-row sph-io" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+        </div>
+      </div>
+      <div class="sph-need-card sph-r" style="--d:.15s">
+        <p><strong>Fewer than 1 in 4</strong> Black residents in Milwaukee own their home, less than half the rate of white residents.</p>
+        <p>For a single parent, one income has to cover rent, childcare, and everything in between. Saving for a down payment can feel permanently out of reach.</p>
+        <p class="sph-accent">The Northside is where we work.</p>
+      </div>
+    </div>
+    <p class="sph-src">Source: Wisconsin Policy Forum analysis of U.S. Census Bureau data, 2016–2020.</p>
+  </div>
+</section>
+
+<!-- ============ MISSION ============ -->
+<section class="sph-sec sph-cream">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">The Mission</p>
+      <h2 class="sph-h2">Housing is the beginning. Ownership is the goal.</h2>
+      <p class="sph-lead">We exist to stabilize families, restore dignity, and build a clear path to sustainable homeownership for single mothers and fathers on Milwaukee’s Northside.</p>
+    </div>
+    <div class="sph-cards3">
+      <article class="sph-mcard sph-r">
+        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-house"/></svg></div><span class="sph-num">01</span></div>
+        <h3>STABILIZE</h3>
+        <p>Safe, dignified, well-maintained housing gives a family room to breathe.</p>
+      </article>
+      <article class="sph-mcard sph-r" style="--d:.12s">
+        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-cap"/></svg></div><span class="sph-num">02</span></div>
+        <h3>PREPARE</h3>
+        <p>Financial education and individualized coaching build real readiness.</p>
+      </article>
+      <article class="sph-mcard sph-r" style="--d:.24s">
+        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-key"/></svg></div><span class="sph-num">03</span></div>
+        <h3>OWN</h3>
+        <p>Grant support and a disciplined pathway help families cross the threshold.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="sph-sec sph-white" id="sph-how">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">How It Works</p>
+      <h2 class="sph-h2">A pathway designed to end in ownership</h2>
+      <p class="sph-lead">Participants are not rushed into buying. We build readiness step by step so ownership can last.</p>
+    </div>
+    <ol class="sph-path sph-io">
+      <li class="sph-path-track" aria-hidden="true"><div class="sph-path-fill"></div></li>
+      <li class="sph-step"><div class="sph-node">01</div><h3>Stable Housing</h3><p>A safe, well-kept home at an affordable rent</p></li>
+      <li class="sph-step"><div class="sph-node">02</div><h3>Personal Coaching</h3><p>One-on-one guidance from entry through closing</p></li>
+      <li class="sph-step"><div class="sph-node">03</div><h3>Financial Readiness</h3><p>Budgeting, credit, savings, and debt progress</p></li>
+      <li class="sph-step"><div class="sph-node">04</div><h3>Grant Support</h3><p>Navigating down payment and closing grants</p></li>
+      <li class="sph-step"><div class="sph-node">05</div><h3>Homeownership</h3><p>Keys in hand, and the unit opens for the next family</p></li>
+    </ol>
+    <div class="sph-banner sph-r"><b>The objective is not indefinite dependency.</b> It is measurable progress toward long-term stability and ownership.</div>
+  </div>
+</section>
+
+<!-- ============ DIFFERENCE ============ -->
+<section class="sph-sec sph-dark">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">What Makes Us Different</p>
+      <h2 class="sph-h2">We do not hand families a packet. We walk with them.</h2>
+      <p class="sph-lead">Our program is built on personal attention, accountability, and practical training from entry through closing.</p>
+    </div>
+    <figure class="sph-band sph-r">
+      <img src="https://media.thechurchcoassets.com/accounts/5782/88a620b2-4636-409e-b3c7-b9efc0cb56c3-./DSC08602.jpg" alt="Parents and families taking notes during an Evolve Community workshop" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+      <figcaption>
+        <p class="sph-eyebrow">In the room</p>
+        <b>Parents learn, ask questions, and plan their next step together.</b>
+      </figcaption>
+    </figure>
+    <div class="sph-diff">
+      <div class="sph-prox sph-r">
+        <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
+        <h3>PROXIMITY<br>MATTERS.</h3>
+        <p>Every parent has different barriers, different strengths, and a different starting point. We meet them where they are.</p>
+      </div>
+      <ul class="sph-checks sph-io">
+        <li><i class="sph-chk" style="--d:.1s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>One-on-one guidance</span></li>
+        <li><i class="sph-chk" style="--d:.3s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Financial education</span></li>
+        <li><i class="sph-chk" style="--d:.5s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Homeownership preparation</span></li>
+        <li><i class="sph-chk" style="--d:.7s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Consistent accountability</span></li>
+        <li><i class="sph-chk" style="--d:.9s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Grant navigation &amp; closing support</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROGRESS ============ -->
+<section class="sph-sec sph-cream">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Progress to Date</p>
+      <h2 class="sph-h2">Launched in 2024, and already working</h2>
+      <p class="sph-lead">We are moving from a donor-supported pilot to a scalable, self-sustaining model.</p>
+    </div>
+    <div class="sph-stats">
+      <article class="sph-stat sph-r">
+        <svg class="sph-ico"><use href="#sph-i-users"/></svg>
+        <b data-count="13">0</b>
+        <h3>Families Served</h3>
+        <p>Single mothers and fathers on the pathway since launch</p>
+      </article>
+      <article class="sph-stat sph-r" style="--d:.1s">
+        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
+        <b data-count="11">0</b>
+        <h3>Housing Units Owned</h3>
+        <p>Safe, dignified homes held by the program</p>
+      </article>
+      <article class="sph-stat sph-r" style="--d:.2s">
+        <svg class="sph-ico"><use href="#sph-i-building"/></svg>
+        <b data-count="3">0</b>
+        <h3>Properties Acquired</h3>
+        <p>One 9-unit apartment building and two single-family homes</p>
+      </article>
+      <article class="sph-stat sph-stat-dark sph-r" style="--d:.3s">
+        <svg class="sph-ico"><use href="#sph-i-key"/></svg>
+        <b data-count="335" data-prefix="$">$0</b>
+        <h3>Out of Pocket</h3>
+        <p>What one graduate paid at closing on her own home</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="sph-sec sph-forest">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Proof of Possibility</p>
+      <h2 class="sph-h2">From participant to homeowner in 12 months</h2>
+    </div>
+    <div class="sph-proof">
+      <div class="sph-r">
+        <svg class="sph-quote-mark" viewBox="0 0 60 44" aria-hidden="true"><path fill="currentColor" d="M0 44V26C0 11 7 2 21 0l2 6C15 8 12 13 12 20h11v24zm34 0V26c0-15 7-24 21-26l2 6c-8 2-11 7-11 14h11v24z"/></svg>
+        <p class="sph-quote">One mother in our program purchased her home in <mark>12 months</mark> with only <mark>$335 out of pocket.</mark></p>
+        <p class="sph-proof-note">The remaining eligible closing costs were covered through grant resources the program helped her secure.</p>
+      </div>
+      <div class="sph-proof-media sph-r" style="--d:.15s">
+        <figure class="sph-proof-photo">
+          <img src="https://media.thechurchcoassets.com/accounts/5782/d2500112-7712-495f-a9f5-8a1bf8b9a005-./KTN_1480.jpg" alt="Two women smiling as they hold an oversized house key" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+          <span class="sph-pill"><svg><use href="#sph-i-key"/></svg>Keys in hand</span>
+        </figure>
+        <div class="sph-proof-card">
+          <div class="sph-proof-stats">
+            <div><b data-count="12">0</b><small>Months to ownership</small></div>
+            <div><b class="sph-gold" data-count="335" data-prefix="$">$0</b><small>Out of pocket at closing</small></div>
+          </div>
+          <div class="sph-months" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODEL ============ -->
+<section class="sph-sec sph-cream">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">A Self-Sustaining Model</p>
+      <h2 class="sph-h2">Your gift buys assets that keep working</h2>
+      <p class="sph-lead">Rent covers the cost of serving each family. What we lack is the capital to acquire more homes.</p>
+    </div>
+    <div class="sph-model">
+      <div class="sph-wheel sph-r" id="sph-wheel">
+        <div class="sph-wheel-ring"></div>
+        <div class="sph-wheel-rot" id="sph-wheel-rot"></div>
+        <div class="sph-wheel-center"><svg><use href="#sph-i-loop"/></svg><span>Family after family</span></div>
+        <button class="sph-wnode is-active" data-i="0" aria-label="Step 1: Capital acquires a home"><svg class="sph-ico"><use href="#sph-i-building"/></svg><em>1</em></button>
+        <button class="sph-wnode" data-i="1" aria-label="Step 2: A family pays affordable rent"><svg class="sph-ico"><use href="#sph-i-house"/></svg><em>2</em></button>
+        <button class="sph-wnode" data-i="2" aria-label="Step 3: Rent funds the pathway"><svg class="sph-ico"><use href="#sph-i-cap"/></svg><em>3</em></button>
+        <button class="sph-wnode" data-i="3" aria-label="Step 4: The family buys a home"><svg class="sph-ico"><use href="#sph-i-key"/></svg><em>4</em></button>
+      </div>
+      <div class="sph-r" style="--d:.15s">
+        <div class="sph-panel" aria-live="polite">
+          <div class="sph-panel-body" id="sph-panel-body">
+            <p class="sph-panel-num" id="sph-panel-num">Step 1 of 4</p>
+            <h3 id="sph-panel-title">Capital acquires a home</h3>
+            <p id="sph-panel-text">Donor gifts buy and prepare housing, debt-free.</p>
+          </div>
+          <div class="sph-dots" id="sph-dots">
+            <button class="is-active" aria-label="Show step 1"></button>
+            <button aria-label="Show step 2"></button>
+            <button aria-label="Show step 3"></button>
+            <button aria-label="Show step 4"></button>
+          </div>
+          <div class="sph-panel-bar" id="sph-panel-bar"></div>
+        </div>
+        <div class="sph-cost">
+          <b>~$<span data-count="10000">0</span></b>
+          <div><h4>Program cost per family</h4><p>Covered by the family’s own rent, so the program sustains itself.</p></div>
+        </div>
+        <p class="sph-loopline"><svg><use href="#sph-i-loop"/></svg>Every home serves family after family. Capital given once keeps creating homeowners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOWN PAYMENT ============ -->
+<section class="sph-sec sph-white">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Closing the Final Gap</p>
+      <h2 class="sph-h2">Down payment assistance rewards progress</h2>
+      <p class="sph-lead">Families who complete the program receive help crossing the last, hardest threshold.</p>
+    </div>
+    <div class="sph-dpa">
+      <div class="sph-dpa-card sph-r">
+        <small>Up to</small>
+        <b data-count="5000" data-prefix="$">$0</b>
+        <span>returned at closing</span>
+      </div>
+      <ul class="sph-dpa-list">
+        <li class="sph-r"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Funded from rent</h3><p>Assistance is drawn from rent paid during residency.</p></div></li>
+        <li class="sph-r" style="--d:.12s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Earned through completion</h3><p>Released at closing when a family successfully completes the program.</p></div></li>
+        <li class="sph-r" style="--d:.24s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Built for discipline</h3><p>The structure reinforces consistency, readiness, and follow-through.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMPAIGN ============ -->
+<section class="sph-sec sph-white" style="padding-top:24px">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">The 2027 Campaign</p>
+      <h2 class="sph-h2">$3 million to expand the pathway to ownership</h2>
+    </div>
+    <div class="sph-camp">
+      <div class="sph-donut sph-r" id="sph-donut">
+        <svg viewBox="0 0 220 220" aria-hidden="true">
+          <circle class="sph-dbg" cx="110" cy="110" r="80"/>
+          <circle class="sph-seg" data-k="0" cx="110" cy="110" r="80" stroke="#2d4a3e"/>
+          <circle class="sph-seg" data-k="1" cx="110" cy="110" r="80" stroke="#c89a3c"/>
+          <circle class="sph-seg" data-k="2" cx="110" cy="110" r="80" stroke="#7d978a"/>
+        </svg>
+        <div class="sph-donut-c"><b id="sph-donut-val">$3M</b><span id="sph-donut-lbl">Total Goal</span></div>
+      </div>
+      <div class="sph-r" style="--d:.15s">
+        <div class="sph-legend" id="sph-legend">
+          <button class="sph-leg" data-k="0">
+            <i class="sph-leg-dot" style="background:#2d4a3e"></i>
+            <div class="sph-leg-top"><b>$1,925,000</b><strong>Acquire six single-family homes</strong></div>
+            <p>Grows the portfolio from 11 to 17 units, preserving quality, affordability, and program readiness. <span class="sph-leg-pct">64% OF GOAL</span></p>
+          </button>
+          <button class="sph-leg" data-k="1">
+            <i class="sph-leg-dot" style="background:#c89a3c"></i>
+            <div class="sph-leg-top"><b>$975,000</b><strong>Renovate the 9-unit apartment building</strong></div>
+            <p>Full roof replacement · parking lot paving and repairs · kitchen and bathroom renovations in all units · interior paint and flooring. <span class="sph-leg-pct">33% OF GOAL</span></p>
+          </button>
+          <button class="sph-leg" data-k="2">
+            <i class="sph-leg-dot" style="background:#7d978a"></i>
+            <div class="sph-leg-top"><b>$100,000</b><strong>Program &amp; ownership support</strong></div>
+            <p>Down payment assistance pool · financial literacy and homeownership readiness programming. <span class="sph-leg-pct">3% OF GOAL</span></p>
+          </button>
+        </div>
+        <p class="sph-camp-note">This investment reduces long-term debt, increases charitable capacity, and ensures rent fuels future ownership, not interest payments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="sph-sec sph-dark">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">See Your Impact</p>
+      <h2 class="sph-h2">What could your gift build?</h2>
+      <p class="sph-lead">Move the slider or pick an amount to see where your investment lands in the 2027 campaign.</p>
+    </div>
+    <div class="sph-calc">
+      <div class="sph-calc-in sph-r">
+        <p class="sph-calc-label">Your gift</p>
+        <p class="sph-calc-amt" id="sph-amt">$10,000</p>
+        <label for="sph-range" class="sph-sprite">Gift amount</label>
+        <input class="sph-range" id="sph-range" type="range" min="0" max="1000" step="1" value="333">
+        <div class="sph-range-ends"><span>$1,000</span><span>$1,000,000</span></div>
+        <div class="sph-chips" id="sph-chips">
+          <button class="sph-chip" data-v="10000">$10K</button>
+          <button class="sph-chip" data-v="100000">$100K</button>
+          <button class="sph-chip" data-v="325000">$325K</button>
+          <button class="sph-chip" data-v="975000">$975K</button>
+        </div>
+      </div>
+      <div class="sph-calc-out sph-r" style="--d:.15s">
+        <div>
+          <p class="sph-out-tier" id="sph-tier">Sponsor a Family</p>
+          <p class="sph-out-say" id="sph-say">Covers one family’s full journey from entry to closing.</p>
+        </div>
+        <div class="sph-out-row">
+          <div class="sph-out"><b id="sph-fam">1</b><span>Family journeys funded</span></div>
+          <div class="sph-out"><b id="sph-pct">0.33%</b><span>Of the $3M goal</span></div>
+        </div>
+        <div class="sph-goalbar" aria-hidden="true"><i id="sph-bar"></i></div>
+        <p class="sph-calc-fine">Based on ~$10,000 per family journey and the 2027 campaign budget. Final allocation is confirmed with each partner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT IT MAKES POSSIBLE ============ -->
+<section class="sph-sec sph-forest">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">What Your Investment Makes Possible</p>
+      <h2 class="sph-h2">More homes. Less debt. More families home.</h2>
+    </div>
+    <div class="sph-poss">
+      <article class="sph-pcard sph-r">
+        <div class="sph-units sph-io" aria-hidden="true" id="sph-units"></div>
+        <b><span data-count="17">0</span></b>
+        <h3>Housing Units</h3>
+        <p>Up from 11, with six more single-family homes on the pathway to ownership.</p>
+      </article>
+      <article class="sph-pcard sph-r" style="--d:.1s">
+        <b>Less debt</b>
+        <h3>Long-term debt reduced</h3>
+        <p>Rent fuels coaching and down payments, not interest payments.</p>
+      </article>
+      <article class="sph-pcard sph-r" style="--d:.2s">
+        <b>Every home</b>
+        <h3>Serves many families</h3>
+        <p>As each family buys, the unit opens for the next one.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACCOUNTABILITY ============ -->
+<section class="sph-sec sph-cream">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Accountability</p>
+      <h2 class="sph-h2">Partners should see the pathway, and the progress</h2>
+      <p class="sph-lead">We measure both program activity and the outcomes that matter most to long-term family stability.</p>
+    </div>
+    <div class="sph-metrics">
+      <div class="sph-metric sph-r"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Families housed</div>
+      <div class="sph-metric sph-r" style="--d:.06s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Program completion</div>
+      <div class="sph-metric sph-r" style="--d:.12s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Savings &amp; debt progress</div>
+      <div class="sph-metric sph-r" style="--d:.18s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homeownership readiness</div>
+      <div class="sph-metric sph-r" style="--d:.24s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Grant assistance deployed</div>
+      <div class="sph-metric sph-r" style="--d:.3s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homes purchased</div>
+      <div class="sph-metric sph-r" style="--d:.36s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Post-purchase stability</div>
+      <div class="sph-metric sph-metric-hi sph-r" style="--d:.42s">Partner impact reports</div>
+    </div>
+    <p class="sph-acc-note sph-r">Campaign partners receive periodic impact updates, stories of progress, and clear reporting on how every dollar advances the mission.</p>
+  </div>
+</section>
+
+<!-- ============ LEADERSHIP ============ -->
+<section class="sph-sec sph-white">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Leadership &amp; Governance</p>
+      <h2 class="sph-h2">Led by people who are proven, present, and accountable</h2>
+    </div>
+    <div class="sph-lead-grid">
+      <article class="sph-leader sph-r">
+        <div class="sph-leader-head">
+          <div class="sph-avatar"><svg class="sph-ico"><use href="#sph-i-person"/></svg></div>
+          <div><h3>Kenneth Lock II</h3><p class="sph-leader-role">President, Evolve Community</p></div>
+        </div>
+        <ul>
+          <li>Senior Pastor of Evolve Church, 5,000+ weekend attendees, named the fastest-growing church in Wisconsin by SpeakLife Magazine</li>
+          <li>Chaplain to the Milwaukee Bucks, the youngest chaplain in NBA history</li>
+          <li>Vice President, Central City Church Planters</li>
+          <li>Author and speaker on ministry and business leadership</li>
+        </ul>
+      </article>
+      <aside class="sph-board sph-r" style="--d:.15s">
+        <div class="sph-board-head"><svg class="sph-ico"><use href="#sph-i-users"/></svg>Board of Directors</div>
+        <ul>
+          <li>Charmon Pittman</li>
+          <li>Amber Jackson</li>
+          <li>Jamal Washington</li>
+        </ul>
+        <p>The Single Parent Housing Initiative is a program of Evolve Community.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WAYS TO PARTNER ============ -->
+<section class="sph-sec sph-dark" id="sph-partner">
+  <div class="sph-wrap">
+    <div class="sph-head sph-r">
+      <p class="sph-eyebrow">Ways to Partner</p>
+      <h2 class="sph-h2">Capital can do more than fund housing. It can fund a future.</h2>
+      <p class="sph-lead">We invite foundations, businesses, churches, and individual donors to build this with us.</p>
+    </div>
+    <div class="sph-tiers">
+      <a class="sph-tier sph-tier-lead sph-r" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Lead%20the%20Renovation">
+        <svg class="sph-ico"><use href="#sph-i-tools"/></svg>
+        <b>$975,000</b>
+        <h3>Lead the Renovation</h3>
+        <p>Restore the 9-unit building that anchors the program.</p>
+        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+      <a class="sph-tier sph-r" style="--d:.1s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Name%20a%20Home">
+        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
+        <b>NAME A HOME</b>
+        <h3>Acquire a House</h3>
+        <p>Underwrite one of six single-family homes in the campaign.</p>
+        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+      <a class="sph-tier sph-r" style="--d:.2s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Ownership%20Pool">
+        <svg class="sph-ico"><use href="#sph-i-key"/></svg>
+        <b>$100,000</b>
+        <h3>Ownership Pool</h3>
+        <p>Seed down payment assistance and readiness training.</p>
+        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+      <a class="sph-tier sph-r" style="--d:.3s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Sponsor%20a%20Family">
+        <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
+        <b>$10,000</b>
+        <h3>Sponsor a Family</h3>
+        <p>Cover one family’s full journey from entry to closing.</p>
+        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+    </div>
+    <div class="sph-welcome sph-r"><b>Also welcome:</b><span>Multi-year commitments</span><span>Grant partnerships</span><span>Property, materials &amp; professional services</span></div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="sph-sec sph-dark" style="padding-top:24px">
+  <div class="sph-wrap">
+    <div class="sph-close">
+      <div class="sph-r">
+        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
+        <p class="sph-close-quote">A single parent should not have to choose between surviving today and building tomorrow.</p>
+        <h2>Help us turn stable housing into lasting ownership.</h2>
+        <p class="sph-next">NEXT STEP: Let’s schedule a conversation and a site visit.</p>
+        <div class="sph-hero-ctas">
+          <a class="sph-btn sph-btn-gold" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%3A%20Schedule%20a%20Conversation%20and%20Site%20Visit">Schedule a Visit <svg><use href="#sph-i-arrow"/></svg></a>
+          <a class="sph-btn sph-btn-ghost" target="_top" href="tel:4145104131">Call 414-510-4131</a>
+        </div>
+      </div>
+      <div class="sph-contact sph-r" style="--d:.15s">
+        <small>2027 Campaign Goal</small>
+        <span class="sph-big">$3M</span>
+        <hr>
+        <h3>Kenneth Lock II</h3>
+        <p class="sph-role">President, Evolve Community</p>
+        <a class="sph-clink" target="_top" href="tel:4145104131"><svg class="sph-ico"><use href="#sph-i-phone"/></svg>414-510-4131</a>
+        <a class="sph-clink" target="_top" href="mailto:Kennethlock@evolvenation.org"><svg class="sph-ico"><use href="#sph-i-mail"/></svg>Kennethlock@evolvenation.org</a>
+      </div>
+    </div>
+    <p class="sph-foot-tag">Evolve Community / Single Parent Housing Initiative</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+/* iframe height reporting: must be defined before evolveFooter.js loads */
+function sendHeight() {
+  var h = Math.max(
+    document.documentElement ? document.documentElement.scrollHeight : 0,
+    document.body ? document.body.scrollHeight : 0
+  );
+  try { window.parent.postMessage({ type: 'iframeHeight', height: h }, '*'); } catch (e) {}
+}
+
+(function () {
+  var root = document.getElementById('sph-root');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Height observers ---------- */
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(sendHeight).observe(document.body || root);
+  }
+  window.addEventListener('load', sendHeight);
+  setTimeout(sendHeight, 300);
+  setTimeout(sendHeight, 1000);
+
+  /* ---------- Formatting ---------- */
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+
+  /* ---------- Count-up ---------- */
+  function countUp(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    var to = parseFloat(el.getAttribute('data-count')) || 0;
+    var pre = el.getAttribute('data-prefix') || '';
+    if (reduce) { el.textContent = pre + fmt(to); return; }
+    var dur = 1700, t0 = null;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + fmt(to * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- 17 unit grid ---------- */
+  var units = document.getElementById('sph-units');
+  if (units) {
+    var html = '';
+    for (var u = 0; u < 17; u++) {
+      var isNew = u >= 11;
+      html += '<svg viewBox="0 0 24 24"' + (isNew ? ' class="sph-new" style="transition-delay:' + (0.4 + (u - 11) * 0.18) + 's"' : '') + '><use href="#sph-i-house"/></svg>';
+    }
+    units.innerHTML = html;
+  }
+
+  /* ---------- Month bar ---------- */
+  function runMonths(card) {
+    var bar = card.querySelector('.sph-months');
+    if (!bar || bar.dataset.done) return;
+    bar.dataset.done = '1';
+    var cells = bar.querySelectorAll('i');
+    cells.forEach(function (c, i) {
+      setTimeout(function () {
+        c.style.background = i === cells.length - 1 ? '#c89a3c' : '#365a4b';
+      }, reduce ? 0 : 150 * i + 200);
+    });
+  }
+
+  /* ---------- Donut ---------- */
+  var C = 2 * Math.PI * 80;
+  var donutData = [
+    { v: 1925000, label: 'Acquire six homes' },
+    { v: 975000, label: 'Renovate the 9-unit building' },
+    { v: 100000, label: 'Program &amp; ownership support' }
+  ];
+  var donut = document.getElementById('sph-donut');
+  var segs = donut ? donut.querySelectorAll('.sph-seg') : [];
+  function setDonut(open) {
+    var offset = 0;
+    segs.forEach(function (s, i) {
+      var len = (donutData[i].v / 3000000) * C;
+      var gap = 3;
+      var drawn = open ? Math.max(len - gap, 0) : 0;
+      s.style.strokeDasharray = drawn + ' ' + (C - drawn);
+      s.style.strokeDashoffset = (-offset).toString();
+      offset += len;
+    });
+  }
+  setDonut(false);
+  var dVal = document.getElementById('sph-donut-val');
+  var dLbl = document.getElementById('sph-donut-lbl');
+  var legs = document.querySelectorAll('.sph-leg');
+  function activate(k) {
+    if (!donut) return;
+    if (k === null) {
+      donut.classList.remove('has-active');
+      segs.forEach(function (s) { s.classList.remove('is-active'); });
+      legs.forEach(function (l) { l.classList.remove('is-active'); });
+      dVal.textContent = '$3M';
+      dLbl.innerHTML = 'Total Goal';
+      return;
+    }
+    donut.classList.add('has-active');
+    segs.forEach(function (s, i) { s.classList.toggle('is-active', i === k); });
+    legs.forEach(function (l, i) { l.classList.toggle('is-active', i === k); });
+    var v = donutData[k].v;
+    dVal.textContent = v >= 1000000 ? '$' + (v / 1000000).toFixed(2).replace(/0$/, '') + 'M' : '$' + Math.round(v / 1000) + 'K';
+    dLbl.innerHTML = donutData[k].label;
+  }
+  legs.forEach(function (l, i) {
+    l.addEventListener('mouseenter', function () { activate(i); });
+    l.addEventListener('focus', function () { activate(i); });
+    l.addEventListener('click', function () { activate(i); });
+  });
+  segs.forEach(function (s, i) {
+    s.addEventListener('mouseenter', function () { activate(i); });
+    s.addEventListener('click', function () { activate(i); });
+  });
+  var legendWrap = document.getElementById('sph-legend');
+  if (legendWrap) legendWrap.addEventListener('mouseleave', function () { activate(null); });
+  if (donut) donut.addEventListener('mouseleave', function () { activate(null); });
+
+  /* ---------- Flywheel ---------- */
+  var steps = [
+    { t: 'Capital acquires a home', d: 'Donor gifts buy and prepare housing, debt-free. Every home purchased with capital is a home that never carries an interest payment.' },
+    { t: 'A family pays affordable rent', d: 'Rent is consistent, on time, and part of the training. Paying well builds the habits that ownership requires.' },
+    { t: 'Rent funds the pathway', d: 'That rent pays for coaching, readiness training, and down payment support, so the program sustains itself.' },
+    { t: 'The family buys a home', d: 'Keys in hand. The unit opens for the next family, and the cycle begins again.' }
+  ];
+  var nodes = document.querySelectorAll('.sph-wnode');
+  var dots = document.querySelectorAll('#sph-dots button');
+  var rot = document.getElementById('sph-wheel-rot');
+  var body = document.getElementById('sph-panel-body');
+  var pNum = document.getElementById('sph-panel-num');
+  var pTitle = document.getElementById('sph-panel-title');
+  var pText = document.getElementById('sph-panel-text');
+  var pBar = document.getElementById('sph-panel-bar');
+  var cur = 0, angle = 0, timer = null, wheelLive = false, paused = false;
+
+  function show(i) {
+    var diff = (i - cur + 4) % 4;
+    angle += diff * 90;
+    cur = i;
+    if (rot) rot.style.transform = 'rotate(' + angle + 'deg)';
+    nodes.forEach(function (n, k) { n.classList.toggle('is-active', k === i); });
+    dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+    if (body) {
+      body.classList.add('is-swap');
+      setTimeout(function () {
+        pNum.textContent = 'Step ' + (i + 1) + ' of 4';
+        pTitle.textContent = steps[i].t;
+        pText.textContent = steps[i].d;
+        body.classList.remove('is-swap');
+        sendHeight();
+      }, 300);
+    }
+    restartBar();
+  }
+  function restartBar() {
+    if (!pBar) return;
+    pBar.classList.remove('is-run');
+    void pBar.offsetWidth;
+    if (!paused && !reduce && wheelLive) pBar.classList.add('is-run');
+  }
+  function startCycle() {
+    stopCycle();
+    if (reduce || paused) return;
+    timer = setInterval(function () { show((cur + 1) % 4); }, 4200);
+    restartBar();
+  }
+  function stopCycle() { if (timer) { clearInterval(timer); timer = null; } }
+  function userPick(i) {
+    paused = true;
+    stopCycle();
+    show(i);
+    if (pBar) pBar.classList.remove('is-run');
+    clearTimeout(userPick.t);
+    userPick.t = setTimeout(function () { paused = false; startCycle(); }, 9000);
+  }
+  nodes.forEach(function (n, i) { n.addEventListener('click', function () { userPick(i); }); });
+  dots.forEach(function (d, i) { d.addEventListener('click', function () { userPick(i); }); });
+  if (rot) rot.style.transform = 'rotate(0deg)';
+
+  /* ---------- Calculator ---------- */
+  var range = document.getElementById('sph-range');
+  var amtEl = document.getElementById('sph-amt');
+  var tierEl = document.getElementById('sph-tier');
+  var sayEl = document.getElementById('sph-say');
+  var famEl = document.getElementById('sph-fam');
+  var pctEl = document.getElementById('sph-pct');
+  var barEl = document.getElementById('sph-bar');
+  var chips = document.querySelectorAll('.sph-chip');
+  var HOME = 1925000 / 6;
+
+  function posToVal(p) {
+    var raw = 1000 * Math.pow(1000, p / 1000);
+    var r = raw < 20000 ? 500 : raw < 100000 ? 1000 : raw < 500000 ? 5000 : 25000;
+    return Math.min(1000000, Math.max(1000, Math.round(raw / r) * r));
+  }
+  function valToPos(v) { return Math.round(1000 * Math.log(v / 1000) / Math.log(1000)); }
+
+  function render(v) {
+    amtEl.textContent = '$' + fmt(v);
+    var fam = Math.floor(v / 10000);
+    famEl.textContent = fmt(fam);
+    var pct = v / 3000000 * 100;
+    pctEl.textContent = (pct < 1 ? pct.toFixed(2) : pct < 10 ? pct.toFixed(1) : Math.round(pct)) + '%';
+    barEl.style.width = Math.min(pct, 100) + '%';
+    var tier, say;
+    if (v >= 975000) {
+      tier = 'Lead the Renovation';
+      say = 'Restores the 9-unit building that anchors the program: new roof, paved lot, new kitchens and baths in every unit.';
+    } else if (v >= 320000) {
+      var homes = Math.min(6, Math.floor(v / HOME));
+      tier = 'Name a Home';
+      say = homes > 1
+        ? 'Underwrites ' + homes + ' of the six campaign homes, each one serving family after family.'
+        : 'Underwrites one of the six campaign homes, a home that serves family after family.';
+    } else if (v >= 100000) {
+      tier = 'Ownership Pool';
+      say = 'Seeds the full down payment assistance pool and readiness training for families crossing the threshold.';
+    } else if (v >= 10000) {
+      tier = 'Sponsor a Family';
+      say = fam > 1
+        ? 'Covers ' + fmt(fam) + ' families’ full journeys from entry to closing.'
+        : 'Covers one family’s full journey from entry to closing.';
+    } else {
+      tier = 'Join the Campaign';
+      say = 'Adds to the capital that buys homes and keeps them working for family after family.';
+    }
+    tierEl.textContent = tier;
+    sayEl.textContent = say;
+    range.style.setProperty('--p', (range.value / 10) + '%');
+    chips.forEach(function (c) { c.classList.toggle('is-active', parseInt(c.getAttribute('data-v'), 10) === v); });
+  }
+  if (range) {
+    range.addEventListener('input', function () { render(posToVal(parseInt(range.value, 10))); });
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var v = parseInt(c.getAttribute('data-v'), 10);
+        range.value = valToPos(v);
+        render(v);
+      });
+    });
+    range.value = valToPos(10000);
+    render(10000);
+  }
+
+  /* ---------- In-page jumps ---------- */
+  document.querySelectorAll('[data-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById(a.getAttribute('data-jump'));
+      if (!t) return;
+      e.preventDefault();
+      try { t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (err) { t.scrollIntoView(); }
+    });
+  });
+
+  /* ---------- Reveal + triggers ---------- */
+  function onIn(el) {
+    el.classList.add('is-in');
+    el.querySelectorAll('[data-count]').forEach(countUp);
+    if (el.hasAttribute('data-count')) countUp(el);
+    var pc = el.classList.contains('sph-proof-card') ? el : el.querySelector('.sph-proof-card');
+    if (pc) runMonths(pc);
+    if (el.id === 'sph-donut') setDonut(true);
+    if (el.id === 'sph-wheel' && !wheelLive) { wheelLive = true; startCycle(); }
+  }
+  var targets = root.querySelectorAll('.sph-r, .sph-io, .sph-hero-stat');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { onIn(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.18 });
+    targets.forEach(function (t) { io.observe(t); });
+    /* Safety net: if the observer never fires inside the embed, show everything */
+    setTimeout(function () {
+      if (!root.querySelector('.is-in')) targets.forEach(onIn);
+    }, 2500);
+  } else {
+    targets.forEach(onIn);
+  }
+
+  sendHeight();
+})();
+</script>
+
+<!-- Shared footer -->
+<div id="evolve-footer-mount"></div>
+<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js?v=1"></script>
