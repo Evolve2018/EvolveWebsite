@@ -1,7 +1,10 @@
 <!-- ============================================================
-     Evolve Community · Single Parent Housing Initiative
-     Donor & Partner page (prospectus theme)
+     Evolve Community · Single Parent Housing Initiative (SPHI)
+     Six-page site in one file: Home, Our Approach, Our Impact,
+     2027 Campaign, About Us, Partner With Us.
      Fragment for GitHub Pages + TCC iframe embed. Class prefix: sph-
+     Deep link a starting page with ?view=campaign or #campaign
+     Uses its own SPHI footer (no shared evolveFooter.js).
      ============================================================ -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -10,6 +13,7 @@
   --ink:#1b201e;
   --ink-2:#252d2a;
   --ink-3:#2b3431;
+  --ink-4:#141816;
   --green:#2d4a3e;
   --green-2:#365a4b;
   --gold:#c89a3c;
@@ -31,8 +35,8 @@
 }
 .sph *,.sph *::before,.sph *::after{box-sizing:border-box}
 .sph img,.sph svg{display:block}
-.sph a{color:inherit}
-.sph button{font-family:inherit}
+.sph :where(a){color:inherit}
+.sph button,.sph input,.sph select,.sph textarea{font-family:inherit}
 
 .sph-wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 .sph-sec{padding:104px 0;position:relative}
@@ -46,13 +50,15 @@
 .sph-lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:760px;line-height:1.6;margin:0}
 .sph-dark .sph-lead,.sph-forest .sph-lead{color:#cfd6d1}
 .sph-head{margin-bottom:56px}
+.sph-head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:56px}
+.sph-head-row .sph-head{margin-bottom:0}
 
-/* Icon sprite */
 .sph-sprite{position:absolute;width:0;height:0;overflow:hidden}
 .sph-ico{width:28px;height:28px;color:var(--gold);flex:none}
+.sph-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Buttons */
-.sph-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:12px;font-weight:700;font-size:15px;letter-spacing:.02em;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease}
+.sph-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 26px;border-radius:12px;font-weight:700;font-size:15px;letter-spacing:.02em;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease, border-color .25s ease}
 .sph-btn svg{width:18px;height:18px;transition:transform .25s ease}
 .sph-btn:hover{transform:translateY(-2px)}
 .sph-btn:hover svg{transform:translateX(4px)}
@@ -60,26 +66,55 @@
 .sph-btn-gold:hover{background:var(--gold-2);box-shadow:0 12px 28px rgba(200,154,60,.35)}
 .sph-btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
 .sph-btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.sph-btn:focus-visible,.sph button:focus-visible,.sph a:focus-visible,.sph input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.sph-btn-ink{background:var(--ink);color:#fff}
+.sph-btn-ink:hover{background:var(--green);box-shadow:0 12px 28px rgba(27,32,30,.25)}
+.sph-btn-line{background:transparent;color:var(--ink);border-color:rgba(27,32,30,.2)}
+.sph-btn-line:hover{border-color:var(--green);color:var(--green)}
+.sph-btns{display:flex;flex-wrap:wrap;gap:14px}
+.sph-btn:focus-visible,.sph button:focus-visible,.sph a:focus-visible,.sph input:focus-visible,.sph select:focus-visible,.sph textarea:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
 /* Reveal */
 .sph-js .sph-r{opacity:0;transform:translateY(30px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .sph-js .sph-r.is-in{opacity:1;transform:none}
 
-/* ---------- HERO ---------- */
+/* Views */
+.sph-view{display:none}
+.sph-view.is-active{display:block;animation:sph-viewin .5s ease}
+@keyframes sph-viewin{from{opacity:0}to{opacity:1}}
+
+/* ---------- HEADER ---------- */
+.sph-header{background:var(--ink);color:#fff;border-bottom:1px solid rgba(255,255,255,.07);position:relative;z-index:5}
+.sph-header-in{display:flex;align-items:center;gap:28px;min-height:84px}
+.sph-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:#fff;flex:none;margin-right:auto}
+.sph-brand svg{width:44px;height:44px}
+.sph-brand b{display:block;font-size:20px;font-weight:900;letter-spacing:.06em;line-height:1}
+.sph-brand small{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--sage-2);margin-top:4px;text-transform:uppercase}
+.sph-nav{display:flex;align-items:center;gap:6px;list-style:none;margin:0;padding:0}
+.sph-nav a{display:block;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#cfd6d1;padding:12px 12px;position:relative;transition:color .25s ease}
+.sph-nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.sph-nav a:hover{color:#fff}
+.sph-nav a:hover::after,.sph-nav a[aria-current="page"]::after{transform:scaleX(1)}
+.sph-nav a[aria-current="page"]{color:#fff}
+.sph-header .sph-btn{padding:13px 22px;font-size:14px;flex:none}
+.sph-menu-btn{display:none;width:46px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;cursor:pointer;place-items:center;padding:0}
+.sph-menu-btn svg{width:24px;height:24px}
+.sph-menu-btn .sph-x{display:none}
+.sph-menu-btn[aria-expanded="true"] .sph-x{display:block}
+.sph-menu-btn[aria-expanded="true"] .sph-bars{display:none}
+
+/* ---------- HOME HERO ---------- */
 .sph-hero{display:grid;grid-template-columns:1.6fr 1fr;background:var(--ink);color:#fff;position:relative}
-.sph-hero-main{position:relative;padding:120px 64px 64px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate}
+.sph-hero-main{position:relative;padding:104px 64px 72px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;isolation:isolate}
 .sph-hero-main::before{content:"";position:absolute;width:620px;height:620px;left:-180px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,60,.16),rgba(200,154,60,0) 65%);z-index:-1;animation:sph-drift 14s ease-in-out infinite alternate}
-.sph-hero-main::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);z-index:-2}
+.sph-hero-main::after,.sph-phero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 75%);z-index:-2}
 @keyframes sph-drift{to{transform:translate(160px,120px)}}
-.sph-hero h1{font-size:clamp(44px,6.6vw,88px);font-weight:800;letter-spacing:-.035em;line-height:1;margin:0 0 28px}
+.sph-hero h1{font-size:clamp(42px,6vw,80px);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0 0 28px}
 .sph-hero h1 span{display:block}
-.sph-hero-sub{font-size:clamp(17px,1.8vw,21px);color:#d9ddd9;max-width:620px;line-height:1.55;margin:0 0 38px}
-.sph-goal{display:inline-flex;align-items:baseline;gap:14px;background:var(--gold);color:var(--ink);padding:20px 28px;border-radius:14px;margin-bottom:34px;align-self:flex-start;box-shadow:0 18px 40px rgba(200,154,60,.22)}
-.sph-goal b{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.01em}
-.sph-goal small{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.sph-hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
-.sph-hero-tag{margin-top:72px;font-size:13px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sage)}
+.sph-hero h1 span:nth-child(2){color:var(--gold)}
+.sph-hero-sub{font-size:clamp(17px,1.8vw,21px);color:#d9ddd9;max-width:640px;line-height:1.55;margin:0 0 34px}
+.sph-label{display:inline-flex;align-items:center;gap:12px;align-self:flex-start;background:rgba(200,154,60,.12);border:1px solid rgba(200,154,60,.45);color:var(--gold-2);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px}
+.sph-label i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(200,154,60,.6);animation:sph-ping 2.4s ease-out infinite}
+@keyframes sph-ping{0%{box-shadow:0 0 0 0 rgba(200,154,60,.6)}80%,100%{box-shadow:0 0 0 12px rgba(200,154,60,0)}}
 .sph-hero-side{background:var(--green);display:flex;flex-direction:column;justify-content:flex-end;padding:40px;min-height:560px;position:relative;overflow:hidden;isolation:isolate}
 .sph-hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:56% 40%;z-index:-2;transform:scale(1.1);animation:sph-kenburns 14s cubic-bezier(.2,.6,.3,1) forwards}
 @keyframes sph-kenburns{to{transform:scale(1)}}
@@ -91,44 +126,37 @@
 .sph-hero-stat b{display:block;font-size:clamp(56px,5.6vw,80px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--gold)}
 .sph-hero-stat span{font-size:17px;color:#e6ebe7;line-height:1.4}
 
-/* Photo band */
-.sph-band{position:relative;margin:0 0 64px;border-radius:22px;overflow:hidden;aspect-ratio:21/9;background:var(--green);isolation:isolate}
-.sph-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 38%;z-index:-2;transform:scale(1.12);transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
-.sph-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(27,32,30,.88) 0%,rgba(27,32,30,.45) 38%,rgba(27,32,30,0) 65%)}
-.sph-js .sph-band.sph-r{opacity:1;transform:none}
-.sph-js .sph-band img{clip-path:inset(0 0 0 100%);transition:clip-path 1.3s cubic-bezier(.7,0,.2,1), transform 1.8s cubic-bezier(.2,.7,.2,1)}
-.sph-js .sph-band figcaption{opacity:0;transform:translateY(16px);transition:opacity .8s ease .9s, transform .8s ease .9s}
-.sph-band.is-in img{clip-path:inset(0 0 0 0);transform:scale(1)}
-.sph-band.is-in figcaption{opacity:1;transform:none}
-.sph-band figcaption{position:absolute;left:48px;bottom:44px;max-width:420px}
-.sph-band figcaption b{display:block;font-size:clamp(22px,2.4vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.01em}
-.sph-band.no-img img{display:none}
-
-/* Proof photo */
-.sph-proof-media{position:relative}
-.sph-proof-photo{margin:0;border-radius:22px;overflow:hidden;aspect-ratio:1/1;background:var(--ink);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.25)}
-.sph-proof-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;transition:transform 1.2s ease}
-.sph-proof-media:hover .sph-proof-photo img{transform:scale(1.04)}
-.sph-proof-photo.no-img img{display:none}
-.sph-pill{position:absolute;top:22px;left:22px;background:var(--gold);color:var(--ink);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px}
-.sph-pill svg{width:16px;height:16px}
+/* ---------- PAGE HERO ---------- */
+.sph-phero{background:var(--ink);color:#fff;padding:96px 0 88px;position:relative;overflow:hidden;isolation:isolate}
+.sph-phero::before{content:"";position:absolute;width:640px;height:640px;right:-200px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,60,.18),rgba(200,154,60,0) 65%);z-index:-1;animation:sph-drift 16s ease-in-out infinite alternate-reverse}
+.sph-crumb{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin:0 0 22px}
+.sph-crumb a{color:var(--sage);text-decoration:none}
+.sph-crumb a:hover{color:var(--gold)}
+.sph-crumb span{color:var(--gold)}
+.sph-phero h1{font-size:clamp(38px,5.4vw,70px);font-weight:800;letter-spacing:-.035em;line-height:1.04;margin:0 0 22px;max-width:960px}
+.sph-phero h1 em{font-style:normal;color:var(--gold)}
+.sph-phero .sph-lead{color:#cfd6d1;max-width:720px}
+.sph-phero .sph-btns{margin-top:34px}
+.sph-goal-big{margin-top:44px;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px}
+.sph-goal-big b{font-size:clamp(56px,9vw,128px);font-weight:900;letter-spacing:-.045em;line-height:.95;color:var(--gold);font-variant-numeric:tabular-nums}
+.sph-goal-big span{font-size:15px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-2)}
 
 /* ---------- NEED ---------- */
 .sph-need{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.sph-ratio{text-align:left}
 .sph-ratio-big{font-size:clamp(84px,12vw,168px);font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--green);margin:0}
 .sph-ratio-big em{font-style:normal;color:var(--gold)}
 .sph-ratio-cap{font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:16px 0 30px}
 .sph-ratio-row{display:flex;gap:18px}
 .sph-ratio-row svg{width:clamp(58px,8vw,92px);height:auto;color:var(--line);transition:color .8s ease, transform .8s cubic-bezier(.3,1.6,.5,1)}
 .sph-ratio-row.is-in svg:first-child{color:var(--gold);transform:translateY(-8px)}
-.sph-need-card{background:var(--cream);border-radius:20px;padding:44px;box-shadow:var(--shadow)}
-.sph-need-card p{font-size:19px;line-height:1.55;margin:0 0 22px}
-.sph-need-card strong{font-size:30px;font-weight:800;color:var(--green);letter-spacing:-.01em}
-.sph-need-card .sph-accent{font-weight:800;color:var(--green);margin:0}
+.sph-need-list{display:grid;gap:18px}
+.sph-need-item{background:var(--cream);border-radius:18px;padding:28px 30px;box-shadow:var(--shadow);display:flex;gap:20px;align-items:flex-start}
+.sph-need-item .sph-ico{width:34px;height:34px;margin-top:2px}
+.sph-need-item h3{font-size:19px;font-weight:800;margin:0 0 6px;color:var(--green)}
+.sph-need-item p{margin:0;font-size:16.5px;color:var(--muted);line-height:1.55}
 .sph-src{margin-top:40px;font-size:13px;font-style:italic;color:var(--muted)}
 
-/* ---------- MISSION ---------- */
+/* ---------- MISSION CARDS ---------- */
 .sph-cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .sph-mcard{background:var(--white);border-radius:20px;padding:42px 40px 46px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .35s ease, box-shadow .35s ease}
 .sph-mcard::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--gold);transition:width .5s ease}
@@ -142,6 +170,8 @@
 .sph-num{font-size:18px;font-weight:800;color:var(--gold)}
 .sph-mcard h3{font-size:28px;font-weight:800;letter-spacing:-.01em;margin:0 0 12px}
 .sph-mcard p{font-size:17px;color:var(--muted);margin:0;line-height:1.55}
+.sph-cream .sph-mcard{background:var(--white)}
+.sph-white .sph-mcard{background:var(--cream)}
 
 /* ---------- PATHWAY ---------- */
 .sph-path{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;list-style:none;margin:0;padding:0}
@@ -149,7 +179,7 @@
 .sph-path-fill{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold));transition:width 2.2s cubic-bezier(.5,0,.2,1) .2s}
 .sph-path.is-in .sph-path-fill{width:100%}
 .sph-step{text-align:center;position:relative;z-index:1}
-.sph-node{width:100px;height:100px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:800;margin:0 auto 26px;box-shadow:0 0 0 8px var(--white);transform:scale(.4);opacity:0;transition:transform .7s cubic-bezier(.3,1.6,.5,1), opacity .5s ease, background .3s ease}
+.sph-node{width:100px;height:100px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:800;margin:0 auto 26px;box-shadow:0 0 0 8px var(--white);transform:scale(.4);opacity:0;transition:transform .7s cubic-bezier(.3,1.6,.5,1), opacity .5s ease}
 .sph-step:last-child .sph-node{background:var(--gold);color:var(--ink)}
 .sph-path.is-in .sph-node{transform:scale(1);opacity:1}
 .sph-path.is-in .sph-step:nth-child(2) .sph-node{transition-delay:.15s}
@@ -157,7 +187,6 @@
 .sph-path.is-in .sph-step:nth-child(4) .sph-node{transition-delay:.95s}
 .sph-path.is-in .sph-step:nth-child(5) .sph-node{transition-delay:1.35s}
 .sph-path.is-in .sph-step:nth-child(6) .sph-node{transition-delay:1.75s}
-.sph-step:hover .sph-node{transform:scale(1.08)}
 .sph-step h3{font-size:17px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;margin:0 0 8px}
 .sph-step p{font-size:15.5px;color:var(--muted);margin:0;line-height:1.5}
 .sph-banner{margin-top:64px;background:var(--ink);color:#fff;border-radius:18px;padding:30px 40px;font-size:clamp(17px,1.8vw,21px);text-align:center;line-height:1.5}
@@ -179,9 +208,22 @@
 .sph-checks li span{transition:color .3s ease}
 .sph-checks li:hover span{color:var(--gold)}
 
-/* ---------- PROGRESS ---------- */
+/* Photo band */
+.sph-band{position:relative;margin:0 0 64px;border-radius:22px;overflow:hidden;aspect-ratio:21/9;background:var(--green);isolation:isolate}
+.sph-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 38%;z-index:-2;transform:scale(1.12);transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.sph-band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(27,32,30,.88) 0%,rgba(27,32,30,.45) 38%,rgba(27,32,30,0) 65%)}
+.sph-js .sph-band.sph-r{opacity:1;transform:none}
+.sph-js .sph-band img{clip-path:inset(0 0 0 100%);transition:clip-path 1.3s cubic-bezier(.7,0,.2,1), transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.sph-js .sph-band figcaption{opacity:0;transform:translateY(16px);transition:opacity .8s ease .9s, transform .8s ease .9s}
+.sph-band.is-in img{clip-path:inset(0 0 0 0);transform:scale(1)}
+.sph-band.is-in figcaption{opacity:1;transform:none}
+.sph-band figcaption{position:absolute;left:48px;bottom:44px;max-width:420px;color:#fff}
+.sph-band figcaption b{display:block;font-size:clamp(22px,2.4vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.01em}
+.sph-band.no-img img{display:none}
+
+/* ---------- STATS ---------- */
 .sph-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-.sph-stat{background:var(--white);border-radius:20px;padding:40px 36px 44px;box-shadow:var(--shadow);transition:transform .35s ease, box-shadow .35s ease}
+.sph-stat{background:var(--white);border-radius:20px;padding:40px 36px 44px;box-shadow:var(--shadow);transition:transform .35s ease, box-shadow .35s ease;position:relative}
 .sph-stat:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .sph-stat .sph-ico{width:46px;height:46px;margin-bottom:34px}
 .sph-stat b{display:block;font-size:clamp(54px,5.4vw,78px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--green);margin-bottom:28px}
@@ -190,6 +232,11 @@
 .sph-stat-dark{background:var(--ink);color:#fff}
 .sph-stat-dark b{color:var(--gold)}
 .sph-stat-dark p{color:#cfd6d1}
+.sph-white .sph-stat:not(.sph-stat-dark){background:var(--cream)}
+.sph-tag{position:absolute;top:22px;right:22px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:6px 11px;border-radius:999px;background:rgba(45,74,62,.1);color:var(--green)}
+.sph-stat-dark .sph-tag{background:rgba(200,154,60,.16);color:var(--gold-2)}
+.sph-since{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--green);background:var(--white);border-radius:999px;padding:10px 18px;box-shadow:var(--shadow)}
+.sph-since i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
 
 /* ---------- PROOF ---------- */
 .sph-proof{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
@@ -198,16 +245,20 @@
 .sph-quote mark{background:linear-gradient(transparent 62%,rgba(200,154,60,.45) 62%);color:inherit;background-size:0 100%;background-repeat:no-repeat;transition:background-size 1.2s ease .6s}
 .sph-r.is-in .sph-quote mark{background-size:100% 100%}
 .sph-proof-note{font-size:18px;color:#d5ddd8;max-width:600px;margin:0;line-height:1.55}
-.sph-proof-card{background:var(--ink);border-radius:20px;padding:30px 32px;box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;width:86%;margin:-96px 0 0 auto;border-top:4px solid var(--gold)}
+.sph-proof-media{position:relative}
+.sph-proof-photo{margin:0;border-radius:22px;overflow:hidden;aspect-ratio:1/1;background:var(--ink);position:relative;box-shadow:0 30px 60px rgba(0,0,0,.25)}
+.sph-proof-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 34%;transition:transform 1.2s ease}
+.sph-proof-media:hover .sph-proof-photo img{transform:scale(1.04)}
+.sph-proof-photo.no-img img{display:none}
+.sph-pill{position:absolute;top:22px;left:22px;background:var(--gold);color:var(--ink);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:9px 16px;border-radius:999px;display:inline-flex;align-items:center;gap:8px}
+.sph-pill svg{width:16px;height:16px}
+.sph-proof-card{background:var(--ink);border-radius:20px;padding:30px 32px;box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;width:86%;margin:-96px 0 0 auto;border-top:4px solid var(--gold);color:#fff}
 .sph-proof-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .sph-proof-card b{display:block;font-size:clamp(46px,4.4vw,64px);font-weight:800;line-height:1;letter-spacing:-.03em}
 .sph-proof-card .sph-gold{color:var(--gold)}
 .sph-proof-card small{display:block;font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-top:12px}
 .sph-months{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin:24px 0 0}
 .sph-months i{height:10px;border-radius:3px;background:rgba(255,255,255,.1);transition:background .3s ease}
-.sph-months.is-on i{background:var(--green-2)}
-.sph-months.is-on i:last-child{background:var(--gold)}
-.sph-divider{height:1px;background:rgba(125,151,138,.35);margin:34px 0}
 
 /* ---------- MODEL / FLYWHEEL ---------- */
 .sph-model{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:64px;align-items:center}
@@ -262,7 +313,25 @@
 .sph-dpa-list h3{font-size:22px;font-weight:800;margin:0 0 6px}
 .sph-dpa-list p{font-size:17px;color:var(--muted);margin:0;line-height:1.5}
 
-/* ---------- CAMPAIGN ---------- */
+/* ---------- HOME CAMPAIGN PREVIEW ---------- */
+.sph-alloc{background:var(--white);border-radius:24px;padding:44px;box-shadow:var(--shadow)}
+.sph-alloc-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:22px}
+.sph-alloc-top b{font-size:clamp(40px,4.6vw,60px);font-weight:900;letter-spacing:-.035em;line-height:1;color:var(--green)}
+.sph-alloc-top span{font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.sph-alloc-bar{display:flex;gap:4px;height:22px;border-radius:12px;overflow:hidden;background:var(--cream)}
+.sph-alloc-bar i{display:block;height:100%;width:0;transition:width 1.6s cubic-bezier(.5,0,.2,1)}
+.sph-alloc-bar i:nth-child(2){transition-delay:.25s}
+.sph-alloc-bar i:nth-child(3){transition-delay:.5s}
+.sph-alloc.is-in .sph-alloc-bar i{width:var(--w)}
+.sph-alloc-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.sph-alloc-row{display:grid;grid-template-columns:14px 1fr;gap:4px 14px}
+.sph-alloc-row i{width:14px;height:14px;border-radius:50%;margin-top:9px}
+.sph-alloc-row b{font-size:clamp(24px,2.4vw,30px);font-weight:800;letter-spacing:-.01em}
+.sph-alloc-row p{grid-column:2;margin:0;font-size:16px;color:var(--muted);line-height:1.45}
+.sph-alloc-foot{margin-top:34px;padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px}
+.sph-alloc-foot p{margin:0;font-size:16px;color:var(--muted);max-width:560px}
+
+/* ---------- CAMPAIGN DONUT ---------- */
 .sph-camp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:64px;align-items:center}
 .sph-donut{position:relative;max-width:400px;width:100%;margin:0 auto}
 .sph-donut svg{width:100%;height:auto;transform:rotate(-90deg)}
@@ -283,6 +352,15 @@
 .sph-leg p{grid-column:2;margin:0;font-size:16px;color:var(--muted);line-height:1.5}
 .sph-leg-pct{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--gold)}
 .sph-camp-note{margin-top:22px;background:var(--cream);border-radius:14px;padding:20px 24px;font-style:italic;font-size:16px;line-height:1.5;box-shadow:var(--shadow)}
+
+/* ---------- OUTCOME CARDS ---------- */
+.sph-outs{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.sph-out-card{background:var(--ink);border-radius:20px;padding:36px 30px;transition:transform .35s ease}
+.sph-out-card:hover{transform:translateY(-6px)}
+.sph-out-card .sph-ico{width:44px;height:44px;margin-bottom:28px}
+.sph-out-card b{display:block;font-size:clamp(34px,3.4vw,46px);font-weight:800;letter-spacing:-.025em;line-height:1;color:var(--gold);margin-bottom:18px}
+.sph-out-card h3{font-size:15px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px}
+.sph-out-card p{font-size:16px;color:#d3dad5;margin:0;line-height:1.5}
 
 /* ---------- CALCULATOR ---------- */
 .sph-calc{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:stretch}
@@ -308,7 +386,7 @@
 .sph-out-say{font-size:20px;font-weight:600;line-height:1.45;margin:0;min-height:58px}
 .sph-calc-fine{font-size:13px;color:var(--sage-2);margin:auto 0 0;line-height:1.5}
 
-/* ---------- POSSIBLE ---------- */
+/* ---------- IMPACT: POSSIBLE ---------- */
 .sph-poss{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:22px}
 .sph-pcard{background:var(--ink);border-radius:22px;padding:44px 40px;transition:transform .35s ease}
 .sph-pcard:hover{transform:translateY(-6px)}
@@ -321,14 +399,24 @@
 .sph-units.is-in svg.sph-new{color:var(--gold);transform:translateY(-3px)}
 
 /* ---------- ACCOUNTABILITY ---------- */
+.sph-key{display:flex;flex-wrap:wrap;gap:12px 26px;margin:-24px 0 36px;font-size:14px;font-weight:700;color:var(--muted)}
+.sph-key span{display:inline-flex;align-items:center;gap:10px}
+.sph-key i{width:12px;height:12px;border-radius:3px}
 .sph-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.sph-metric{background:var(--white);border-radius:16px;padding:28px 26px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);font-size:18px;font-weight:700;line-height:1.25;transition:transform .3s ease, box-shadow .3s ease}
+.sph-metric{background:var(--white);border-radius:16px;padding:28px 26px;display:flex;align-items:center;gap:18px;box-shadow:var(--shadow);font-size:18px;font-weight:700;line-height:1.25;transition:transform .3s ease, box-shadow .3s ease;border-left:4px solid var(--line)}
 .sph-metric:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .sph-metric .sph-ico{width:40px;height:40px}
-.sph-metric-hi{background:var(--green);color:#fff;justify-content:center;text-align:center}
+.sph-metric-hi{background:var(--green);color:#fff;justify-content:center;text-align:center;border-left-color:var(--gold)}
 .sph-acc-note{margin:44px 0 0;font-size:19px;line-height:1.55;max-width:880px}
 
-/* ---------- LEADERSHIP ---------- */
+/* ---------- ABOUT ---------- */
+.sph-about{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.sph-about p.sph-body{font-size:clamp(18px,1.8vw,21px);line-height:1.6;margin:0 0 20px}
+.sph-facts{background:var(--ink);color:#fff;border-radius:22px;padding:14px 36px;list-style:none;margin:0}
+.sph-facts li{display:flex;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid rgba(125,151,138,.28);font-size:17px}
+.sph-facts li:last-child{border-bottom:0}
+.sph-facts span{color:var(--sage);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;padding-top:3px}
+.sph-facts b{text-align:right;font-weight:700}
 .sph-lead-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px}
 .sph-leader{background:var(--cream);border-radius:22px;padding:48px;box-shadow:var(--shadow)}
 .sph-leader-head{display:flex;gap:20px;align-items:center;margin-bottom:30px}
@@ -346,10 +434,16 @@
 .sph-board li{font-size:22px;font-weight:700;padding:20px 0;border-bottom:1px solid rgba(125,151,138,.3);transition:padding .3s ease, color .3s ease}
 .sph-board li:hover{padding-left:10px;color:var(--gold-2)}
 .sph-board p{margin:auto 0 0;padding-top:28px;font-size:15px;color:var(--sage);line-height:1.5}
+.sph-commit{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.sph-ccard{background:var(--white);border-radius:20px;padding:36px 30px;box-shadow:var(--shadow);border-top:4px solid var(--gold);transition:transform .35s ease, box-shadow .35s ease}
+.sph-ccard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.sph-ccard .sph-ico{width:44px;height:44px;margin-bottom:24px}
+.sph-ccard h3{font-size:20px;font-weight:800;margin:0 0 10px}
+.sph-ccard p{margin:0;font-size:16px;color:var(--muted);line-height:1.5}
 
-/* ---------- PARTNER ---------- */
+/* ---------- PARTNER TIERS ---------- */
 .sph-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.sph-tier{position:relative;display:flex;flex-direction:column;background:var(--ink-3);border-radius:20px;padding:40px 32px 32px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.05);overflow:hidden;isolation:isolate;transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease}
+.sph-tier{position:relative;display:flex;flex-direction:column;background:var(--ink-3);border-radius:20px;padding:40px 32px 32px;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.05);overflow:hidden;isolation:isolate;transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;text-align:left;cursor:pointer;font:inherit}
 .sph-tier::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(200,154,60,.22),transparent 60%);opacity:0;transition:opacity .4s ease;z-index:-1}
 .sph-tier:hover{transform:translateY(-8px);box-shadow:0 28px 50px rgba(0,0,0,.4);border-color:rgba(200,154,60,.45)}
 .sph-tier:hover::before{opacity:1}
@@ -365,50 +459,135 @@
 .sph-welcome b{color:var(--gold);margin-right:6px}
 .sph-welcome span{border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:9px 18px;color:#e2e7e3}
 
-/* ---------- CLOSE ---------- */
-.sph-close{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:center}
-.sph-close .sph-ico{width:68px;height:68px;margin-bottom:30px}
-.sph-close-quote{font-size:clamp(18px,1.9vw,22px);font-style:italic;color:var(--sage);margin:0 0 34px;max-width:620px;line-height:1.5}
-.sph-close h2{font-size:clamp(38px,5vw,64px);font-weight:800;letter-spacing:-.03em;line-height:1.04;margin:0 0 30px}
-.sph-next{font-size:18px;font-weight:800;color:var(--gold);margin:0 0 30px}
-.sph-contact{background:var(--green);border-radius:22px;padding:48px 44px}
-.sph-contact small{display:block;font-size:13px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-2)}
-.sph-contact .sph-big{display:block;font-size:clamp(64px,7vw,96px);font-weight:800;color:var(--gold);letter-spacing:-.03em;line-height:1;margin:6px 0 34px}
-.sph-contact hr{border:0;height:1px;background:rgba(169,187,177,.35);margin:0 0 30px}
-.sph-contact h3{font-size:26px;font-weight:800;margin:0}
-.sph-contact .sph-role{color:#d3dbd6;font-size:17px;margin:2px 0 30px}
-.sph-clink{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;font-size:18px;padding:12px 0;transition:color .25s ease, transform .25s ease;word-break:break-word}
-.sph-clink .sph-ico{width:30px;height:30px;margin:0}
+/* ---------- PARTNER WAYS ---------- */
+.sph-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sph-way{display:flex;gap:20px;align-items:flex-start;background:var(--cream);border:2px solid transparent;border-radius:20px;padding:30px 28px;text-align:left;cursor:pointer;color:inherit;font:inherit;transition:transform .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease}
+.sph-way:hover{transform:translateY(-5px);border-color:var(--gold);background:var(--white);box-shadow:var(--shadow-lg)}
+.sph-way-ico{width:58px;height:58px;border-radius:16px;background:var(--ink);display:grid;place-items:center;flex:none;transition:background .3s ease}
+.sph-way-ico .sph-ico{width:28px;height:28px}
+.sph-way:hover .sph-way-ico{background:var(--green)}
+.sph-way h3{font-size:19px;font-weight:800;margin:4px 0 8px}
+.sph-way p{margin:0 0 14px;font-size:16px;color:var(--muted);line-height:1.5}
+.sph-way span{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--green);display:inline-flex;align-items:center;gap:6px}
+.sph-way span svg{width:14px;height:14px;transition:transform .3s ease}
+.sph-way:hover span svg{transform:translateX(4px)}
+
+/* ---------- FORM ---------- */
+.sph-contact-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:28px;align-items:start}
+.sph-form{background:var(--white);border-radius:24px;padding:44px;box-shadow:var(--shadow-lg)}
+.sph-form h3{font-size:28px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
+.sph-form > p{margin:0 0 30px;color:var(--muted);font-size:16px}
+.sph-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 18px}
+.sph-field{display:flex;flex-direction:column;gap:8px}
+.sph-field-full{grid-column:1 / -1}
+.sph-field label{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.sph-field label em{font-style:normal;font-weight:600;letter-spacing:.04em;text-transform:none;color:var(--muted)}
+.sph-field input,.sph-field select,.sph-field textarea{width:100%;border:1.5px solid var(--line);background:var(--cream);border-radius:12px;padding:14px 16px;font-size:16px;color:var(--ink);transition:border-color .25s ease, background .25s ease, box-shadow .25s ease}
+.sph-field textarea{min-height:140px;resize:vertical}
+.sph-field select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--green) 50%),linear-gradient(135deg,var(--green) 50%,transparent 50%);background-position:calc(100% - 22px) 52%,calc(100% - 16px) 52%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+.sph-field input:focus,.sph-field select:focus,.sph-field textarea:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 4px rgba(200,154,60,.15);outline:none}
+.sph-field.has-err input,.sph-field.has-err select,.sph-field.has-err textarea{border-color:#b54a3a}
+.sph-err{font-size:13px;color:#b54a3a;font-weight:600;min-height:0}
+.sph-form-foot{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:28px}
+.sph-form-foot small{color:var(--muted);font-size:13px;max-width:340px;line-height:1.45}
+.sph-done{display:none;margin-top:22px;background:rgba(45,74,62,.08);border:1.5px solid rgba(45,74,62,.25);border-radius:14px;padding:18px 20px;font-size:16px;line-height:1.5;color:var(--green)}
+.sph-done.is-on{display:block;animation:sph-viewin .4s ease}
+.sph-side{display:grid;gap:22px}
+.sph-direct{background:var(--green);color:#fff;border-radius:22px;padding:40px 36px}
+.sph-direct small{display:block;font-size:13px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-2);margin-bottom:18px}
+.sph-direct h3{font-size:26px;font-weight:800;margin:0}
+.sph-direct .sph-role{color:#d3dbd6;font-size:17px;margin:2px 0 22px}
+.sph-clink{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;font-size:17px;padding:10px 0;transition:color .25s ease, transform .25s ease;word-break:break-word}
+.sph-clink .sph-ico{width:28px;height:28px;margin:0}
 .sph-clink:hover{color:var(--gold-2);transform:translateX(6px)}
-.sph-foot-tag{margin-top:64px;font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--sage)}
+.sph-visit{background:var(--ink);color:#fff;border-radius:22px;padding:40px 36px;position:relative;overflow:hidden}
+.sph-visit::after{content:"";position:absolute;right:-70px;bottom:-70px;width:200px;height:200px;border-radius:50%;border:26px solid rgba(200,154,60,.12)}
+.sph-visit .sph-ico{width:46px;height:46px;margin-bottom:22px}
+.sph-visit h3{font-size:24px;font-weight:800;margin:0 0 10px}
+.sph-visit p{margin:0 0 24px;color:#cfd6d1;font-size:16px;line-height:1.5}
+
+/* ---------- CTA BLOCKS ---------- */
+.sph-cta{background:var(--cream);padding:88px 0}
+.sph-cta-box{background:var(--white);border-radius:26px;padding:56px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.4fr auto;gap:32px;align-items:center;position:relative;overflow:hidden}
+.sph-cta-box::after{content:"";position:absolute;right:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(200,154,60,.2),transparent 70%)}
+.sph-cta-box h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.08;margin:0 0 12px}
+.sph-cta-box p{margin:0;color:var(--muted);font-size:18px;line-height:1.5;max-width:640px}
+.sph-cta-box .sph-btns{position:relative;z-index:1}
+.sph-next{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:22px;padding:34px 40px;text-decoration:none;transition:background .3s ease, transform .3s ease}
+.sph-next:hover{background:var(--green);transform:translateY(-3px)}
+.sph-next small{display:block;font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sph-next b{font-size:clamp(24px,2.8vw,34px);font-weight:800;letter-spacing:-.015em}
+.sph-next-arrow{width:64px;height:64px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;flex:none;transition:transform .3s ease}
+.sph-next-arrow svg{width:26px;height:26px}
+.sph-next:hover .sph-next-arrow{transform:translateX(6px)}
+
+/* ---------- PRE-FOOTER + FOOTER ---------- */
+.sph-prefoot{background:var(--green);color:#fff;padding:84px 0;position:relative;overflow:hidden;isolation:isolate}
+.sph-prefoot::before{content:"";position:absolute;width:520px;height:520px;left:-160px;bottom:-280px;border-radius:50%;border:60px solid rgba(200,154,60,.1);z-index:-1}
+.sph-prefoot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px}
+.sph-prefoot h2{font-size:clamp(30px,4.2vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;max-width:760px}
+.sph-prefoot h2 em{font-style:normal;color:var(--gold)}
+.sph-prefoot.is-off{display:none}
+.sph-prefoot .sph-lead{color:#dbe3de}
+.sph-foot{background:var(--ink-4);color:#cfd6d1;padding:80px 0 0}
+.sph-foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:44px}
+.sph-foot-brand .sph-brand{margin:0 0 22px}
+.sph-foot-brand p{margin:0;font-size:15.5px;line-height:1.6;max-width:340px}
+.sph-foot-brand .sph-of{display:block;color:var(--gold);font-weight:700;font-size:14px;margin:0 0 14px;letter-spacing:.04em}
+.sph-foot h4{font-size:13px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#fff;margin:6px 0 22px}
+.sph-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.sph-foot ul a{color:#cfd6d1;text-decoration:none;font-size:15.5px;transition:color .25s ease, padding .25s ease;display:inline-block}
+.sph-foot ul a:hover{color:var(--gold-2);padding-left:4px}
+.sph-foot-contact p{margin:0 0 6px;font-size:15.5px;line-height:1.5}
+.sph-foot-contact b{color:#fff}
+.sph-foot-contact a{color:#cfd6d1;text-decoration:none;display:flex;align-items:center;gap:10px;margin-top:10px;font-size:15.5px;word-break:break-word;transition:color .25s ease}
+.sph-foot-contact a:hover{color:var(--gold-2)}
+.sph-foot-contact a .sph-ico{width:20px;height:20px}
+.sph-bottom{margin-top:64px;border-top:1px solid rgba(255,255,255,.08);padding:26px 0 30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;font-size:13.5px;color:var(--sage)}
+.sph-bottom nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.sph-bottom a{color:var(--sage);text-decoration:none}
+.sph-bottom a:hover{color:var(--gold-2)}
 
 /* ---------- RESPONSIVE ---------- */
-@media (max-width:1040px){
+@media (max-width:1100px){
+  .sph-nav a{padding:12px 9px;letter-spacing:.08em;font-size:12.5px}
+  .sph-header-in{gap:18px}
+}
+@media (max-width:980px){
+  .sph-menu-btn{display:grid}
+  .sph-header-in{flex-wrap:wrap;min-height:76px;gap:14px}
+  .sph-header .sph-btn-top{display:none}
+  .sph-nav{display:none;order:5;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:6px 0 18px}
+  .sph-nav.is-open{display:flex;animation:sph-viewin .3s ease}
+  .sph-nav a{font-size:15px;padding:16px 4px;border-top:1px solid rgba(255,255,255,.07);letter-spacing:.12em}
+  .sph-nav a::after{left:4px;right:auto;width:28px;bottom:10px}
+  .sph-nav .sph-nav-cta{display:block;padding-top:14px}
+  .sph-nav .sph-nav-cta a{border:0;text-align:center;background:var(--gold);color:var(--ink);border-radius:12px;padding:16px}
+  .sph-nav .sph-nav-cta a::after{display:none}
   .sph-hero{grid-template-columns:1fr}
-  .sph-hero-main{padding:96px 32px 56px}
+  .sph-hero-main{padding:80px 32px 56px}
   .sph-hero-side{padding:28px;min-height:480px}
-  .sph-hero-tag{margin-top:48px}
-  .sph-need,.sph-diff,.sph-proof,.sph-model,.sph-dpa,.sph-camp,.sph-calc,.sph-close,.sph-lead-grid{grid-template-columns:1fr;gap:44px}
-  .sph-stats,.sph-tiers,.sph-metrics{grid-template-columns:repeat(2,1fr)}
+  .sph-need,.sph-diff,.sph-proof,.sph-model,.sph-dpa,.sph-camp,.sph-calc,.sph-lead-grid,.sph-about,.sph-contact-grid{grid-template-columns:1fr;gap:44px}
+  .sph-stats,.sph-tiers,.sph-metrics,.sph-outs,.sph-commit{grid-template-columns:repeat(2,1fr)}
+  .sph-ways{grid-template-columns:1fr 1fr}
   .sph-poss{grid-template-columns:1fr 1fr}
   .sph-poss .sph-pcard:first-child{grid-column:1 / -1}
-  .sph-cards3{grid-template-columns:1fr}
+  .sph-cards3,.sph-alloc-rows{grid-template-columns:1fr}
+  .sph-cta-box{grid-template-columns:1fr}
+  .sph-foot-grid{grid-template-columns:1fr 1fr}
 }
+@media (min-width:981px){ .sph-nav .sph-nav-cta{display:none} }
 @media (max-width:760px){
   .sph-sec{padding:76px 0}
   .sph-wrap{padding:0 16px}
-  .sph-hero-main{padding:80px 20px 48px}
+  .sph-brand small{display:none}
+  .sph-hero-main{padding:64px 20px 48px}
   .sph-hero-side{padding:16px;min-height:420px}
   .sph-hero-stat{padding:18px 20px;gap:16px}
-  .sph-band{aspect-ratio:4/5;margin-bottom:44px}
-  .sph-band::after{background:linear-gradient(180deg,rgba(27,32,30,0) 35%,rgba(27,32,30,.9) 100%)}
-  .sph-band img{object-position:66% 40%}
-  .sph-band figcaption{left:22px;right:22px;bottom:24px}
-  .sph-proof-card{width:auto;margin:-56px 12px 0}
-  .sph-proof-card,.sph-proof-card.sph-r{padding:24px 22px}
-  .sph-goal{flex-direction:column;gap:2px;align-items:flex-start}
-  .sph-hero-ctas .sph-btn{flex:1 1 100%;justify-content:center}
-  .sph-need-card,.sph-prox,.sph-leader,.sph-board,.sph-contact,.sph-calc-in,.sph-calc-out,.sph-panel,.sph-dpa-card,.sph-proof-card{padding:34px 26px}
+  .sph-phero{padding:72px 0 64px}
+  .sph-btns .sph-btn{flex:1 1 100%}
+  .sph-label{font-size:11.5px;letter-spacing:.1em}
+  .sph-need-item,.sph-prox,.sph-leader,.sph-board,.sph-calc-in,.sph-calc-out,.sph-panel,.sph-dpa-card,.sph-alloc,.sph-form,.sph-direct,.sph-visit,.sph-cta-box{padding:32px 24px}
   .sph-path{grid-template-columns:1fr;gap:30px}
   .sph-path-track{top:30px;bottom:30px;left:30px;right:auto;width:4px;height:auto}
   .sph-path-fill{width:100%;height:0;transition:height 2.2s cubic-bezier(.5,0,.2,1) .2s}
@@ -417,7 +596,7 @@
   .sph-node{width:64px;height:64px;font-size:20px;margin:0;grid-row:span 2;box-shadow:0 0 0 6px var(--white)}
   .sph-step h3{margin-top:10px}
   .sph-banner{padding:24px 22px}
-  .sph-stats,.sph-tiers,.sph-metrics,.sph-poss,.sph-out-row{grid-template-columns:1fr}
+  .sph-stats,.sph-tiers,.sph-metrics,.sph-poss,.sph-out-row,.sph-outs,.sph-commit,.sph-ways,.sph-fgrid,.sph-foot-grid{grid-template-columns:1fr}
   .sph-poss .sph-pcard:first-child{grid-column:auto}
   .sph-wnode{width:70px;height:70px;margin:-35px 0 0 -35px}
   .sph-wnode .sph-ico{width:28px;height:28px}
@@ -430,6 +609,17 @@
   .sph-cost{flex-direction:column;align-items:flex-start;gap:14px;padding:28px 26px}
   .sph-checks li{font-size:19px}
   .sph-ratio-row{gap:12px}
+  .sph-band{aspect-ratio:4/5;margin-bottom:44px}
+  .sph-band::after{background:linear-gradient(180deg,rgba(27,32,30,0) 35%,rgba(27,32,30,.9) 100%)}
+  .sph-band img{object-position:66% 40%}
+  .sph-band figcaption{left:22px;right:22px;bottom:24px}
+  .sph-proof-card{width:auto;margin:-56px 12px 0;padding:24px 22px}
+  .sph-next{padding:26px 24px}
+  .sph-next-arrow{width:52px;height:52px}
+  .sph-facts{padding:8px 22px}
+  .sph-facts li{flex-direction:column;gap:4px}
+  .sph-facts b{text-align:left}
+  .sph-foot{padding-top:64px}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -443,6 +633,7 @@
 
 <!-- Icon sprite -->
 <svg class="sph-sprite" aria-hidden="true" focusable="false">
+  <symbol id="sph-logo" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#2d4a3e"/><path fill="#c89a3c" d="M24 8.5 7.5 22.4l2.3 2.7 2.2-1.9V38.5h24V23.2l2.2 1.9 2.3-2.7L33.5 16.5V10h-4v3.1z"/><path fill="#2d4a3e" d="M24 23.5a4.2 4.2 0 0 0-2.1 7.8v4.2h4.2v-4.2A4.2 4.2 0 0 0 24 23.5z"/></symbol>
   <symbol id="sph-i-house" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6 1.3 11.4l1.4 1.7L4.5 11.6V21.5h5.7v-6.2h3.6v6.2h5.7v-9.9l1.8 1.5 1.4-1.7L18.2 8V3.5h-3v2z"/></symbol>
   <symbol id="sph-i-cap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5 0.8 8.6 12 13.7l8.3-3.8v5.6h1.9V8.6zM5 12.4v4.1c0 1.9 3.1 3.6 7 3.6s7-1.7 7-3.6v-4.1l-7 3.2z"/></symbol>
   <symbol id="sph-i-key" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M15 1.8a7.2 7.2 0 0 0-6.9 9.4L1.8 17.5V22h4.4v-2.2h2.2v-2.2h2.2l2.2-2.2A7.2 7.2 0 1 0 15 1.8zm1.6 3.4a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4z"/></symbol>
@@ -456,509 +647,862 @@
   <symbol id="sph-i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 2.2 9.5 6c.5.7.4 1.6-.2 2.2L7.7 9.8a12.3 12.3 0 0 0 6.5 6.5l1.6-1.6c.6-.6 1.5-.7 2.2-.2l3.8 2.9c.8.6.9 1.7.3 2.4l-1.6 2c-.6.7-1.6 1-2.5.8C10.6 21 3 13.4 1.4 6c-.2-.9.1-1.9.8-2.5l2-1.6c.7-.6 1.8-.5 2.4.3z"/></symbol>
   <symbol id="sph-i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v.6l-10 6.3L2 6.1zm0 3 10 6.3 10-6.3v10A1.5 1.5 0 0 1 20.5 20h-17A1.5 1.5 0 0 1 2 18.5z"/></symbol>
   <symbol id="sph-i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6 6 6-6 6"/></symbol>
-  <symbol id="sph-i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4v15m-6-6 6 6 6-6"/></symbol>
+  <symbol id="sph-i-calendar" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M7 1.5h2v2.5h6V1.5h2v2.5h3a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3zM5 9v11h14V9zm2 2.5h3v3H7z"/></symbol>
+  <symbol id="sph-i-gift" viewBox="0 0 24 24"><path fill="currentColor" d="M9 2.5c1.3 0 2.4.8 3 1.9.6-1.1 1.7-1.9 3-1.9a3 3 0 0 1 2.6 4.5H21a1 1 0 0 1 1 1V11H2V8a1 1 0 0 1 1-1h3.4A3 3 0 0 1 9 2.5zm0 2a1 1 0 0 0 0 2.5h2A2 2 0 0 0 9 4.5zm6 0A2 2 0 0 0 13 7h2a1 1 0 0 0 0-2.5zM3 12.5h8V22H4a1 1 0 0 1-1-1zm10 0h8V21a1 1 0 0 1-1 1h-7z"/></symbol>
+  <symbol id="sph-i-church" viewBox="0 0 24 24"><path fill="currentColor" d="M11 1h2v3h3v2h-3v2.2l7 5.3V22h-6v-5a2 2 0 0 0-4 0v5H4v-8.5l7-5.3V6H8V4h3z"/></symbol>
+  <symbol id="sph-i-briefcase" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M9 2h6a2 2 0 0 1 2 2v2h4a1 1 0 0 1 1 1v5H2V7a1 1 0 0 1 1-1h4V4a2 2 0 0 1 2-2zm0 2v2h6V4zM2 13.5h8.5V15h3v-1.5H22V20a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="sph-i-shield" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5 3 5v6.2c0 5.4 3.8 10 9 11.3 5.2-1.3 9-5.9 9-11.3V5zm-1.3 14.8-4-4 1.6-1.6 2.4 2.4 5-5 1.6 1.6z"/></symbol>
+  <symbol id="sph-i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5a7.5 7.5 0 0 0-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0 0 12 1.5zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4z"/></symbol>
+  <symbol id="sph-i-bars" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="sph-i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M5 5l14 14M19 5 5 19"/></symbol>
 </svg>
 
-<!-- ============ HERO ============ -->
-<header class="sph-hero">
-  <div class="sph-hero-main">
-    <p class="sph-eyebrow sph-r">Evolve Community</p>
-    <h1 class="sph-r" style="--d:.1s"><span>Single Parent</span><span>Housing Initiative</span></h1>
-    <p class="sph-hero-sub sph-r" style="--d:.2s">A personalized pathway from stable housing to sustainable homeownership for single-parent families on Milwaukee’s Northside.</p>
-    <div class="sph-goal sph-r" style="--d:.3s"><b>$<span data-count="3">0</span> MILLION</b><small>2027 Campaign Goal</small></div>
-    <div class="sph-hero-ctas sph-r" style="--d:.4s">
-      <a class="sph-btn sph-btn-gold" href="#sph-partner" data-jump="sph-partner">Become a Partner <svg><use href="#sph-i-arrow"/></svg></a>
-      <a class="sph-btn sph-btn-ghost" href="#sph-how" data-jump="sph-how">See How It Works <svg><use href="#sph-i-down"/></svg></a>
-    </div>
-    <p class="sph-hero-tag sph-r" style="--d:.5s">Donor &amp; Partner Prospectus</p>
-  </div>
-  <div class="sph-hero-side">
-    <img class="sph-hero-photo" src="https://media.thechurchcoassets.com/heic-jpg-accounts/5782/463b8682-993f-4033-90e2-5c8fc105fe9e-./IMG_1145.HEIC" alt="A new homeowner celebrating with a SOLD sign" fetchpriority="high" decoding="async" onerror="this.parentNode.classList.add('no-img')">
-    <div class="sph-hero-shade" aria-hidden="true"></div>
-    <div class="sph-hero-stat">
-      <b data-count="13">0</b>
-      <span>single-parent families served since 2024</span>
-    </div>
+<!-- ======================= HEADER ======================= -->
+<header class="sph-header" id="sph-top">
+  <div class="sph-wrap sph-header-in">
+    <a class="sph-brand" href="#home" data-go="home" aria-label="SPHI home">
+      <svg aria-hidden="true"><use href="#sph-logo"/></svg>
+      <span><b>SPHI</b><small>Single Parent Housing Initiative</small></span>
+    </a>
+    <button class="sph-menu-btn" id="sph-menu-btn" aria-expanded="false" aria-controls="sph-nav" aria-label="Open menu">
+      <svg class="sph-bars"><use href="#sph-i-bars"/></svg><svg class="sph-x"><use href="#sph-i-x"/></svg>
+    </button>
+    <ul class="sph-nav" id="sph-nav">
+      <li><a href="#home" data-go="home">Home</a></li>
+      <li><a href="#approach" data-go="approach">Our Approach</a></li>
+      <li><a href="#impact" data-go="impact">Our Impact</a></li>
+      <li><a href="#campaign" data-go="campaign">2027 Campaign</a></li>
+      <li><a href="#about" data-go="about">About Us</a></li>
+      <li class="sph-nav-cta"><a href="#partner" data-go="partner">Partner With Us</a></li>
+    </ul>
+    <a class="sph-btn sph-btn-gold sph-btn-top" href="#partner" data-go="partner">Partner With Us <svg><use href="#sph-i-arrow"/></svg></a>
   </div>
 </header>
 
-<!-- ============ THE NEED ============ -->
-<section class="sph-sec sph-white">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">The Need</p>
-      <h2 class="sph-h2">In Milwaukee, the door to ownership is not open equally</h2>
-    </div>
-    <div class="sph-need">
-      <div class="sph-ratio sph-r">
-        <p class="sph-ratio-big">1 <em>in</em> 4</p>
-        <p class="sph-ratio-cap">Fewer than this many Black residents own their home</p>
-        <div class="sph-ratio-row sph-io" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
-          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
-          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
-          <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
-        </div>
-      </div>
-      <div class="sph-need-card sph-r" style="--d:.15s">
-        <p><strong>Fewer than 1 in 4</strong> Black residents in Milwaukee own their home, less than half the rate of white residents.</p>
-        <p>For a single parent, one income has to cover rent, childcare, and everything in between. Saving for a down payment can feel permanently out of reach.</p>
-        <p class="sph-accent">The Northside is where we work.</p>
+<main>
+
+<!-- ======================= PAGE 1 | HOME ======================= -->
+<div class="sph-view" data-view="home" data-title="Home" data-prefooter="off">
+
+  <section class="sph-hero">
+    <div class="sph-hero-main">
+      <p class="sph-eyebrow sph-r">Single Parent Housing Initiative</p>
+      <h1 class="sph-r" style="--d:.1s"><span>Stable Housing.</span><span>Lasting Ownership.</span><span>Stronger Families.</span></h1>
+      <p class="sph-hero-sub sph-r" style="--d:.2s">The Single Parent Housing Initiative creates a personalized pathway from stable housing to sustainable homeownership for single-parent families on Milwaukee’s Northside.</p>
+      <span class="sph-label sph-r" style="--d:.28s"><i></i>2027 Campaign | $3 Million Goal</span>
+      <div class="sph-btns sph-r" style="--d:.36s">
+        <a class="sph-btn sph-btn-gold" href="#approach" data-go="approach">Explore the Initiative <svg><use href="#sph-i-arrow"/></svg></a>
+        <a class="sph-btn sph-btn-ghost" href="#partner" data-go="partner">Partner With Us</a>
       </div>
     </div>
-    <p class="sph-src">Source: Wisconsin Policy Forum analysis of U.S. Census Bureau data, 2016–2020.</p>
-  </div>
-</section>
-
-<!-- ============ MISSION ============ -->
-<section class="sph-sec sph-cream">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">The Mission</p>
-      <h2 class="sph-h2">Housing is the beginning. Ownership is the goal.</h2>
-      <p class="sph-lead">We exist to stabilize families, restore dignity, and build a clear path to sustainable homeownership for single mothers and fathers on Milwaukee’s Northside.</p>
-    </div>
-    <div class="sph-cards3">
-      <article class="sph-mcard sph-r">
-        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-house"/></svg></div><span class="sph-num">01</span></div>
-        <h3>STABILIZE</h3>
-        <p>Safe, dignified, well-maintained housing gives a family room to breathe.</p>
-      </article>
-      <article class="sph-mcard sph-r" style="--d:.12s">
-        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-cap"/></svg></div><span class="sph-num">02</span></div>
-        <h3>PREPARE</h3>
-        <p>Financial education and individualized coaching build real readiness.</p>
-      </article>
-      <article class="sph-mcard sph-r" style="--d:.24s">
-        <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-key"/></svg></div><span class="sph-num">03</span></div>
-        <h3>OWN</h3>
-        <p>Grant support and a disciplined pathway help families cross the threshold.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HOW IT WORKS ============ -->
-<section class="sph-sec sph-white" id="sph-how">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">How It Works</p>
-      <h2 class="sph-h2">A pathway designed to end in ownership</h2>
-      <p class="sph-lead">Participants are not rushed into buying. We build readiness step by step so ownership can last.</p>
-    </div>
-    <ol class="sph-path sph-io">
-      <li class="sph-path-track" aria-hidden="true"><div class="sph-path-fill"></div></li>
-      <li class="sph-step"><div class="sph-node">01</div><h3>Stable Housing</h3><p>A safe, well-kept home at an affordable rent</p></li>
-      <li class="sph-step"><div class="sph-node">02</div><h3>Personal Coaching</h3><p>One-on-one guidance from entry through closing</p></li>
-      <li class="sph-step"><div class="sph-node">03</div><h3>Financial Readiness</h3><p>Budgeting, credit, savings, and debt progress</p></li>
-      <li class="sph-step"><div class="sph-node">04</div><h3>Grant Support</h3><p>Navigating down payment and closing grants</p></li>
-      <li class="sph-step"><div class="sph-node">05</div><h3>Homeownership</h3><p>Keys in hand, and the unit opens for the next family</p></li>
-    </ol>
-    <div class="sph-banner sph-r"><b>The objective is not indefinite dependency.</b> It is measurable progress toward long-term stability and ownership.</div>
-  </div>
-</section>
-
-<!-- ============ DIFFERENCE ============ -->
-<section class="sph-sec sph-dark">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">What Makes Us Different</p>
-      <h2 class="sph-h2">We do not hand families a packet. We walk with them.</h2>
-      <p class="sph-lead">Our program is built on personal attention, accountability, and practical training from entry through closing.</p>
-    </div>
-    <figure class="sph-band sph-r">
-      <img src="https://media.thechurchcoassets.com/accounts/5782/88a620b2-4636-409e-b3c7-b9efc0cb56c3-./DSC08602.jpg" alt="Parents and families taking notes during an Evolve Community workshop" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
-      <figcaption>
-        <p class="sph-eyebrow">In the room</p>
-        <b>Parents learn, ask questions, and plan their next step together.</b>
-      </figcaption>
-    </figure>
-    <div class="sph-diff">
-      <div class="sph-prox sph-r">
-        <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
-        <h3>PROXIMITY<br>MATTERS.</h3>
-        <p>Every parent has different barriers, different strengths, and a different starting point. We meet them where they are.</p>
-      </div>
-      <ul class="sph-checks sph-io">
-        <li><i class="sph-chk" style="--d:.1s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>One-on-one guidance</span></li>
-        <li><i class="sph-chk" style="--d:.3s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Financial education</span></li>
-        <li><i class="sph-chk" style="--d:.5s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Homeownership preparation</span></li>
-        <li><i class="sph-chk" style="--d:.7s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Consistent accountability</span></li>
-        <li><i class="sph-chk" style="--d:.9s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Grant navigation &amp; closing support</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROGRESS ============ -->
-<section class="sph-sec sph-cream">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Progress to Date</p>
-      <h2 class="sph-h2">Launched in 2024, and already working</h2>
-      <p class="sph-lead">We are moving from a donor-supported pilot to a scalable, self-sustaining model.</p>
-    </div>
-    <div class="sph-stats">
-      <article class="sph-stat sph-r">
-        <svg class="sph-ico"><use href="#sph-i-users"/></svg>
+    <div class="sph-hero-side">
+      <img class="sph-hero-photo" src="https://media.thechurchcoassets.com/heic-jpg-accounts/5782/463b8682-993f-4033-90e2-5c8fc105fe9e-./IMG_1145.HEIC" alt="A new homeowner celebrating with a SOLD sign" fetchpriority="high" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+      <div class="sph-hero-shade" aria-hidden="true"></div>
+      <div class="sph-hero-stat">
         <b data-count="13">0</b>
-        <h3>Families Served</h3>
-        <p>Single mothers and fathers on the pathway since launch</p>
-      </article>
-      <article class="sph-stat sph-r" style="--d:.1s">
-        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
-        <b data-count="11">0</b>
-        <h3>Housing Units Owned</h3>
-        <p>Safe, dignified homes held by the program</p>
-      </article>
-      <article class="sph-stat sph-r" style="--d:.2s">
-        <svg class="sph-ico"><use href="#sph-i-building"/></svg>
-        <b data-count="3">0</b>
-        <h3>Properties Acquired</h3>
-        <p>One 9-unit apartment building and two single-family homes</p>
-      </article>
-      <article class="sph-stat sph-stat-dark sph-r" style="--d:.3s">
-        <svg class="sph-ico"><use href="#sph-i-key"/></svg>
-        <b data-count="335" data-prefix="$">$0</b>
-        <h3>Out of Pocket</h3>
-        <p>What one graduate paid at closing on her own home</p>
-      </article>
+        <span>single-parent families served since 2024</span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ PROOF ============ -->
-<section class="sph-sec sph-forest">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Proof of Possibility</p>
-      <h2 class="sph-h2">From participant to homeowner in 12 months</h2>
+  <!-- The Need -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">The Need</p>
+        <h2 class="sph-h2">Homeownership should be within reach.</h2>
+      </div>
+      <div class="sph-need">
+        <div class="sph-r">
+          <p class="sph-ratio-big">1 <em>in</em> 4</p>
+          <p class="sph-ratio-cap">Fewer than this many Black residents in Milwaukee own their home</p>
+          <div class="sph-ratio-row sph-io" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#sph-i-house"/></svg>
+          </div>
+        </div>
+        <div class="sph-need-list">
+          <div class="sph-need-item sph-r"><svg class="sph-ico"><use href="#sph-i-chart"/></svg><div><h3>A wide ownership gap</h3><p>Fewer than 1 in 4 Black residents in Milwaukee own their home, less than half the rate of white residents.</p></div></div>
+          <div class="sph-need-item sph-r" style="--d:.1s"><svg class="sph-ico"><use href="#sph-i-person"/></svg><div><h3>One income, every bill</h3><p>For a single parent, one paycheck covers rent, childcare, and everything in between. Saving for a down payment can feel permanently out of reach.</p></div></div>
+          <div class="sph-need-item sph-r" style="--d:.2s"><svg class="sph-ico"><use href="#sph-i-pin"/></svg><div><h3>Why the Northside</h3><p>The Northside is our community. It is where Evolve serves families every week, and it is where we focus this work.</p></div></div>
+        </div>
+      </div>
+      <p class="sph-src">Source: Wisconsin Policy Forum analysis of U.S. Census Bureau data, 2016–2020.</p>
     </div>
-    <div class="sph-proof">
+  </section>
+
+  <!-- Our Approach -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head-row">
+        <div class="sph-head sph-r">
+          <p class="sph-eyebrow">Our Approach</p>
+          <h2 class="sph-h2">Stabilize. Prepare. Own.</h2>
+        </div>
+        <a class="sph-btn sph-btn-line sph-r" href="#approach" data-go="approach">How It Works <svg><use href="#sph-i-arrow"/></svg></a>
+      </div>
+      <div class="sph-cards3">
+        <article class="sph-mcard sph-r">
+          <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-house"/></svg></div><span class="sph-num">01</span></div>
+          <h3>STABILIZE</h3>
+          <p>Safe, dignified, affordable housing gives a family room to breathe.</p>
+        </article>
+        <article class="sph-mcard sph-r" style="--d:.12s">
+          <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-cap"/></svg></div><span class="sph-num">02</span></div>
+          <h3>PREPARE</h3>
+          <p>Financial education and individualized coaching build real readiness.</p>
+        </article>
+        <article class="sph-mcard sph-r" style="--d:.24s">
+          <div class="sph-mcard-top"><div class="sph-circle"><svg class="sph-ico"><use href="#sph-i-key"/></svg></div><span class="sph-num">03</span></div>
+          <h3>OWN</h3>
+          <p>Grant support and a disciplined pathway help families cross the threshold into homeownership.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact at a Glance -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head-row">
+        <div class="sph-head sph-r">
+          <p class="sph-eyebrow">Impact at a Glance</p>
+          <h2 class="sph-h2">Launched in 2024, and already working.</h2>
+        </div>
+        <a class="sph-btn sph-btn-line sph-r" href="#impact" data-go="impact">See Our Impact <svg><use href="#sph-i-arrow"/></svg></a>
+      </div>
+      <div class="sph-stats">
+        <article class="sph-stat sph-r"><svg class="sph-ico"><use href="#sph-i-users"/></svg><b data-count="13">0</b><h3>Families Served</h3><p>Single mothers and fathers on the pathway</p></article>
+        <article class="sph-stat sph-r" style="--d:.1s"><svg class="sph-ico"><use href="#sph-i-house"/></svg><b data-count="11">0</b><h3>Housing Units</h3><p>Owned by the program</p></article>
+        <article class="sph-stat sph-r" style="--d:.2s"><svg class="sph-ico"><use href="#sph-i-building"/></svg><b data-count="3">0</b><h3>Properties Acquired</h3><p>A 9-unit building and two single-family homes</p></article>
+        <article class="sph-stat sph-stat-dark sph-r" style="--d:.3s"><svg class="sph-ico"><use href="#sph-i-key"/></svg><b data-count="335" data-prefix="$">$0</b><h3>Out of Pocket</h3><p>A graduate’s cost at closing on her own home</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaign Preview -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">2027 Campaign Preview</p>
+        <h2 class="sph-h2">$3 million to expand the pathway to ownership.</h2>
+      </div>
+      <div class="sph-alloc sph-r">
+        <div class="sph-alloc-top"><b>$3,000,000</b><span>Campaign goal</span></div>
+        <div class="sph-alloc-bar" aria-hidden="true"><i style="--w:64.17%;background:#2d4a3e"></i><i style="--w:32.5%;background:#c89a3c"></i><i style="--w:3.33%;background:#7d978a"></i></div>
+        <div class="sph-alloc-rows">
+          <div class="sph-alloc-row"><i style="background:#2d4a3e"></i><b>$1,925,000</b><p>Acquire six single-family homes</p></div>
+          <div class="sph-alloc-row"><i style="background:#c89a3c"></i><b>$975,000</b><p>Renovate the nine-unit apartment building</p></div>
+          <div class="sph-alloc-row"><i style="background:#7d978a"></i><b>$100,000</b><p>Program and ownership support</p></div>
+        </div>
+        <div class="sph-alloc-foot">
+          <p>Every dollar buys or restores homes that serve family after family.</p>
+          <a class="sph-btn sph-btn-ink" href="#campaign" data-go="campaign">Explore the Campaign <svg><use href="#sph-i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="sph-prefoot">
+    <div class="sph-wrap sph-prefoot-in">
       <div class="sph-r">
-        <svg class="sph-quote-mark" viewBox="0 0 60 44" aria-hidden="true"><path fill="currentColor" d="M0 44V26C0 11 7 2 21 0l2 6C15 8 12 13 12 20h11v24zm34 0V26c0-15 7-24 21-26l2 6c-8 2-11 7-11 14h11v24z"/></svg>
-        <p class="sph-quote">One mother in our program purchased her home in <mark>12 months</mark> with only <mark>$335 out of pocket.</mark></p>
-        <p class="sph-proof-note">The remaining eligible closing costs were covered through grant resources the program helped her secure.</p>
+        <h2>Help us build <em>the pathway.</em></h2>
+        <p class="sph-lead" style="margin-top:14px">We invite foundations, businesses, churches, and individual donors to partner with us.</p>
       </div>
-      <div class="sph-proof-media sph-r" style="--d:.15s">
-        <figure class="sph-proof-photo">
-          <img src="https://media.thechurchcoassets.com/accounts/5782/d2500112-7712-495f-a9f5-8a1bf8b9a005-./KTN_1480.jpg" alt="Two women smiling as they hold an oversized house key" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
-          <span class="sph-pill"><svg><use href="#sph-i-key"/></svg>Keys in hand</span>
-        </figure>
-        <div class="sph-proof-card">
-          <div class="sph-proof-stats">
-            <div><b data-count="12">0</b><small>Months to ownership</small></div>
-            <div><b class="sph-gold" data-count="335" data-prefix="$">$0</b><small>Out of pocket at closing</small></div>
+      <a class="sph-btn sph-btn-gold sph-r" href="#partner" data-go="partner">Partner With Us <svg><use href="#sph-i-arrow"/></svg></a>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= PAGE 2 | OUR APPROACH ======================= -->
+<div class="sph-view" data-view="approach" data-title="Our Approach">
+
+  <section class="sph-phero">
+    <div class="sph-wrap">
+      <p class="sph-crumb sph-r"><a href="#home" data-go="home">SPHI</a> / <span>Our Approach</span></p>
+      <h1 class="sph-r" style="--d:.08s">Housing is the beginning. <em>Ownership is the goal.</em></h1>
+      <p class="sph-lead sph-r" style="--d:.16s">We exist to stabilize families, restore dignity, and build a clear path to sustainable homeownership for single mothers and fathers on Milwaukee’s Northside.</p>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">How It Works</p>
+        <h2 class="sph-h2">A pathway designed to end in ownership.</h2>
+        <p class="sph-lead">Participants are not rushed into buying. We build readiness step by step so ownership can last.</p>
+      </div>
+      <ol class="sph-path sph-io">
+        <li class="sph-path-track" aria-hidden="true"><div class="sph-path-fill"></div></li>
+        <li class="sph-step"><div class="sph-node">01</div><h3>Stable Housing</h3><p>A safe, well-kept home at an affordable rent</p></li>
+        <li class="sph-step"><div class="sph-node">02</div><h3>Personal Coaching</h3><p>One-on-one guidance from entry through closing</p></li>
+        <li class="sph-step"><div class="sph-node">03</div><h3>Financial Readiness</h3><p>Budgeting, credit, savings, and debt progress</p></li>
+        <li class="sph-step"><div class="sph-node">04</div><h3>Grant Support</h3><p>Navigating down payment and closing grants</p></li>
+        <li class="sph-step"><div class="sph-node">05</div><h3>Homeownership</h3><p>Keys in hand, and the unit opens for the next family</p></li>
+      </ol>
+      <div class="sph-banner sph-r"><b>The objective is not indefinite dependency.</b> It is measurable progress toward long-term stability and ownership.</div>
+    </div>
+  </section>
+
+  <!-- What Makes Us Different -->
+  <section class="sph-sec sph-dark">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">What Makes Us Different</p>
+        <h2 class="sph-h2">We do not hand families a packet. We walk with them.</h2>
+        <p class="sph-lead">Our program is built on personal attention, accountability, and practical training from entry through closing.</p>
+      </div>
+      <figure class="sph-band sph-r">
+        <img src="https://media.thechurchcoassets.com/accounts/5782/88a620b2-4636-409e-b3c7-b9efc0cb56c3-./DSC08602.jpg" alt="Parents and families taking notes during an Evolve Community workshop" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+        <figcaption>
+          <p class="sph-eyebrow">In the room</p>
+          <b>Parents learn, ask questions, and plan their next step together.</b>
+        </figcaption>
+      </figure>
+      <div class="sph-diff">
+        <div class="sph-prox sph-r">
+          <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
+          <h3>PROXIMITY<br>MATTERS.</h3>
+          <p>Every parent has different barriers, different strengths, and a different starting point. We meet them where they are.</p>
+        </div>
+        <ul class="sph-checks sph-io">
+          <li><i class="sph-chk" style="--d:.1s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>One-on-one guidance</span></li>
+          <li><i class="sph-chk" style="--d:.3s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Financial education</span></li>
+          <li><i class="sph-chk" style="--d:.5s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Homeownership preparation</span></li>
+          <li><i class="sph-chk" style="--d:.7s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Consistent accountability</span></li>
+          <li><i class="sph-chk" style="--d:.9s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span>Grant navigation &amp; closing support</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sustainable Model -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">A Sustainable Model</p>
+        <h2 class="sph-h2">Capital given once keeps creating homeowners.</h2>
+        <p class="sph-lead">Rent covers the cost of serving each family. What we need is the capital to acquire and prepare more homes.</p>
+      </div>
+      <div class="sph-model">
+        <div class="sph-wheel sph-r" id="sph-wheel">
+          <div class="sph-wheel-ring"></div>
+          <div class="sph-wheel-rot" id="sph-wheel-rot"></div>
+          <div class="sph-wheel-center"><svg><use href="#sph-i-loop"/></svg><span>Family after family</span></div>
+          <button class="sph-wnode is-active" data-i="0" aria-label="Step 1: Capital acquires a home"><svg class="sph-ico"><use href="#sph-i-building"/></svg><em>1</em></button>
+          <button class="sph-wnode" data-i="1" aria-label="Step 2: A family pays affordable rent"><svg class="sph-ico"><use href="#sph-i-house"/></svg><em>2</em></button>
+          <button class="sph-wnode" data-i="2" aria-label="Step 3: Rent funds the pathway"><svg class="sph-ico"><use href="#sph-i-cap"/></svg><em>3</em></button>
+          <button class="sph-wnode" data-i="3" aria-label="Step 4: The family buys a home"><svg class="sph-ico"><use href="#sph-i-key"/></svg><em>4</em></button>
+        </div>
+        <div class="sph-r" style="--d:.15s">
+          <div class="sph-panel" aria-live="polite">
+            <div class="sph-panel-body" id="sph-panel-body">
+              <p class="sph-panel-num" id="sph-panel-num">Step 1 of 4</p>
+              <h3 id="sph-panel-title">Capital acquires a home</h3>
+              <p id="sph-panel-text">Donor gifts acquire and prepare housing, debt-free. Every home purchased with capital is a home that never carries an interest payment.</p>
+            </div>
+            <div class="sph-dots" id="sph-dots">
+              <button class="is-active" aria-label="Show step 1"></button>
+              <button aria-label="Show step 2"></button>
+              <button aria-label="Show step 3"></button>
+              <button aria-label="Show step 4"></button>
+            </div>
+            <div class="sph-panel-bar" id="sph-panel-bar"></div>
           </div>
-          <div class="sph-months" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MODEL ============ -->
-<section class="sph-sec sph-cream">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">A Self-Sustaining Model</p>
-      <h2 class="sph-h2">Your gift buys assets that keep working</h2>
-      <p class="sph-lead">Rent covers the cost of serving each family. What we lack is the capital to acquire more homes.</p>
-    </div>
-    <div class="sph-model">
-      <div class="sph-wheel sph-r" id="sph-wheel">
-        <div class="sph-wheel-ring"></div>
-        <div class="sph-wheel-rot" id="sph-wheel-rot"></div>
-        <div class="sph-wheel-center"><svg><use href="#sph-i-loop"/></svg><span>Family after family</span></div>
-        <button class="sph-wnode is-active" data-i="0" aria-label="Step 1: Capital acquires a home"><svg class="sph-ico"><use href="#sph-i-building"/></svg><em>1</em></button>
-        <button class="sph-wnode" data-i="1" aria-label="Step 2: A family pays affordable rent"><svg class="sph-ico"><use href="#sph-i-house"/></svg><em>2</em></button>
-        <button class="sph-wnode" data-i="2" aria-label="Step 3: Rent funds the pathway"><svg class="sph-ico"><use href="#sph-i-cap"/></svg><em>3</em></button>
-        <button class="sph-wnode" data-i="3" aria-label="Step 4: The family buys a home"><svg class="sph-ico"><use href="#sph-i-key"/></svg><em>4</em></button>
-      </div>
-      <div class="sph-r" style="--d:.15s">
-        <div class="sph-panel" aria-live="polite">
-          <div class="sph-panel-body" id="sph-panel-body">
-            <p class="sph-panel-num" id="sph-panel-num">Step 1 of 4</p>
-            <h3 id="sph-panel-title">Capital acquires a home</h3>
-            <p id="sph-panel-text">Donor gifts buy and prepare housing, debt-free.</p>
+          <div class="sph-cost">
+            <b>~$<span data-count="10000">0</span></b>
+            <div><h4>Program cost per family</h4><p>Covered by the family’s own rent, so the program sustains itself.</p></div>
           </div>
-          <div class="sph-dots" id="sph-dots">
-            <button class="is-active" aria-label="Show step 1"></button>
-            <button aria-label="Show step 2"></button>
-            <button aria-label="Show step 3"></button>
-            <button aria-label="Show step 4"></button>
+          <p class="sph-loopline"><svg><use href="#sph-i-loop"/></svg>When a family buys, the unit opens for the next family.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Homeownership Support -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Homeownership Support</p>
+        <h2 class="sph-h2">Down payment assistance rewards progress.</h2>
+        <p class="sph-lead">Families who successfully complete the program receive help crossing the last, hardest threshold.</p>
+      </div>
+      <div class="sph-dpa">
+        <div class="sph-dpa-card sph-r">
+          <small>Up to</small>
+          <b data-count="5000" data-prefix="$">$0</b>
+          <span>in closing assistance</span>
+        </div>
+        <ul class="sph-dpa-list">
+          <li class="sph-r"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Funded from rent</h3><p>Assistance is drawn from rent paid during residency.</p></div></li>
+          <li class="sph-r" style="--d:.12s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Earned through completion</h3><p>Released at closing when a family successfully completes the program.</p></div></li>
+          <li class="sph-r" style="--d:.24s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Built for discipline</h3><p>The structure reinforces consistency, readiness, and follow-through.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sph-cta">
+    <div class="sph-wrap">
+      <a class="sph-next sph-r" href="#impact" data-go="impact">
+        <div><small>Next</small><b>Explore Our Impact</b></div>
+        <span class="sph-next-arrow"><svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= PAGE 3 | OUR IMPACT ======================= -->
+<div class="sph-view" data-view="impact" data-title="Our Impact">
+
+  <section class="sph-phero">
+    <div class="sph-wrap">
+      <p class="sph-crumb sph-r"><a href="#home" data-go="home">SPHI</a> / <span>Our Impact</span></p>
+      <h1 class="sph-r" style="--d:.08s">Progress you can <em>see and measure.</em></h1>
+      <p class="sph-lead sph-r" style="--d:.16s">Launched in 2024, the initiative is moving from a donor-supported pilot to a scalable, self-sustaining model.</p>
+    </div>
+  </section>
+
+  <!-- Results at a Glance -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head-row">
+        <div class="sph-head sph-r">
+          <p class="sph-eyebrow">Results at a Glance</p>
+          <h2 class="sph-h2">What has been achieved so far.</h2>
+        </div>
+        <span class="sph-since sph-r"><i></i>Initiative launched in 2024</span>
+      </div>
+      <div class="sph-stats">
+        <article class="sph-stat sph-r"><span class="sph-tag">Achieved</span><svg class="sph-ico"><use href="#sph-i-users"/></svg><b data-count="13">0</b><h3>Families Served</h3><p>Single mothers and fathers on the pathway since launch</p></article>
+        <article class="sph-stat sph-r" style="--d:.1s"><span class="sph-tag">Achieved</span><svg class="sph-ico"><use href="#sph-i-house"/></svg><b data-count="11">0</b><h3>Housing Units Owned</h3><p>Safe, dignified homes held by the program</p></article>
+        <article class="sph-stat sph-r" style="--d:.2s"><span class="sph-tag">Achieved</span><svg class="sph-ico"><use href="#sph-i-building"/></svg><b data-count="3">0</b><h3>Properties Acquired</h3><p>One 9-unit apartment building and two single-family homes</p></article>
+        <article class="sph-stat sph-stat-dark sph-r" style="--d:.3s"><span class="sph-tag">Achieved</span><svg class="sph-ico"><use href="#sph-i-key"/></svg><b data-count="335" data-prefix="$">$0</b><h3>Out of Pocket</h3><p>What one graduate paid at closing on her own home</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Participant Story -->
+  <section class="sph-sec sph-forest">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Participant Story</p>
+        <h2 class="sph-h2">From participant to homeowner in 12 months.</h2>
+      </div>
+      <div class="sph-proof">
+        <div class="sph-r">
+          <svg class="sph-quote-mark" viewBox="0 0 60 44" aria-hidden="true"><path fill="currentColor" d="M0 44V26C0 11 7 2 21 0l2 6C15 8 12 13 12 20h11v24zm34 0V26c0-15 7-24 21-26l2 6c-8 2-11 7-11 14h11v24z"/></svg>
+          <p class="sph-quote">One mother in our program purchased her home in <mark>12 months</mark> with only <mark>$335 out of pocket.</mark></p>
+          <p class="sph-proof-note">The remaining eligible closing costs were covered through grant resources the program helped her secure.</p>
+        </div>
+        <div class="sph-proof-media sph-r" style="--d:.15s">
+          <figure class="sph-proof-photo">
+            <img src="https://media.thechurchcoassets.com/accounts/5782/d2500112-7712-495f-a9f5-8a1bf8b9a005-./KTN_1480.jpg" alt="Two women smiling as they hold an oversized house key" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('no-img')">
+            <span class="sph-pill"><svg><use href="#sph-i-key"/></svg>Keys in hand</span>
+          </figure>
+          <div class="sph-proof-card">
+            <div class="sph-proof-stats">
+              <div><b data-count="12">0</b><small>Months to ownership</small></div>
+              <div><b class="sph-gold" data-count="335" data-prefix="$">$0</b><small>Out of pocket at closing</small></div>
+            </div>
+            <div class="sph-months" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           </div>
-          <div class="sph-panel-bar" id="sph-panel-bar"></div>
         </div>
-        <div class="sph-cost">
-          <b>~$<span data-count="10000">0</span></b>
-          <div><h4>Program cost per family</h4><p>Covered by the family’s own rent, so the program sustains itself.</p></div>
-        </div>
-        <p class="sph-loopline"><svg><use href="#sph-i-loop"/></svg>Every home serves family after family. Capital given once keeps creating homeowners.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ DOWN PAYMENT ============ -->
-<section class="sph-sec sph-white">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Closing the Final Gap</p>
-      <h2 class="sph-h2">Down payment assistance rewards progress</h2>
-      <p class="sph-lead">Families who complete the program receive help crossing the last, hardest threshold.</p>
-    </div>
-    <div class="sph-dpa">
-      <div class="sph-dpa-card sph-r">
-        <small>Up to</small>
-        <b data-count="5000" data-prefix="$">$0</b>
-        <span>returned at closing</span>
+  <!-- Campaign Impact -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Campaign Impact</p>
+        <h2 class="sph-h2">Where the 2027 campaign takes us.</h2>
+        <p class="sph-lead">These are planned outcomes of the $3 million campaign, not results already achieved.</p>
       </div>
-      <ul class="sph-dpa-list">
-        <li class="sph-r"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Funded from rent</h3><p>Assistance is drawn from rent paid during residency.</p></div></li>
-        <li class="sph-r" style="--d:.12s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Earned through completion</h3><p>Released at closing when a family successfully completes the program.</p></div></li>
-        <li class="sph-r" style="--d:.24s"><i class="sph-chk"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><h3>Built for discipline</h3><p>The structure reinforces consistency, readiness, and follow-through.</p></div></li>
-      </ul>
+      <div class="sph-poss">
+        <article class="sph-pcard sph-r" style="color:#fff">
+          <div class="sph-units sph-io" aria-hidden="true" id="sph-units"></div>
+          <b><span data-count="17">0</span></b>
+          <h3>Housing Units</h3>
+          <p>Growing from 11 to 17 with six additional single-family homes.</p>
+        </article>
+        <article class="sph-pcard sph-r" style="--d:.1s;color:#fff">
+          <b>9 units</b>
+          <h3>Renovated</h3>
+          <p>A full renovation of the nine-unit apartment building that anchors the program.</p>
+        </article>
+        <article class="sph-pcard sph-r" style="--d:.2s;color:#fff">
+          <b>Less debt</b>
+          <h3>Readiness &amp; ownership</h3>
+          <p>Reduced long-term debt, plus readiness and ownership support for more families.</p>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CAMPAIGN ============ -->
-<section class="sph-sec sph-white" style="padding-top:24px">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">The 2027 Campaign</p>
-      <h2 class="sph-h2">$3 million to expand the pathway to ownership</h2>
-    </div>
-    <div class="sph-camp">
-      <div class="sph-donut sph-r" id="sph-donut">
-        <svg viewBox="0 0 220 220" aria-hidden="true">
-          <circle class="sph-dbg" cx="110" cy="110" r="80"/>
-          <circle class="sph-seg" data-k="0" cx="110" cy="110" r="80" stroke="#2d4a3e"/>
-          <circle class="sph-seg" data-k="1" cx="110" cy="110" r="80" stroke="#c89a3c"/>
-          <circle class="sph-seg" data-k="2" cx="110" cy="110" r="80" stroke="#7d978a"/>
-        </svg>
-        <div class="sph-donut-c"><b id="sph-donut-val">$3M</b><span id="sph-donut-lbl">Total Goal</span></div>
+  <!-- Accountability -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Accountability &amp; Reporting</p>
+        <h2 class="sph-h2">Partners should see the pathway, and the progress.</h2>
+        <p class="sph-lead">We measure both program activity and the outcomes that matter most to long-term family stability.</p>
       </div>
-      <div class="sph-r" style="--d:.15s">
-        <div class="sph-legend" id="sph-legend">
-          <button class="sph-leg" data-k="0">
-            <i class="sph-leg-dot" style="background:#2d4a3e"></i>
-            <div class="sph-leg-top"><b>$1,925,000</b><strong>Acquire six single-family homes</strong></div>
-            <p>Grows the portfolio from 11 to 17 units, preserving quality, affordability, and program readiness. <span class="sph-leg-pct">64% OF GOAL</span></p>
-          </button>
-          <button class="sph-leg" data-k="1">
-            <i class="sph-leg-dot" style="background:#c89a3c"></i>
-            <div class="sph-leg-top"><b>$975,000</b><strong>Renovate the 9-unit apartment building</strong></div>
-            <p>Full roof replacement · parking lot paving and repairs · kitchen and bathroom renovations in all units · interior paint and flooring. <span class="sph-leg-pct">33% OF GOAL</span></p>
-          </button>
-          <button class="sph-leg" data-k="2">
-            <i class="sph-leg-dot" style="background:#7d978a"></i>
-            <div class="sph-leg-top"><b>$100,000</b><strong>Program &amp; ownership support</strong></div>
-            <p>Down payment assistance pool · financial literacy and homeownership readiness programming. <span class="sph-leg-pct">3% OF GOAL</span></p>
-          </button>
-        </div>
-        <p class="sph-camp-note">This investment reduces long-term debt, increases charitable capacity, and ensures rent fuels future ownership, not interest payments.</p>
+      <div class="sph-key sph-r"><span><i style="background:var(--green)"></i>Achieved results are shown above with real numbers</span><span><i style="background:var(--line)"></i>Measures below are tracked and reported to partners</span></div>
+      <div class="sph-metrics">
+        <div class="sph-metric sph-r"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Families housed</div>
+        <div class="sph-metric sph-r" style="--d:.06s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Grant assistance deployed</div>
+        <div class="sph-metric sph-r" style="--d:.12s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Program completion</div>
+        <div class="sph-metric sph-r" style="--d:.18s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Savings &amp; debt progress</div>
+        <div class="sph-metric sph-r" style="--d:.24s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homes purchased</div>
+        <div class="sph-metric sph-r" style="--d:.3s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homeownership readiness</div>
+        <div class="sph-metric sph-r" style="--d:.36s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Post-purchase stability</div>
+        <div class="sph-metric sph-metric-hi sph-r" style="--d:.42s">Partner impact reports</div>
       </div>
+      <p class="sph-acc-note sph-r">Campaign partners receive periodic impact updates, stories of progress, and clear reporting on how every dollar advances the mission.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CALCULATOR ============ -->
-<section class="sph-sec sph-dark">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">See Your Impact</p>
-      <h2 class="sph-h2">What could your gift build?</h2>
-      <p class="sph-lead">Move the slider or pick an amount to see where your investment lands in the 2027 campaign.</p>
+  <section class="sph-cta">
+    <div class="sph-wrap">
+      <a class="sph-next sph-r" href="#partner" data-go="partner">
+        <div><small>Ready to help?</small><b>Partner With Us</b></div>
+        <span class="sph-next-arrow"><svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
     </div>
-    <div class="sph-calc">
-      <div class="sph-calc-in sph-r">
-        <p class="sph-calc-label">Your gift</p>
-        <p class="sph-calc-amt" id="sph-amt">$10,000</p>
-        <label for="sph-range" class="sph-sprite">Gift amount</label>
-        <input class="sph-range" id="sph-range" type="range" min="0" max="1000" step="1" value="333">
-        <div class="sph-range-ends"><span>$1,000</span><span>$1,000,000</span></div>
-        <div class="sph-chips" id="sph-chips">
-          <button class="sph-chip" data-v="10000">$10K</button>
-          <button class="sph-chip" data-v="100000">$100K</button>
-          <button class="sph-chip" data-v="325000">$325K</button>
-          <button class="sph-chip" data-v="975000">$975K</button>
+  </section>
+</div>
+
+<!-- ======================= PAGE 4 | 2027 CAMPAIGN ======================= -->
+<div class="sph-view" data-view="campaign" data-title="2027 Campaign">
+
+  <section class="sph-phero">
+    <div class="sph-wrap">
+      <p class="sph-crumb sph-r"><a href="#home" data-go="home">SPHI</a> / <span>2027 Campaign</span></p>
+      <h1 class="sph-r" style="--d:.08s">More Homes. Less Debt. <em>More Families Home.</em></h1>
+      <p class="sph-lead sph-r" style="--d:.16s">The 2027 campaign expands the pathway to ownership for single-parent families on Milwaukee’s Northside.</p>
+      <div class="sph-goal-big sph-r" style="--d:.24s"><b data-count="3000000" data-prefix="$">$0</b><span>Campaign Goal</span></div>
+    </div>
+  </section>
+
+  <!-- Funding Priorities -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Funding Priorities</p>
+        <h2 class="sph-h2">Where every dollar goes.</h2>
+      </div>
+      <div class="sph-camp">
+        <div class="sph-donut sph-r" id="sph-donut">
+          <svg viewBox="0 0 220 220" aria-hidden="true">
+            <circle class="sph-dbg" cx="110" cy="110" r="80"/>
+            <circle class="sph-seg" data-k="0" cx="110" cy="110" r="80" stroke="#2d4a3e"/>
+            <circle class="sph-seg" data-k="1" cx="110" cy="110" r="80" stroke="#c89a3c"/>
+            <circle class="sph-seg" data-k="2" cx="110" cy="110" r="80" stroke="#7d978a"/>
+          </svg>
+          <div class="sph-donut-c"><b id="sph-donut-val">$3M</b><span id="sph-donut-lbl">Total Goal</span></div>
+        </div>
+        <div class="sph-r" style="--d:.15s">
+          <div class="sph-legend" id="sph-legend">
+            <button class="sph-leg" data-k="0">
+              <i class="sph-leg-dot" style="background:#2d4a3e"></i>
+              <div class="sph-leg-top"><b>$1,925,000</b><strong>Acquire six single-family homes</strong></div>
+              <p>Grows the portfolio from 11 to 17 units, preserving quality, affordability, and program readiness. <span class="sph-leg-pct">64% OF GOAL</span></p>
+            </button>
+            <button class="sph-leg" data-k="1">
+              <i class="sph-leg-dot" style="background:#c89a3c"></i>
+              <div class="sph-leg-top"><b>$975,000</b><strong>Renovate the nine-unit apartment building</strong></div>
+              <p>Roof replacement, parking lot paving and repairs, kitchen and bathroom renovations, interior paint, and flooring. <span class="sph-leg-pct">33% OF GOAL</span></p>
+            </button>
+            <button class="sph-leg" data-k="2">
+              <i class="sph-leg-dot" style="background:#7d978a"></i>
+              <div class="sph-leg-top"><b>$100,000</b><strong>Program &amp; ownership support</strong></div>
+              <p>Down payment assistance, financial literacy, and homeownership readiness. <span class="sph-leg-pct">3% OF GOAL</span></p>
+            </button>
+          </div>
+          <p class="sph-camp-note">This investment reduces long-term debt, increases charitable capacity, and ensures rent fuels future ownership, not interest payments.</p>
         </div>
       </div>
-      <div class="sph-calc-out sph-r" style="--d:.15s">
+    </div>
+  </section>
+
+  <!-- What Investment Makes Possible -->
+  <section class="sph-sec sph-forest">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">What Your Investment Makes Possible</p>
+        <h2 class="sph-h2">Capital can do more than fund housing. It can fund a future.</h2>
+      </div>
+      <div class="sph-outs">
+        <article class="sph-out-card sph-r"><svg class="sph-ico"><use href="#sph-i-house"/></svg><b>11 → 17</b><h3>Grow the homes</h3><p>Six more single-family homes on the pathway to ownership.</p></article>
+        <article class="sph-out-card sph-r" style="--d:.1s"><svg class="sph-ico"><use href="#sph-i-tools"/></svg><b>Restore</b><h3>Improve existing housing</h3><p>A full renovation of the nine-unit building.</p></article>
+        <article class="sph-out-card sph-r" style="--d:.2s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg><b>Less debt</b><h3>Reduce long-term debt</h3><p>Rent fuels coaching and down payments, not interest.</p></article>
+        <article class="sph-out-card sph-r" style="--d:.3s"><svg class="sph-ico"><use href="#sph-i-key"/></svg><b>More keys</b><h3>More families home</h3><p>Help more families progress toward homeownership.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ways to Partner -->
+  <section class="sph-sec sph-dark" id="sph-ways">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Ways to Partner</p>
+        <h2 class="sph-h2">Choose where your investment lands.</h2>
+        <p class="sph-lead">Select an opportunity to start a conversation with our team.</p>
+      </div>
+      <div class="sph-tiers">
+        <button class="sph-tier sph-tier-lead sph-r" data-go="partner" data-interest="Lead the renovation">
+          <svg class="sph-ico"><use href="#sph-i-tools"/></svg>
+          <b>$975,000</b>
+          <h3>Lead the Renovation</h3>
+          <p>Restore the nine-unit building that anchors the program.</p>
+          <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+        </button>
+        <button class="sph-tier sph-r" style="--d:.1s" data-go="partner" data-interest="Acquire a house">
+          <svg class="sph-ico"><use href="#sph-i-house"/></svg>
+          <b>$100,000</b>
+          <h3>Acquire a House</h3>
+          <p>Help acquire one of the six single-family homes in the campaign.</p>
+          <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+        </button>
+        <button class="sph-tier sph-r" style="--d:.2s" data-go="partner" data-interest="Ownership pool">
+          <svg class="sph-ico"><use href="#sph-i-key"/></svg>
+          <b>$100,000</b>
+          <h3>Ownership Pool</h3>
+          <p>Seed down payment assistance and readiness training.</p>
+          <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+        </button>
+        <button class="sph-tier sph-r" style="--d:.3s" data-go="partner" data-interest="Sponsor a family">
+          <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
+          <b>$10,000</b>
+          <h3>Sponsor a Family</h3>
+          <p>Cover one family’s full journey from entry to closing.</p>
+          <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
+        </button>
+      </div>
+      <div class="sph-welcome sph-r"><b>Also welcome:</b><span>Multi-year commitments</span><span>Grant partnerships</span><span>Property</span><span>Materials</span><span>Professional services</span></div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="sph-sec sph-dark" style="padding-top:0">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">See Your Impact</p>
+        <h2 class="sph-h2">What could your gift build?</h2>
+        <p class="sph-lead">Move the slider or pick an amount to see where your investment lands in the 2027 campaign.</p>
+      </div>
+      <div class="sph-calc">
+        <div class="sph-calc-in sph-r">
+          <p class="sph-calc-label">Your gift</p>
+          <p class="sph-calc-amt" id="sph-amt">$10,000</p>
+          <label for="sph-range" class="sph-vh">Gift amount</label>
+          <input class="sph-range" id="sph-range" type="range" min="0" max="1000" step="1" value="333">
+          <div class="sph-range-ends"><span>$1,000</span><span>$1,000,000</span></div>
+          <div class="sph-chips" id="sph-chips">
+            <button class="sph-chip" data-v="10000">$10K</button>
+            <button class="sph-chip" data-v="100000">$100K</button>
+            <button class="sph-chip" data-v="250000">$250K</button>
+            <button class="sph-chip" data-v="975000">$975K</button>
+          </div>
+        </div>
+        <div class="sph-calc-out sph-r" style="--d:.15s">
+          <div>
+            <p class="sph-out-tier" id="sph-tier">Sponsor a Family</p>
+            <p class="sph-out-say" id="sph-say">Covers one family’s full journey from entry to closing.</p>
+          </div>
+          <div class="sph-out-row">
+            <div class="sph-out"><b id="sph-fam">1</b><span>Family journeys funded</span></div>
+            <div class="sph-out"><b id="sph-pct">0.33%</b><span>Of the $3M goal</span></div>
+          </div>
+          <div class="sph-goalbar" aria-hidden="true"><i id="sph-bar"></i></div>
+          <p class="sph-calc-fine">Based on about $10,000 per family journey and the 2027 campaign budget. Final allocation is confirmed with each partner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaign CTA -->
+  <section class="sph-cta">
+    <div class="sph-wrap">
+      <div class="sph-cta-box sph-r">
         <div>
-          <p class="sph-out-tier" id="sph-tier">Sponsor a Family</p>
-          <p class="sph-out-say" id="sph-say">Covers one family’s full journey from entry to closing.</p>
+          <h2>Let’s build the next chapter together.</h2>
+          <p>Talk with our team about a partnership, or come see the homes in person.</p>
         </div>
-        <div class="sph-out-row">
-          <div class="sph-out"><b id="sph-fam">1</b><span>Family journeys funded</span></div>
-          <div class="sph-out"><b id="sph-pct">0.33%</b><span>Of the $3M goal</span></div>
+        <div class="sph-btns">
+          <a class="sph-btn sph-btn-ink" href="#partner" data-go="partner" data-interest="Campaign investment">Discuss a Partnership <svg><use href="#sph-i-arrow"/></svg></a>
+          <a class="sph-btn sph-btn-line" href="#partner" data-go="partner" data-interest="Schedule a site visit">Schedule a Site Visit</a>
         </div>
-        <div class="sph-goalbar" aria-hidden="true"><i id="sph-bar"></i></div>
-        <p class="sph-calc-fine">Based on ~$10,000 per family journey and the 2027 campaign budget. Final allocation is confirmed with each partner.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<!-- ============ WHAT IT MAKES POSSIBLE ============ -->
-<section class="sph-sec sph-forest">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">What Your Investment Makes Possible</p>
-      <h2 class="sph-h2">More homes. Less debt. More families home.</h2>
-    </div>
-    <div class="sph-poss">
-      <article class="sph-pcard sph-r">
-        <div class="sph-units sph-io" aria-hidden="true" id="sph-units"></div>
-        <b><span data-count="17">0</span></b>
-        <h3>Housing Units</h3>
-        <p>Up from 11, with six more single-family homes on the pathway to ownership.</p>
-      </article>
-      <article class="sph-pcard sph-r" style="--d:.1s">
-        <b>Less debt</b>
-        <h3>Long-term debt reduced</h3>
-        <p>Rent fuels coaching and down payments, not interest payments.</p>
-      </article>
-      <article class="sph-pcard sph-r" style="--d:.2s">
-        <b>Every home</b>
-        <h3>Serves many families</h3>
-        <p>As each family buys, the unit opens for the next one.</p>
-      </article>
-    </div>
-  </div>
-</section>
+<!-- ======================= PAGE 5 | ABOUT US ======================= -->
+<div class="sph-view" data-view="about" data-title="About Us">
 
-<!-- ============ ACCOUNTABILITY ============ -->
-<section class="sph-sec sph-cream">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Accountability</p>
-      <h2 class="sph-h2">Partners should see the pathway, and the progress</h2>
-      <p class="sph-lead">We measure both program activity and the outcomes that matter most to long-term family stability.</p>
+  <section class="sph-phero">
+    <div class="sph-wrap">
+      <p class="sph-crumb sph-r"><a href="#home" data-go="home">SPHI</a> / <span>About Us</span></p>
+      <h1 class="sph-r" style="--d:.08s">Proven, present, <em>and accountable.</em></h1>
+      <p class="sph-lead sph-r" style="--d:.16s">Meet the people who lead the initiative and the community behind it.</p>
     </div>
-    <div class="sph-metrics">
-      <div class="sph-metric sph-r"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Families housed</div>
-      <div class="sph-metric sph-r" style="--d:.06s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Program completion</div>
-      <div class="sph-metric sph-r" style="--d:.12s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Savings &amp; debt progress</div>
-      <div class="sph-metric sph-r" style="--d:.18s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homeownership readiness</div>
-      <div class="sph-metric sph-r" style="--d:.24s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Grant assistance deployed</div>
-      <div class="sph-metric sph-r" style="--d:.3s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Homes purchased</div>
-      <div class="sph-metric sph-r" style="--d:.36s"><svg class="sph-ico"><use href="#sph-i-chart"/></svg>Post-purchase stability</div>
-      <div class="sph-metric sph-metric-hi sph-r" style="--d:.42s">Partner impact reports</div>
-    </div>
-    <p class="sph-acc-note sph-r">Campaign partners receive periodic impact updates, stories of progress, and clear reporting on how every dollar advances the mission.</p>
-  </div>
-</section>
+  </section>
 
-<!-- ============ LEADERSHIP ============ -->
-<section class="sph-sec sph-white">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Leadership &amp; Governance</p>
-      <h2 class="sph-h2">Led by people who are proven, present, and accountable</h2>
-    </div>
-    <div class="sph-lead-grid">
-      <article class="sph-leader sph-r">
-        <div class="sph-leader-head">
-          <div class="sph-avatar"><svg class="sph-ico"><use href="#sph-i-person"/></svg></div>
-          <div><h3>Kenneth Lock II</h3><p class="sph-leader-role">President, Evolve Community</p></div>
+  <!-- About the Initiative -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-about">
+        <div class="sph-r">
+          <p class="sph-eyebrow">About the Initiative</p>
+          <h2 class="sph-h2">A program of Evolve Community.</h2>
+          <p class="sph-body">The Single Parent Housing Initiative is a program of Evolve Community. It serves single mothers and fathers on Milwaukee’s Northside with stable housing, personal coaching, and a clear path to owning a home.</p>
         </div>
-        <ul>
-          <li>Senior Pastor of Evolve Church, 5,000+ weekend attendees, named the fastest-growing church in Wisconsin by SpeakLife Magazine</li>
-          <li>Chaplain to the Milwaukee Bucks, the youngest chaplain in NBA history</li>
-          <li>Vice President, Central City Church Planters</li>
-          <li>Author and speaker on ministry and business leadership</li>
+        <ul class="sph-facts sph-r" style="--d:.12s">
+          <li><span>Program of</span><b>Evolve Community</b></li>
+          <li><span>Who we serve</span><b>Single-parent families</b></li>
+          <li><span>Where</span><b>Milwaukee’s Northside</b></li>
+          <li><span>Launched</span><b>2024</b></li>
         </ul>
-      </article>
-      <aside class="sph-board sph-r" style="--d:.15s">
-        <div class="sph-board-head"><svg class="sph-ico"><use href="#sph-i-users"/></svg>Board of Directors</div>
-        <ul>
-          <li>Charmon Pittman</li>
-          <li>Amber Jackson</li>
-          <li>Jamal Washington</li>
-        </ul>
-        <p>The Single Parent Housing Initiative is a program of Evolve Community.</p>
-      </aside>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ WAYS TO PARTNER ============ -->
-<section class="sph-sec sph-dark" id="sph-partner">
-  <div class="sph-wrap">
-    <div class="sph-head sph-r">
-      <p class="sph-eyebrow">Ways to Partner</p>
-      <h2 class="sph-h2">Capital can do more than fund housing. It can fund a future.</h2>
-      <p class="sph-lead">We invite foundations, businesses, churches, and individual donors to build this with us.</p>
+  <!-- Leadership & Board -->
+  <section class="sph-sec sph-cream">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Leadership &amp; Board</p>
+        <h2 class="sph-h2">Led by people who are proven, present, and accountable.</h2>
+      </div>
+      <div class="sph-lead-grid">
+        <article class="sph-leader sph-r" style="background:var(--white)">
+          <div class="sph-leader-head">
+            <div class="sph-avatar"><svg class="sph-ico"><use href="#sph-i-person"/></svg></div>
+            <div><h3>Kenneth Lock II</h3><p class="sph-leader-role">President, Evolve Community</p></div>
+          </div>
+          <ul>
+            <li>Senior Pastor of Evolve Church, 5,000+ weekend attendees, named the fastest-growing church in Wisconsin by SpeakLife Magazine</li>
+            <li>Chaplain to the Milwaukee Bucks, the youngest chaplain in NBA history</li>
+            <li>Vice President, Central City Church Planters</li>
+            <li>Author and speaker on ministry and business leadership</li>
+          </ul>
+        </article>
+        <aside class="sph-board sph-r" style="--d:.15s">
+          <div class="sph-board-head"><svg class="sph-ico"><use href="#sph-i-users"/></svg>Board of Directors</div>
+          <ul>
+            <li>Charmon Pittman</li>
+            <li>Amber Jackson</li>
+            <li>Jamal Washington</li>
+          </ul>
+          <p>The Single Parent Housing Initiative is a program of Evolve Community.</p>
+        </aside>
+      </div>
     </div>
-    <div class="sph-tiers">
-      <a class="sph-tier sph-tier-lead sph-r" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Lead%20the%20Renovation">
-        <svg class="sph-ico"><use href="#sph-i-tools"/></svg>
-        <b>$975,000</b>
-        <h3>Lead the Renovation</h3>
-        <p>Restore the 9-unit building that anchors the program.</p>
-        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
-      </a>
-      <a class="sph-tier sph-r" style="--d:.1s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Name%20a%20Home">
-        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
-        <b>NAME A HOME</b>
-        <h3>Acquire a House</h3>
-        <p>Underwrite one of six single-family homes in the campaign.</p>
-        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
-      </a>
-      <a class="sph-tier sph-r" style="--d:.2s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Ownership%20Pool">
-        <svg class="sph-ico"><use href="#sph-i-key"/></svg>
-        <b>$100,000</b>
-        <h3>Ownership Pool</h3>
-        <p>Seed down payment assistance and readiness training.</p>
-        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
-      </a>
-      <a class="sph-tier sph-r" style="--d:.3s" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%20Partnership%3A%20Sponsor%20a%20Family">
-        <svg class="sph-ico"><use href="#sph-i-heart"/></svg>
-        <b>$10,000</b>
-        <h3>Sponsor a Family</h3>
-        <p>Cover one family’s full journey from entry to closing.</p>
-        <span class="sph-tier-go">Start the conversation <svg><use href="#sph-i-arrow"/></svg></span>
-      </a>
-    </div>
-    <div class="sph-welcome sph-r"><b>Also welcome:</b><span>Multi-year commitments</span><span>Grant partnerships</span><span>Property, materials &amp; professional services</span></div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ CLOSE ============ -->
-<section class="sph-sec sph-dark" style="padding-top:24px">
-  <div class="sph-wrap">
-    <div class="sph-close">
-      <div class="sph-r">
-        <svg class="sph-ico"><use href="#sph-i-house"/></svg>
-        <p class="sph-close-quote">A single parent should not have to choose between surviving today and building tomorrow.</p>
-        <h2>Help us turn stable housing into lasting ownership.</h2>
-        <p class="sph-next">NEXT STEP: Let’s schedule a conversation and a site visit.</p>
-        <div class="sph-hero-ctas">
-          <a class="sph-btn sph-btn-gold" target="_top" href="mailto:Kennethlock@evolvenation.org?subject=SPHI%3A%20Schedule%20a%20Conversation%20and%20Site%20Visit">Schedule a Visit <svg><use href="#sph-i-arrow"/></svg></a>
-          <a class="sph-btn sph-btn-ghost" target="_top" href="tel:4145104131">Call 414-510-4131</a>
+  <!-- Our Commitment -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Our Commitment</p>
+        <h2 class="sph-h2">What every family and partner can count on.</h2>
+      </div>
+      <div class="sph-commit">
+        <article class="sph-ccard sph-r" style="background:var(--cream)"><svg class="sph-ico"><use href="#sph-i-house"/></svg><h3>Family stability</h3><p>Safe, dignified housing gives parents and children room to breathe.</p></article>
+        <article class="sph-ccard sph-r" style="--d:.1s;background:var(--cream)"><svg class="sph-ico"><use href="#sph-i-person"/></svg><h3>Individualized support</h3><p>Every parent gets a plan built around their own barriers and strengths.</p></article>
+        <article class="sph-ccard sph-r" style="--d:.2s;background:var(--cream)"><svg class="sph-ico"><use href="#sph-i-shield"/></svg><h3>Accountability</h3><p>Clear expectations for participants and clear reporting for partners.</p></article>
+        <article class="sph-ccard sph-r" style="--d:.3s;background:var(--cream)"><svg class="sph-ico"><use href="#sph-i-key"/></svg><h3>Lasting homeownership</h3><p>We prepare families to buy well and stay in their homes.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sph-cta">
+    <div class="sph-wrap">
+      <a class="sph-next sph-r" href="#partner" data-go="partner" data-target="sph-contact">
+        <div><small>Get in touch</small><b>Connect With Our Team</b></div>
+        <span class="sph-next-arrow"><svg><use href="#sph-i-arrow"/></svg></span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= PAGE 6 | PARTNER WITH US ======================= -->
+<div class="sph-view" data-view="partner" data-title="Partner With Us" data-prefooter="off">
+
+  <section class="sph-phero">
+    <div class="sph-wrap">
+      <p class="sph-crumb sph-r"><a href="#home" data-go="home">SPHI</a> / <span>Partner With Us</span></p>
+      <h1 class="sph-r" style="--d:.08s">Your partnership can open <em>the door to homeownership.</em></h1>
+      <p class="sph-lead sph-r" style="--d:.16s">We invite foundations, businesses, churches, and individual donors to help expand the initiative.</p>
+      <div class="sph-btns sph-r" style="--d:.24s">
+        <a class="sph-btn sph-btn-gold" href="#sph-contact" data-scroll="sph-contact">Start the Conversation <svg><use href="#sph-i-arrow"/></svg></a>
+        <a class="sph-btn sph-btn-ghost" href="#sph-visit" data-scroll="sph-visit">Request a Site Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ways to Partner -->
+  <section class="sph-sec sph-white">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Ways to Partner</p>
+        <h2 class="sph-h2">There is a place for every kind of partner.</h2>
+        <p class="sph-lead">Choose an option to start your message with it already selected.</p>
+      </div>
+      <div class="sph-ways">
+        <button class="sph-way sph-r" data-interest="Campaign investment"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-gift"/></svg></span><div><h3>Campaign investment</h3><p>Give toward the $3 million 2027 campaign.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+        <button class="sph-way sph-r" style="--d:.06s" data-interest="Foundation or grant partnership"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-building"/></svg></span><div><h3>Foundation &amp; grant partnerships</h3><p>Fund acquisitions, renovation, or ownership support through a grant.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+        <button class="sph-way sph-r" style="--d:.12s" data-interest="Corporate partnership"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-briefcase"/></svg></span><div><h3>Corporate partnerships</h3><p>Invest as a business and bring your team into the mission.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+        <button class="sph-way sph-r" style="--d:.18s" data-interest="Church or community partnership"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-church"/></svg></span><div><h3>Church &amp; community partnerships</h3><p>Join as a congregation or community group to support families.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+        <button class="sph-way sph-r" style="--d:.24s" data-interest="Property or in-kind contribution"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-tools"/></svg></span><div><h3>Property &amp; in-kind contributions</h3><p>Contribute property, materials, or professional services.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+        <button class="sph-way sph-r" style="--d:.3s" data-interest="Multi-year commitment"><span class="sph-way-ico"><svg class="sph-ico"><use href="#sph-i-calendar"/></svg></span><div><h3>Multi-year commitments</h3><p>Spread a larger gift across several years of growth.</p><span>Select <svg><use href="#sph-i-arrow"/></svg></span></div></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form + Direct Contact + Site Visit -->
+  <section class="sph-sec sph-cream" id="sph-contact">
+    <div class="sph-wrap">
+      <div class="sph-head sph-r">
+        <p class="sph-eyebrow">Start the Conversation</p>
+        <h2 class="sph-h2">Tell us how you would like to help.</h2>
+      </div>
+      <div class="sph-contact-grid">
+        <form class="sph-form sph-r" id="sph-form" novalidate>
+          <h3>Partnership inquiry</h3>
+          <p>We will follow up personally, usually within a few business days.</p>
+          <div class="sph-fgrid">
+            <div class="sph-field"><label for="sph-f-first">First name</label><input id="sph-f-first" name="first" autocomplete="given-name" required><span class="sph-err"></span></div>
+            <div class="sph-field"><label for="sph-f-last">Last name</label><input id="sph-f-last" name="last" autocomplete="family-name" required><span class="sph-err"></span></div>
+            <div class="sph-field"><label for="sph-f-org">Organization <em>if any</em></label><input id="sph-f-org" name="org" autocomplete="organization"><span class="sph-err"></span></div>
+            <div class="sph-field"><label for="sph-f-email">Email</label><input id="sph-f-email" name="email" type="email" autocomplete="email" required><span class="sph-err"></span></div>
+            <div class="sph-field"><label for="sph-f-phone">Phone <em>optional</em></label><input id="sph-f-phone" name="phone" type="tel" autocomplete="tel"><span class="sph-err"></span></div>
+            <div class="sph-field"><label for="sph-f-interest">Partnership interest</label>
+              <select id="sph-f-interest" name="interest" required>
+                <option value="">Choose one</option>
+                <option>Campaign investment</option>
+                <option>Lead the renovation</option>
+                <option>Acquire a house</option>
+                <option>Ownership pool</option>
+                <option>Sponsor a family</option>
+                <option>Foundation or grant partnership</option>
+                <option>Corporate partnership</option>
+                <option>Church or community partnership</option>
+                <option>Property or in-kind contribution</option>
+                <option>Multi-year commitment</option>
+                <option>Schedule a site visit</option>
+                <option>Something else</option>
+              </select><span class="sph-err"></span></div>
+            <div class="sph-field sph-field-full"><label for="sph-f-range">Estimated investment range <em>optional</em></label>
+              <select id="sph-f-range" name="range">
+                <option value="">Prefer not to say</option>
+                <option>Under $10,000</option>
+                <option>$10,000 to $99,999</option>
+                <option>$100,000 to $499,999</option>
+                <option>$500,000 to $974,999</option>
+                <option>$975,000 and above</option>
+                <option>Not sure yet</option>
+              </select><span class="sph-err"></span></div>
+            <div class="sph-field sph-field-full"><label for="sph-f-msg">Message</label><textarea id="sph-f-msg" name="message" required placeholder="Share what you have in mind, or any questions for our team."></textarea><span class="sph-err"></span></div>
+          </div>
+          <div class="sph-form-foot">
+            <button class="sph-btn sph-btn-gold" type="submit">Start the Conversation <svg><use href="#sph-i-arrow"/></svg></button>
+            <small>This opens your email app with your message ready to send to our team.</small>
+          </div>
+          <div class="sph-done" id="sph-done" role="status">Your email app should open with your message ready to send. If it does not, email <b>Kennethlock@evolvenation.org</b> or call <b>414-510-4131</b>.</div>
+        </form>
+
+        <div class="sph-side">
+          <div class="sph-direct sph-r" style="--d:.1s">
+            <small>Direct contact</small>
+            <h3>Kenneth Lock II</h3>
+            <p class="sph-role">President, Evolve Community</p>
+            <a class="sph-clink" target="_top" href="tel:4145104131"><svg class="sph-ico"><use href="#sph-i-phone"/></svg>414-510-4131</a>
+            <a class="sph-clink" target="_top" href="mailto:Kennethlock@evolvenation.org"><svg class="sph-ico"><use href="#sph-i-mail"/></svg>Kennethlock@evolvenation.org</a>
+          </div>
+          <div class="sph-visit sph-r" style="--d:.2s" id="sph-visit">
+            <svg class="sph-ico"><use href="#sph-i-calendar"/></svg>
+            <h3>See the homes in person</h3>
+            <p>Walk the properties, meet the team, and see the pathway up close.</p>
+            <button class="sph-btn sph-btn-gold" type="button" data-interest="Schedule a site visit">Request a Site Visit <svg><use href="#sph-i-arrow"/></svg></button>
+          </div>
         </div>
       </div>
-      <div class="sph-contact sph-r" style="--d:.15s">
-        <small>2027 Campaign Goal</small>
-        <span class="sph-big">$3M</span>
-        <hr>
-        <h3>Kenneth Lock II</h3>
-        <p class="sph-role">President, Evolve Community</p>
-        <a class="sph-clink" target="_top" href="tel:4145104131"><svg class="sph-ico"><use href="#sph-i-phone"/></svg>414-510-4131</a>
-        <a class="sph-clink" target="_top" href="mailto:Kennethlock@evolvenation.org"><svg class="sph-ico"><use href="#sph-i-mail"/></svg>Kennethlock@evolvenation.org</a>
-      </div>
     </div>
-    <p class="sph-foot-tag">Evolve Community / Single Parent Housing Initiative</p>
+  </section>
+</div>
+
+</main>
+
+<!-- ======================= PRE-FOOTER CTA ======================= -->
+<section class="sph-prefoot" id="sph-prefoot">
+  <div class="sph-wrap sph-prefoot-in">
+    <h2>Help turn stable housing into <em>lasting ownership.</em></h2>
+    <a class="sph-btn sph-btn-gold" href="#partner" data-go="partner">Partner With Us <svg><use href="#sph-i-arrow"/></svg></a>
   </div>
 </section>
+
+<!-- ======================= SPHI FOOTER ======================= -->
+<footer class="sph-foot">
+  <div class="sph-wrap">
+    <div class="sph-foot-grid">
+      <div class="sph-foot-brand">
+        <a class="sph-brand" href="#home" data-go="home" aria-label="SPHI home">
+          <svg aria-hidden="true"><use href="#sph-logo"/></svg>
+          <span><b>SPHI</b><small>Single Parent Housing Initiative</small></span>
+        </a>
+        <span class="sph-of">A program of Evolve Community</span>
+        <p>A personalized pathway from stable housing to sustainable homeownership for single-parent families on Milwaukee’s Northside.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home" data-go="home">Home</a></li>
+          <li><a href="#approach" data-go="approach">Our Approach</a></li>
+          <li><a href="#impact" data-go="impact">Our Impact</a></li>
+          <li><a href="#campaign" data-go="campaign">2027 Campaign</a></li>
+          <li><a href="#about" data-go="about">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul>
+          <li><a href="#partner" data-go="partner">Partner With Us</a></li>
+          <li><a href="#campaign" data-go="campaign" data-target="sph-ways">Investment Opportunities</a></li>
+          <li><a href="#partner" data-go="partner" data-interest="Schedule a site visit">Schedule a Site Visit</a></li>
+          <li><a href="#partner" data-go="partner" data-target="sph-contact">Contact Our Team</a></li>
+        </ul>
+      </div>
+      <div class="sph-foot-contact">
+        <h4>Contact</h4>
+        <p><b>Evolve Community</b><br>Single Parent Housing Initiative</p>
+        <p>Kenneth Lock II, President</p>
+        <a target="_top" href="tel:4145104131"><svg class="sph-ico"><use href="#sph-i-phone"/></svg>414-510-4131</a>
+        <a target="_top" href="mailto:Kennethlock@evolvenation.org"><svg class="sph-ico"><use href="#sph-i-mail"/></svg>Kennethlock@evolvenation.org</a>
+      </div>
+    </div>
+    <div class="sph-bottom">
+      <span>Copyright © <span id="sph-year">2026</span> Evolve Community. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <!-- TODO: point these at the real pages once they exist -->
+        <a href="#" target="_top">Privacy Policy</a>
+        <a href="#" target="_top">Accessibility</a>
+      </nav>
+    </div>
+  </div>
+</footer>
 
 </div>
 
 <script>
-/* iframe height reporting: must be defined before evolveFooter.js loads */
+/* iframe height reporting */
 function sendHeight() {
   var h = Math.max(
     document.documentElement ? document.documentElement.scrollHeight : 0,
@@ -970,16 +1514,16 @@ function sendHeight() {
 (function () {
   var root = document.getElementById('sph-root');
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CONTACT_EMAIL = 'Kennethlock@evolvenation.org';
 
-  /* ---------- Height observers ---------- */
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(sendHeight).observe(document.body || root);
-  }
+  if ('ResizeObserver' in window) new ResizeObserver(sendHeight).observe(document.body || root);
   window.addEventListener('load', sendHeight);
   setTimeout(sendHeight, 300);
   setTimeout(sendHeight, 1000);
 
-  /* ---------- Formatting ---------- */
+  var yr = document.getElementById('sph-year');
+  if (yr) yr.textContent = new Date().getFullYear();
+
   function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
 
   /* ---------- Count-up ---------- */
@@ -989,12 +1533,11 @@ function sendHeight() {
     var to = parseFloat(el.getAttribute('data-count')) || 0;
     var pre = el.getAttribute('data-prefix') || '';
     if (reduce) { el.textContent = pre + fmt(to); return; }
-    var dur = 1700, t0 = null;
+    var dur = to > 100000 ? 2200 : 1700, t0 = null;
     function step(ts) {
       if (!t0) t0 = ts;
       var p = Math.min((ts - t0) / dur, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      el.textContent = pre + fmt(to * e);
+      el.textContent = pre + fmt(to * (1 - Math.pow(1 - p, 3)));
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -1018,9 +1561,7 @@ function sendHeight() {
     bar.dataset.done = '1';
     var cells = bar.querySelectorAll('i');
     cells.forEach(function (c, i) {
-      setTimeout(function () {
-        c.style.background = i === cells.length - 1 ? '#c89a3c' : '#365a4b';
-      }, reduce ? 0 : 150 * i + 200);
+      setTimeout(function () { c.style.background = i === cells.length - 1 ? '#c89a3c' : '#365a4b'; }, reduce ? 0 : 150 * i + 200);
     });
   }
 
@@ -1028,7 +1569,7 @@ function sendHeight() {
   var C = 2 * Math.PI * 80;
   var donutData = [
     { v: 1925000, label: 'Acquire six homes' },
-    { v: 975000, label: 'Renovate the 9-unit building' },
+    { v: 975000, label: 'Renovate the nine-unit building' },
     { v: 100000, label: 'Program &amp; ownership support' }
   ];
   var donut = document.getElementById('sph-donut');
@@ -1037,8 +1578,7 @@ function sendHeight() {
     var offset = 0;
     segs.forEach(function (s, i) {
       var len = (donutData[i].v / 3000000) * C;
-      var gap = 3;
-      var drawn = open ? Math.max(len - gap, 0) : 0;
+      var drawn = open ? Math.max(len - 3, 0) : 0;
       s.style.strokeDasharray = drawn + ' ' + (C - drawn);
       s.style.strokeDashoffset = (-offset).toString();
       offset += len;
@@ -1054,8 +1594,7 @@ function sendHeight() {
       donut.classList.remove('has-active');
       segs.forEach(function (s) { s.classList.remove('is-active'); });
       legs.forEach(function (l) { l.classList.remove('is-active'); });
-      dVal.textContent = '$3M';
-      dLbl.innerHTML = 'Total Goal';
+      dVal.textContent = '$3M'; dLbl.innerHTML = 'Total Goal';
       return;
     }
     donut.classList.add('has-active');
@@ -1080,7 +1619,7 @@ function sendHeight() {
 
   /* ---------- Flywheel ---------- */
   var steps = [
-    { t: 'Capital acquires a home', d: 'Donor gifts buy and prepare housing, debt-free. Every home purchased with capital is a home that never carries an interest payment.' },
+    { t: 'Capital acquires a home', d: 'Donor gifts acquire and prepare housing, debt-free. Every home purchased with capital is a home that never carries an interest payment.' },
     { t: 'A family pays affordable rent', d: 'Rent is consistent, on time, and part of the training. Paying well builds the habits that ownership requires.' },
     { t: 'Rent funds the pathway', d: 'That rent pays for coaching, readiness training, and down payment support, so the program sustains itself.' },
     { t: 'The family buys a home', d: 'Keys in hand. The unit opens for the next family, and the cycle begins again.' }
@@ -1096,8 +1635,7 @@ function sendHeight() {
   var cur = 0, angle = 0, timer = null, wheelLive = false, paused = false;
 
   function show(i) {
-    var diff = (i - cur + 4) % 4;
-    angle += diff * 90;
+    angle += ((i - cur + 4) % 4) * 90;
     cur = i;
     if (rot) rot.style.transform = 'rotate(' + angle + 'deg)';
     nodes.forEach(function (n, k) { n.classList.toggle('is-active', k === i); });
@@ -1109,7 +1647,6 @@ function sendHeight() {
         pTitle.textContent = steps[i].t;
         pText.textContent = steps[i].d;
         body.classList.remove('is-swap');
-        sendHeight();
       }, 300);
     }
     restartBar();
@@ -1128,16 +1665,13 @@ function sendHeight() {
   }
   function stopCycle() { if (timer) { clearInterval(timer); timer = null; } }
   function userPick(i) {
-    paused = true;
-    stopCycle();
-    show(i);
+    paused = true; stopCycle(); show(i);
     if (pBar) pBar.classList.remove('is-run');
     clearTimeout(userPick.t);
     userPick.t = setTimeout(function () { paused = false; startCycle(); }, 9000);
   }
   nodes.forEach(function (n, i) { n.addEventListener('click', function () { userPick(i); }); });
   dots.forEach(function (d, i) { d.addEventListener('click', function () { userPick(i); }); });
-  if (rot) rot.style.transform = 'rotate(0deg)';
 
   /* ---------- Calculator ---------- */
   var range = document.getElementById('sph-range');
@@ -1148,7 +1682,6 @@ function sendHeight() {
   var pctEl = document.getElementById('sph-pct');
   var barEl = document.getElementById('sph-bar');
   var chips = document.querySelectorAll('.sph-chip');
-  var HOME = 1925000 / 6;
 
   function posToVal(p) {
     var raw = 1000 * Math.pow(1000, p / 1000);
@@ -1156,7 +1689,6 @@ function sendHeight() {
     return Math.min(1000000, Math.max(1000, Math.round(raw / r) * r));
   }
   function valToPos(v) { return Math.round(1000 * Math.log(v / 1000) / Math.log(1000)); }
-
   function render(v) {
     amtEl.textContent = '$' + fmt(v);
     var fam = Math.floor(v / 10000);
@@ -1167,21 +1699,13 @@ function sendHeight() {
     var tier, say;
     if (v >= 975000) {
       tier = 'Lead the Renovation';
-      say = 'Restores the 9-unit building that anchors the program: new roof, paved lot, new kitchens and baths in every unit.';
-    } else if (v >= 320000) {
-      var homes = Math.min(6, Math.floor(v / HOME));
-      tier = 'Name a Home';
-      say = homes > 1
-        ? 'Underwrites ' + homes + ' of the six campaign homes, each one serving family after family.'
-        : 'Underwrites one of the six campaign homes, a home that serves family after family.';
+      say = 'Restores the nine-unit building that anchors the program: new roof, paved lot, new kitchens and baths.';
     } else if (v >= 100000) {
-      tier = 'Ownership Pool';
-      say = 'Seeds the full down payment assistance pool and readiness training for families crossing the threshold.';
+      tier = 'Acquire a House or Ownership Pool';
+      say = 'Helps acquire one of the six campaign homes, or seeds down payment assistance and readiness training.';
     } else if (v >= 10000) {
       tier = 'Sponsor a Family';
-      say = fam > 1
-        ? 'Covers ' + fmt(fam) + ' families’ full journeys from entry to closing.'
-        : 'Covers one family’s full journey from entry to closing.';
+      say = fam > 1 ? 'Covers ' + fmt(fam) + ' families’ full journeys from entry to closing.' : 'Covers one family’s full journey from entry to closing.';
     } else {
       tier = 'Join the Campaign';
       say = 'Adds to the capital that buys homes and keeps them working for family after family.';
@@ -1204,16 +1728,6 @@ function sendHeight() {
     render(10000);
   }
 
-  /* ---------- In-page jumps ---------- */
-  document.querySelectorAll('[data-jump]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var t = document.getElementById(a.getAttribute('data-jump'));
-      if (!t) return;
-      e.preventDefault();
-      try { t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (err) { t.scrollIntoView(); }
-    });
-  });
-
   /* ---------- Reveal + triggers ---------- */
   function onIn(el) {
     el.classList.add('is-in');
@@ -1225,25 +1739,173 @@ function sendHeight() {
     if (el.id === 'sph-wheel' && !wheelLive) { wheelLive = true; startCycle(); }
   }
   var targets = root.querySelectorAll('.sph-r, .sph-io, .sph-hero-stat');
+  var io = null;
   if ('IntersectionObserver' in window && !reduce) {
-    var io = new IntersectionObserver(function (entries) {
+    io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { onIn(en.target); io.unobserve(en.target); }
       });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.15 });
     targets.forEach(function (t) { io.observe(t); });
-    /* Safety net: if the observer never fires inside the embed, show everything */
-    setTimeout(function () {
-      if (!root.querySelector('.is-in')) targets.forEach(onIn);
-    }, 2500);
   } else {
     targets.forEach(onIn);
   }
+  /* Safety net for embeds where the observer never fires: reveal the active view */
+  function safety() {
+    setTimeout(function () {
+      var v = root.querySelector('.sph-view.is-active');
+      if (v && !v.querySelector('.is-in')) v.querySelectorAll('.sph-r, .sph-io').forEach(onIn);
+    }, 2500);
+  }
 
+  /* ---------- Router ---------- */
+  var VIEWS = ['home', 'approach', 'impact', 'campaign', 'about', 'partner'];
+  var views = {};
+  root.querySelectorAll('.sph-view').forEach(function (v) { views[v.getAttribute('data-view')] = v; });
+  var prefoot = document.getElementById('sph-prefoot');
+  var navLinks = root.querySelectorAll('.sph-nav a[data-go]');
+  var nav = document.getElementById('sph-nav');
+  var menuBtn = document.getElementById('sph-menu-btn');
+  var current = null;
+
+  function closeMenu() {
+    if (!nav) return;
+    nav.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+  }
+  if (menuBtn) menuBtn.addEventListener('click', function () {
+    var open = !nav.classList.contains('is-open');
+    nav.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    sendHeight();
+  });
+
+  function scrollToEl(el) {
+    if (!el) return;
+    try { el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } catch (e) { el.scrollIntoView(); }
+  }
+  function toTop() {
+    var top = document.getElementById('sph-top');
+    try { top.scrollIntoView({ block: 'start' }); } catch (e) { window.scrollTo(0, 0); }
+    try { window.parent.postMessage({ type: 'sphiScrollTop' }, '*'); } catch (e) {}
+  }
+
+  function go(name, opts) {
+    opts = opts || {};
+    if (VIEWS.indexOf(name) < 0) name = 'home';
+    var changed = name !== current;
+    if (changed) {
+      Object.keys(views).forEach(function (k) { views[k].classList.toggle('is-active', k === name); });
+      navLinks.forEach(function (a) {
+        if (a.getAttribute('data-go') === name) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      if (prefoot) prefoot.classList.toggle('is-off', views[name].getAttribute('data-prefooter') === 'off');
+      current = name;
+      if (opts.push !== false) {
+        try { history.pushState({ v: name }, '', '#' + name); } catch (e) {}
+      }
+      safety();
+    }
+    closeMenu();
+    if (opts.interest) setInterest(opts.interest, true);
+    else if (opts.target) setTimeout(function () { scrollToEl(document.getElementById(opts.target)); }, changed ? 60 : 0);
+    else if (changed && opts.scroll !== false) toTop();
+    requestAnimationFrame(sendHeight);
+    setTimeout(sendHeight, 400);
+  }
+
+  root.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go], [data-scroll], [data-interest]');
+    if (!a || !root.contains(a)) return;
+    if (a.hasAttribute('data-go')) {
+      e.preventDefault();
+      go(a.getAttribute('data-go'), { target: a.getAttribute('data-target'), interest: a.getAttribute('data-interest') });
+    } else if (a.hasAttribute('data-scroll')) {
+      e.preventDefault();
+      scrollToEl(document.getElementById(a.getAttribute('data-scroll')));
+    } else if (a.hasAttribute('data-interest')) {
+      e.preventDefault();
+      setInterest(a.getAttribute('data-interest'), true);
+    }
+  });
+
+  window.addEventListener('popstate', function () {
+    var h = (location.hash || '').replace('#', '');
+    go(VIEWS.indexOf(h) >= 0 ? h : 'home', { push: false });
+  });
+
+  /* ---------- Contact form ---------- */
+  var form = document.getElementById('sph-form');
+  var sel = document.getElementById('sph-f-interest');
+  function setInterest(val, focus) {
+    if (sel) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].text === val) { sel.selectedIndex = i; break; }
+      }
+      sel.closest('.sph-field').classList.remove('has-err');
+    }
+    if (focus) {
+      setTimeout(function () {
+        scrollToEl(document.getElementById('sph-contact'));
+        var first = document.getElementById('sph-f-first');
+        if (first) setTimeout(function () { try { first.focus({ preventScroll: true }); } catch (e) {} }, 500);
+      }, 60);
+    }
+  }
+  function fieldErr(el, msg) {
+    var f = el.closest('.sph-field');
+    f.classList.toggle('has-err', !!msg);
+    f.querySelector('.sph-err').textContent = msg || '';
+  }
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = {};
+      ['first', 'last', 'org', 'email', 'phone', 'interest', 'range', 'message'].forEach(function (k) {
+        d[k] = (form.elements[k].value || '').trim();
+      });
+      var ok = true, firstBad = null;
+      [['first', 'Please add your first name.'], ['last', 'Please add your last name.'], ['email', 'Please add your email.'], ['interest', 'Please choose an interest.'], ['message', 'Please add a short message.']].forEach(function (r) {
+        var el = form.elements[r[0]];
+        var bad = !d[r[0]];
+        if (r[0] === 'email' && d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) bad = true;
+        fieldErr(el, bad ? (r[0] === 'email' && d.email ? 'Please check your email address.' : r[1]) : '');
+        if (bad) { ok = false; if (!firstBad) firstBad = el; }
+      });
+      ['org', 'phone', 'range'].forEach(function (k) { fieldErr(form.elements[k], ''); });
+      if (!ok) { firstBad.focus(); sendHeight(); return; }
+      var lines = [
+        'Name: ' + d.first + ' ' + d.last,
+        'Organization: ' + (d.org || 'None given'),
+        'Email: ' + d.email,
+        'Phone: ' + (d.phone || 'None given'),
+        'Partnership interest: ' + d.interest,
+        'Estimated investment range: ' + (d.range || 'Prefer not to say'),
+        '',
+        d.message
+      ];
+      var href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('SPHI Partnership Inquiry: ' + d.interest) + '&body=' + encodeURIComponent(lines.join('\n'));
+      var a = document.createElement('a');
+      a.href = href; a.target = '_top'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+      document.getElementById('sph-done').classList.add('is-on');
+      sendHeight();
+    });
+  }
+
+  /* ---------- Start ---------- */
+  var start = 'home';
+  try {
+    var qp = new URLSearchParams(location.search).get('view');
+    var hp = (location.hash || '').replace('#', '');
+    if (VIEWS.indexOf(qp) >= 0) start = qp;
+    else if (VIEWS.indexOf(hp) >= 0) start = hp;
+  } catch (e) {}
+  go(start, { push: false, scroll: false });
+  try { history.replaceState({ v: start }, '', location.pathname + location.search + '#' + start); } catch (e) {}
   sendHeight();
 })();
 </script>
-
-<!-- Shared footer -->
-<div id="evolve-footer-mount"></div>
-<script src="https://evolve2018.github.io/EvolveWebsite/evolveFooter.js?v=1"></script>
